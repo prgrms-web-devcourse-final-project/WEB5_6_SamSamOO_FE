@@ -20,6 +20,7 @@
     "framer-motion": "^12.23.14",
     "gsap": "^3.13.0",
     "next": "15.5.3",
+    "prettier": "^3.6.2",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "tailwind-merge": "^3.3.1",
@@ -38,6 +39,7 @@
     "typescript": "^5.9.2"
   },
   "lint-staged": {
-    "*/.{js, ts, jsx, tsx}": "eslint --fix"
+    "*/.{js, ts, jsx, tsx}": "eslint --fix",
+    "*.{js,ts,jsx,tsx,json,css,md}": "prettier --write"
   }
 }
