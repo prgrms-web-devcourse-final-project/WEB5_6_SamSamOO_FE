@@ -1,17 +1,9 @@
 import type { Metadata } from "next";
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Analytics } from '@vercel/analytics/next';
 import localFont from "next/font/local";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,19 +12,31 @@ export const metadata: Metadata = {
 
 export const appleSD = localFont({
   src: [
-    { path: '../../public/fonts/AppleSDGothicNeo-Black.woff2', weight: '900' },
-    { path: '../../public/fonts/AppleSDGothicNeo-ExtraBold.woff2', weight: '800' },
-    { path: '../../public/fonts/AppleSDGothicNeo-Bold.woff2', weight: '700' },
-    { path: '../../public/fonts/AppleSDGothicNeo-Medium.woff2', weight: '500' },
-    { path: '../../public/fonts/AppleSDGothicNeo-SemiBold.woff2', weight: '600' },
-    { path: '../../public/fonts/AppleSDGothicNeo-Regular.woff2', weight: '400' },
-    { path: '../../public/fonts/AppleSDGothicNeo-Light.woff2', weight: '300' },
-    { path: '../../public/fonts/AppleSDGothicNeo-ExtraLight.woff2', weight: '200' },
-    { path: '../../public/fonts/AppleSDGothicNeo-Thin.woff2', weight: '100' },
+    { path: "../../public/fonts/AppleSDGothicNeo-Black.woff2", weight: "900" },
+    {
+      path: "../../public/fonts/AppleSDGothicNeo-ExtraBold.woff2",
+      weight: "800",
+    },
+    { path: "../../public/fonts/AppleSDGothicNeo-Bold.woff2", weight: "700" },
+    { path: "../../public/fonts/AppleSDGothicNeo-Medium.woff2", weight: "500" },
+    {
+      path: "../../public/fonts/AppleSDGothicNeo-SemiBold.woff2",
+      weight: "600",
+    },
+    {
+      path: "../../public/fonts/AppleSDGothicNeo-Regular.woff2",
+      weight: "400",
+    },
+    { path: "../../public/fonts/AppleSDGothicNeo-Light.woff2", weight: "300" },
+    {
+      path: "../../public/fonts/AppleSDGothicNeo-ExtraLight.woff2",
+      weight: "200",
+    },
+    { path: "../../public/fonts/AppleSDGothicNeo-Thin.woff2", weight: "100" },
   ],
   variable: "--font-apple-sd",
-  display: 'swap',
-})
+  display: "swap",
+});
 
 export default function RootLayout({
   children,
@@ -42,11 +46,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${appleSD.variable} antialiased`}
+        className={`${appleSD.variable} antialiased`}
       >
         <p className="font-appleSD font-light">제1장 총칙</p>
         {children}
+        <SpeedInsights />
+        <Analytics />
       </body>
-                        </html>
-            );
+    </html>
+  );
 }
