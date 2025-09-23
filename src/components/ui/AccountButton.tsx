@@ -6,7 +6,7 @@ interface Props {
 function AccountButton({ children, type }: Props) {
   return (
     <button
-      className="w-[420px] h-13 bg-primary rounded-full text-text-white text-xl font-bold"
+      className="w-full h-13 bg-primary rounded-full text-primary-white text-xl font-bold"
       type={type}
     >
       {children}
