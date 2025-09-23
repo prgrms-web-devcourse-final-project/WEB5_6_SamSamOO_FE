@@ -1,0 +1,34 @@
+@theme {
+  --color-primary: #0d1846; /* fallback */
+  --color-primary: oklch(23.31% 0.087 268.43);
+
+  --color-accent: #e95623; /* fallback */
+  --color-accent: oklch(64.31% 0.192 37.88);
+
+  --color-sub-blue: #406eb7; /* fallback */
+  --color-sub-blue: oklch(54.13% 0.125 259.27);
+
+  --color-sub-yellow: #ffca28; /* fallback */
+  --color-sub-yellow: oklch(86.22% 0.168 88.31);
+
+  --color-text-black: #1b1b1b; /* fallback */
+  --color-text-black: oklch(22.21% 0 0);
+
+  --color-text-white: #ededed; /* fallback */
+  --color-text-white: oklch(94.61% 0 0);
+
+  --color-text-gray1: #7b7b7b; /* fallback */
+  --color-text-gray1: oklch(58.29% 0 0);
+
+  --color-text-gray2: #4d4d4d; /* fallback */
+  --color-text-gray2: oklch(42.02% 0 0);
+
+  --color-background-white: #ffffff; /* fallback */
+  --color-background-white: oklch(100% 0 0);
+
+  --color-background-black1: #121212; /* fallback */
+  --color-background-black1: oklch(18.22% 0 0);
+
+  --color-background-black2: #181a1b; /* fallback */
+  --color-background-black2: oklch(21.6% 0.004 228.98);
+}

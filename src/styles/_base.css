@@ -1,0 +1,37 @@
+@layer base {
+  *,
+  *::before,
+  ::after {
+    box-sizing: border-box;
+  }
+  html {
+    min-block-size: 99vh;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    touch-action: manipulation; /* 더블탭 확대 방지 */
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+
+  button {
+    @apply disabled:cursor-not-allowed cursor-pointer;
+  }
+
+  a {
+    font-size: 100%;
+    color: inherit;
+    line-height: 1.2;
+    text-decoration: none;
+  }
+  a:active,
+  a:hover {
+    outline: 0;
+    text-decoration: none;
+    color: inherit;
+  }
+}
