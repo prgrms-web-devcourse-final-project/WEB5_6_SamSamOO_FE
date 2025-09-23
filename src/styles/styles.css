@@ -8,3 +8,5 @@
 
 @import 'tailwindcss/utilities.css' layer(utilities);
 @import './_utilities.css';
+
+@custom-variant dark (&:where(.dark, .dark *));
