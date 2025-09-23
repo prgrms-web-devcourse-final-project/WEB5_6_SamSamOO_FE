@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from '@vercel/analytics/next';
 import localFont from 'next/font/local';
+import Header from '@/components/layout/Header';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -43,8 +44,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko-KR">
-      <body className={`${appleSD.variable} antialiased`}>
-        <p className="font-appleSD font-light">제1장 총칙</p>
+      <body className={`${appleSD.className} antialiased`}>
+        <Header />
         {children}
         <SpeedInsights />
         <Analytics />
