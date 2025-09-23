@@ -9,11 +9,11 @@ function Page() {
   const [password, setPassword] = useState<string>('');
 
   return (
-    <div className="w-[420px] flex flex-col justify-center items-center">
+    <div className="w-[420px] center-col">
       <h2 className="text-4xl font-bold mb-2">👋 안녕하세요!</h2>
       <h3 className="text-2xl mb-9">다시 만나게 되어서 반가워요!</h3>
 
-      <form className="w-full flex flex-col justify-center items-center gap-8 mb-[30px]">
+      <form className="w-full center-col gap-8 mb-[30px]">
         <div className="w-full flex flex-col gap-6">
           <AccountInput type="text" placeholder="이메일을 입력해주세요." onChange={setEmail} />
           <AccountInput
