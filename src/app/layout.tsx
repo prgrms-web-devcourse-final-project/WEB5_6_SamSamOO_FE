@@ -4,7 +4,6 @@ import { Analytics } from '@vercel/analytics/next';
 
 import '../styles/styles.css';
 import localFont from 'next/font/local';
-import '../styles/styles.css';
 
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
