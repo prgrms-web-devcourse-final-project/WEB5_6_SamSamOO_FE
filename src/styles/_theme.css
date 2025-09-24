@@ -50,6 +50,6 @@
     transform: translateX(0px);
   }
   100% {
-    transform: translateX(32px);
+    transform: translateX(35px);
   }
 }

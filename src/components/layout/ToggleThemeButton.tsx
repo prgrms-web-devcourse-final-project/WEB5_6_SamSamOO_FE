@@ -24,13 +24,13 @@ function ToggleThemeButton() {
     );
   }
 
-  const iconStyle = 'w-[30px] h-[29px] flex items-center justify-center bg-white rounded-full';
+  const iconStyle = 'w-[28px] h-[26px] flex items-center justify-center bg-white rounded-full';
 
   // 시스템 값으로만 변경할때 다크모드 아이콘 표시 위치 변경 필요
   return (
     <div
       className={tw(
-        'flex items-center w-[72px] h-[36px] rounded-[67px] p-1 bg-[#E5E5E5]',
+        'flex items-center w-[72px] h-[32px] rounded-[67px] p-1 bg-[#E5E5E5]',
         isDark && 'bg-[#404040]',
       )}
     >
