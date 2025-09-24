@@ -11,17 +11,17 @@
   --color-sub-yellow: #ffca28; /* fallback */
   --color-sub-yellow: oklch(86.22% 0.168 88.31);
 
-  --color-text-black: #1b1b1b; /* fallback */
-  --color-text-black: oklch(22.21% 0 0);
+  --color-primary-black: #1b1b1b; /* fallback */
+  --color-primary-black: oklch(22.21% 0 0);
 
-  --color-text-white: #ededed; /* fallback */
-  --color-text-white: oklch(94.61% 0 0);
+  --color-primary-white: #ededed; /* fallback */
+  --color-primary-white: oklch(94.61% 0 0);
 
-  --color-text-gray1: #7b7b7b; /* fallback */
-  --color-text-gray1: oklch(58.29% 0 0);
+  --color-primary-gray1: #7b7b7b; /* fallback */
+  --color-primary-gray1: oklch(58.29% 0 0);
 
-  --color-text-gray2: #4d4d4d; /* fallback */
-  --color-text-gray2: oklch(42.02% 0 0);
+  --color-primary-gray2: #4d4d4d; /* fallback */
+  --color-primary-gray2: oklch(42.02% 0 0);
 
   --color-background-white: #ffffff; /* fallback */
   --color-background-white: oklch(100% 0 0);
