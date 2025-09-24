@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from '@vercel/analytics/next';
 import localFont from 'next/font/local';
+import '../styles/styles.css';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
