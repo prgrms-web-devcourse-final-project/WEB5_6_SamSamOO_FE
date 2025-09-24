@@ -4,6 +4,7 @@ import { Analytics } from '@vercel/analytics/next';
 
 import '../styles/styles.css';
 import localFont from 'next/font/local';
+
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import ThemeProvider from '@/components/provider/ThemeProvider';
@@ -51,7 +52,7 @@ export default function RootLayout({
       <body className={`${appleSD.className} antialiased`}>
         <ThemeProvider enableSystem>
           <Header />
-          <main className="flex-1">{children}</main>
+          <main className="w-full min-h-[calc(100vh-50px)] pt-[70px]">{children}</main>
           <Footer />
         </ThemeProvider>
 
