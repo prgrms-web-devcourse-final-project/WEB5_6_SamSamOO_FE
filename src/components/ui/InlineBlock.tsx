@@ -1,18 +1,14 @@
 'use client';
 
+import { TextSelection } from '@/types/inline';
 import { useEffect, useRef, useState } from 'react';
 
 const inline =
   'dark:bg-background-black1 dark:text-primary-white dark:shadow-[0_0px_1px_1px_rgba(255,255,255,0.40)]' +
   'bg-background-white text-primary-black shadow-[4_4px_10px_10px_rgba(0,0,0,0.25)] text-xs rounded-lg absolute max-h-[150px] overflow-y-auto';
 
-interface SelectedTextProps {
-  selectedText: string;
-  positionX: number;
-  positionY: number;
-}
 interface Props {
-  selectedText: SelectedTextProps;
+  selectedText: TextSelection;
   ref: React.Ref<HTMLDivElement>;
 }
 

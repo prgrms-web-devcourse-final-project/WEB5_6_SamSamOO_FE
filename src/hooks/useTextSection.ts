@@ -1,10 +1,11 @@
+import { TextSelection } from '@/types/inline';
 import { useEffect, useState } from 'react';
 
-interface TextSelection {
-  selectedText: string;
-  positionX: number;
-  positionY: number;
-}
+/**
+ * 더블 클릭/드래그 이벤트 시 텍스트 정보를 반환하는 커스텀 훅
+ * @param containerRef
+ * @returns Object {selectedText : 선택한 텍스트와 위치정보, handleDoubleClick : 더블클릭 이벤트, handlePointerUp : 드래그 이벤트, handlePointerDown : 클릭 초기화}
+ */
 
 export default function useTextSelection(containerRef: React.RefObject<HTMLDivElement | null>) {
   const [selectedText, setSelectedText] = useState<TextSelection | null>(null);
@@ -57,7 +58,6 @@ export default function useTextSelection(containerRef: React.RefObject<HTMLDivEl
     if (selectText.length === 0 || selectText === '') return null;
 
     const rect = selection.getRangeAt(0).getBoundingClientRect();
-    console.log(rect);
     return { selectText, rect };
   };
 
