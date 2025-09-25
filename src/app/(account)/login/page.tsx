@@ -11,7 +11,7 @@ function Page() {
   return (
     <div className="w-[420px] center-col">
       <h2 className="text-4xl font-bold mb-2">👋 안녕하세요!</h2>
-      <h3 className="text-2xl mb-9">다시 만나게 되어서 반가워요!</h3>
+      <h3 className="text-2xl mb-9 break-keep text-center">다시 만나게 되어서 반가워요!</h3>
 
       <form className="w-full center-col gap-8 mb-[30px]">
         <div className="w-full flex flex-col gap-6">
@@ -37,7 +37,7 @@ function Page() {
       </div>
 
       <Link
-        href={''}
+        href={'find-account'}
         className="text-[#7b7b7b] underline underline-offset-4 mb-6 dark:text-primary-white"
       >
         혹시 계정이 기억나지 않으신가요?
