@@ -32,6 +32,8 @@
   --color-background-black2: #181a1b; /* fallback */
   --color-background-black2: oklch(21.6% 0.004 228.98);
 
+  --color-border-gray1: #353535;
+
   --animate-toLight: toggle-toLight 1.1s forwards;
   --animate-toDark: toggle-toDark 1.1s forwards;
 

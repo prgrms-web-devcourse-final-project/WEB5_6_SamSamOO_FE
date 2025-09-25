@@ -1,14 +1,14 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
 import ToggleThemeButton from './ToggleThemeButton';
 
 const mainNavItems = [
   { href: '/ai', label: 'AI 상담' },
-  { href: '/search', label: '법령ㆍ판례 검색' },
+  { href: '/search/total', label: '법령ㆍ판례 검색' },
   { href: '/vote', label: '투표' },
 ];
 
@@ -20,7 +20,7 @@ const subNavItems = [
 
 function Header() {
   const pathname = usePathname();
-  console.log(pathname);
+  // console.log(pathname);
 
   return (
     <header className="fixed w-full grid grid-cols-[1fr_2fr_1fr] h-[60px] pl-[30px] pr-8 items-center justify-between text-xl font-bold text-primary-black dark:text-primary-white bg-[rgba(255,255,255,0.89)] shadow-[0_4px_14.2px_0_rgba(0,0,0,0.25)] dark:bg-[rgba(0,0,0,0.89)] dark:shadow-[0_1px_2px_0_rgba(213,213,213,0.25)]">
@@ -51,7 +51,11 @@ function Header() {
             <li key={href}>
               <Link
                 href={href}
-                className={pathname === href ? 'text-accent' : 'text-black dark:text-white'}
+                className={
+                  pathname.includes(href.split('/')[1])
+                    ? 'text-accent'
+                    : 'text-primary-black dark:text-primary-white'
+                }
               >
                 {label}
               </Link>
