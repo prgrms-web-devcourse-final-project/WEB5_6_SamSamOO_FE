@@ -34,4 +34,10 @@
     text-decoration: none;
     color: inherit;
   }
+
+  ol,
+  ul,
+  li {
+    list-style: none;
+  }
 }

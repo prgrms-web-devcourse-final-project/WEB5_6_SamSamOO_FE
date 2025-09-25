@@ -38,6 +38,12 @@
   --animate-toDark: toggle-toDark 1.1s forwards;
 
   --shadow-floating: 3px 5px 10.8px rgba(0, 0, 0, 0.23);
+  --shadow-landing-input-outer: 0 4px 28.5px 0 rgba(0, 0, 0, 0.25);
+  --shadow-landing-input-inner: 0 4px 13px 0 rgba(0, 0, 0, 0.25) inset;
+  --shadow-landing-1: 0 4px 14.3px 0 rgba(0, 0, 0, 0.25);
+  --shadow-landing-card: 13px 22px 26.5px 10px rgba(0, 0, 0, 0.15);
+
+  --radius-modal: 50px;
 }
 
 @keyframes toggle-toLight {
