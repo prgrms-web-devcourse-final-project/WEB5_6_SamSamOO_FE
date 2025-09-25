@@ -17,7 +17,7 @@ function SelectGender({ className }: SelectGenderProps) {
       <Select.Trigger
         aria-label="성별 선택"
         className={tw(
-          'flex h-13 items-center justify-between rounded-full bg-[#F4F4F4] px-6 shadow-[inset_0_4px_10px_rgba(0,0,0,0.3)] outline-none',
+          'flex h-13 items-center justify-between rounded-full bg-[#F4F4F4] px-6 shadow-[inset_0_4px_10px_rgba(0,0,0,0.3)] outline-none dark:text-primary-black',
           className,
         )}
       >

@@ -26,9 +26,9 @@ function Page() {
       </form>
 
       <div className="flex items-center w-full gap-2 mb-3">
-        <div className="flex-1 h-[1px] bg-[#7b7b7b]"></div>
-        <p className="text-[#7b7b7b] text-sm">간편 로그인</p>
-        <div className="flex-1 h-[1px] bg-[#7b7b7b]"></div>
+        <div className="flex-1 h-[1px] bg-[#7b7b7b] dark:bg-primary-white"></div>
+        <p className="text-[#7b7b7b] text-sm dark:text-primary-white">간편 로그인</p>
+        <div className="flex-1 h-[1px] bg-[#7b7b7b] dark:bg-primary-white"></div>
       </div>
 
       <div className="w-full flex gap-6 mb-6">
@@ -36,10 +36,16 @@ function Page() {
         <button className="flex-1 h-13 bg-[#FEE500] px-[35px] rounded-sm">카카오 로그인</button>
       </div>
 
-      <Link href={''} className="text-[#7b7b7b] underline underline-offset-4 mb-6">
+      <Link
+        href={''}
+        className="text-[#7b7b7b] underline underline-offset-4 mb-6 dark:text-primary-white"
+      >
         혹시 계정이 기억나지 않으신가요?
       </Link>
-      <Link href={'sign-up'} className="text-[#7b7b7b] underline underline-offset-4">
+      <Link
+        href={'sign-up'}
+        className="text-[#7b7b7b] underline underline-offset-4 dark:text-primary-white"
+      >
         회원가입 하러가기
       </Link>
     </div>
