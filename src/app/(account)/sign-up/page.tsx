@@ -27,14 +27,18 @@ function Page() {
       </form>
 
       <div className="mb-5 flex w-full items-center gap-2">
-        <div className="h-px flex-1 bg-[#7b7b7b]" />
-        <p className="text-sm text-[#7b7b7b]">간편 회원가입</p>
-        <div className="h-px flex-1 bg-[#7b7b7b]" />
+        <div className="h-px flex-1 bg-[#7b7b7b] dark:bg-primary-white" />
+        <p className="text-sm text-[#7b7b7b] dark:text-primary-white">간편 회원가입</p>
+        <div className="h-px flex-1 bg-[#7b7b7b] dark:bg-primary-white" />
       </div>
 
       <div className="mb-6 flex w-full gap-6">
-        <button className="h-13 flex-1 rounded-sm bg-[#03C75A] px-9">네이버 로그인</button>
-        <button className="h-13 flex-1 rounded-sm bg-[#FEE500] px-9">카카오 로그인</button>
+        <button className="h-13 flex-1 rounded-sm bg-[#03C75A] px-9 dark:text-primary-black">
+          네이버 로그인
+        </button>
+        <button className="h-13 flex-1 rounded-sm bg-[#FEE500] px-9 dark:text-primary-black">
+          카카오 로그인
+        </button>
       </div>
     </div>
   );
