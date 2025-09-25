@@ -4,8 +4,7 @@ import { TextSelection } from '@/types/inline';
 import { useEffect, useRef, useState } from 'react';
 
 const inline =
-  'dark:bg-background-black1 dark:text-primary-white dark:shadow-[0_0px_1px_1px_rgba(255,255,255,0.40)]' +
-  'bg-background-white text-primary-black shadow-[4_4px_10px_10px_rgba(0,0,0,0.25)] text-xs rounded-lg absolute max-h-[150px] overflow-y-auto';
+  'bg-background-black1 text-primary-white shadow-[0_0px_1px_1px_rgba(255,255,255,0.40)] dark:bg-background-white dark:text-primary-black dark:shadow-[4_4px_10px_10px_rgba(0,0,0,0.25)] text-xs rounded-lg absolute max-h-[150px] overflow-y-auto';
 
 interface Props {
   selectedText: TextSelection;
@@ -35,7 +34,16 @@ function InlineBlock({ selectedText, ref }: Props) {
     >
       {!isSearch && (
         <button className="flex items-center justify-center gap-2 p-1 " onClick={handleSearchWord}>
-          <img src="/inline_search.svg" alt="인라인 찾기 아이콘" />
+          <img
+            src="/icons/inlineSearchLight.svg"
+            className="dark:hidden"
+            alt="인라인 찾기 아이콘"
+          />
+          <img
+            src="/icons/inlineSearchDark.svg"
+            className="hidden dark:block"
+            alt="인라인 찾기 아이콘"
+          />
           <span>용어 검색</span>
         </button>
       )}
