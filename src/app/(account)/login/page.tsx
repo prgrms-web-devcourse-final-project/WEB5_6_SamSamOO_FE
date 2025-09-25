@@ -1,6 +1,6 @@
 'use client';
-import AccountButton from '@/components/ui/AccountButton';
-import AccountInput from '@/components/ui/AccountInput';
+import AccountButton from '@/components/ui/account/AccountButton';
+import AccountInput from '@/components/ui/account/AccountInput';
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -39,7 +39,7 @@ function Page() {
       <Link href={''} className="text-[#7b7b7b] underline underline-offset-4 mb-6">
         혹시 계정이 기억나지 않으신가요?
       </Link>
-      <Link href={''} className="text-[#7b7b7b] underline underline-offset-4">
+      <Link href={'sign-up'} className="text-[#7b7b7b] underline underline-offset-4">
         회원가입 하러가기
       </Link>
     </div>
