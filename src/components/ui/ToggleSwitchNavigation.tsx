@@ -17,14 +17,14 @@ interface Props {
   paddingX?: number;
   paddingY?: number;
   parentStyle?: string;
-  highlightStyle?: string;
+  activeBlockStyle?: string;
   activeTextStyle?: string;
   inactiveTextStyle?: string;
 }
 
 const defaultParentStyle =
   'px-8 py-3 gap-[83px] bg-[#0D1846] rounded-full text-xl text-primary-white dark:bg-primary-black dark:border dark:border-border-gray1';
-const defaultHighlightStyle = 'bg-primary-white rounded-4xl';
+const defaultActiveBlockStyle = 'bg-primary-white rounded-4xl';
 const defaultActiveTextStyle = 'text-primary-black';
 const defaultInactiveTextStyle = 'text-primary-white';
 
@@ -33,7 +33,7 @@ function ToggleSwitchNavigation({
   paddingX,
   paddingY,
   parentStyle = defaultParentStyle,
-  highlightStyle = defaultHighlightStyle,
+  activeBlockStyle = defaultActiveBlockStyle,
   activeTextStyle = defaultActiveTextStyle,
   inactiveTextStyle = defaultInactiveTextStyle,
 }: Props) {
@@ -41,14 +41,14 @@ function ToggleSwitchNavigation({
   const parentRef = useRef<HTMLUListElement | null>(null);
   const categoryRefs = useRef<(HTMLLIElement | null)[]>([]);
   const [activeIndex, setActiveIndex] = useState<number>(0);
-  const [activeX, setActiveX] = useState<number | null>(null);
+  const [activeLeft, setActiveLeft] = useState<number | null>(null);
   const [activeHeight, setActiveHeight] = useState<number | null>(null);
   const [activeWidth, setActiveWidth] = useState<number | null>(null);
 
   useEffect(() => {
     const idx = items.findIndex((item) => item.href === pathname);
     setActiveIndex(idx);
-  }, [pathname]);
+  }, [pathname, items]);
 
   const measure = useCallback(() => {
     const activeCategory = categoryRefs.current[activeIndex];
@@ -58,12 +58,15 @@ function ToggleSwitchNavigation({
     if (activeCategory && parent) {
       const categoryRect = activeCategory.getBoundingClientRect();
       const parentRect = parent.getBoundingClientRect();
+      const activeBlockLeft = Math.floor(categoryRect.x - parentRect.x - (paddingX ?? 0));
+      const activeBlockHeight = Math.floor(categoryRect.height + (paddingY ?? 0) * 2);
+      const activeBlockWidth = Math.floor(categoryRect.width + (paddingX ?? 0) * 2);
 
-      setActiveX(Math.floor(categoryRect.x - parentRect.x - (paddingX ?? 0)));
-      setActiveHeight(Math.floor(categoryRect.height + (paddingY ?? 0) * 2));
-      setActiveWidth(Math.floor(categoryRect.width + (paddingX ?? 0) * 2));
+      setActiveLeft(activeBlockLeft);
+      setActiveHeight(activeBlockHeight);
+      setActiveWidth(activeBlockWidth);
     }
-  }, [activeIndex]);
+  }, [activeIndex, paddingX, paddingY]);
 
   useLayoutEffect(() => {
     // measure();
@@ -103,9 +106,9 @@ function ToggleSwitchNavigation({
         role="presentation"
         className={tw(
           'absolute transition-[left,width,height] duration-300 ease-out',
-          highlightStyle,
+          activeBlockStyle,
         )}
-        style={{ left: activeX ?? 0, width: activeWidth ?? 0, height: activeHeight ?? 0 }}
+        style={{ left: activeLeft ?? 0, width: activeWidth ?? 0, height: activeHeight ?? 0 }}
       ></li>
     </ul>
   );
