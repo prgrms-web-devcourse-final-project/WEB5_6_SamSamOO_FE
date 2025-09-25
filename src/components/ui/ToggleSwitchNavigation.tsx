@@ -5,15 +5,12 @@ import { usePathname } from 'next/navigation';
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 import tw from '@/utils/tw';
+import { NavigationItem } from '@/types/navigationItems';
 
-type NavigationItem = {
-  href?: string;
-  label?: string;
-  test?: string;
-};
+import { categoryItems } from '../features/search/navigationItems';
 
 interface Props {
-  items: NavigationItem[];
+  items?: NavigationItem[];
   paddingX?: number;
   paddingY?: number;
   parentStyle?: string;
@@ -23,13 +20,13 @@ interface Props {
 }
 
 const defaultParentStyle =
-  'px-8 py-3 gap-[83px] bg-[#0D1846] rounded-full text-xl text-primary-white dark:bg-primary-black dark:border dark:border-border-gray1';
-const defaultActiveBlockStyle = 'bg-primary-white rounded-4xl';
+  'px-8 py-3 gap-[83px] bg-[#0D1846] rounded-full font-medium text-xl text-primary-white dark:bg-primary-black dark:border dark:border-border-gray1';
+const defaultActiveBlockStyle = 'bg-background-white rounded-4xl';
 const defaultActiveTextStyle = 'text-primary-black';
 const defaultInactiveTextStyle = 'text-primary-white';
 
 function ToggleSwitchNavigation({
-  items,
+  items = categoryItems,
   paddingX,
   paddingY,
   parentStyle = defaultParentStyle,
@@ -104,10 +101,7 @@ function ToggleSwitchNavigation({
       <li
         aria-hidden="true"
         role="presentation"
-        className={tw(
-          'absolute transition-[left,width,height] duration-300 ease-out',
-          activeBlockStyle,
-        )}
+        className={tw('absolute transition-[left] duration-300 ease-out', activeBlockStyle)}
         style={{ left: activeLeft ?? 0, width: activeWidth ?? 0, height: activeHeight ?? 0 }}
       ></li>
     </ul>
