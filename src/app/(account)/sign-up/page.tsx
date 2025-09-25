@@ -1,9 +1,9 @@
 'use client';
 
-import AccountButton from '@/components/ui/account/AccountButton';
-import AccountInput from '@/components/ui/account/AccountInput';
-import BirthdayInput from '@/components/ui/account/BirthdayInput';
-import SelectGender from '@/components/ui/account/SelectGender';
+import AccountButton from '@/components/features/account/AccountButton';
+import AccountInput from '@/components/features/account/AccountInput';
+import BirthdayInput from '@/components/features/account/BirthdayInput';
+import SelectGender from '@/components/features/account/SelectGender';
 
 function Page() {
   return (
