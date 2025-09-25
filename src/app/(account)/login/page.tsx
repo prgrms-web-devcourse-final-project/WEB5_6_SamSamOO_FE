@@ -1,6 +1,6 @@
 'use client';
-import AccountButton from '@/components/ui/account/AccountButton';
-import AccountInput from '@/components/ui/account/AccountInput';
+import AccountButton from '@/components/features/account/AccountButton';
+import AccountInput from '@/components/features/account/AccountInput';
 import Link from 'next/link';
 import { useState } from 'react';
 
