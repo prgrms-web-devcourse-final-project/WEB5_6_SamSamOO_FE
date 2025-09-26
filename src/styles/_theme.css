@@ -23,6 +23,8 @@
   --color-primary-gray2: #4d4d4d; /* fallback */
   --color-primary-gray2: oklch(42.02% 0 0);
 
+  --color-primary-gray3: #1a1a1a; /* fallback */
+
   --color-background-white: #ffffff; /* fallback */
   --color-background-white: oklch(100% 0 0);
 
@@ -33,6 +35,8 @@
   --color-background-black2: oklch(21.6% 0.004 228.98);
 
   --color-border-gray1: #353535;
+  --color-filter-outline1: #d2d2d2;
+  --color-filter-outline2: #737373;
 
   --animate-toLight: toggle-toLight 1.1s forwards;
   --animate-toDark: toggle-toDark 1.1s forwards;
@@ -42,6 +46,9 @@
   --shadow-landing-input-inner: 0 4px 13px 0 rgba(0, 0, 0, 0.25) inset;
   --shadow-landing-1: 0 4px 14.3px 0 rgba(0, 0, 0, 0.25);
   --shadow-landing-card: 13px 22px 26.5px 10px rgba(0, 0, 0, 0.15);
+  --shadow-filter: 0 6px 21.6px -3px rgba(0, 0, 0, 0.25);
+  --shadow-filter-dark-active: 0 1px 5.7px 1px rgba(232, 232, 232, 0.39);
+  --shadow-filter-light-active: 0 1px 5.7px 1px rgba(13, 24, 70, 0.39);
 
   --radius-modal: 50px;
 }
