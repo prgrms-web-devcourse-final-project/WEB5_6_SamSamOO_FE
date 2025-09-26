@@ -35,7 +35,7 @@ export default function PromptInput() {
         ref={textAreaRef}
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        className="w-full ml-6 text-xl text-primary-black dark:text-primary-white resize-none bg-transparent outline-none p-3"
+        className="w-full ml-6 md:text-xl text-sm text-primary-black dark:text-primary-white resize-none bg-transparent outline-none p-3"
         rows={1}
         placeholder="무엇이든 물어보세요."
         style={{ overflowY: 'hidden' }}

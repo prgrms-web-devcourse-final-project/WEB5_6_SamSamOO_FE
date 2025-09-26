@@ -26,7 +26,7 @@ function KeywordRank() {
   const currentItem = initialKeywords[currentIndex];
 
   return (
-    <div className="absolute right-10 top-4">
+    <div className="md:absolute static md:w-fit w-full pt-2 md:right-10 md:top-4">
       <AnimatePresence mode="wait">
         <motion.div
           key={currentItem.id}
@@ -34,7 +34,7 @@ function KeywordRank() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.5, ease: 'easeInOut' }}
-          className="w-70 h-10 rounded-[20px] border-[0.5px] border-[#7B7B7B] flex gap-8 items-center justify-between dark:bg-background-black1"
+          className="w-70 h-10 rounded-[20px] border-[0.5px] border-[#7B7B7B] lg:m-0 m-auto flex gap-8 items-center justify-between dark:bg-background-black1"
         >
           <div
             className={`tracking-tighter center-col w-7 h-7 ${currentItem.rank > 3 ? '' : 'bg-accent text-primary-white'} rounded-[50%] ml-3 dark:text-primary-white`}
