@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import SearchFilterDropdown from './SearchFilterDropdown';
 import SearchFilterModal from './SearchFilterModal';
 import { useTheme } from 'next-themes';
 
@@ -38,7 +37,6 @@ function SearchFilter({ category }: Props) {
         </svg>
       </button>
       <SearchFilterModal />
-      <SearchFilterDropdown />
     </>
   );
 }
