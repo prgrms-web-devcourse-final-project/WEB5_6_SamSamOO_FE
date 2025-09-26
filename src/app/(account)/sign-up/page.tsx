@@ -3,6 +3,7 @@
 import AccountButton from '@/components/features/account/AccountButton';
 import AccountInput from '@/components/features/account/AccountInput';
 import BirthdayInput from '@/components/features/account/BirthdayInput';
+import DividerWithText from '@/components/features/account/DividerWithText';
 import SelectGender from '@/components/features/account/SelectGender';
 
 function Page() {
@@ -28,11 +29,7 @@ function Page() {
         <AccountButton type="submit">회원가입</AccountButton>
       </form>
 
-      <div className="mb-5 flex w-full items-center gap-2">
-        <div className="h-px flex-1 bg-[#7b7b7b] dark:bg-primary-white" />
-        <p className="text-sm text-[#7b7b7b] dark:text-primary-white">간편 회원가입</p>
-        <div className="h-px flex-1 bg-[#7b7b7b] dark:bg-primary-white" />
-      </div>
+      <DividerWithText text="간편 회원가입" />
 
       <div className="mb-6 flex w-full gap-6">
         <button className="h-13 flex-1 rounded-sm bg-[#03C75A] px-9 dark:text-primary-black">

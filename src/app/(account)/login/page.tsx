@@ -1,35 +1,66 @@
 'use client';
+import { login } from '@/api/loginApi';
 import AccountButton from '@/components/features/account/AccountButton';
 import AccountInput from '@/components/features/account/AccountInput';
+import DividerWithText from '@/components/features/account/DividerWithText';
 import Link from 'next/link';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 function Page() {
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const router = useRouter();
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const submitLoginForm = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      const response = await login(formData);
+      console.log(response);
+      // 전역 상태에 적재.
+      router.replace('/');
+    } catch (error) {
+      console.error('로그인 실패:', error);
+    }
+  };
 
   return (
     <div className="w-[420px] center-col">
       <h2 className="text-4xl font-bold mb-2">👋 안녕하세요!</h2>
       <h3 className="text-2xl mb-9 break-keep text-center">다시 만나게 되어서 반가워요!</h3>
 
-      <form className="w-full center-col gap-8 mb-[30px]">
+      <form onSubmit={submitLoginForm} className="w-full center-col gap-8 mb-[30px]">
         <div className="w-full flex flex-col gap-6">
-          <AccountInput type="text" placeholder="이메일을 입력해주세요." onChange={setEmail} />
           <AccountInput
+            name="email"
+            placeholder="이메일 주소"
+            type="text"
+            value={formData.email}
+            onChange={handleInputChange}
+          />
+          <AccountInput
+            name="password"
+            placeholder="비밀번호"
             type="password"
-            placeholder="비밀번호를 입력해주세요."
-            onChange={setPassword}
+            value={formData.password}
+            onChange={handleInputChange}
           />
         </div>
         <AccountButton type="submit">로그인</AccountButton>
       </form>
 
-      <div className="flex items-center w-full gap-2 mb-3">
-        <div className="flex-1 h-[1px] bg-[#7b7b7b] dark:bg-primary-white"></div>
-        <p className="text-[#7b7b7b] text-sm dark:text-primary-white">간편 로그인</p>
-        <div className="flex-1 h-[1px] bg-[#7b7b7b] dark:bg-primary-white"></div>
-      </div>
+      <DividerWithText text="간편 로그인" />
 
       <div className="w-full flex gap-6 mb-6">
         <button className="flex-1 h-13 bg-[#03C75A] px-[35px] rounded-sm">네이버 로그인</button>
