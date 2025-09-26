@@ -23,7 +23,7 @@ function Header() {
   // console.log(pathname);
 
   return (
-    <header className="fixed w-full grid grid-cols-[1fr_2fr_1fr] h-[60px] pl-[30px] pr-8 items-center justify-between text-xl font-bold text-primary-black dark:text-primary-white bg-[rgba(255,255,255,0.89)] shadow-[0_4px_14.2px_0_rgba(0,0,0,0.25)] dark:bg-[rgba(0,0,0,0.89)] dark:shadow-[0_1px_2px_0_rgba(213,213,213,0.25)]">
+    <header className="fixed z-40 w-full grid grid-cols-[1fr_2fr_1fr] h-[60px] pl-[30px] pr-8 items-center justify-between text-xl font-bold text-primary-black dark:text-primary-white bg-[rgba(255,255,255,0.89)] shadow-[0_4px_14.2px_0_rgba(0,0,0,0.25)] dark:bg-[rgba(0,0,0,0.89)] dark:shadow-[0_1px_2px_0_rgba(213,213,213,0.25)]">
       <div className="justify-self-start">
         <Link href="/">
           <>

@@ -1,7 +1,7 @@
 'use client';
 function SearchInput() {
   return (
-    <label className="gap-2 flex items-center justify-between w-full shadow-[0_3px_12.9px_0_rgba(0,0,0,0.25)_inset] rounded-l-[20px] rounded-r-modal dark:bg-primary-black dark:shadow-[0_4px_13px_0_rgba(0,0,0,0.84)_inset]">
+    <label className="gap-2 flex items-center justify-between w-full shadow-[0_3px_12.9px_0_rgba(0,0,0,0.25)_inset] outline-none rounded-l-[20px] rounded-r-modal dark:bg-primary-black dark:shadow-[0_4px_13px_0_rgba(0,0,0,0.84)_inset]">
       <input
         type="search"
         id="search"
