@@ -1,26 +1,15 @@
 import api from '@/api/axiosInstance';
-
+import { User } from '@/types/User';
 export interface LoginRequest {
   email: string;
   password: string;
 }
 
-export interface LoginResponse {
-  memberId: number;
-  loginId: string;
-  age: number;
-  gender: 'MALE' | 'FEMALE';
-  role: 'USER' | 'ADMIN';
-  name: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export const login = async (data: LoginRequest): Promise<LoginResponse> => {
+export const login = async (data: LoginRequest): Promise<User> => {
   const { email: loginId, password } = data;
 
   try {
-    const res = await api.post<LoginResponse>('/api/auth/login', {
+    const res = await api.post<User>('/api/auth/login', {
       loginId,
       password,
     });
