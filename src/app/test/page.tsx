@@ -1,4 +1,5 @@
 'use client';
+import ScrollButton from '@/components/ui/ScrollButton';
 import SelectFilter from '@/components/ui/SelectFilter';
 
 const itemList = [
@@ -60,6 +61,7 @@ function page() {
             </p>
           </li>
         ))}
+      <ScrollButton direction="bottom" />
     </div>
   );
 }
