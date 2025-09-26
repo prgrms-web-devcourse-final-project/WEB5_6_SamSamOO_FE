@@ -5,8 +5,39 @@ import AccountInput from '@/components/features/account/AccountInput';
 import { useState } from 'react';
 
 function Page() {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isVerified, setIsVerified] = useState<boolean>(false);
+  const [formData, setFormData] = useState({
+    email: '',
+    verificationCode: '',
+    password: '',
+    confirmPassword: '',
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSendVerification = async () => {
+    // 인증 메일 발송 로직
+    console.log('인증 메일 발송:', formData.email);
+  };
+
+  const handleVerifyCode = async (e: React.FormEvent) => {
+    // 인증번호 확인 로직
+    e.preventDefault();
+    console.log('인증번호 확인:', formData.verificationCode);
+    setIsVerified(true);
+  };
+
+  const handlePasswordReset = async (e: React.FormEvent) => {
+    // 비밀번호 재설정 로직
+    e.preventDefault();
+    console.log('비밀번호 재설정:', formData.password, formData.confirmPassword);
+  };
 
   return (
     <div className="center-col">
@@ -18,20 +49,47 @@ function Page() {
       </div>
 
       {isVerified ? (
-        <form className="center-col mb-10 w-[420px] gap-7">
-          <AccountInput type="password" placeholder="비밀번호를 입력해주세요" />
-          <AccountInput type="password" placeholder="비밀번호를 다시 입력해주세요" />
+        <form className="center-col mb-10 w-[420px] gap-7" onSubmit={handlePasswordReset}>
+          <AccountInput
+            name="password"
+            type="password"
+            placeholder="비밀번호를 입력해주세요"
+            value={formData.password}
+            onChange={handleInputChange}
+          />
+          <AccountInput
+            name="confirmPassword"
+            type="password"
+            placeholder="비밀번호를 다시 입력해주세요"
+            value={formData.confirmPassword}
+            onChange={handleInputChange}
+          />
           <AccountButton type="submit">비밀번호 재설정</AccountButton>
         </form>
       ) : (
-        <form className="center-col mb-10 w-[420px] gap-7">
-          <AccountInput type="text" placeholder="이메일을 입력해주세요" />
-          <AccountButton type="button">인증 메일 발송</AccountButton>
-          <AccountInput type="text" placeholder="인증번호를 입력해주세요" />
+        <form className="center-col mb-10 w-[420px] gap-7" onSubmit={handleVerifyCode}>
+          <AccountInput
+            name="email"
+            type="text"
+            placeholder="이메일을 입력해주세요"
+            value={formData.email}
+            onChange={handleInputChange}
+          />
+          <AccountButton type="button" onClick={handleSendVerification}>
+            인증 메일 발송
+          </AccountButton>
+          <AccountInput
+            name="verificationCode"
+            type="text"
+            placeholder="인증번호를 입력해주세요"
+            value={formData.verificationCode}
+            onChange={handleInputChange}
+          />
           <AccountButton type="submit">인증하기</AccountButton>
         </form>
       )}
     </div>
   );
 }
+
 export default Page;

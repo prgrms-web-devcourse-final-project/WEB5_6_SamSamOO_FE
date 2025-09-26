@@ -2,18 +2,17 @@
 'use client';
 
 import * as Select from '@radix-ui/react-select';
-import { useState } from 'react';
 import tw from '@/utils/tw';
 
 type SelectGenderProps = {
   className?: string;
+  value?: string;
+  onChange?: (value: string) => void;
 };
 
-function SelectGender({ className }: SelectGenderProps) {
-  const [value, setValue] = useState<string>();
-
+function SelectGender({ className, value, onChange }: SelectGenderProps) {
   return (
-    <Select.Root value={value} onValueChange={setValue}>
+    <Select.Root value={value} onValueChange={onChange}>
       <Select.Trigger
         aria-label="성별 선택"
         className={tw(
