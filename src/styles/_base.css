@@ -6,6 +6,7 @@
   }
   html {
     min-block-size: 99vh;
+    scrollbar-gutter: stable;
   }
 
   body {
