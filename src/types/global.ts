@@ -1,3 +1,3 @@
-export type FilterItem = {
+export type MenuItem = {
   label: string;
 };

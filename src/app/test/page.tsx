@@ -1,6 +1,6 @@
 'use client';
 import ScrollButton from '@/components/ui/ScrollButton';
-import SelectFilter from '@/components/ui/SelectFilter';
+import SelectMenu from '@/components/ui/SelectMenu';
 
 const itemList = [
   { label: '전체' },
@@ -28,13 +28,13 @@ function page() {
       <h2>TEST PAGE</h2>
       {/* 셀렉터 테스트 */}
       <div className="flex gap-5">
-        <SelectFilter
+        <SelectMenu
           itemList={itemList}
           aria="소관부처 상세"
           className="w-[230]"
           onSelect={(select) => console.log('선택된 값 :', select)}
         />
-        <SelectFilter
+        <SelectMenu
           itemList={itemList}
           aria="소관부처 상세"
           className="w-[230]"

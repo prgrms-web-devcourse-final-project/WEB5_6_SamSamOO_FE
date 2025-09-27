@@ -6,7 +6,7 @@ interface Props {
   category: string;
 }
 
-// 이거 서버컴포넌트인데 왜 useEffect를 쓸 수 있지?
+// 이거 서버컴포넌트인데 왜 useEffect를 쓸 수 있지? => 얘를 import하는 부모에서 'use client'하기 때문
 function SearchFilter({ category }: Props) {
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);

@@ -2,20 +2,20 @@
 
 import { useEffect, useState } from 'react';
 
-import { FilterItem } from '@/types/global';
+import { MenuItem } from '@/types/global';
 import * as Select from '@radix-ui/react-select';
 import tw from '@/utils/tw';
 
 import { useTheme } from 'next-themes';
 
-interface SelectFilterProps {
+interface SelectMenuProps {
   className?: string;
-  itemList?: FilterItem[];
+  itemList?: MenuItem[];
   aria?: string;
   onSelect?: (value: string) => void;
 }
 
-function SelectFilter({ className, itemList, aria, onSelect }: SelectFilterProps) {
+function SelectMenu({ className, itemList, aria, onSelect }: SelectMenuProps) {
   const [value, setValue] = useState<string>();
   const [mounted, setMounted] = useState(false);
   const { resolvedTheme } = useTheme();
@@ -106,4 +106,4 @@ function SelectFilter({ className, itemList, aria, onSelect }: SelectFilterProps
     </Select.Root>
   );
 }
-export default SelectFilter;
+export default SelectMenu;
