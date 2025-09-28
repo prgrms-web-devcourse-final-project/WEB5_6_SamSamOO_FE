@@ -6,9 +6,14 @@ import tw from '@/utils/tw';
 
 type SelectGenderProps = {
   className?: string;
-  value?: string;
-  onChange?: (value: string) => void;
+  value?: 'MALE' | 'FEMALE';
+  onChange?: (value: 'MALE' | 'FEMALE') => void;
 };
+
+const genderOptions = [
+  { label: '남자', value: 'MALE' },
+  { label: '여자', value: 'FEMALE' },
+];
 
 function SelectGender({ className, value, onChange }: SelectGenderProps) {
   return (
@@ -38,13 +43,13 @@ function SelectGender({ className, value, onChange }: SelectGenderProps) {
         className="w-[var(--radix-select-trigger-width)] rounded-3xl border border-[#D2D2D2] bg-white shadow-lg"
       >
         <Select.Viewport className="p-2.5">
-          {['남자', '여자'].map((label) => (
+          {genderOptions.map((option) => (
             <Select.Item
-              key={label}
-              value={label}
+              key={option.value}
+              value={option.value}
               className="flex h-10 cursor-pointer select-none items-center rounded-[18px] px-3 outline-none hover:bg-[#f7f7f7]"
             >
-              <Select.ItemText>{label}</Select.ItemText>
+              <Select.ItemText>{option.label}</Select.ItemText>
             </Select.Item>
           ))}
         </Select.Viewport>

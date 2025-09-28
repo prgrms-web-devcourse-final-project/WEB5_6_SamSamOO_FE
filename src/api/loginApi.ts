@@ -1,5 +1,6 @@
 import api from '@/api/axiosInstance';
 import { User } from '@/types/User';
+
 export interface LoginRequest {
   email: string;
   password: string;
