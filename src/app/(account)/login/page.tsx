@@ -6,9 +6,11 @@ import DividerWithText from '@/components/features/account/DividerWithText';
 import Link from 'next/link';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useUserStore } from '@/store/useUserStore';
 
 function Page() {
   const router = useRouter();
+  const setUser = useUserStore((state) => state.setUser);
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -28,7 +30,7 @@ function Page() {
     try {
       const response = await login(formData);
       console.log(response);
-      // 전역 상태에 적재.
+      setUser(response);
       router.replace('/');
     } catch (error) {
       console.error('로그인 실패:', error);

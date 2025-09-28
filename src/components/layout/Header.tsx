@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 import ToggleThemeButton from './ToggleThemeButton';
+import { useUserStore } from '@/store/useUserStore';
 
 const mainNavItems = [
   { href: '/ai', label: 'AI 상담' },
@@ -20,7 +21,7 @@ const subNavItems = [
 
 function Header() {
   const pathname = usePathname();
-  console.log(pathname);
+  const user = useUserStore((state) => state.user);
 
   return (
     <header className="fixed w-full grid grid-cols-[1fr_2fr_1fr] h-[70px] pl-[30px] pr-8 items-center justify-between text-2xl font-bold text-primary-black dark:text-primary-white bg-[rgba(255,255,255,0.89)] shadow-[0_4px_14.2px_0_rgba(0,0,0,0.25)] dark:bg-[rgba(0,0,0,0.89)] dark:shadow-[0_1px_2px_0_rgba(213,213,213,0.25)]">
@@ -63,32 +64,48 @@ function Header() {
         <h2 className="sr-only">서브 메뉴</h2>
         <ToggleThemeButton />
         <ul className="flex gap-4">
-          {subNavItems.map(({ href, label }) => (
-            <li key={href}>
-              <Link href={href} className={pathname === href ? 'text-accent' : ''}>
-                {label === '마이페이지' ? (
-                  <>
-                    <Image
-                      className="block dark:hidden"
-                      src="/icons/profileLight.svg"
-                      width={34}
-                      height={34}
-                      alt={label}
-                    />
-                    <Image
-                      className="hidden dark:block"
-                      src="/icons/profileDark.svg"
-                      width={34}
-                      height={34}
-                      alt={label}
-                    />
-                  </>
-                ) : (
-                  label
-                )}
-              </Link>
-            </li>
-          ))}
+          {user ? (
+            <>
+              {/* 로그인 상태 */}
+              <li>
+                <Link href="/mypage" className={pathname === '/mypage' ? 'text-accent' : ''}>
+                  <Image
+                    className="block dark:hidden"
+                    src="/icons/profileLight.svg"
+                    width={34}
+                    height={34}
+                    alt="마이페이지"
+                  />
+                  <Image
+                    className="hidden dark:block"
+                    src="/icons/profileDark.svg"
+                    width={34}
+                    height={34}
+                    alt="마이페이지"
+                  />
+                </Link>
+              </li>
+              <li>
+                <button
+                  onClick={() => {
+                    // TODO: 로그아웃 API 호출 + store.clearUser()
+                  }}
+                  className="hover:text-accent"
+                >
+                  로그아웃
+                </button>
+              </li>
+            </>
+          ) : (
+            <>
+              {/* 비로그인 상태 */}
+              <li>
+                <Link href="/login" className={pathname === '/login' ? 'text-accent' : ''}>
+                  로그인
+                </Link>
+              </li>
+            </>
+          )}
         </ul>
       </nav>
     </header>
