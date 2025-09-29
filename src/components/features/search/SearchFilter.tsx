@@ -1,26 +1,182 @@
 import { useEffect, useState } from 'react';
-import SearchFilterModal from './SearchFilterModal';
 import { useTheme } from 'next-themes';
+
+import TotalSearchFilterModal from './TotalSearchFilterModal';
+import LawSearchFilterModal from './LawSearchFilterModal';
+import PrecedentSearchFilterModal from './PrecedentSearchFilterModal';
+
+import convertObjectToString from '@/utils/convertObjectToString';
+import { LawSearchFilter, TestSearchFilter } from '@/types/global';
 
 interface Props {
   category: string;
+  setAppliedFilterText: React.Dispatch<React.SetStateAction<string>>;
 }
 
 // 이거 서버컴포넌트인데 왜 useEffect를 쓸 수 있지? => 얘를 import하는 부모에서 'use client'하기 때문
-function SearchFilter({ category }: Props) {
+function SearchFilter({ category, setAppliedFilterText }: Props) {
   const { resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const [mounted, setMounted] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const isDark = resolvedTheme === 'dark' ? true : false;
+  const [totalSearchFilter, setTotalSearchFilter] = useState<TestSearchFilter>({
+    field1: '',
+    field2: '',
+    field3: '',
+    // 필드1: { field1: '' },
+    // 필드2: { field2: '' },
+    // 필드3: { field3: '' },
+  });
+  const [lawSearchFilter, setLawSearchFilter] = useState<LawSearchFilter>({
+    lawField: '',
+    authority: '',
+    ministry: '',
+    promulgationStart: '',
+    promulgationEnd: '',
+    enforcementStart: '',
+    enforcementEnd: '',
+  });
+  const [precedentSearchFilter, setPrecedentSearchFilter] = useState<TestSearchFilter>({
+    field1: '',
+    field2: '',
+    field3: '',
+    // 필드1: { field1: '' },
+    // 필드2: { field2: '' },
+    // 필드3: { field3: '' },
+  });
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
+  const searchFilterModal = () => {
+    if (category === '통합') {
+      return (
+        <TotalSearchFilterModal
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          setTotalSearchFilter={setTotalSearchFilter}
+        />
+      );
+    }
+    if (category === '법령') {
+      return (
+        <LawSearchFilterModal
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          setLawSearchFilter={setLawSearchFilter}
+        />
+      );
+    }
+    if (category === '판례') {
+      return (
+        <PrecedentSearchFilterModal
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          setPrecedentSearchFilter={setPrecedentSearchFilter}
+        />
+      );
+    }
+  };
+
+  useEffect(() => {
+    if (category === '통합') {
+      setLawSearchFilter({
+        lawField: '',
+        authority: '',
+        ministry: '',
+        promulgationStart: '',
+        promulgationEnd: '',
+        enforcementStart: '',
+        enforcementEnd: '',
+      });
+      // setPrecedentSearchFilter({
+      //   필드1: { field1: '' },
+      //   필드2: { field2: '' },
+      //   필드3: { field3: '' },
+      // });
+      setPrecedentSearchFilter({
+        field1: '',
+        field2: '',
+        field3: '',
+      });
+    }
+    if (category === '법령') {
+      // setPrecedentSearchFilter({
+      //   필드1: { field1: '' },
+      //   필드2: { field2: '' },
+      //   필드3: { field3: '' },
+      // });
+      setPrecedentSearchFilter({
+        field1: '',
+        field2: '',
+        field3: '',
+      });
+      // setTotalSearchFilter({
+      //   필드1: { field1: '' },
+      //   필드2: { field2: '' },
+      //   필드3: { field3: '' },
+      // });
+      setTotalSearchFilter({
+        field1: '',
+        field2: '',
+        field3: '',
+      });
+    }
+    if (category === '판례') {
+      setLawSearchFilter({
+        lawField: '',
+        authority: '',
+        ministry: '',
+        promulgationStart: '',
+        promulgationEnd: '',
+        enforcementStart: '',
+        enforcementEnd: '',
+      });
+      // setTotalSearchFilter({
+      //   필드1: { field1: '' },
+      //   필드2: { field2: '' },
+      //   필드3: { field3: '' },
+      // });
+      setTotalSearchFilter({
+        field1: '',
+        field2: '',
+        field3: '',
+      });
+    }
+    setAppliedFilterText('');
+  }, [category]);
+
+  useEffect(() => {
+    if (category === '통합') {
+      const convert = convertObjectToString(totalSearchFilter);
+      if (convert.length === 0) setAppliedFilterText('적용된 필터가 없습니다');
+      else setAppliedFilterText(convert);
+    }
+    if (category === '법령') {
+      const convert = convertObjectToString(lawSearchFilter);
+      if (convert.length === 0) setAppliedFilterText('적용된 필터가 없습니다');
+      else setAppliedFilterText(convert);
+    }
+    if (category === '판례') {
+      const convert = convertObjectToString(precedentSearchFilter);
+      if (convert.length === 0) setAppliedFilterText('적용된 필터가 없습니다');
+      else setAppliedFilterText(convert);
+    }
+    console.log('법령 필터 : ', lawSearchFilter);
+    console.log('통합 필터 : ', totalSearchFilter);
+    console.log('판례 필터 : ', precedentSearchFilter);
+  }, [lawSearchFilter, totalSearchFilter, precedentSearchFilter]);
+
   if (!mounted) return null;
 
   return (
     <>
-      <button type="button" className="flex w-17 gap-2 items-center focus:bg-accent">
+      <button
+        type="button"
+        className="flex w-17 gap-2 items-center"
+        onClick={() => setIsOpen((prev) => !prev)}
+      >
         {category}
         <svg
           width="10"
@@ -36,7 +192,7 @@ function SearchFilter({ category }: Props) {
           />
         </svg>
       </button>
-      <SearchFilterModal />
+      {isOpen && searchFilterModal()}
     </>
   );
 }

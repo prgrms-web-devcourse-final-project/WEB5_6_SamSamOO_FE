@@ -34,6 +34,8 @@
   --color-background-black2: #181a1b; /* fallback */
   --color-background-black2: oklch(21.6% 0.004 228.98);
 
+  --color-background-black3: #000;
+
   --color-border-gray1: #353535;
   --color-filter-outline1: #d2d2d2;
   --color-filter-outline2: #737373;
@@ -49,6 +51,7 @@
   --shadow-filter: 0 6px 21.6px -3px rgba(0, 0, 0, 0.25);
   --shadow-filter-dark-active: 0 1px 5.7px 1px rgba(232, 232, 232, 0.39);
   --shadow-filter-light-active: 0 1px 5.7px 1px rgba(13, 24, 70, 0.39);
+  --shadow-modal-dark: 0 4px 77px 8px rgba(124, 124, 124, 0.25);
 
   --radius-modal: 50px;
 }
