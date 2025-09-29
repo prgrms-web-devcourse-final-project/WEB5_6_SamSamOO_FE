@@ -7,7 +7,7 @@ import Image from 'next/image';
 import ToggleThemeButton from './ToggleThemeButton';
 
 const mainNavItems = [
-  { href: '/ai', label: 'AI 상담' },
+  { href: '/advice', label: 'AI 상담' },
   { href: '/search', label: '법령ㆍ판례 검색' },
   { href: '/vote', label: '투표' },
 ];
