@@ -163,9 +163,9 @@ function SearchFilter({ category, setAppliedFilterText }: Props) {
       if (convert.length === 0) setAppliedFilterText('적용된 필터가 없습니다');
       else setAppliedFilterText(convert);
     }
-    console.log('법령 필터 : ', lawSearchFilter);
-    console.log('통합 필터 : ', totalSearchFilter);
-    console.log('판례 필터 : ', precedentSearchFilter);
+    // console.log('법령 필터 : ', lawSearchFilter);
+    // console.log('통합 필터 : ', totalSearchFilter);
+    // console.log('판례 필터 : ', precedentSearchFilter);
   }, [lawSearchFilter, totalSearchFilter, precedentSearchFilter]);
 
   if (!mounted) return null;

@@ -46,13 +46,13 @@ function page() {
           itemList={itemList}
           aria="소관부처 상세"
           triggerStyle="w-[230]"
-          onValueChange={(value) => console.log('선택된 값 : ', value)}
+          // onValueChange={(value) => console.log('선택된 값 : ', value)}
         />
         <SelectMenu
           itemList={itemList}
           aria="소관부처 상세"
           triggerStyle="w-[230]"
-          onValueChange={(value) => console.log('선택된 값 : ', value)}
+          // onValueChange={(value) => console.log('선택된 값 : ', value)}
         />
       </div>
 

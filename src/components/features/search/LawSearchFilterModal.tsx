@@ -50,7 +50,7 @@ function LawSearchFilterModal({ isOpen = false, onClose = () => {}, setLawSearch
             itemList={lawFieldData}
             triggerStyle="w-[165px]"
             onValueChange={(value) => {
-              console.log('법령분야 : ', value);
+              // console.log('법령분야 : ', value);
               setLawField(value);
             }}
           />
@@ -65,7 +65,7 @@ function LawSearchFilterModal({ isOpen = false, onClose = () => {}, setLawSearch
             itemList={lawFieldData}
             triggerStyle="w-[165px]"
             onValueChange={(value) => {
-              console.log('소관기관 : ', value);
+              // console.log('소관기관 : ', value);
               setAuthority(value);
             }}
           />
@@ -76,7 +76,7 @@ function LawSearchFilterModal({ isOpen = false, onClose = () => {}, setLawSearch
             itemList={ministryList}
             triggerStyle="w-[230px]"
             onValueChange={(value) => {
-              console.log(`${authority} : `, value);
+              // console.log(`${authority} : `, value);
               setMinistry(value);
             }}
             disabled={!authority}
@@ -93,7 +93,7 @@ function LawSearchFilterModal({ isOpen = false, onClose = () => {}, setLawSearch
             type="date"
             id="promulgationStart"
             onChange={(e) => {
-              console.log(e.target.value);
+              // console.log(e.target.value);
               setPromulgationStart(e.target.value);
             }}
           />
@@ -101,7 +101,7 @@ function LawSearchFilterModal({ isOpen = false, onClose = () => {}, setLawSearch
             type="date"
             id="promulgationEnd"
             onChange={(e) => {
-              console.log(e.target.value);
+              // console.log(e.target.value);
               setPromulgationEnd(e.target.value);
             }}
           />
@@ -114,7 +114,7 @@ function LawSearchFilterModal({ isOpen = false, onClose = () => {}, setLawSearch
             type="date"
             id="enforcementStart"
             onChange={(e) => {
-              console.log(e.target.value);
+              // console.log(e.target.value);
               setEnforcementStart(e.target.value);
             }}
           />
@@ -122,7 +122,7 @@ function LawSearchFilterModal({ isOpen = false, onClose = () => {}, setLawSearch
             type="date"
             id="enforcementEnd"
             onChange={(e) => {
-              console.log(e.target.value);
+              // console.log(e.target.value);
               setEnforcementEnd(e.target.value);
             }}
           />

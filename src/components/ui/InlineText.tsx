@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import InlineBlock from './InlineBlock';
 
 import useTextSelection from '@/hooks/useTextSection';

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 async function Page({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
   const { q } = await searchParams;
-  console.log(q);
+  // console.log(q);
   return (
     <div>
       {
