@@ -1,6 +1,7 @@
 'use client';
 import ScrollButton from '@/components/ui/ScrollButton';
 import SelectMenu from '@/components/ui/SelectMenu';
+import convertObjectToString from '@/utils/convertObjectToString';
 
 const itemList = [
   { label: '전체' },
@@ -23,22 +24,35 @@ const itemList = [
 
 // 배포전에 꼭 지우기
 function page() {
+  {
+    /* 변환 유틸 테스트 */
+  }
+  convertObjectToString({
+    lawField: 'ㄱㄱ',
+    authority: 'ㄱ',
+    ministry: 'ㄱㄱㄱ',
+    promulgationStart: 'ㄱㄱ',
+    promulgationEnd: 'ㄱㄱ',
+    enforcementStart: 'ㄱㄱㄱ',
+    enforcementEnd: 'ㄱㄱㄱ',
+  });
   return (
     <div className="px-8 py-2">
       <h2>TEST PAGE</h2>
+
       {/* 셀렉터 테스트 */}
       <div className="flex gap-5">
         <SelectMenu
           itemList={itemList}
           aria="소관부처 상세"
-          className="w-[230]"
-          onSelect={(select) => console.log('선택된 값 :', select)}
+          triggerStyle="w-[230]"
+          onValueChange={(value) => console.log('선택된 값 : ', value)}
         />
         <SelectMenu
           itemList={itemList}
           aria="소관부처 상세"
-          className="w-[230]"
-          onSelect={(select) => console.log('선택된 값 :', select)}
+          triggerStyle="w-[230]"
+          onValueChange={(value) => console.log('선택된 값 : ', value)}
         />
       </div>
 
