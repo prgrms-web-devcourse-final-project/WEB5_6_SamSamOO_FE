@@ -11,6 +11,5 @@ export default function convertObjectToString(
       return `${key}${wordSeparator}${value}`;
     });
   const convertString = parameter.join(pairSeparator);
-  console.log(convertString);
   return convertString;
 }

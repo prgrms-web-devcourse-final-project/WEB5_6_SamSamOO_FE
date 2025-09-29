@@ -36,7 +36,7 @@ function TotalSearchFilterModal({ isOpen, onClose = () => {}, setTotalSearchFilt
             itemList={lawFieldData}
             triggerStyle="w-[165px]"
             onValueChange={(value) => {
-              console.log('분야1 : ', value);
+              // console.log('분야1 : ', value);
               setField1(value);
             }}
           />
@@ -51,7 +51,7 @@ function TotalSearchFilterModal({ isOpen, onClose = () => {}, setTotalSearchFilt
             itemList={lawFieldData}
             triggerStyle="w-[165px]"
             onValueChange={(value) => {
-              console.log('분야2 : ', value);
+              // console.log('분야2 : ', value);
               setField2(value);
             }}
           />
@@ -66,7 +66,7 @@ function TotalSearchFilterModal({ isOpen, onClose = () => {}, setTotalSearchFilt
             itemList={lawFieldData}
             triggerStyle="w-[165px]"
             onValueChange={(value) => {
-              console.log('분야3 : ', value);
+              // console.log('분야3 : ', value);
               setField3(value);
             }}
           />

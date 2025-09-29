@@ -7,7 +7,10 @@ import { useEffect, useState } from 'react';
  * @returns Object {selectedText : 선택한 텍스트와 위치정보, handleDoubleClick : 더블클릭 이벤트, handlePointerUp : 드래그 이벤트, handlePointerDown : 클릭 초기화}
  */
 
-export default function useTextSelection(containerRef: React.RefObject<HTMLDivElement | null>) {
+export default function useTextSelection(
+  containerRef: React.RefObject<HTMLDivElement | null>,
+  textRef: React.RefObject<HTMLParagraphElement | null>,
+) {
   const [selectedText, setSelectedText] = useState<TextSelection | null>(null);
 
   useEffect(() => {
@@ -25,10 +28,14 @@ export default function useTextSelection(containerRef: React.RefObject<HTMLDivEl
     if (!selection) return;
 
     const { selectText, rect } = selection;
+
+    if (!textRef || !textRef.current) return;
+    const pRect = textRef.current.getBoundingClientRect();
+
     setSelectedText({
       selectedText: selectText,
-      positionX: rect.x === 0 ? e.clientX : rect.x,
-      positionY: rect.y - rect.height,
+      positionX: rect.x === 0 ? e.clientX : rect.x - pRect.x,
+      positionY: rect.y - pRect.y + rect.height,
     });
   };
 
@@ -37,10 +44,13 @@ export default function useTextSelection(containerRef: React.RefObject<HTMLDivEl
     if (!selection) return;
 
     const { selectText, rect } = selection;
+
+    if (!textRef || !textRef.current) return;
+    const pRect = textRef.current.getBoundingClientRect();
     setSelectedText({
       selectedText: selectText,
-      positionX: rect.x === 0 ? e.clientX : rect.x,
-      positionY: rect.x === 0 ? rect.y : rect.y - rect.height,
+      positionX: rect.x === 0 ? e.clientX : rect.x - pRect.x,
+      positionY: rect.y - pRect.y + rect.height,
     });
   };
 
