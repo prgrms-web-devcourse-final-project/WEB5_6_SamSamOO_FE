@@ -27,5 +27,4 @@ function AccountInput({ name, placeholder, type, onChange, value }: Props) {
     />
   );
 }
-
 export default AccountInput;
