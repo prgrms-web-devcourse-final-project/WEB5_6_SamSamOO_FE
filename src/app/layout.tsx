@@ -8,6 +8,7 @@ import localFont from 'next/font/local';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import ThemeProvider from '@/components/provider/ThemeProvider';
+import ServerUserProvider from '@/components/provider/ServerUserProvider';
 import ScrollButton from '@/components/ui/ScrollButton';
 
 export const metadata: Metadata = {
@@ -51,13 +52,14 @@ export default function RootLayout({
   return (
     <html lang="ko-KR" suppressHydrationWarning>
       <body className={`${appleSD.className} antialiased`}>
-        <ThemeProvider enableSystem>
-          <Header />
-          <main className="w-full min-h-[calc(100vh-50px)] pt-[70px]">{children}</main>
-          <Footer />
-          <ScrollButton />
-        </ThemeProvider>
-
+        <ServerUserProvider>
+          <ThemeProvider enableSystem>
+            <Header />
+            <main className="w-full min-h-[calc(100vh-50px)] pt-[70px]">{children}</main>
+            <Footer />
+            <ScrollButton />
+          </ThemeProvider>
+        </ServerUserProvider>
         <SpeedInsights />
         <Analytics />
       </body>

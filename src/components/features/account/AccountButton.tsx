@@ -3,6 +3,7 @@ import tw from '@/utils/tw';
 interface Props {
   children: string;
   type: 'submit' | 'button';
+  onClick?: () => void;
 }
 
 export const STYLE = tw(
@@ -13,9 +14,9 @@ export const STYLE = tw(
   'dark:bg-accent',
 );
 
-function AccountButton({ children, type }: Props) {
+function AccountButton({ children, type, onClick }: Props) {
   return (
-    <button className={STYLE} type={type}>
+    <button className={STYLE} type={type} onClick={onClick}>
       {children}
     </button>
   );
