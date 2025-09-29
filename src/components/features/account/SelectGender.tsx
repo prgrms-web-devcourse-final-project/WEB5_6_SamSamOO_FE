@@ -2,18 +2,22 @@
 'use client';
 
 import * as Select from '@radix-ui/react-select';
-import { useState } from 'react';
 import tw from '@/utils/tw';
 
 type SelectGenderProps = {
   className?: string;
+  value?: 'MALE' | 'FEMALE';
+  onChange?: (value: 'MALE' | 'FEMALE') => void;
 };
 
-function SelectGender({ className }: SelectGenderProps) {
-  const [value, setValue] = useState<string>();
+const genderOptions = [
+  { label: '남자', value: 'MALE' },
+  { label: '여자', value: 'FEMALE' },
+];
 
+function SelectGender({ className, value, onChange }: SelectGenderProps) {
   return (
-    <Select.Root value={value} onValueChange={setValue}>
+    <Select.Root value={value} onValueChange={onChange}>
       <Select.Trigger
         aria-label="성별 선택"
         className={tw(
@@ -39,13 +43,13 @@ function SelectGender({ className }: SelectGenderProps) {
         className="w-[var(--radix-select-trigger-width)] rounded-3xl border border-[#D2D2D2] bg-white shadow-lg"
       >
         <Select.Viewport className="p-2.5">
-          {['남자', '여자'].map((label) => (
+          {genderOptions.map((option) => (
             <Select.Item
-              key={label}
-              value={label}
+              key={option.value}
+              value={option.value}
               className="flex h-10 cursor-pointer select-none items-center rounded-[18px] px-3 outline-none hover:bg-[#f7f7f7]"
             >
-              <Select.ItemText>{label}</Select.ItemText>
+              <Select.ItemText>{option.label}</Select.ItemText>
             </Select.Item>
           ))}
         </Select.Viewport>
