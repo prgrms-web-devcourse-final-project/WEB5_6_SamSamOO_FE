@@ -1,4 +1,5 @@
 'use client';
+import Pagination from '@/components/ui/Pagination';
 import ScrollButton from '@/components/ui/ScrollButton';
 import SelectMenu from '@/components/ui/SelectMenu';
 import convertObjectToString from '@/utils/convertObjectToString';
@@ -75,6 +76,8 @@ function page() {
             </p>
           </li>
         ))}
+      <Pagination />
+
       <ScrollButton direction="bottom" />
     </div>
   );
