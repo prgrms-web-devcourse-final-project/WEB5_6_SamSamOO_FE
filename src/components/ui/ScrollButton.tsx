@@ -1,8 +1,9 @@
 'use client';
 
-import tw from '@/utils/tw';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+
+import tw from '@/utils/tw';
 
 interface Props {
   direction?: string;
