@@ -1,22 +1,40 @@
 'use client';
 
+import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 
-import { MenuItem } from '@/types/global';
-import * as Select from '@radix-ui/react-select';
 import tw from '@/utils/tw';
-
-import { useTheme } from 'next-themes';
+import * as Select from '@radix-ui/react-select';
+import { MenuItem } from '@/types/global';
 
 interface SelectMenuProps {
-  className?: string;
+  field?: string;
   itemList?: MenuItem[];
+  triggerStyle?: string;
+  valueStyle?: string;
+  contentStyle?: string;
+  itemStyle?: string;
+
   aria?: string;
-  onSelect?: (value: string) => void;
+  value?: string;
+  disabled?: boolean;
+  placeholder?: string;
+  onValueChange?: (value: string) => void;
 }
 
-function SelectMenu({ className, itemList, aria, onSelect }: SelectMenuProps) {
-  const [value, setValue] = useState<string>();
+function SelectMenu({
+  field,
+  itemList,
+  triggerStyle,
+  valueStyle,
+  contentStyle,
+  itemStyle,
+  aria = '전체',
+  value,
+  disabled,
+  placeholder,
+  onValueChange,
+}: SelectMenuProps) {
   const [mounted, setMounted] = useState(false);
   const { resolvedTheme } = useTheme();
   const isDark = resolvedTheme === 'dark';
@@ -25,26 +43,25 @@ function SelectMenu({ className, itemList, aria, onSelect }: SelectMenuProps) {
     setMounted(true);
   }, []);
 
-  if (!mounted) return '';
+  if (!mounted) return null;
 
   return (
-    <Select.Root
-      value={value}
-      onValueChange={(value) => {
-        setValue(value);
-        onSelect?.(value ?? '');
-      }}
-    >
+    <Select.Root value={value} onValueChange={(value) => onValueChange?.(value)}>
       <Select.Trigger
+        id={field}
+        disabled={disabled}
         aria-label={`${aria} 선택`}
         className={tw(
           'py-2 px-6 w-fit flex gap-3 items-center justify-between rounded-full bg-background-white  outline-none border border-filter-outline1 text-primary-gray2 focus:shadow-filter-light-active dark:bg-primary-gray3 dark:text-primary-white dark:border-filter-outline2 data-[state=open]:shadow-filter-light-active dark:data-[state=open]:shadow-filter-dark-active',
-          className,
+          triggerStyle,
         )}
       >
         <Select.Value
-          placeholder={aria}
-          className="flex items-center text-primary-black data-[placeholder]:text-primary-black"
+          placeholder={placeholder ?? aria}
+          className={tw(
+            'flex items-center text-primary-black data-[placeholder]:text-primary-black',
+            valueStyle,
+          )}
         />
         <Select.Icon>
           <svg
@@ -71,7 +88,10 @@ function SelectMenu({ className, itemList, aria, onSelect }: SelectMenuProps) {
         align="start"
         sideOffset={8}
         avoidCollisions={false}
-        className="w-[var(--radix-select-trigger-width)] max-h-[var(--radix-select-content-available-height)] rounded-3xl border border-[#D2D2D2] bg-white shadow-filter dark:bg-primary-gray3 dark:text-primary-white dark:border-filter-outline2"
+        className={tw(
+          'w-[var(--radix-select-trigger-width)] max-h-[var(--radix-select-content-available-height)] rounded-3xl border border-[#D2D2D2] bg-white shadow-filter dark:bg-primary-gray3 dark:text-primary-white dark:border-filter-outline2',
+          contentStyle,
+        )}
       >
         <Select.Viewport className="p-2.5 space-y-2 gap-2 overflow-auto">
           {itemList &&
@@ -82,6 +102,7 @@ function SelectMenu({ className, itemList, aria, onSelect }: SelectMenuProps) {
                 className={tw(
                   'flex h-10 cursor-pointer select-none items-center justify-between rounded-[18px] px-3 outline-none hover:bg-[#f7f7f7] dark:hover:text-primary-black',
                   value === label ? 'bg-[#f7f7f7] dark:text-primary-black' : '',
+                  itemStyle,
                 )}
               >
                 <Select.ItemText>{label}</Select.ItemText>
