@@ -6,6 +6,7 @@
   }
   html {
     min-block-size: 99vh;
+    scrollbar-gutter: stable;
   }
 
   body {
@@ -33,5 +34,11 @@
     outline: 0;
     text-decoration: none;
     color: inherit;
+  }
+
+  ol,
+  ul,
+  li {
+    list-style: none;
   }
 }
