@@ -2,12 +2,16 @@ interface Props {
   fileName: string;
   label: string;
   alt?: string;
+  onClick: () => void;
 }
 
-function IconButton({ fileName, label, alt }: Props) {
+function IconButton({ fileName, label, alt, onClick }: Props) {
   return (
     <li className="group w-16 h-18 hover:bg-primary hover:text-primary-white dark:hover:bg-accent text-primary-black dark:text-primary-white rounded-lg">
-      <button className="flex flex-col justify-around items-center w-full h-full text-sm">
+      <button
+        className="flex flex-col justify-around items-center w-full h-full text-sm"
+        onClick={onClick}
+      >
         <div className="relative w-6 h-6">
           {/* 기본 아이콘들 */}
           <img
