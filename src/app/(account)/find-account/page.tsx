@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import VerificationForm from '@/components/forms/VerificationForm';
+import VerifyEmailForm from '@/components/forms/VerifyEmailForm';
 import PasswordResetForm from '@/components/forms/PasswordResetForm';
 import AuthHeader from '@/components/features/account/AuthHeader';
 import { useRouter } from 'next/navigation';
@@ -26,7 +26,7 @@ function Page() {
           }}
         />
       ) : (
-        <VerificationForm onVerified={(email) => setVerifiedEmail(email)} />
+        <VerifyEmailForm onVerified={(email) => setVerifiedEmail(email)} />
       )}
     </div>
   );
