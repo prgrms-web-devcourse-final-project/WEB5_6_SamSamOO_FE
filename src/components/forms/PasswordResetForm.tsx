@@ -4,7 +4,7 @@ import { useState } from 'react';
 import AccountInput from '@/components/features/account/AccountInput';
 import AccountButton from '@/components/features/account/AccountButton';
 import FormErrorMessage from '@/components/features/account/FormErrorMessage';
-import { passwordReset } from '@/api/passwordResetApi';
+import { passwordReset } from '@/api/account/passwordResetApi';
 
 interface Props {
   email: string;

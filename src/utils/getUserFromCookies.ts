@@ -1,6 +1,6 @@
 import 'server-only';
 import { cookies } from 'next/headers';
-import { fetchUser } from '@/api/fetchUserProfile';
+import { fetchUser } from '@/api/account/fetchUserProfile';
 import { User } from '@/types/User';
 
 /**
