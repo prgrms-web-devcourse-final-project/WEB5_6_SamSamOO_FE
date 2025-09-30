@@ -1,12 +1,12 @@
 'use client';
 
-import { getChatTitleList } from '@/api/chat/chatHistoty';
+import { getChatHistoryList } from '@/api/chat/chatHistoty';
 import { useEffect, useState } from 'react';
 
-import ChatHistoryItem from './components/chatHistory/ChatHistoryItem';
 import useClosePopup from '@/hooks/useClosePopup';
 import CloseButton from '@/components/ui/CloseButton';
 import { ChatHistoryList } from '@/types/chat';
+import ChatHistoryItem from '../chatHistory/ChatHistoryItem';
 
 interface Props {
   onClose: () => void;
@@ -19,7 +19,7 @@ function ChatListModal({ onClose, isOpen }: Props) {
 
   useEffect(() => {
     const getChat = async () => {
-      const list = await getChatTitleList();
+      const list = await getChatHistoryList();
       setChatHistoryList(list);
       console.log(list);
     };

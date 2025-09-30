@@ -1,4 +1,4 @@
-import PromptArea from '@/components/features/advice/components/PromptArea';
+import PromptArea from '@/components/features/advice/components/chat/PromptArea';
 
 function page() {
   return (

@@ -1,9 +1,10 @@
 'use client';
 import { useState } from 'react';
-import IconButton from './components/IconButton';
-import ChatListModal from './ChatListModal';
+
 import CloseButton from '@/components/ui/CloseButton';
 import ChatMenuButton from './components/chatHistory/ChatMenuButton';
+import IconButton from './components/sideBar/IconButton';
+import ChatListModal from './components/sideBar/ChatListModal';
 
 function AdviceSideBar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);

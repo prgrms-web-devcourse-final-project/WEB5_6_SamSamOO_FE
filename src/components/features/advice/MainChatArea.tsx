@@ -1,5 +1,5 @@
-import AIMessage from './components/AIMessage';
-import UserMessage from './components/UserMessage';
+import AIMessage from './components/chat/AIMessage';
+import UserMessage from './components/chat/UserMessage';
 
 function MainChatArea() {
   return (
