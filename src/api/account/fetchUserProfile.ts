@@ -1,12 +1,23 @@
-import api from '@/api/axiosInstance';
 import { User } from '@/types/User';
 
-export async function fetchUser() {
+export async function fetchUser(cookieString: string) {
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   try {
-    const res = await api.get<User>('/api/auth/me');
-    return res.data;
+    const res = await fetch(`${apiUrl}/api/auth/me`, {
+      headers: {
+        Cookie: cookieString,
+      },
+      cache: 'no-store',
+    });
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch user: ${res.status}`);
+    }
+
+    const data: User = await res.json();
+    return data;
   } catch (err) {
-    console.log(err, '토큰을 확인하지 못해 비로그인 상태로 시작.');
+    console.error('Fetch error:', err);
     return null;
   }
 }
