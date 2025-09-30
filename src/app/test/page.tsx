@@ -2,6 +2,7 @@
 import ScrollButton from '@/components/ui/ScrollButton';
 import SelectMenu from '@/components/ui/SelectMenu';
 import convertObjectToString from '@/utils/convertObjectToString';
+import Close from '@/assets/icons/close.svg';
 
 const itemList = [
   { label: '전체' },
@@ -39,6 +40,7 @@ function page() {
   return (
     <div className="px-8 py-2">
       <h2>TEST PAGE</h2>
+      <Close className="text-blue-600" />
 
       {/* 셀렉터 테스트 */}
       <div className="flex gap-5">
