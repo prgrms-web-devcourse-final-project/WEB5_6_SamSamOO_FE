@@ -47,7 +47,7 @@ function SelectGender({ className, value, onChange }: SelectGenderProps) {
             <Select.Item
               key={option.value}
               value={option.value}
-              className="flex h-10 cursor-pointer select-none items-center rounded-[18px] px-3 outline-none hover:bg-[#f7f7f7]"
+              className="flex h-10 cursor-pointer select-none items-center rounded-[18px] px-3 outline-none hover:bg-[#f7f7f7] text-primary-black"
             >
               <Select.ItemText>{option.label}</Select.ItemText>
             </Select.Item>
