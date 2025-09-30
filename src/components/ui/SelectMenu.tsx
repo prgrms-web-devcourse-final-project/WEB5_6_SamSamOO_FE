@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 import tw from '@/utils/tw';
 import * as Select from '@radix-ui/react-select';
-import { MenuItem } from '@/types/global';
+import { MenuItem } from '@/types/filter';
 
 interface SelectMenuProps {
   field?: string;
