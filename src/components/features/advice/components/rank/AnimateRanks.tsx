@@ -31,7 +31,7 @@ function AnimateRanks({ rankList }: Props) {
       >
         <div
           className={`flex items-center justify-center w-8 h-8 rounded-full text-sm font-bold text-primary-white ${
-            currentIndex <= 2 ? 'bg-accent' : 'bg-primary-gray1 dark:bg-primary-gray2'
+            currentIndex <= 2 ? 'bg-brand-accent' : 'bg-primary-gray1 dark:bg-primary-gray2'
           }`}
         >
           {currentIndex + 1}

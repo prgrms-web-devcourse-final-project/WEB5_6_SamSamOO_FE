@@ -1,7 +1,8 @@
 'use client';
-import Link from 'next/link';
+
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
+import ArrowUpward from '@/assets/icons/arrowUpward.svg';
 
 //todo - 기능 개발 시 디바운스 적용
 export default function PromptInput() {
@@ -53,16 +54,7 @@ export default function PromptInput() {
       />
       <div className="center-row mr-3">
         <button type="submit" className="border-1 border-primary-gray1 rounded-[50%]">
-          <img
-            src="/icons/arrowUpwardLight.svg"
-            className="dark:hidden"
-            alt="프롬프트 엔터 아이콘"
-          />
-          <img
-            src="/icons/arrowUpwardDark.svg"
-            className="hidden dark:block"
-            alt="프롬프트 엔터 다크모드 아이콘"
-          />
+          <ArrowUpward className="text-[#406EB7] dark:text-brand-accent w-9 h-9" />
         </button>
       </div>
     </form>

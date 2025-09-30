@@ -16,7 +16,7 @@ function KeywordRankClient({ rankList, className }: Props) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className={tw('md:absolute relative md:w-fit w-full  md:right-10 md:top-4', className)}>
+    <div className={tw('md:absolute relative md:w-fit w-full md:right-10 md:top-4', className)}>
       <motion.div
         animate={{
           height: isOpen ? 'auto' : 40, // 헤더 높이만큼
@@ -28,7 +28,9 @@ function KeywordRankClient({ rankList, className }: Props) {
           {!isOpen && rankList && <AnimateRanks rankList={rankList} />}
           {isOpen && (
             <div>
-              <p className="font-semibold text-primary dark:text-accent">실시간 키워드 순위</p>
+              <p className="font-semibold text-brand-primary dark:text-brand-accent">
+                실시간 키워드 순위
+              </p>
             </div>
           )}
           <AccordionButton isOpen={isOpen} onChange={() => setIsOpen((prev) => !prev)} />

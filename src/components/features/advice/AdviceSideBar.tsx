@@ -46,10 +46,9 @@ function AdviceSideBar() {
             <CloseButton onClose={closeSidebar} />
           </div>
           <ul className="center-col gap-4">
-            <IconButton fileName="newChat" alt="새 채팅" label="새 채팅" onClick={() => {}} />
+            <IconButton fileName="newChat" label="새 채팅" onClick={() => {}} />
             <IconButton
               fileName="chatList"
-              alt="채팅 목록"
               label="채팅 목록"
               onClick={() => setIsOpenPop((prev) => !prev)}
             />

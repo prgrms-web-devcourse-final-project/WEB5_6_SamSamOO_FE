@@ -1,3 +1,5 @@
+import Menu from '@/assets/icons/menu.svg';
+
 interface Props {
   toggleSidebar: () => void;
   isSidebarOpen: boolean;
@@ -12,8 +14,7 @@ function ChatMenuButton({ toggleSidebar, isSidebarOpen, closeSidebar }: Props) {
         className="md:hidden p-2 bg-primary-white dark:bg-primary-black border-[0.5px] border-gray-200 rounded-lg shadow-sm hover:bg-gray-50 hover:dark:bg-primary-gray3"
         aria-label="메뉴 열기"
       >
-        <img src="/icons/menuLight.svg" className="dark:hidden" alt="메뉴 아이콘 라이트 모드" />
-        <img src="/icons/menuDark.svg" className="hidden dark:block" alt="메뉴 아이콘 다크 모드" />
+        <Menu className="text-primary-black dark:text-primary-white w-6 h-6" />
       </button>
 
       {isSidebarOpen && (
