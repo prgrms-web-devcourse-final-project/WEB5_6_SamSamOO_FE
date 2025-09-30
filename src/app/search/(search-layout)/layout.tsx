@@ -1,4 +1,4 @@
-import SearchArea from '@/components/features/search/SearchForm';
+import SearchArea from '@/components/features/search/SearchArea';
 import Pagination from '@/components/ui/Pagination';
 import ToggleSwitchNavigation from '@/components/ui/ToggleSwitchNavigation';
 

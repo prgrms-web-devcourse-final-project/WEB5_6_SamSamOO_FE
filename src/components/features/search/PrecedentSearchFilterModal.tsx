@@ -3,7 +3,7 @@ import { lawFieldData } from './_testData/mockData';
 
 import SelectMenu from '@/components/ui/SelectMenu';
 import useClosePopup from '@/hooks/useClosePopup';
-import { TestSearchFilter } from '@/types/global';
+import { TestSearchFilter } from '@/types/filter';
 
 interface Props {
   isOpen?: boolean;

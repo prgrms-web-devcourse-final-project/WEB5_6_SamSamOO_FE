@@ -4,7 +4,7 @@ import { groupTestData, lawFieldData } from './_testData/mockData';
 
 import SelectMenu from '@/components/ui/SelectMenu';
 import useClosePopup from '@/hooks/useClosePopup';
-import { LawSearchFilter } from '@/types/global';
+import { LawSearchFilter } from '@/types/filter';
 
 interface Props {
   isOpen?: boolean;

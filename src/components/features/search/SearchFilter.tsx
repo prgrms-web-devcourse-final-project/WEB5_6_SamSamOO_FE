@@ -6,7 +6,7 @@ import LawSearchFilterModal from './LawSearchFilterModal';
 import PrecedentSearchFilterModal from './PrecedentSearchFilterModal';
 
 import convertObjectToString from '@/utils/convertObjectToString';
-import { LawSearchFilter, TestSearchFilter } from '@/types/global';
+import { LawSearchFilter, TestSearchFilter } from '@/types/filter';
 
 interface Props {
   category: string;

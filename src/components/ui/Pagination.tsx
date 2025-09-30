@@ -1,8 +1,8 @@
 'use client';
 import { clamp } from '@/utils/date';
 import tw from '@/utils/tw';
-import { usePathname, useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+// import { usePathname, useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 interface Props {
   showCount?: number;
@@ -11,8 +11,8 @@ interface Props {
 
 // svg 바꾸기, 첫 끝 페이지일때 prev,next 버튼 스타일 흐리기
 function Pagination({ showCount = 5, end = 10 }: Props) {
-  const router = useRouter();
-  const pathname = usePathname();
+  // const router = useRouter();
+  // const pathname = usePathname();
   const [activePageNumber, setActivePageNumber] = useState<number>(1);
   const maxStart = Math.max(1, end - showCount + 1);
   const half = Math.floor(showCount / 2);
