@@ -12,8 +12,12 @@ interface Props {
 
 function InlineText({ children, className }: Props) {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const { selectedText, handleDoubleClick, handlePointerUp, handlePointerDown } =
-    useTextSelection(containerRef);
+  const textRef = useRef<HTMLParagraphElement | null>(null);
+
+  const { selectedText, handleDoubleClick, handlePointerUp, handlePointerDown } = useTextSelection(
+    containerRef,
+    textRef,
+  );
 
   return (
     <div className="relative">
@@ -28,6 +32,7 @@ function InlineText({ children, className }: Props) {
         onPointerDown={() => {
           handlePointerDown();
         }}
+        ref={textRef}
         className={className}
       >
         {children}
