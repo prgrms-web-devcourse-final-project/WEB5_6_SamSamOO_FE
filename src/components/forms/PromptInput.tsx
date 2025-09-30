@@ -1,12 +1,21 @@
 'use client';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 
 //todo - 기능 개발 시 디바운스 적용
 export default function PromptInput() {
   const [value, setValue] = useState('');
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
+
+  const router = useRouter();
+
   const MAX_HEIGHT = 300;
+
+  // value 변경 시(입력 시) 높이 조절
+  useEffect(() => {
+    adjustHeight();
+  }, [value]);
 
   const adjustHeight = () => {
     const ta = textAreaRef.current;
@@ -19,17 +28,19 @@ export default function PromptInput() {
     ta.style.overflowY = needed > MAX_HEIGHT ? 'auto' : 'hidden';
   };
 
-  // value 변경 시(입력 시) 높이 조절
-  useEffect(() => {
-    adjustHeight();
-  }, [value]);
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const input = value;
+    console.log(input);
+    console.log(router);
+    router.push(`/chat/1?c=${input}`);
+  };
 
   return (
     <form
       className="w-[100%] flex border-[0.5px] h-auto border-primary-gray1 rounded-3xl shadow-[5px_5px_0_1px_rgba(0,0,0,0.10)]"
-      onSubmit={(e) => {
-        e.preventDefault();
-      }}
+      onSubmit={handleSubmit}
     >
       <textarea
         ref={textAreaRef}
@@ -41,20 +52,18 @@ export default function PromptInput() {
         style={{ overflowY: 'hidden' }}
       />
       <div className="center-row mr-3">
-        <Link href={`chat/${1}`}>
-          <button type="submit" className="border-1 border-primary-gray1 rounded-[50%]">
-            <img
-              src="/icons/arrowUpwardLight.svg"
-              className="dark:hidden"
-              alt="프롬프트 엔터 아이콘"
-            />
-            <img
-              src="/icons/arrowUpwardDark.svg"
-              className="hidden dark:block"
-              alt="프롬프트 엔터 다크모드 아이콘"
-            />
-          </button>
-        </Link>
+        <button type="submit" className="border-1 border-primary-gray1 rounded-[50%]">
+          <img
+            src="/icons/arrowUpwardLight.svg"
+            className="dark:hidden"
+            alt="프롬프트 엔터 아이콘"
+          />
+          <img
+            src="/icons/arrowUpwardDark.svg"
+            className="hidden dark:block"
+            alt="프롬프트 엔터 다크모드 아이콘"
+          />
+        </button>
       </div>
     </form>
   );

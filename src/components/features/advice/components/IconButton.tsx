@@ -1,3 +1,6 @@
+import ChatList from '@/assets/icons/chatList.svg';
+import NewChat from '@/assets/icons/newChat.svg';
+
 interface Props {
   fileName: string;
   label: string;
@@ -13,23 +16,12 @@ function IconButton({ fileName, label, alt, onClick }: Props) {
         onClick={onClick}
       >
         <div className="relative w-6 h-6">
-          {/* 기본 아이콘들 */}
-          <img
-            src={`/icons/${fileName}Light.svg`}
-            className="absolute inset-0 dark:hidden group-hover:opacity-0 transition-opacity duration-200"
-            alt={`${alt} 아이콘`}
-          />
-          <img
-            src={`/icons/${fileName}Dark.svg`}
-            className="absolute inset-0 hidden dark:block group-hover:opacity-0 transition-opacity duration-200"
-            alt={`${alt} 아이콘`}
-          />
-          {/* 호버 시 보여질 아이콘 */}
-          <img
-            src={`/icons/${fileName}Active.svg`}
-            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-            alt={`${alt} 아이콘 활성`}
-          />
+          {fileName === 'chatList' && (
+            <ChatList className="text-primary dark:text-accent group-hover:text-primary-white" />
+          )}
+          {fileName === 'newChat' && (
+            <NewChat className="text-primary dark:text-accent group-hover:text-primary-white" />
+          )}
         </div>
         <span>{label}</span>
       </button>
