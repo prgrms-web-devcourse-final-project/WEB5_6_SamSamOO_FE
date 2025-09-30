@@ -43,9 +43,6 @@ export default function PasswordResetForm({ email, onSuccess }: Props) {
     }
 
     try {
-      console.log('메시', email);
-      console.log('메시', formData.password);
-
       const res = await passwordReset({
         email,
         newPassword: formData.password,

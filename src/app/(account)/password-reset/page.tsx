@@ -4,6 +4,7 @@ import { useState } from 'react';
 import AuthHeader from '@/components/features/account/AuthHeader';
 import VerifyPasswordForm from '@/components/forms/VerifyPasswordForm';
 import PasswordResetForm from '@/components/forms/PasswordResetForm';
+import { showSuccessToast } from '@/utils/showToast';
 
 function Page() {
   const [verifiedEmail, setVerifiedEmail] = useState<string | null>(null);
@@ -19,7 +20,7 @@ function Page() {
         <PasswordResetForm
           email={verifiedEmail}
           onSuccess={() => {
-            console.log('비밀번호 재설정 완료, 로그인 페이지로 이동');
+            showSuccessToast('비밀번호 재설정 성공!');
             // router.replace('/') 같은 후속 처리 가능
           }}
         />

@@ -10,6 +10,7 @@ import calAge from '@/utils/calAge';
 import { signUp } from '@/api/account/signUpApi';
 import { useUserStore } from '@/store/useUserStore';
 import { useRouter } from 'next/navigation';
+import { showSuccessToast } from '@/utils/showToast';
 
 export default function SignupForm() {
   const router = useRouter();
@@ -86,8 +87,8 @@ export default function SignupForm() {
       };
 
       const response = await signUp(payload);
-      console.log('회원가입 성공:', response);
       setUser(response);
+      showSuccessToast('환영합니다! 지금부터 서비스를 자유롭게 이용하실 수 있어요.');
       router.replace('/');
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (err) {
