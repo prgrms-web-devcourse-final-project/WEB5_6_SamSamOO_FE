@@ -6,6 +6,7 @@ import { useUserStore } from '@/store/useUserStore';
 import AccountInput from '@/components/features/account/AccountInput';
 import AccountButton from '@/components/features/account/AccountButton';
 import FormErrorMessage from '@/components/features/account/FormErrorMessage';
+import { showSuccessToast } from '@/utils/showToast';
 
 export default function LoginForm() {
   const router = useRouter();
@@ -42,6 +43,7 @@ export default function LoginForm() {
     try {
       const response = await login(formData);
       setUser(response);
+      showSuccessToast('로그인 성공! 환영합니다♥️');
       router.replace('/');
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (_err) {

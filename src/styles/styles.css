@@ -9,4 +9,6 @@
 @import 'tailwindcss/utilities.css' layer(utilities);
 @import './_utilities.css';
 
+@import 'tw-animate-css';
+
 @custom-variant dark (&:where(.dark, .dark *));
