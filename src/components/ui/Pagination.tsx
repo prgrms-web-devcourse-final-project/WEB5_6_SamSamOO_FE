@@ -1,23 +1,40 @@
 'use client';
+import { clamp } from '@/utils/date';
 import tw from '@/utils/tw';
 import { useState } from 'react';
 
-function Pagination() {
-  const [activePageNumber, setActivePageNumber] = useState<number>(0);
-  const showCount = 5;
-  const start = 1;
-  const end = 10;
+interface Props {
+  showCount?: number;
+  end?: number;
+}
+
+// svg 바꾸기, 첫 끝 페이지일때 prev,next 버튼 스타일 흐리기
+function Pagination({ showCount = 5, end = 10 }: Props) {
+  const [activePageNumber, setActivePageNumber] = useState<number>(1);
+  const maxStart = Math.max(1, end - showCount + 1);
+  const half = Math.floor(showCount / 2);
+  const start = clamp(activePageNumber - half, 1, maxStart);
 
   const getPage = (index: number) => {
     console.log('페이지 요청');
     setActivePageNumber(index);
   };
 
+  console.log(activePageNumber);
+
+  const prevPage = Math.max(1, activePageNumber - 1);
+  const nextPage = Math.min(end, activePageNumber + 1);
+
   return (
     <section>
       <h2 className="sr-only">페이지네이션</h2>
-      <ul className="flex items-center gap-6">
-        <button type="button" title="첫 페이지로 이동" onClick={() => getPage(0)}>
+      <ul className="flex items-center gap-4">
+        <button
+          type="button"
+          title="첫 페이지로 이동"
+          inert={activePageNumber === 1}
+          onClick={() => getPage(0)}
+        >
           <svg
             className="relative bottom-0.5"
             width="16"
@@ -39,7 +56,9 @@ function Pagination() {
         <button
           type="button"
           title="이전 페이지로 이동"
-          onClick={() => getPage(activePageNumber - 1)}
+          inert={activePageNumber === 1}
+          className={tw('inset')}
+          onClick={() => getPage(prevPage)}
         >
           <svg
             className="relative bottom-0.5"
@@ -61,17 +80,21 @@ function Pagination() {
             <li key={index}>
               <button
                 type="button"
-                className={tw('hover:text-accent', activePageNumber === index ? 'text-accent' : '')}
-                onClick={() => getPage(index)}
+                className={tw(
+                  'w-6 hover:bg-stone-100 rounded-full ',
+                  activePageNumber === start + index ? 'text-accent' : '',
+                )}
+                onClick={() => getPage(start + index)}
               >
-                {start + index}
+                <p className="relative top-0.5">{start + index}</p>
               </button>
             </li>
           ))}
         <button
           type="button"
           title="다음 페이지로 이동"
-          onClick={() => getPage(activePageNumber + 1)}
+          inert={activePageNumber === end}
+          onClick={() => getPage(nextPage)}
         >
           <svg
             className="relative bottom-0.5 -scale-x-100"
@@ -87,7 +110,12 @@ function Pagination() {
             />
           </svg>
         </button>
-        <button type="button" title="마지막 페이지로 이동" onClick={() => getPage(end)}>
+        <button
+          type="button"
+          title="마지막 페이지로 이동"
+          inert={activePageNumber === end}
+          onClick={() => getPage(end)}
+        >
           <svg
             className="relative bottom-0.5 -scale-x-100"
             width="16"
