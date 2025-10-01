@@ -1,10 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import VerificationForm from '@/components/forms/VerificationForm';
+import VerifyEmailForm from '@/components/forms/VerifyEmailForm';
 import PasswordResetForm from '@/components/forms/PasswordResetForm';
 import AuthHeader from '@/components/features/account/AuthHeader';
 import { useRouter } from 'next/navigation';
+import { showSuccessToast } from '@/utils/showToast';
 
 function Page() {
   const router = useRouter();
@@ -21,12 +22,12 @@ function Page() {
         <PasswordResetForm
           email={verifiedEmail}
           onSuccess={() => {
-            console.log('비밀번호 재설정 완료, 로그인 페이지로 이동');
+            showSuccessToast('비밀번호 재설정 완료! \n다시 로그인 해주세요.');
             router.replace('/');
           }}
         />
       ) : (
-        <VerificationForm onVerified={(email) => setVerifiedEmail(email)} />
+        <VerifyEmailForm onVerified={(email) => setVerifiedEmail(email)} />
       )}
     </div>
   );

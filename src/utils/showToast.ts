@@ -26,3 +26,31 @@ export function showSuccessToast(message: string) {
     } as React.CSSProperties,
   });
 }
+
+export function showInfoToast(message: string) {
+  toast.info(message, {
+    duration: 2500,
+    position: 'top-center',
+    className: '!border-2 whitespace-pre-line',
+    style: {
+      '--normal-bg':
+        'color-mix(in oklab, light-dark(var(--color-sky-600), var(--color-sky-400)) 10%, var(--background))',
+      '--normal-text': 'light-dark(var(--color-sky-600), var(--color-sky-400))',
+      '--normal-border': 'light-dark(var(--color-sky-600), var(--color-sky-400))',
+    } as React.CSSProperties,
+  });
+}
+
+export function showWarningToast(message: string) {
+  toast.warning(message, {
+    duration: 2500,
+    position: 'top-center',
+    className: '!border-2 whitespace-pre-line',
+    style: {
+      '--normal-bg':
+        'color-mix(in oklab, light-dark(var(--color-amber-600), var(--color-amber-400)) 10%, var(--background))',
+      '--normal-text': 'light-dark(var(--color-amber-600), var(--color-amber-400))',
+      '--normal-border': 'light-dark(var(--color-amber-600), var(--color-amber-400))',
+    } as React.CSSProperties,
+  });
+}

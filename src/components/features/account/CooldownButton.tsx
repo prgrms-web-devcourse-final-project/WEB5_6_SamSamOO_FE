@@ -36,7 +36,7 @@ export default function CooldownButton({ onClick, cooldown = 30 }: CooldownButto
       type="button"
       onClick={handleClick}
       disabled={loading || remaining > 0}
-      className="h-13 w-full rounded-full bg-primary text-xl text-primary-white font-bold disabled:bg-gray-400 dark:bg-accent"
+      className="h-13 w-full rounded-full bg-brand-primary text-xl text-primary-white font-bold disabled:bg-gray-400 dark:bg-brand-accent"
     >
       {loading ? '발송 중...' : remaining > 0 ? `${remaining}초 후 재발송` : '인증 메일 발송'}
     </button>
