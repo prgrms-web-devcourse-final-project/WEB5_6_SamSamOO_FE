@@ -35,7 +35,12 @@ async function Page({ searchParams }: { searchParams: Promise<{ search_query?: s
 
   return (
     <div>
-      <LawSearchResults content={lawPayload.content} showTag={true} />
+      <LawSearchResults
+        content={lawPayload.content}
+        showTag={true}
+        totalElements={lawPayload.totalElements}
+        totalPages={lawPayload.totalPages}
+      />
       <PrecedentSearchResults content={precedentPayload.content} showTag={true} />
     </div>
   );

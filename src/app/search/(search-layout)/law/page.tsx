@@ -9,13 +9,26 @@ export const metadata: Metadata = {
   description: '바로 BaLaw 판례 검색 페이지입니다',
 };
 
-async function Page({ searchParams }: { searchParams: Promise<{ search_query?: string }> }) {
-  console.log(searchParams);
-  const { search_query } = await searchParams;
+type searchParams = {
+  search_query?: string;
+  lawField?: string;
+  ministry?: string;
+  promulgationDateStart?: string;
+  promulgationDateEnd?: string;
+  enforcementDateStart?: string;
+  enforcementDateEnd?: string;
+  pageNumber: number;
+  pageSize: number;
+};
+
+async function Page({ searchParams }: { searchParams: Promise<searchParams> }) {
+  const searchList = await searchParams;
+  const { search_query } = searchList;
+
   const getData = async () => {
     const response = await getLawSearchResults({
       lawName: search_query ?? null,
-      pageNumber: 0,
+      ...searchList,
       pageSize: 10,
     });
     return response;
@@ -25,7 +38,11 @@ async function Page({ searchParams }: { searchParams: Promise<{ search_query?: s
 
   return (
     <>
-      <LawSearchResults content={payload.content} />
+      <LawSearchResults
+        content={payload.content}
+        totalElements={payload.totalElements}
+        totalPages={payload.pageNumber}
+      />
     </>
   );
 }

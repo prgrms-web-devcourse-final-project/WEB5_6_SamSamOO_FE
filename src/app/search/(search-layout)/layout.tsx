@@ -1,5 +1,5 @@
 import SearchArea from '@/components/features/search/SearchArea';
-import Pagination from '@/components/ui/Pagination';
+import Pagination from '@/components/features/search/Pagination';
 import ToggleSwitchNavigation from '@/components/ui/ToggleSwitchNavigation';
 
 function SearchLayout({ children }: { children: React.ReactNode }) {

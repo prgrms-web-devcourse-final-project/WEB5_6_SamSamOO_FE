@@ -1,6 +1,6 @@
 'use client';
 import CalendarWithDateInputRange from '@/components/features/search/CalendarWithDateInputRange';
-import Pagination from '@/components/ui/Pagination';
+import Pagination from '@/components/features/search/Pagination';
 import ScrollButton from '@/components/ui/ScrollButton';
 import SelectMenu from '@/components/ui/SelectMenu';
 import convertObjectToString from '@/utils/convertObjectToString';
