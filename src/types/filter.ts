@@ -3,20 +3,24 @@ export type MenuItem = {
 };
 
 export type LawSearchFilter = {
-  lawField: string;
-  authority: string;
-  ministry: string;
-  promulgationStart: string;
-  promulgationEnd: string;
-  enforcementStart: string;
-  enforcementEnd: string;
+  lawField?: string;
+  authority?: string;
+  ministry?: string;
+  promulgationDateStart?: string;
+  promulgationDateEnd?: string;
+  enforcementDateStart?: string;
+  enforcementDateEnd?: string;
 };
+
+export type LawSearchFilterLabel = keyof LawSearchFilter;
 
 export type TestSearchFilter = {
   field1: string;
   field2: string;
   field3: string;
 };
+
+export type CalendarRange = { start: string | null; end: string | null };
 
 // export type TestSearchFilter = {
 //   필드1: {

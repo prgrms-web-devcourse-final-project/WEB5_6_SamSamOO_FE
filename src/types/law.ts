@@ -4,8 +4,8 @@ export type LawItem = {
   lawField: string; // 정해져있다면 리터럴로 바꾸는걸로
   ministry: string;
   promulgationNumber: string;
-  promulgationDate: Date; // "YYYY-MM-DD" 형식 -> Date 객체 변환할지
-  enforcementDate: Date; // "YYYY-MM-DD" 형식
+  promulgationDate: string; // "YYYY-MM-DD" 형식
+  enforcementDate: string;
   firstJoContent: string;
 };
 
@@ -21,10 +21,10 @@ export type LawRequest = {
   lawName?: string | null;
   lawField?: string;
   ministry?: string;
-  promulgationDateStart?: Date;
-  promulgationDateEnd?: Date;
-  enforcementDateStart?: Date;
-  enforcementDateEnd?: Date;
+  promulgationDateStart?: string;
+  promulgationDateEnd?: string;
+  enforcementDateStart?: string;
+  enforcementDateEnd?: string;
   pageNumber: number;
   pageSize: number;
 };
