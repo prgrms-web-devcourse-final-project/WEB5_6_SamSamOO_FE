@@ -54,7 +54,7 @@ function Header() {
                 href={href}
                 className={
                   pathname.includes(href.split('/')[1])
-                    ? 'text-accent'
+                    ? 'text-brand-accent'
                     : 'text-primary-black dark:text-primary-white'
                 }
               >
@@ -72,7 +72,7 @@ function Header() {
             <>
               {/* 로그인 상태 */}
               <li>
-                <Link href="/mypage" className={pathname === '/mypage' ? 'text-accent' : ''}>
+                <Link href="/mypage" className={pathname === '/mypage' ? 'text-brand-accent' : ''}>
                   <Image
                     className="block dark:hidden"
                     src="/icons/profileLight.svg"
@@ -104,7 +104,7 @@ function Header() {
             <>
               {/* 비로그인 상태 */}
               <li>
-                <Link href="/login" className={pathname === '/login' ? 'text-accent' : ''}>
+                <Link href="/login" className={pathname === '/login' ? 'text-brand-accent' : ''}>
                   로그인
                 </Link>
               </li>

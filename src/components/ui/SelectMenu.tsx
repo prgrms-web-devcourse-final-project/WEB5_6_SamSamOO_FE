@@ -89,7 +89,7 @@ function SelectMenu({
         sideOffset={8}
         avoidCollisions={false}
         className={tw(
-          'w-[var(--radix-select-trigger-width)] max-h-[var(--radix-select-content-available-height)] rounded-3xl border border-[#D2D2D2] bg-white shadow-filter dark:bg-primary-gray3 dark:text-primary-white dark:border-filter-outline2',
+          'z-10 w-[var(--radix-select-trigger-width)] max-h-[var(--radix-select-content-available-height)] rounded-3xl border border-[#D2D2D2] bg-white shadow-filter dark:bg-primary-gray3 dark:text-primary-white dark:border-filter-outline2',
           contentStyle,
         )}
       >

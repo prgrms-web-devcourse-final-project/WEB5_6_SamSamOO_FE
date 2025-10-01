@@ -28,7 +28,9 @@ function PrecedentSearchFilterModal({
       }}
     >
       <section className="p-10 bg-white rounded-modal flex flex-col gap-6 text-lg justify-center dark:bg-background-black3 dark:text-primary-white dark:shadow-modal-dark">
-        <h1 className="text-3xl font-bold text-primary dark:text-primary-white">판례 상세 검색</h1>
+        <h1 className="text-3xl font-bold text-brand-primary dark:text-primary-white">
+          판례 상세 검색
+        </h1>
         <div className="flex gap-7 items-center">
           <label className="min-w-fit" htmlFor="field1">
             카테고리1
@@ -77,7 +79,7 @@ function PrecedentSearchFilterModal({
         <div className="flex gap-4 items-center justify-center">
           <button
             type="button"
-            className="px-11 py-3 bg-primary text-primary-white font-bold rounded-full dark:bg-primary-white dark:text-primary-black"
+            className="px-11 py-3 bg-brand-primary text-primary-white font-bold rounded-full dark:bg-primary-white dark:text-primary-black"
             // onClick={() => setPrecedentSearchFilter({
             //   필드1: { field1 },
             //   필드2: { field2 },
@@ -95,7 +97,7 @@ function PrecedentSearchFilterModal({
           </button>
           <button
             type="button"
-            className="px-11 py-3 border border-primary font-bold rounded-full dark:border-primary-white"
+            className="px-11 py-3 border border-brand-primary font-bold rounded-full dark:border-primary-white"
             onClick={onClose}
           >
             닫기
