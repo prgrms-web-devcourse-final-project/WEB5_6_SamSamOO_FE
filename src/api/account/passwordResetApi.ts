@@ -17,7 +17,7 @@ export const passwordReset = async (data: passwordResetRequest): Promise<passwor
   const { email: loginId, newPassword, success } = data;
 
   try {
-    const res = await api.post<passwordResetResponse>('/api/auth/password-reset/reset', {
+    const res = await api.post<passwordResetResponse>('/api/auth/passwordReset', {
       loginId,
       newPassword,
       success,
