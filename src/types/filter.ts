@@ -12,32 +12,17 @@ export type LawSearchFilter = {
   enforcementDateEnd?: string;
 };
 
-export type LawSearchFilterLabel = keyof LawSearchFilter;
-
 export type TestSearchFilter = {
   field1: string;
   field2: string;
   field3: string;
 };
 
+export type PrecedentSearchFilter = {
+  sentencingDateStart?: string;
+  sentencingDateEnd?: string;
+};
+
+export type TotalSearchFilter = LawSearchFilter & PrecedentSearchFilter;
+
 export type CalendarRange = { start: string | null; end: string | null };
-
-// export type TestSearchFilter = {
-//   필드1: {
-//     field1: string;
-//   };
-//   필드2: {
-//     field2: string;
-//   };
-//   필드3: {
-//     field3: string;
-//   };
-// }
-
-// type TestKeys = 'field1' | 'field2' | 'filed3';
-// type TestValues = Record<TestKeys, string>;
-// const koLabel: Record<TestKeys, string> = {
-//   field1: '필드1',
-//   field2: '필드2',
-//   filed3: '필드3',
-// };
