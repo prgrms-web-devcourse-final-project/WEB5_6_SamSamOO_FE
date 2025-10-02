@@ -30,12 +30,12 @@ export type LawRequest = {
 };
 
 export type LawDetailsResponse = {
-  lawName: string;
-  lawField: string;
-  ministry: string;
-  promulgationNumber: string;
-  promulgationDate: string;
-  enforcementDate: string;
+  lawName: string; // 법령명
+  lawField: string; // 법령분야
+  ministry: string; // 소관부처
+  promulgationNumber: string; // 공포번호
+  promulgationDate: string; // 공포일자
+  enforcementDate: string; // 시행일
   jangList: [
     {
       content: string;

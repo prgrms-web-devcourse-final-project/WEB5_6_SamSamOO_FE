@@ -25,7 +25,7 @@ export type PrecedentRequest = {
 export type PrecedentDetailsResponse = {
   precedentNumber: string; // 판례일련번호
   caseName: string; // 사건명
-  caseNumbe: string; // 사건번호
+  caseNumber: string; // 사건번호
   sentencingDate: string; // 선고일자
   sentence: string; // 선고
   courtName: string; // 법원명
