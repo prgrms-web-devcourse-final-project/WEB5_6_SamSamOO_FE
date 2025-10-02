@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 import PrecedentSearchResults from '@/components/features/search/PrecedentSearchResults';
 
 import { getPrecedentSearchResults } from '@/api/getPrecedentSearchResults';
+import SetTotalElementsAndPages from '@/components/features/search/SetTotalElementsAndPages';
 
 export const metadata: Metadata = {
   title: '바로 | 판례 검색',
@@ -33,10 +34,11 @@ async function Page({ searchParams }: { searchParams: Promise<SearchParams> }) {
 
   return (
     <>
-      <PrecedentSearchResults
-        content={payload.content}
-        totalElements={payload.totalElements}
-        totalPages={payload.totalPages}
+      <PrecedentSearchResults content={payload.content} />
+      <SetTotalElementsAndPages
+        category="판례"
+        precedentTotalElements={payload.totalElements}
+        precedentTotalPages={payload.totalPages}
       />
     </>
   );

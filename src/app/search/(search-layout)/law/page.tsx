@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 import LawSearchResults from '@/components/features/search/LawSearchResults';
 
 import { getLawSearchResults } from '@/api/getLawSearchResults';
+import SetTotalElementsAndPages from '@/components/features/search/SetTotalElementsAndPages';
 
 export const metadata: Metadata = {
   title: '바로 | 법령 검색',
@@ -38,10 +39,11 @@ async function Page({ searchParams }: { searchParams: Promise<SearchParams> }) {
 
   return (
     <>
-      <LawSearchResults
-        content={payload.content}
-        totalElements={payload.totalElements}
-        totalPages={payload.totalPages}
+      <LawSearchResults content={payload.content} />
+      <SetTotalElementsAndPages
+        category="법령"
+        lawTotalElements={payload.totalElements}
+        lawTotalPages={payload.totalPages}
       />
     </>
   );
