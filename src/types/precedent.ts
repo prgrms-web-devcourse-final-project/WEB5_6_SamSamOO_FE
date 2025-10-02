@@ -16,6 +16,8 @@ export type PrecedentResponse = {
 
 export type PrecedentRequest = {
   keyword?: string | null;
+  sentencingDateStart?: string;
+  sentencingDateEnd?: string;
   pageNumber: number;
   pageSize: number;
 };

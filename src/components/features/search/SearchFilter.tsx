@@ -1,16 +1,22 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 import TotalSearchFilterModal from './TotalSearchFilterModal';
 import LawSearchFilterModal from './LawSearchFilterModal';
 import PrecedentSearchFilterModal from './PrecedentSearchFilterModal';
+import {
+  LawSearchFilterLabel,
+  PrecedentSearchFilterLabel,
+  TotalSearchFilterLabel,
+} from './labelList';
 
 import FilterDown from '@/assets/icons/filterDown.svg';
-import convertObjectToString from '@/utils/convertObjectToString';
-import { LawSearchFilter, TestSearchFilter } from '@/types/filter';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import makeSearchUrl from '@/utils/makeSearchUrl';
+import convertObjectToString from '@/utils/convertObjectToString';
+import { mapFilterToLabel } from '@/utils/mapFilterToLabel';
+import { LawSearchFilter, PrecedentSearchFilter, TotalSearchFilter } from '@/types/filter';
 
 interface Props {
   category: string;
@@ -23,17 +29,9 @@ function SearchFilter({ category, setAppliedFilterText }: Props) {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const [totalSearchFilter, setTotalSearchFilter] = useState<TestSearchFilter>({
-    field1: '',
-    field2: '',
-    field3: '',
-  });
+  const [totalSearchFilter, setTotalSearchFilter] = useState<TotalSearchFilter>({});
   const [lawSearchFilter, setLawSearchFilter] = useState<LawSearchFilter>({});
-  const [precedentSearchFilter, setPrecedentSearchFilter] = useState<TestSearchFilter>({
-    field1: '',
-    field2: '',
-    field3: '',
-  });
+  const [precedentSearchFilter, setPrecedentSearchFilter] = useState<PrecedentSearchFilter>({});
 
   const searchFilterModal = () => {
     if (category === '통합') {
@@ -77,21 +75,25 @@ function SearchFilter({ category, setAppliedFilterText }: Props) {
         enforcementDateEnd: '',
       });
       setPrecedentSearchFilter({
-        field1: '',
-        field2: '',
-        field3: '',
+        sentencingDateStart: '',
+        sentencingDateEnd: '',
       });
     }
     if (category === '법령') {
       setPrecedentSearchFilter({
-        field1: '',
-        field2: '',
-        field3: '',
+        sentencingDateStart: '',
+        sentencingDateEnd: '',
       });
       setTotalSearchFilter({
-        field1: '',
-        field2: '',
-        field3: '',
+        lawField: '',
+        authority: '',
+        ministry: '',
+        promulgationDateStart: '',
+        promulgationDateEnd: '',
+        enforcementDateStart: '',
+        enforcementDateEnd: '',
+        sentencingDateStart: '',
+        sentencingDateEnd: '',
       });
     }
     if (category === '판례') {
@@ -105,9 +107,15 @@ function SearchFilter({ category, setAppliedFilterText }: Props) {
         enforcementDateEnd: '',
       });
       setTotalSearchFilter({
-        field1: '',
-        field2: '',
-        field3: '',
+        lawField: '',
+        authority: '',
+        ministry: '',
+        promulgationDateStart: '',
+        promulgationDateEnd: '',
+        enforcementDateStart: '',
+        enforcementDateEnd: '',
+        sentencingDateStart: '',
+        sentencingDateEnd: '',
       });
     }
     setAppliedFilterText('');
@@ -115,17 +123,20 @@ function SearchFilter({ category, setAppliedFilterText }: Props) {
 
   useEffect(() => {
     if (category === '통합') {
-      const convert = convertObjectToString(totalSearchFilter);
+      const mapLabel = mapFilterToLabel(totalSearchFilter, TotalSearchFilterLabel);
+      const convert = convertObjectToString(mapLabel);
       if (convert.length === 0) setAppliedFilterText('적용된 필터가 없습니다');
       else setAppliedFilterText(convert);
     }
     if (category === '법령') {
-      const convert = convertObjectToString(lawSearchFilter);
+      const mapLabel = mapFilterToLabel(lawSearchFilter, LawSearchFilterLabel);
+      const convert = convertObjectToString(mapLabel);
       if (convert.length === 0) setAppliedFilterText('적용된 필터가 없습니다');
       else setAppliedFilterText(convert);
     }
     if (category === '판례') {
-      const convert = convertObjectToString(precedentSearchFilter);
+      const mapLabel = mapFilterToLabel(precedentSearchFilter, PrecedentSearchFilterLabel);
+      const convert = convertObjectToString(mapLabel);
       if (convert.length === 0) setAppliedFilterText('적용된 필터가 없습니다');
       else setAppliedFilterText(convert);
     }
@@ -144,9 +155,7 @@ function SearchFilter({ category, setAppliedFilterText }: Props) {
       const url = makeSearchUrl(pathname, params, precedentSearchFilter);
       router.push(url);
     }
-  }, [lawSearchFilter]);
-
-  // console.log('필터 컴포넌트에서 파라미터 콘솔 확인 : ', params);
+  }, [totalSearchFilter, precedentSearchFilter, lawSearchFilter]);
 
   return (
     <>

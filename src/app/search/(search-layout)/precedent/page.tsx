@@ -9,13 +9,22 @@ export const metadata: Metadata = {
   description: '바로 BaLaw 판례 검색 페이지입니다',
 };
 
-async function Page({ searchParams }: { searchParams: Promise<{ search_query?: string }> }) {
-  const { search_query } = await searchParams;
-  console.log(search_query);
+type SearchParams = {
+  search_query?: string;
+  sentencingDateStart?: string;
+  sentencingDateEnd?: string;
+  pageNumber: number;
+  pageSize: number;
+};
+
+async function Page({ searchParams }: { searchParams: Promise<SearchParams> }) {
+  const searchList = await searchParams;
+  const { search_query } = searchList;
+
   const getData = async () => {
     const response = await getPrecedentSearchResults({
       keyword: search_query ?? null,
-      pageNumber: 0,
+      ...searchList,
       pageSize: 10,
     });
     return response;

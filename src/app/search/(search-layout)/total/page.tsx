@@ -11,27 +11,69 @@ export const metadata: Metadata = {
 };
 // 통신해서 데이터 가져오기
 // 통합에서는 어떤 기준으로 렌더링할지..?
-async function Page({ searchParams }: { searchParams: Promise<{ search_query?: string }> }) {
-  const { search_query } = await searchParams;
-  console.log(search_query);
+
+type SearchParams = {
+  search_query?: string;
+
+  lawField?: string;
+  ministry?: string;
+  promulgationDateStart?: string;
+  promulgationDateEnd?: string;
+  enforcementDateStart?: string;
+  enforcementDateEnd?: string;
+
+  sentencingDateStart?: string;
+  sentencingDateEnd?: string;
+
+  pageNumber: number;
+  pageSize: number;
+};
+
+async function Page({ searchParams }: { searchParams: Promise<SearchParams> }) {
+  const searchList = await searchParams;
+  const {
+    search_query,
+    lawField,
+    ministry,
+    promulgationDateStart,
+    promulgationDateEnd,
+    enforcementDateStart,
+    enforcementDateEnd,
+    sentencingDateStart,
+    sentencingDateEnd,
+    pageNumber,
+  } = searchList;
+  console.log(searchList);
+
   const getLawData = async () => {
     const response = await getLawSearchResults({
       lawName: search_query ?? null,
-      pageNumber: 0,
+      lawField,
+      ministry,
+      promulgationDateStart,
+      promulgationDateEnd,
+      enforcementDateStart,
+      enforcementDateEnd,
+      pageNumber,
       pageSize: 5,
     });
     return response;
   };
   const lawPayload = await getLawData();
+  console.log('법령 개수 : ', lawPayload.totalElements);
+
   const getPrecedentData = async () => {
     const response = await getPrecedentSearchResults({
       keyword: search_query ?? null,
-      pageNumber: 0,
+      sentencingDateStart,
+      sentencingDateEnd,
+      pageNumber,
       pageSize: 5,
     });
     return response;
   };
   const precedentPayload = await getPrecedentData();
+  console.log('판례 개수 : ', precedentPayload.totalElements);
 
   return (
     <div>

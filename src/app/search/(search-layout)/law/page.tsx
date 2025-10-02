@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description: '바로 BaLaw 판례 검색 페이지입니다',
 };
 
-type searchParams = {
+type SearchParams = {
   search_query?: string;
   lawField?: string;
   ministry?: string;
@@ -21,7 +21,7 @@ type searchParams = {
   pageSize: number;
 };
 
-async function Page({ searchParams }: { searchParams: Promise<searchParams> }) {
+async function Page({ searchParams }: { searchParams: Promise<SearchParams> }) {
   const searchList = await searchParams;
   const { search_query } = searchList;
 
