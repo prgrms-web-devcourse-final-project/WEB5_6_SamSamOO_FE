@@ -1,33 +1,16 @@
-'use client';
-import { useSearch } from '@/context/SearchContext';
 import { LawItem } from '@/types/law';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 
 interface Props {
   content: LawItem[];
   showTag?: boolean;
-  totalElements: number;
-  totalPages: number;
 }
 
-function LawSearchResults({ content, showTag = false, totalElements, totalPages }: Props) {
-  const [results, setResults] = useState<LawItem[] | null>(null);
-  const { setTotalLawElements, setTotalLawPages } = useSearch();
-  useEffect(() => {
-    setTotalLawElements(totalElements);
-    setTotalLawPages(totalPages);
-  }, [totalElements, totalPages, setTotalLawElements, setTotalLawPages]);
-  console.log(totalElements, totalPages);
-
-  useEffect(() => {
-    setResults(content);
-  }, [content]);
-
+function LawSearchResults({ content, showTag = false }: Props) {
   return (
     <>
-      {results &&
-        results.map(
+      {content &&
+        content.map(
           ({
             id,
             lawName,

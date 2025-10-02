@@ -1,33 +1,17 @@
 'use client';
-import { useSearch } from '@/context/SearchContext';
 import { PrecedentItem } from '@/types/precedent';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 
 interface Props {
   content: PrecedentItem[];
   showTag?: boolean;
-  totalElements: number;
-  totalPages: number;
 }
 
-function PrecedentSearchResults({ content, showTag = false, totalElements, totalPages }: Props) {
-  const [results, setResults] = useState<PrecedentItem[] | null>(null);
-  const { setTotalPrecedentElements, setTotalPrecedentPages } = useSearch();
-
-  useEffect(() => {
-    setTotalPrecedentElements(totalElements);
-    setTotalPrecedentPages(totalPages);
-  }, [totalElements, totalPages, setTotalPrecedentElements, setTotalPrecedentPages]);
-
-  useEffect(() => {
-    setResults(content);
-  }, [content]);
-
+function PrecedentSearchResults({ content, showTag = false }: Props) {
   return (
     <>
-      {results &&
-        results.map(({ id, caseName, caseNumber, contents, sentencingDate }) => (
+      {content &&
+        content.map(({ id, caseName, caseNumber, contents, sentencingDate }) => (
           <li key={id} className="mb-10">
             <Link href={`precedent/${id}`}>
               <section className="space-x-2 text-xl font-bold mb-2">

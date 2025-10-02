@@ -4,6 +4,7 @@ import LawSearchResults from '@/components/features/search/LawSearchResults';
 import PrecedentSearchResults from '@/components/features/search/PrecedentSearchResults';
 import { getPrecedentSearchResults } from '@/api/getPrecedentSearchResults';
 import { getLawSearchResults } from '@/api/getLawSearchResults';
+import SetTotalElementsAndPages from '@/components/features/search/SetTotalElementsAndPages';
 
 export const metadata: Metadata = {
   title: '바로 | 통합 검색',
@@ -77,17 +78,14 @@ async function Page({ searchParams }: { searchParams: Promise<SearchParams> }) {
 
   return (
     <div>
-      <LawSearchResults
-        content={lawPayload.content}
-        showTag={true}
-        totalElements={lawPayload.totalElements}
-        totalPages={lawPayload.totalPages}
-      />
-      <PrecedentSearchResults
-        content={precedentPayload.content}
-        showTag={true}
-        totalElements={precedentPayload.totalElements}
-        totalPages={precedentPayload.totalPages}
+      <LawSearchResults content={lawPayload.content} showTag={true} />
+      <PrecedentSearchResults content={precedentPayload.content} showTag={true} />
+      <SetTotalElementsAndPages
+        category="통합"
+        lawTotalElements={lawPayload.totalElements}
+        lawTotalPages={lawPayload.totalPages}
+        precedentTotalElements={precedentPayload.totalElements}
+        precedentTotalPages={precedentPayload.totalPages}
       />
     </div>
   );
