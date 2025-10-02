@@ -24,7 +24,8 @@ function Pagination({ showCount = 5, end = 10 }: Props) {
   const start = clamp(activePageNumber - half, 1, maxStart);
 
   const getPage = (index: number) => {
-    console.log('페이지 요청');
+    // console.log('페이지 요청');
+    // console.log(index);
     setActivePageNumber(index);
   };
 
@@ -46,7 +47,7 @@ function Pagination({ showCount = 5, end = 10 }: Props) {
           type="button"
           title="첫 페이지로 이동"
           inert={activePageNumber === 1}
-          onClick={() => getPage(0)}
+          onClick={() => getPage(1)}
         >
           <SkipPage className="relative bottom-0.5" />
         </button>
