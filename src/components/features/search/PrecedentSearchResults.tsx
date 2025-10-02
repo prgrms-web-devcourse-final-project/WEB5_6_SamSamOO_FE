@@ -13,7 +13,7 @@ function PrecedentSearchResults({ content, showTag = false }: Props) {
       {content &&
         content.map(({ id, caseName, caseNumber, contents, sentencingDate }) => (
           <li key={id} className="mb-10">
-            <Link href={`precedent/${id}`}>
+            <Link href={`/detail/precedent/${id}`}>
               <section className="space-x-2 text-xl font-bold mb-2">
                 <h2 className="sr-only">제목</h2>
                 <span hidden={!showTag}>{`<판례>`}</span>

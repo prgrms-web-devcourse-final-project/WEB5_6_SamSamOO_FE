@@ -22,7 +22,7 @@ function LawSearchResults({ content, showTag = false }: Props) {
             firstJoContent,
           }) => (
             <li key={id} className="mb-10">
-              <Link href={`law/${id}`}>
+              <Link href={`/detail/law/${id}`}>
                 <section className="space-x-2 text-xl font-bold mb-2">
                   <h2 className="sr-only">제목</h2>
                   <span hidden={!showTag}>{'<법령>'}</span>
