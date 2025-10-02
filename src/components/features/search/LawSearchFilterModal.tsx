@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import FilterDetailDown from '@/assets/icons/filterDetailDown.svg';
 
-import { groupTestData, lawFieldData } from './_testData/mockData';
+import { ministryData, authorityData, lawFieldData } from './filterItemList';
 
 import SelectMenu from '@/components/ui/SelectMenu';
 import useClosePopup from '@/hooks/useClosePopup';
@@ -19,8 +19,9 @@ function LawSearchFilterModal({ isOpen = false, onClose = () => {}, setLawSearch
   const [lawField, setLawField] = useState<string>('');
   const [authority, setAuthority] = useState<string>('');
   const [ministry, setMinistry] = useState<string>('');
-  const [openPromulgationCalender, setOpenPromulgationCalender] = useState<boolean>(false);
-  const [openEnforcementCalender, setOpenEnforcementCalender] = useState<boolean>(false);
+  const [openCalendar, setOpenCalendar] = useState<'promulgation' | 'enforcement' | null>(null);
+  const promulgationRef = useRef<HTMLDivElement>(null);
+  const enforcementRef = useRef<HTMLDivElement>(null);
   const [promulgationRange, setPromulgationRange] = useState<CalendarRange>({
     start: null,
     end: null,
@@ -33,12 +34,17 @@ function LawSearchFilterModal({ isOpen = false, onClose = () => {}, setLawSearch
   const [ministryList, setMinistryList] = useState<{ label: string }[]>([]);
 
   useEffect(() => {
-    const ministryList = groupTestData.find((item) => item.label === authority);
+    const ministryList = ministryData.find((item) => item.label === authority);
     setMinistryList(ministryList?.contents ?? []);
     setMinistry('');
   }, [authority]);
 
   useClosePopup({ onClose, isOpen });
+  useClosePopup({
+    isOpen: !!openCalendar,
+    onClose: () => setOpenCalendar(null),
+    ignoreSelectors: ['[data-radix-popper-content-wrapper]'],
+  });
 
   return (
     <div
@@ -61,7 +67,10 @@ function LawSearchFilterModal({ isOpen = false, onClose = () => {}, setLawSearch
             itemList={lawFieldData}
             triggerStyle="w-[165px]"
             onValueChange={(value) => {
-              setLawField(value);
+              if (value !== '전체') setLawField(value);
+            }}
+            onOpenChange={(open) => {
+              if (open) setOpenCalendar(null);
             }}
           />
         </div>
@@ -72,10 +81,13 @@ function LawSearchFilterModal({ isOpen = false, onClose = () => {}, setLawSearch
           <SelectMenu
             field="authority"
             value={authority}
-            itemList={lawFieldData}
+            itemList={authorityData}
             triggerStyle="w-[165px]"
             onValueChange={(value) => {
               setAuthority(value);
+            }}
+            onOpenChange={(open) => {
+              if (open) setOpenCalendar(null);
             }}
           />
           <SelectMenu
@@ -87,18 +99,26 @@ function LawSearchFilterModal({ isOpen = false, onClose = () => {}, setLawSearch
             onValueChange={(value) => {
               setMinistry(value);
             }}
-            disabled={!authority}
-            placeholder={authority ? `${authority} 선택` : '먼저 소관기관 선택'}
+            onOpenChange={(open) => {
+              if (open) setOpenCalendar(null);
+            }}
+            disabled={!authority || authority === '전체'}
+            placeholder={
+              authority === '전체' ? '전체' : authority ? `${authority} 선택` : '먼저 소관기관 선택'
+            }
           />
         </div>
 
-        <div className="relative flex gap-7 items-center">
+        <div ref={promulgationRef} className="relative flex gap-7 items-center">
           <label htmlFor="promulgation" className="min-w-fit">
             공포일자
           </label>
           <button
+            id="promulgation"
             type="button"
-            onClick={() => setOpenPromulgationCalender((prev) => !prev)}
+            onClick={() => {
+              setOpenCalendar(openCalendar === 'promulgation' ? null : 'promulgation');
+            }}
             className="w-full py-2 px-6 flex gap-3 items-center justify-between rounded-full bg-background-white  outline-none border border-filter-outline1 text-primary-gray2 focus:shadow-filter-light-active dark:bg-primary-gray3 dark:text-primary-white dark:border-filter-outline2 data-[state=open]:shadow-filter-light-active dark:data-[state=open]:shadow-filter-dark-active'"
           >
             {promulgationRange.start === null || promulgationRange.end === null
@@ -106,18 +126,23 @@ function LawSearchFilterModal({ isOpen = false, onClose = () => {}, setLawSearch
               : `${promulgationRange.start} ~ ${promulgationRange.end}`}
             <FilterDetailDown className="dark:text-[#6E6E6E]" />
           </button>
-          <div hidden={!openPromulgationCalender} className="absolute top-13 right-0 z-10">
-            <CalendarWithDateInputRange id="promulgation" onChangeValue={setPromulgationRange} />
-          </div>
+          {openCalendar === 'promulgation' && (
+            <div className="absolute top-13 right-0 z-10">
+              <CalendarWithDateInputRange onChangeValue={setPromulgationRange} />
+            </div>
+          )}
         </div>
 
-        <div className="relative flex gap-7 items-center">
+        <div ref={enforcementRef} className="relative flex gap-7 items-center">
           <label htmlFor="enforcement" className="min-w-fit">
             시행일자
           </label>
           <button
+            id="enforcement"
             type="button"
-            onClick={() => setOpenEnforcementCalender((prev) => !prev)}
+            onClick={() => {
+              setOpenCalendar(openCalendar === 'enforcement' ? null : 'enforcement');
+            }}
             className="w-full py-2 px-6 flex gap-3 items-center justify-between rounded-full bg-background-white  outline-none border border-filter-outline1 text-primary-gray2 focus:shadow-filter-light-active dark:bg-primary-gray3 dark:text-primary-white dark:border-filter-outline2 data-[state=open]:shadow-filter-light-active dark:data-[state=open]:shadow-filter-dark-active'"
           >
             {enforcementRange.start === null || enforcementRange.end === null
@@ -125,9 +150,11 @@ function LawSearchFilterModal({ isOpen = false, onClose = () => {}, setLawSearch
               : `${enforcementRange.start} ~ ${enforcementRange.end}`}
             <FilterDetailDown className="dark:text-[#6E6E6E]" />
           </button>
-          <div hidden={!openEnforcementCalender} className="absolute top-13 right-0 z-10">
-            <CalendarWithDateInputRange id="promulgation" onChangeValue={setEnforcementRange} />
-          </div>
+          {openCalendar === 'enforcement' && (
+            <div className="absolute top-13 right-0 z-10">
+              <CalendarWithDateInputRange onChangeValue={setEnforcementRange} />
+            </div>
+          )}
         </div>
 
         <div className="flex gap-4 items-center justify-center">

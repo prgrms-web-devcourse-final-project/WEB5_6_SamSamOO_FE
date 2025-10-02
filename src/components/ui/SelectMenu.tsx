@@ -20,6 +20,7 @@ interface SelectMenuProps {
   disabled?: boolean;
   placeholder?: string;
   onValueChange?: (value: string) => void;
+  onOpenChange?: (open: boolean) => void;
 }
 
 function SelectMenu({
@@ -34,6 +35,7 @@ function SelectMenu({
   disabled,
   placeholder,
   onValueChange,
+  onOpenChange,
 }: SelectMenuProps) {
   const [mounted, setMounted] = useState(false);
   const { resolvedTheme } = useTheme();
@@ -46,7 +48,11 @@ function SelectMenu({
   if (!mounted) return null;
 
   return (
-    <Select.Root value={value} onValueChange={(value) => onValueChange?.(value)}>
+    <Select.Root
+      value={value}
+      onValueChange={(value) => onValueChange?.(value)}
+      onOpenChange={(open) => onOpenChange?.(open)}
+    >
       <Select.Trigger
         id={field}
         disabled={disabled}
