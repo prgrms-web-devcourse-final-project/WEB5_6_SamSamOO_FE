@@ -1,4 +1,4 @@
 function page() {
-  return <div>page</div>;
+  return <div>판례 상세 page</div>;
 }
 export default page;

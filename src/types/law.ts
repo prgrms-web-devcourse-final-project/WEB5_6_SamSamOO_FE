@@ -28,3 +28,36 @@ export type LawRequest = {
   pageNumber: number;
   pageSize: number;
 };
+
+export type LawDetailsResponse = {
+  lawName: string;
+  lawField: string;
+  ministry: string;
+  promulgationNumber: string;
+  promulgationDate: string;
+  enforcementDate: string;
+  jangList: [
+    {
+      content: string;
+      law: string;
+      joList: [
+        {
+          content: string;
+          jang: string;
+          hangList: [
+            {
+              content: string;
+              jo: string;
+              hoList: [
+                {
+                  content: string;
+                  hang: string;
+                },
+              ];
+            },
+          ];
+        },
+      ];
+    },
+  ];
+};
