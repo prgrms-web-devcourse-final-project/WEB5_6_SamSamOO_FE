@@ -1,6 +1,7 @@
 import SearchArea from '@/components/features/search/SearchArea';
-import Pagination from '@/components/features/search/Pagination';
 import ToggleSwitchNavigation from '@/components/ui/ToggleSwitchNavigation';
+import { SearchProvider } from '@/context/SearchContext';
+import PaginationWrapper from '@/components/features/search/PaginationWrapper';
 
 function SearchLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -13,14 +14,13 @@ function SearchLayout({ children }: { children: React.ReactNode }) {
           </nav>
           <SearchArea />
         </section>
-        <section className="w-full">
-          <h2 className="sr-only">검색 결과</h2>
-          {children}
-        </section>
-        <div className="flex flex-col items-center pb-6 gap-2">
-          <Pagination />
-          <p className="font-light text-sm">검색결과 : 총 164,321건</p>
-        </div>
+        <SearchProvider>
+          <section className="w-full">
+            <h2 className="sr-only">검색 결과</h2>
+            {children}
+          </section>
+          <PaginationWrapper />
+        </SearchProvider>
       </div>
     </div>
   );

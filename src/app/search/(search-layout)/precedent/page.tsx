@@ -24,7 +24,11 @@ async function Page({ searchParams }: { searchParams: Promise<{ search_query?: s
 
   return (
     <>
-      <PrecedentSearchResults content={payload.content} />
+      <PrecedentSearchResults
+        content={payload.content}
+        totalElements={payload.totalElements}
+        totalPages={payload.totalPages}
+      />
     </>
   );
 }

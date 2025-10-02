@@ -1,8 +1,8 @@
 'use client';
+import { useSearch } from '@/context/SearchContext';
 import { LawItem } from '@/types/law';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import Pagination from './Pagination';
 
 interface Props {
   content: LawItem[];
@@ -13,6 +13,11 @@ interface Props {
 
 function LawSearchResults({ content, showTag = false, totalElements, totalPages }: Props) {
   const [results, setResults] = useState<LawItem[] | null>(null);
+  const { setTotalLawElements, setTotalLawPages } = useSearch();
+  useEffect(() => {
+    setTotalLawElements(totalElements);
+    setTotalLawPages(totalPages);
+  }, [totalElements, totalPages, setTotalLawElements, setTotalLawPages]);
   console.log(totalElements, totalPages);
 
   useEffect(() => {
@@ -52,10 +57,6 @@ function LawSearchResults({ content, showTag = false, totalElements, totalPages 
             </li>
           ),
         )}
-      <div className="flex flex-col items-center pb-6 gap-2">
-        <Pagination end={Math.ceil(totalElements / 10)} />
-        <p className="font-light text-sm">검색결과 : 총 {totalElements}건</p>
-      </div>
     </>
   );
 }

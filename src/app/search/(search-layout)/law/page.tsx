@@ -41,7 +41,7 @@ async function Page({ searchParams }: { searchParams: Promise<searchParams> }) {
       <LawSearchResults
         content={payload.content}
         totalElements={payload.totalElements}
-        totalPages={payload.pageNumber}
+        totalPages={payload.totalPages}
       />
     </>
   );

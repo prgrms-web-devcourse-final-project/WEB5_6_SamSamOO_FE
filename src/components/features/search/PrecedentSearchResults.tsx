@@ -1,4 +1,5 @@
 'use client';
+import { useSearch } from '@/context/SearchContext';
 import { PrecedentItem } from '@/types/precedent';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -6,10 +7,19 @@ import { useEffect, useState } from 'react';
 interface Props {
   content: PrecedentItem[];
   showTag?: boolean;
+  totalElements: number;
+  totalPages: number;
 }
 
-function PrecedentSearchResults({ content, showTag }: Props) {
+function PrecedentSearchResults({ content, showTag = false, totalElements, totalPages }: Props) {
   const [results, setResults] = useState<PrecedentItem[] | null>(null);
+  const { setTotalPrecedentElements, setTotalPrecedentPages } = useSearch();
+
+  useEffect(() => {
+    setTotalPrecedentElements(totalElements);
+    setTotalPrecedentPages(totalPages);
+  }, [totalElements, totalPages, setTotalPrecedentElements, setTotalPrecedentPages]);
+
   useEffect(() => {
     setResults(content);
   }, [content]);
