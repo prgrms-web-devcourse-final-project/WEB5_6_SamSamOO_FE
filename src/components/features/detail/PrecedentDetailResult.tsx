@@ -2,6 +2,7 @@ import Hamburger from '@/assets/icons/hamburger.svg';
 import { PrecedentDetailsResponse } from '@/types/precedent';
 
 function PrecedentDetailResult({ data }: { data: PrecedentDetailsResponse }) {
+  console.log(data);
   const {
     precedentNumber, // 판례일련번호
     caseName, // 사건명

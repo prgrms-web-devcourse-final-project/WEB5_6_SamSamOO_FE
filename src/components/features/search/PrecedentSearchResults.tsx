@@ -8,6 +8,7 @@ interface Props {
 }
 
 function PrecedentSearchResults({ content, showTag = false }: Props) {
+  console.log(content);
   return (
     <>
       {content &&
