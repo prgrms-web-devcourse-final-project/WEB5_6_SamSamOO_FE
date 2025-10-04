@@ -3,6 +3,9 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
+import KakaoIcon from '@/assets/icons/kakao.svg';
+import NaverIcon from '@/assets/icons/naver.svg';
+
 interface Props {
   mode?: 'login' | 'signup';
 }
@@ -51,17 +54,20 @@ export default function Oauth({ mode = 'login' }: Props) {
     <div className="mb-6 flex w-full gap-6">
       <button
         type="button"
-        className="h-13 flex-1 rounded-sm bg-[#03C75A] px-9 text-primary-white"
+        className="h-13 flex flex-1 items-center justify-center gap-3 rounded-sm bg-[#03C75A] px-9 text-primary-white"
         onClick={() => handleOauthPopup('naver')}
       >
-        {naverText}
+        <NaverIcon width={18} height={18} />
+        <span>{naverText}</span>
       </button>
+
       <button
         type="button"
-        className="h-13 flex-1 rounded-sm bg-[#FEE500] px-9 text-primary-black"
+        className="h-13 flex flex-1 items-center justify-center gap-3 rounded-sm bg-[#FEE500] px-9 text-primary-black"
         onClick={() => handleOauthPopup('kakao')}
       >
-        {kakaoText}
+        <KakaoIcon width={20} height={20} />
+        <span>{kakaoText}</span>
       </button>
     </div>
   );
