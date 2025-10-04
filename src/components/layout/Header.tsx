@@ -12,7 +12,7 @@ import { showErrorToast } from '@/utils/showToast';
 const mainNavItems = [
   { href: '/advice', label: 'AI 상담' },
   { href: '/search/total', label: '법령ㆍ판례 검색' },
-  { href: '/vote', label: '투표' },
+  { href: '/vote/ongoing', label: '투표' },
 ];
 
 function Header() {
