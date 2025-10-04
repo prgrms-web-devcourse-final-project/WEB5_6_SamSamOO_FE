@@ -34,9 +34,9 @@ export async function getUserFromCookies(): Promise<User | null> {
   const cookieStore = await cookies();
 
   const accessToken = cookieStore.get('accessToken');
-  const refreshToken = cookieStore.get('refreshToken');
+  // const refreshToken = cookieStore.get('refreshToken');
 
-  if (!accessToken && !refreshToken) {
+  if (!accessToken) {
     return null;
   }
 
