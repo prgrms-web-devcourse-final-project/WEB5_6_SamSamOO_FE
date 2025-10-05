@@ -44,12 +44,12 @@ export default function VoteCard({
       : { text: '마감', color: '#EE4444' };
 
   return (
-    <div className="w-[800px] rounded-4xl p-6 flex flex-col gap-6 shadow-[0_4px_20px_rgba(0,0,0,0.25)] hover:shadow-[0_0_40px_rgba(175,207,255,1)]">
+    <div className="w-[800px] rounded-4xl p-6 flex flex-col gap-6 shadow-[0_4px_20px_rgba(0,0,0,0.25)] hover:shadow-[0_0_40px_rgba(175,207,255,1)] dark:bg-background-black3 dark:shadow-[0_0_14px_rgba(77,77,77,1)]">
       {/* 헤더 */}
       <header className="flex justify-between items-center">
         <div className="flex items-center gap-4">
           {/* 카테고리 태그 */}
-          <div className="h-10 bg-brand-primary rounded-full flex items-center gap-2 px-5 dark:bg-brand-accent">
+          <div className="h-12 bg-brand-primary rounded-full flex items-center gap-2 px-5 dark:bg-primary-gray3 dark:border-1 dark:border-[#a3a3a3]">
             <Gavel className="text-primary-white scale-150" />
             <p className="text-primary-white">{category}</p>
           </div>
