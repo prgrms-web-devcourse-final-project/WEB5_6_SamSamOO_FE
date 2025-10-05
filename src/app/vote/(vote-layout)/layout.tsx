@@ -26,7 +26,7 @@ export default function VoteLayout({ children }: { children: React.ReactNode }) 
 
       <CtaVote />
 
-      <nav className="mb-4 flex min-w-[550px] items-center justify-center">
+      <nav className="mb-8 flex min-w-[550px] items-center justify-center">
         <ToggleNavigation className="w-full" />
       </nav>
 

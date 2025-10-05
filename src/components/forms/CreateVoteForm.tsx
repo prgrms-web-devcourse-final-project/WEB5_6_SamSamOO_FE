@@ -49,7 +49,7 @@ export default function CreateVoteForm({ onClose }: Props) {
           </button>
 
           <div className="w-[280px] flex flex-col gap-2">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
               <Time className="text-brand-primary dark:text-brand-accent scale-150" />
               <p className="text-brand-primary text-lg dark:text-primary-white">게시 시간 :</p>
               <p className="text-brand-primary font-bold text-lg dark:text-brand-accent">
@@ -92,7 +92,7 @@ export default function CreateVoteForm({ onClose }: Props) {
           <textarea
             name="content"
             placeholder="논쟁 내용을 입력해주세요."
-            className="w-full h-full resize-none font-bold outline-none text-lg bg-transparent"
+            className="w-full h-full resize-none outline-none text-md bg-transparent"
           />
         </div>
       </div>

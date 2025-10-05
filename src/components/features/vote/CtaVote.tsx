@@ -11,7 +11,7 @@ export default function CtaVote() {
       <button
         onClick={() => setIsOpen(true)}
         className="
-          mb-10
+          mb-16
           rounded-full
           bg-brand-primary dark:bg-brand-accent
           py-2 px-8
