@@ -8,6 +8,7 @@ import Indicator from '@/assets/icons/indicator.svg';
 import Voter from '@/assets/icons/voter.svg';
 import SelectDown from '@/assets/icons/selectDown.svg';
 import ProgressBar from './ProgressBar';
+import GraphWrapper from './GraphWrapper';
 
 interface Option {
   label: string;
@@ -119,6 +120,7 @@ export default function VoteCard({
           )}
         </AnimatePresence>
       </div>
+      {status === 'closed' ? <GraphWrapper /> : null}
 
       {/* 투표 항목 */}
       <div className="flex flex-col items-center gap-5">
