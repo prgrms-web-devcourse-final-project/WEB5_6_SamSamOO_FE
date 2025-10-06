@@ -14,9 +14,9 @@ export async function postNewChat(message: string) {
   }
 }
 
-export async function postExistingChat(message: string, historyId: number) {
+export async function postExistingChat(message: string, historyId: string) {
   try {
-    const res = await api.post<ChatBotAnswer[]>(`/api/chat/${historyId}/message`, {
+    const res = await api.post(`/api/chat/${historyId}/message`, {
       message,
     });
     console.log('res', res);

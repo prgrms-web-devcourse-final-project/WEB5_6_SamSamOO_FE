@@ -1,3 +1,5 @@
+import { SimilarCase, SimilarLaw } from './chatBot';
+
 export type ChatHistoryList = {
   historyRoomId: number;
   title: string;
@@ -10,4 +12,14 @@ export type ChatHistory = {
   title: string;
   createdAt: string;
   updatedAt: string;
+};
+
+export type Message = {
+  id: string;
+  role: 'user' | 'ai';
+  content: string;
+  similarCases?: SimilarCase[];
+  similarLaws?: SimilarLaw[];
+  timestamp: number;
+  isPending?: boolean;
 };

@@ -16,7 +16,6 @@ function AnimateRanks({ rankList }: Props) {
 
     return () => clearInterval(interval);
   }, []);
-
   const currentItem = rankList[currentIndex];
 
   return (

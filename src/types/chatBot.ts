@@ -2,11 +2,19 @@ export type ChatBotAnswer = {
   roomId: number;
   title: string;
   message: string;
-  similarCases: SimilarCases[];
-  similarLaws: SimilarCases[];
+  similarCases: SimilarCase[];
+  similarLaws: SimilarLaw[];
 };
 
-export type SimilarCases = {
+export type SimilarCase = {
+  id: string;
+  text: string;
+  media: Media;
+  meatadata: MetaData;
+  score: number;
+};
+
+export type SimilarLaw = {
   id: string;
   text: string;
   media: Media;

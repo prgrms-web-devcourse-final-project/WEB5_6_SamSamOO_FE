@@ -5,10 +5,14 @@ import CloseButton from '@/components/ui/CloseButton';
 import ChatMenuButton from './components/chatHistory/ChatMenuButton';
 import IconButton from './components/sideBar/IconButton';
 import ChatListModal from './components/sideBar/ChatListModal';
+import { useChatStore } from '@/store/useChatStore';
+import { useRouter } from 'next/navigation';
 
 function AdviceSideBar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isOpenPop, setIsOpenPop] = useState(false);
+  const resetStore = useChatStore((state) => state.resetStore);
+  const router = useRouter();
 
   const closeChatPop = () => {
     setIsOpenPop(false);
@@ -16,6 +20,11 @@ function AdviceSideBar() {
 
   const closeSidebar = () => {
     setIsSidebarOpen(false);
+  };
+
+  const newChat = () => {
+    resetStore();
+    router.push(`/advice`);
   };
   return (
     <>
@@ -47,7 +56,7 @@ function AdviceSideBar() {
             <CloseButton onClose={closeSidebar} />
           </div>
           <ul className="center-col gap-4">
-            <IconButton fileName="newChat" label="새 채팅" onClick={() => {}} />
+            <IconButton fileName="newChat" label="새 채팅" onClick={() => newChat()} />
             <IconButton
               fileName="chatList"
               label="채팅 목록"

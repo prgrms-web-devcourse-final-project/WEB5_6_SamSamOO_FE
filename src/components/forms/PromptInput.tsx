@@ -3,15 +3,25 @@
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import ArrowUpward from '@/assets/icons/arrowUpward.svg';
+import { useChatStore } from '@/store/useChatStore';
+import { useShallow } from 'zustand/shallow';
 
 //todo - 기능 개발 시 디바운스 적용
 export default function PromptInput() {
   const [value, setValue] = useState('');
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
-
   const router = useRouter();
+  const { roomId, addMessage } = useChatStore(
+    useShallow((state) => ({ roomId: state.roomId, addMessage: state.addMessage })),
+  );
 
   const MAX_HEIGHT = 300;
+
+  useEffect(() => {
+    if (roomId) {
+      router.push(`/chat/${roomId}`);
+    }
+  }, [roomId]);
 
   // value 변경 시(입력 시) 높이 조절
   useEffect(() => {
@@ -29,13 +39,12 @@ export default function PromptInput() {
     ta.style.overflowY = needed > MAX_HEIGHT ? 'auto' : 'hidden';
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    const input = value;
-    console.log(input);
-    console.log(router);
-    router.push(`/chat/1?c=${input}`);
+    if (!value.trim()) return;
+    addMessage({ role: 'user', content: value });
+    router.push(`/chat/temp-${Date.now()}`);
+    setValue('');
   };
 
   return (

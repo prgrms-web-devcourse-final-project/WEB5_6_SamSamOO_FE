@@ -32,8 +32,8 @@ function ChatListModal({ onClose, isOpen }: Props) {
         <h2 className="text-2xl">채팅목록</h2>
         <CloseButton onClose={onClose} />
       </div>
-      <div className="w-[300px]">
-        <ul className="flex flex-col gap-4">
+      <div className="w-[300px] overflow-y-auto">
+        <ul className="flex flex-col gap-4 ">
           {chatHistoryList &&
             chatHistoryList.map((items, index) => <ChatHistoryItem key={index} chatItem={items} />)}
         </ul>

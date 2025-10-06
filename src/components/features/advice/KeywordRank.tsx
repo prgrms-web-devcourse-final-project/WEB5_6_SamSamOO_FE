@@ -7,6 +7,7 @@ interface Props {
 
 export default async function KeywordRank({ className }: Props) {
   const rankList = await getKeywordRanks();
-  if (!rankList) return;
+
+  if (!rankList || rankList.length === 0) return;
   return <KeywordRankClient rankList={rankList} className={className} />;
 }
