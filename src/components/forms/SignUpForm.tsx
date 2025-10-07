@@ -14,7 +14,7 @@ import { showSuccessToast } from '@/utils/showToast';
 
 export default function SignupForm() {
   const router = useRouter();
-  const setUser = useUserStore((state) => state.setUser);
+  const setSession = useUserStore((state) => state.setSession);
 
   const [formData, setFormData] = useState({
     email: '',
@@ -87,7 +87,7 @@ export default function SignupForm() {
       };
 
       const response = await signUp(payload);
-      setUser(response);
+      setSession({ isAuthenticated: true, user: response });
       showSuccessToast('환영합니다! 지금부터 서비스를 자유롭게 이용하실 수 있어요.');
       router.replace('/');
       // eslint-disable-next-line @typescript-eslint/no-unused-vars

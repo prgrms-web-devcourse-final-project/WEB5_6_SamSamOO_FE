@@ -1,28 +1,19 @@
 'use client';
-import { ReactNode, useEffect, useRef } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { useUserStore } from '@/store/useUserStore';
-import { User } from '@/types/User';
+import { SessionSnapshot } from '@/types/Session';
 
 interface UserProviderProps {
-  initialUser: User | null;
+  initialSession: SessionSnapshot;
   children: ReactNode;
 }
 
-export default function UserProvider({ initialUser, children }: UserProviderProps) {
-  const { setUser } = useUserStore();
-  const didHydrate = useRef(false);
+export default function UserProvider({ initialSession, children }: UserProviderProps) {
+  const setSession = useUserStore((state) => state.setSession);
 
   useEffect(() => {
-    if (didHydrate.current) return;
-    didHydrate.current = true;
-
-    if (initialUser) {
-      setUser(initialUser);
-    } else {
-      setUser(null);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    setSession(initialSession);
+  }, [initialSession, setSession]);
 
   return <>{children}</>;
 }

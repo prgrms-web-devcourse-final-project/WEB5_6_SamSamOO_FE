@@ -10,7 +10,7 @@ import { showSuccessToast } from '@/utils/showToast';
 
 export default function LoginForm() {
   const router = useRouter();
-  const setUser = useUserStore((state) => state.setUser);
+  const setSession = useUserStore((state) => state.setSession);
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [error, setError] = useState<string | null>(null);
 
@@ -42,7 +42,7 @@ export default function LoginForm() {
 
     try {
       const response = await login(formData);
-      setUser(response);
+      setSession({ isAuthenticated: true, user: response });
       showSuccessToast('로그인 성공! 환영합니다♥️');
       router.replace('/');
       // eslint-disable-next-line @typescript-eslint/no-unused-vars

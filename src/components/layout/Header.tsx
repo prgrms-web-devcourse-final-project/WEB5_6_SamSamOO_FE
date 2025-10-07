@@ -18,13 +18,13 @@ const mainNavItems = [
 function Header() {
   const router = useRouter();
   const pathname = usePathname();
-  const user = useUserStore((state) => state.user);
-  const clearUser = useUserStore((state) => state.clearUser);
+  const isAuthenticated = useUserStore((state) => state.isAuthenticated);
+  const clearSession = useUserStore((state) => state.clearSession);
 
   const handleLogout = async () => {
     try {
       await logout();
-      clearUser();
+      clearSession();
       router.replace('/');
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
@@ -77,7 +77,7 @@ function Header() {
         <h2 className="sr-only">서브 메뉴</h2>
         <ToggleThemeButton />
         <ul className="flex gap-4">
-          {user ? (
+          {isAuthenticated ? (
             <>
               {/* 로그인 상태 */}
               <li>
