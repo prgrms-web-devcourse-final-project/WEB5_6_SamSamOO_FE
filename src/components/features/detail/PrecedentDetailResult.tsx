@@ -4,6 +4,7 @@ import extractPrecedentHeadings from '@/utils/extractPrecedentHeadings';
 import Toc from './Toc';
 import { Metadata } from '@/types/detail';
 import MetadataGrid from './MetadataGrid';
+import CategoryTag from './CategoryTag';
 
 function PrecedentDetailResult({ data }: { data: PrecedentDetailsResponse }) {
   console.log(data);
@@ -57,9 +58,7 @@ function PrecedentDetailResult({ data }: { data: PrecedentDetailsResponse }) {
           <h2 className="sr-only">컨텐츠</h2>
           <header className="text-primary-gray1 dark:text-primary-white pb-10">
             <div className="flex gap-2 items-center mb-3">
-              <div className="border-4 border-brand-accent rounded-3xl px-4 py-1 text-brand-accent font-extrabold text-2xl">
-                판례
-              </div>
+              <CategoryTag text="판례" />
               <p className="text-3xl font-extrabold">{caseName}</p>
             </div>
             <div className="flex gap-8 text-xl font-normal pl-2">
