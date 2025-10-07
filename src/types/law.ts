@@ -61,3 +61,26 @@ export type LawDetailsResponse = {
     },
   ];
 };
+
+export type LawJangContents = {
+  content: string;
+  law: string;
+  joList: [
+    {
+      content: string;
+      jang: string;
+      hangList: [
+        {
+          content: string;
+          jo: string;
+          hoList: [
+            {
+              content: string;
+              hang: string;
+            },
+          ];
+        },
+      ];
+    },
+  ];
+};
