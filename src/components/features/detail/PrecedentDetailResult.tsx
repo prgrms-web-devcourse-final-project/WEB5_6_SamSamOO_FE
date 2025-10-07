@@ -1,5 +1,9 @@
 import Hamburger from '@/assets/icons/hamburger.svg';
 import { PrecedentDetailsResponse } from '@/types/precedent';
+import extractPrecedentHeadings from '@/utils/extractPrecedentHeadings';
+import Toc from './Toc';
+import { Metadata } from '@/types/detail';
+import MetadataGrid from './MetadataGrid';
 
 function PrecedentDetailResult({ data }: { data: PrecedentDetailsResponse }) {
   console.log(data);
@@ -20,55 +24,38 @@ function PrecedentDetailResult({ data }: { data: PrecedentDetailsResponse }) {
     // referencePrecedent, // 참조판례
     precedentContent, // 판례내용
   } = data;
+
+  let count = 0;
+  const regex = /^(?=.{0,2}\d+\.\s)/;
+  const toc = extractPrecedentHeadings(notice, summaryOfTheJudgment, precedentContent);
+  const metadata: Metadata = {
+    사건번호: caseNumber,
+    사건종류명: caseTypeName,
+    법원명: courtName,
+    선고: sentence,
+    선고일자: sentencingDate,
+  };
   return (
     <>
       <div className="w-full h-full flex flex-1">
-        <section className="w-[366px] text-primary-gray2 dark:text-primary-white h-[calc(100vh-50px)] border-r">
+        <section className="flex max-w-[366px] flex-col text-primary-gray2 dark:text-primary-white border-r">
           <h2 className="sr-only">네비게이션</h2>
-          <div className="w-[366px] flex gap-2 items-center py-10 border-b mb-8 px-8">
-            <Hamburger className="dark:text-primary-white w-8 h-4" />
-            <p className="font-bold text-3xl">판례 목차</p>
-          </div>
-          <div className="px-8">
-            <nav className="h-[calc(100vh-450px)] space-y-4">
-              <p className="font-medium text-2xl text-brand-accent">판시 사항</p>
-              <p className="font-medium text-2xl">판결요지</p>
-              <p className="font-medium text-2xl">판례내용</p>
-              <p className="pl-4 text-xl">주문</p>
-              <p className="pl-4 text-xl">관련 법리</p>
-              <p className="pl-4 text-xl">공소사실의 요지</p>
-              <p className="pl-4 text-xl">원심의 판단</p>
-              <p className="pl-4 text-xl">대법원의 판단</p>
-              <p className="pl-4 text-xl">결론</p>
-            </nav>
-            {/* k,v로 null 값 검사해서 렌더링되게 해야할듯 */}
-            <div className="border border-filter-outline2 font-medium rounded-2xl">
-              <div className="flex gap-2 border-b items-center">
-                <p className="border-r px-4 py-2">사건번호</p>
-                <p className="pl-2">{caseNumber}</p>
-              </div>
-              <div className="flex gap-2 border-b items-center">
-                <p className="border-r px-4 py-2">사건종류명</p>
-                <p className="pl-2">{caseTypeName}</p>
-              </div>
-              <div className="flex gap-2 border-b items-center">
-                <p className="border-r px-4 py-2">법원명</p>
-                <p className="pl-2">{courtName}</p>
-              </div>
-              <div className="flex gap-2 border-b items-center">
-                <p className="border-r px-4 py-2">선고</p>
-                <p className="pl-2">{sentence}</p>
-              </div>
-              <div className="flex gap-2 items-center">
-                <p className="border-r px-4 py-2">선고일자</p>
-                <p className="pl-2">{sentencingDate}</p>
-              </div>
+          <div>
+            <div className="w-full flex gap-2 items-center py-10 mb-12 px-8 border-b">
+              <Hamburger className="dark:text-primary-white w-8 h-4" />
+              <p className="font-bold text-3xl">판례 목차</p>
             </div>
+          </div>
+          <div className="flex-1 px-8">
+            <Toc toc={toc} />
+          </div>
+          <div className="px-8 pb-10">
+            <MetadataGrid metadata={metadata} />
           </div>
         </section>
         <section className="w-[1200px] px-25 py-10 ">
           <h2 className="sr-only">컨텐츠</h2>
-          <header className="text-primary-gray1 dark:text-primary-white">
+          <header className="text-primary-gray1 dark:text-primary-white pb-10">
             <div className="flex gap-2 items-center mb-3">
               <div className="border-4 border-brand-accent rounded-3xl px-4 py-1 text-brand-accent font-extrabold text-2xl">
                 판례
@@ -84,16 +71,16 @@ function PrecedentDetailResult({ data }: { data: PrecedentDetailsResponse }) {
           </header>
           <article className="leading-[26px] dark:text-primary-white">
             {notice && (
-              <div>
-                <p className="text-2xl font-medium mb-5 pt-14 text-primary-gray2 dark:text-primary-white">
+              <div id={String(count++)} className="scroll-mt-24">
+                <p className="text-2xl font-medium pb-6 text-primary-gray2 dark:text-primary-white">
                   판시사항
                 </p>
                 <p>{notice.slice(0, notice.indexOf('<br/>'))}</p>
               </div>
             )}
             {summaryOfTheJudgment && (
-              <div>
-                <p className="text-2xl font-medium mb-5 pt-14 text-primary-gray2 dark:text-primary-white">
+              <div id={String(count++)} className="scroll-mt-12">
+                <p className="text-2xl font-medium mb-5 pt-14 text-primary-gray2 dark:text-primary-white ">
                   판결요지
                 </p>
                 <span>
@@ -106,13 +93,27 @@ function PrecedentDetailResult({ data }: { data: PrecedentDetailsResponse }) {
               </div>
             )}
             {precedentContent && (
-              <div>
+              <div id={String(count++)} className="scroll-mt-12">
                 <p className="text-2xl font-medium mb-5 pt-14 text-primary-gray2 dark:text-primary-white">
                   판례내용
                 </p>
                 <span>
                   {precedentContent.split('<br/>').map((row, index) => {
                     if (row.includes('【') && row[1] !== '주') return '';
+                    if (
+                      (row.includes('【') && row[1] === '주') ||
+                      (regex.test(row) && row.length <= 30)
+                    ) {
+                      return (
+                        <li
+                          key={index}
+                          id={String(count++)}
+                          className="pb-3 text-red-700 scroll-mt-22"
+                        >
+                          <p>{row}</p>
+                        </li>
+                      );
+                    }
                     return (
                       <li key={index} className="pb-3">
                         <p>{row}</p>
