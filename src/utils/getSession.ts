@@ -1,5 +1,6 @@
 import 'server-only';
 import { cookies } from 'next/headers';
+import { cache } from 'react';
 import { SessionSnapshot } from '@/types/Session';
 
 const UNVERIFIED_SESSION: SessionSnapshot = {
@@ -7,7 +8,7 @@ const UNVERIFIED_SESSION: SessionSnapshot = {
   user: null,
 };
 
-export async function getSession(): Promise<SessionSnapshot> {
+export const getSession = cache(async (): Promise<SessionSnapshot> => {
   const cookieStore = await cookies();
   const accessToken = cookieStore.get('accessToken');
 
@@ -40,4 +41,4 @@ export async function getSession(): Promise<SessionSnapshot> {
     isAuthenticated: true,
     user: null,
   };
-}
+});
