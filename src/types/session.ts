@@ -1,4 +1,4 @@
-import { User } from '@/types/tempUser';
+import { User } from '@/types/user';
 
 export interface SessionSnapshot {
   isAuthenticated: boolean;

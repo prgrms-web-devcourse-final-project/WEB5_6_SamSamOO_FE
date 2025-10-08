@@ -1,6 +1,6 @@
 import { create } from 'zustand';
-import { SessionSnapshot } from '@/types/tempSession';
-import { User } from '@/types/tempUser';
+import { SessionSnapshot } from '@/types/session';
+import { User } from '@/types/user';
 
 interface UserState extends SessionSnapshot {
   setSession: (session: SessionSnapshot) => void;
