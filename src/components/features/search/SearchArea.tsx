@@ -1,16 +1,18 @@
 'use client';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import AppliedFilter from '@/components/features/search/AppliedFilter';
 import { categoryItems } from './navigationItems';
 import SearchInput from './SearchInput';
 import SearchFilter from './SearchFilter';
 import { useState } from 'react';
+import makeSearchUrl from '@/utils/makeSearchUrl';
 
 function SearchArea() {
   const router = useRouter();
   const pathname = usePathname();
+  const params = useSearchParams();
   const [appliedFilterText, setAppliedFilterText] = useState<string>('');
-  const category = categoryItems.filter((item) => item.href === pathname)[0].label;
+  const category = categoryItems.filter((item) => pathname.includes(item.href))[0].label;
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -19,7 +21,9 @@ function SearchArea() {
     const keyword = input.value.trim();
     console.log(keyword);
 
-    router.push(`${pathname}?q=${keyword}`);
+    const url = makeSearchUrl(pathname, params, { search_query: keyword });
+    router.push(url);
+    input.value = '';
   };
 
   return (
