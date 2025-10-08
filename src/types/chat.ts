@@ -23,3 +23,22 @@ export type Message = {
   timestamp: number;
   isPending?: boolean;
 };
+
+export type ChatInfo = {
+  type: 'USER' | 'ASSISTANT';
+  message: string;
+  precedents: Precedent[];
+  laws: Laws[];
+  createdAt: string;
+};
+
+export type Precedent = {
+  precedentContent: string;
+  caseNumber: string;
+  caseName: string;
+};
+
+export type Laws = {
+  content: string;
+  lawName: string;
+};

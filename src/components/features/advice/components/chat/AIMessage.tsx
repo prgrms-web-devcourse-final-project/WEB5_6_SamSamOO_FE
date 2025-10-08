@@ -1,31 +1,21 @@
-import Image from 'next/image';
-import dike from '@/assets/images/dike.png';
 import InlineText from '@/components/ui/InlineText';
+import Mascot from '@/components/ui/Mascot';
 import { Message } from '@/types/chat';
+import { convertTimestampToDate } from '@/utils/date';
 
 interface Props {
   msg: Message;
 }
 
 function AIMessage({ msg }: Props) {
-  console.log(msg);
   return (
     <div className="w-full">
-      <div className="center-row w-fit gap-1">
-        <div className="w-9 h-9 bg-[#DBDBDB] dark:bg-[#1F1F1F] rounded-sm center-row">
-          <Image src={dike} width={24} height={24} alt="마스코트 디케 이미지" />
-        </div>
-        <span className="font-semibold">디케</span>
-      </div>
+      <Mascot />
       <div className="pt-3">
         <InlineText className="whitespace-pre-wrap">{msg.content}</InlineText>
         <span className="text-xs text-[#555555] dark:text-primary-white">
           {' '}
-          {new Date(msg.timestamp).toLocaleTimeString('ko-KR', {
-            hour: '2-digit',
-            minute: '2-digit',
-            hour12: false,
-          })}
+          {`${convertTimestampToDate(msg.timestamp)}`}
         </span>
       </div>
     </div>

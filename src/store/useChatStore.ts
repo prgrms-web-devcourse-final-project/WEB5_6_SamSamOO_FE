@@ -18,6 +18,7 @@ interface ChatState {
   setRoomId: (roomId: string) => void;
   addMessage: (params: AddMessageParams) => void;
   sendMessage: (content: string) => Promise<void>;
+  setChatHistory: (convertMessage: Message[]) => void;
   resetStore: () => void; // 전체 초기화
   setLoading: (isLoading: boolean) => void;
 }
@@ -113,6 +114,9 @@ export const useChatStore = create<ChatState>()(
         } finally {
           setLoading(false);
         }
+      },
+      setChatHistory: (convertMessage: Message[]) => {
+        set({ messages: convertMessage });
       },
       resetStore: () => set(initialState),
       setLoading: (isLoading) => set({ isLoading }),

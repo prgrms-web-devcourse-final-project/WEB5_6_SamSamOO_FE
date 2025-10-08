@@ -5,23 +5,21 @@ import { useRouter } from 'next/navigation';
 
 interface Props {
   chatItem: ChatHistory;
+  onDelete: (historyRoomId: number) => Promise<void>;
 }
 
-function ChatHistoryItem({ chatItem }: Props) {
+function ChatHistoryItem({ chatItem, onDelete }: Props) {
   const router = useRouter();
 
-  const handleChatRoom = async (e: React.MouseEvent<HTMLLIElement>) => {
-    console.log('현재 채팅 변경', chatItem.historyRoomId);
-    router.push(`/chat`);
-    const res = await getChatHistoryInfo(chatItem.historyRoomId);
-    console.log('결과', res);
+  const handleChatRoom = async () => {
+    router.push(`/chat/${chatItem.historyRoomId}`);
   };
 
-  const handelChatDelete = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handelChatDelete = (e: React.MouseEvent<HTMLButtonElement>, historyRoomId: number) => {
     e.stopPropagation();
-    console.log('삭제하였습니다.');
-    await deleteChatHistory(chatItem.historyRoomId);
+    onDelete(historyRoomId);
   };
+
   return (
     <li
       className="w-full group border rounded-xl hover:bg-brand-primary hover:dark:bg-brand-accent"
@@ -32,11 +30,19 @@ function ChatHistoryItem({ chatItem }: Props) {
 
         <div className="flex-1 text-primary-black dark:text-primary-white group-hover:text-primary-white">
           <p className="truncate">
-            {chatItem.title.length > 15 ? chatItem.title.slice(0, 15) + '...' : chatItem.title}
+            {!chatItem.title
+              ? '...'
+              : chatItem.title.length > 15
+                ? chatItem.title.slice(0, 15) + '...'
+                : chatItem.title}
           </p>
           <p className="font-light text-xs">{chatItem.updatedAt.slice(0, 10)}</p>
         </div>
-        <button type="button" className="mr-1 hidden group-hover:block" onClick={handelChatDelete}>
+        <button
+          type="button"
+          className="mr-1 hidden group-hover:block"
+          onClick={(e) => handelChatDelete(e, chatItem.historyRoomId)}
+        >
           <img src="/icons/delete.svg" alt="삭제 아이콘" />
         </button>
       </div>

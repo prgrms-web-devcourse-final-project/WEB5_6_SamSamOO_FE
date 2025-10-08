@@ -14,17 +14,11 @@ function AdviceSideBar() {
   const resetStore = useChatStore((state) => state.resetStore);
   const router = useRouter();
 
-  const closeChatPop = () => {
-    setIsOpenPop(false);
-  };
-
-  const closeSidebar = () => {
-    setIsSidebarOpen(false);
-  };
-
   const newChat = () => {
     resetStore();
-    router.push(`/advice`);
+    setTimeout(() => {
+      router.push(`/advice`);
+    }, 0);
   };
   return (
     <>
@@ -35,7 +29,7 @@ function AdviceSideBar() {
             setIsSidebarOpen((prev) => !prev);
           }}
           closeSidebar={() => {
-            closeSidebar();
+            setIsSidebarOpen(false);
           }}
         />
         <aside
@@ -53,7 +47,11 @@ function AdviceSideBar() {
           <h2 className="a11y">AI 상담 페이지 사이드 바</h2>
           <div className="md:hidden flex items-center justify-between p-4 border-b border-primary-gray1">
             <h2 className="font-semibold">메뉴</h2>
-            <CloseButton onClose={closeSidebar} />
+            <CloseButton
+              onClose={() => {
+                setIsSidebarOpen(false);
+              }}
+            />
           </div>
           <ul className="center-col gap-4">
             <IconButton fileName="newChat" label="새 채팅" onClick={() => newChat()} />
@@ -66,7 +64,7 @@ function AdviceSideBar() {
           {isOpenPop && (
             <ChatListModal
               onClose={() => {
-                closeChatPop();
+                setIsOpenPop(false);
               }}
               isOpen={isOpenPop}
             />

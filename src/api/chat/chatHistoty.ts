@@ -1,5 +1,5 @@
 import api from '@/api/axiosInstance';
-import { ChatHistoryList } from '@/types/chat';
+import { ChatHistoryList, ChatInfo } from '@/types/chat';
 
 export async function getChatHistoryList() {
   try {
@@ -11,9 +11,9 @@ export async function getChatHistoryList() {
   }
 }
 
-export async function getChatHistoryInfo(historyId: number) {
+export async function getChatHistoryInfo(historyId: string) {
   try {
-    const res = await api.get<ChatHistoryList>(`/api/chat/history/${historyId}`);
+    const res = await api.get<ChatInfo[]>(`/api/chat/history/${historyId}`);
     return res.data;
   } catch (err) {
     console.log(err, '채팅방 목록 조회 실패');
@@ -21,7 +21,7 @@ export async function getChatHistoryInfo(historyId: number) {
   }
 }
 
-export async function deleteChatHistory(historyId: number) {
+export async function deleteChatHistory(historyId: string) {
   try {
     const res = await api.delete<ChatHistoryList>(`/api/chat/history/${historyId}`);
     return res.data;
