@@ -10,7 +10,9 @@ import makeSearchUrl from '@/utils/makeSearchUrl';
 function SearchArea() {
   const router = useRouter();
   const pathname = usePathname();
-  const params = useSearchParams();
+  const searchParams = useSearchParams();
+  const newParams = new URLSearchParams(searchParams);
+  newParams.delete('pageNumber');
   const [appliedFilterText, setAppliedFilterText] = useState<string>('');
   const category = categoryItems.filter((item) => pathname.includes(item.href))[0].label;
 
@@ -21,7 +23,7 @@ function SearchArea() {
     const keyword = input.value.trim();
     console.log(keyword);
 
-    const url = makeSearchUrl(pathname, params, { search_query: keyword });
+    const url = makeSearchUrl(pathname, newParams, { search_query: keyword });
     router.push(url);
     input.value = '';
   };

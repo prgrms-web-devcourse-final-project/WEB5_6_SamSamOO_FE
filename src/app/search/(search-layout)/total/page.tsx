@@ -28,6 +28,9 @@ type SearchParams = {
 
   pageNumber: number;
   pageSize: number;
+
+  law?: string;
+  precedent?: string;
 };
 
 async function Page({ searchParams }: { searchParams: Promise<SearchParams> }) {
@@ -43,10 +46,15 @@ async function Page({ searchParams }: { searchParams: Promise<SearchParams> }) {
     sentencingDateStart,
     sentencingDateEnd,
     pageNumber,
+    // law,
+    // precedent,
   } = searchList;
+  // const PAGE_SIZE = law === 'false' || precedent === 'false' ? 10 : 5;
+  const PAGE_SIZE = 5;
   console.log(searchList);
 
   const getLawData = async () => {
+    // if (law === 'false') return { content: [], totalElements: 0, totalPages: 0 };
     const response = await getLawSearchResults({
       lawName: search_query ?? null,
       lawField,
@@ -56,25 +64,30 @@ async function Page({ searchParams }: { searchParams: Promise<SearchParams> }) {
       enforcementDateStart,
       enforcementDateEnd,
       pageNumber,
-      pageSize: 5,
+      pageSize: PAGE_SIZE,
     });
     return response;
   };
+
   const lawPayload = await getLawData();
   console.log('법령 개수 : ', lawPayload.totalElements);
+  console.log('법령 페이지 수 : ', lawPayload.totalPages);
 
   const getPrecedentData = async () => {
+    // if (precedent === 'false') return { content: [], totalElements: 0, totalPages: 0 };
     const response = await getPrecedentSearchResults({
       keyword: search_query ?? null,
       sentencingDateStart,
       sentencingDateEnd,
       pageNumber,
-      pageSize: 5,
+      pageSize: PAGE_SIZE,
     });
     return response;
   };
   const precedentPayload = await getPrecedentData();
+
   console.log('판례 개수 : ', precedentPayload.totalElements);
+  console.log('판례 페이지 수 : ', precedentPayload.totalPages);
 
   return (
     <div>

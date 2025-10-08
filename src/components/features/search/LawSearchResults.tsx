@@ -1,5 +1,6 @@
 import { LawItem } from '@/types/law';
 import Link from 'next/link';
+import CategoryTag from '../detail/CategoryTag';
 
 interface Props {
   content: LawItem[];
@@ -7,7 +8,7 @@ interface Props {
 }
 
 function LawSearchResults({ content, showTag = false }: Props) {
-  console.log(content);
+  // console.log(content);
   return (
     <>
       {content &&
@@ -24,12 +25,15 @@ function LawSearchResults({ content, showTag = false }: Props) {
           }) => (
             <li key={id} className="mb-10">
               <Link href={`/detail/law/${id}`}>
-                <section className="space-x-2 text-xl font-bold mb-2">
+                <section className="space-x-2 text-xl font-bold mb-2 items-center">
                   <h2 className="sr-only">제목</h2>
-                  <span hidden={!showTag}>{'<법령>'}</span>
-                  <span>
-                    [{promulgationNumber}] {lawName}
-                  </span>
+                  <CategoryTag
+                    text="법령"
+                    hidden={!showTag}
+                    className="text-sm relative bottom-1 px-2 py-0.5 border-2 font-semibold rounded-2xl"
+                  />
+                  <span className="font-semibold">[{promulgationNumber}]</span>
+                  <p>{lawName}</p>
                 </section>
                 <p className="mb-3 line-clamp-2">{firstJoContent}</p>
                 <section className="flex gap-2 text-md text-primary-gray1">

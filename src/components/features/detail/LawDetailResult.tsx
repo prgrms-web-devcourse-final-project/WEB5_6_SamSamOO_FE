@@ -6,6 +6,7 @@ import extractLawHeadings from '@/utils/extractLawHeadings';
 import MetadataGrid from './MetadataGrid';
 import { Metadata } from '@/types/detail';
 import { LawDetailsResponse } from '@/types/law';
+import CategoryTag from './CategoryTag';
 
 function LawDetailResult({ data }: { data: LawDetailsResponse }) {
   const {
@@ -50,9 +51,7 @@ function LawDetailResult({ data }: { data: LawDetailsResponse }) {
           <h2 className="sr-only">컨텐츠</h2>
           <header className="text-primary-gray1 dark:text-primary-white pb-10">
             <div className="flex gap-2 items-center mb-3">
-              <div className="border-4 border-brand-accent rounded-3xl px-4 py-1 text-brand-accent font-extrabold text-2xl">
-                법령
-              </div>
+              <CategoryTag text="법령" />
               <p className="text-3xl font-extrabold">{lawName}</p>
             </div>
             <div className="flex gap-8 text-xl font-normal pl-2">
