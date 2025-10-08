@@ -8,7 +8,7 @@ function Layout({ children }: { children: React.ReactNode }) {
         <AdviceSideBar />
         <KeywordRank className="md:hidden flex justify-center absolute z-50" />
       </div>
-      <article className="flex-1 shadow-[0_4px_4px_5px_rgba(0,0,0,0.25)] dark:bg-[#181A1B] rounded-4xl relative">
+      <article className="flex-1 shadow-ai-floating dark:bg-[#181A1B] rounded-4xl relative">
         <h2 className="a11y">AI 상담 메인 컨텐츠 영역</h2>
         <KeywordRank className="hidden md:block z-50" />
         {children}
