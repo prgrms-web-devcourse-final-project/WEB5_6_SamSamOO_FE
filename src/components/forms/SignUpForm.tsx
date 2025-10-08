@@ -7,13 +7,14 @@ import SelectGender from '@/components/features/account/SelectGender';
 import BirthdayInput from '@/components/features/account/BirthdayInput';
 import FormErrorMessage from '@/components/features/account/FormErrorMessage';
 import calAge from '@/utils/calAge';
-import { signUp } from '@/api/signUpApi';
+import { signUp } from '@/api/account/signUpApi';
 import { useUserStore } from '@/store/useUserStore';
 import { useRouter } from 'next/navigation';
+import { showSuccessToast } from '@/utils/showToast';
 
 export default function SignupForm() {
   const router = useRouter();
-  const setUser = useUserStore((state) => state.setUser);
+  const setSession = useUserStore((state) => state.setSession);
 
   const [formData, setFormData] = useState({
     email: '',
@@ -86,8 +87,8 @@ export default function SignupForm() {
       };
 
       const response = await signUp(payload);
-      console.log('회원가입 성공:', response);
-      setUser(response);
+      setSession({ isAuthenticated: true, user: response });
+      showSuccessToast('환영합니다! 지금부터 서비스를 자유롭게 이용하실 수 있어요.');
       router.replace('/');
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (err) {

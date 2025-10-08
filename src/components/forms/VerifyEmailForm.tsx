@@ -4,8 +4,8 @@ import { useState } from 'react';
 import AccountInput from '@/components/features/account/AccountInput';
 import AccountButton from '@/components/features/account/AccountButton';
 import FormErrorMessage from '@/components/features/account/FormErrorMessage';
-import { sendEmail } from '@/api/sendEmailApi';
-import { verifyEmail } from '@/api/verifyEmailApi';
+import { sendEmail } from '@/api/account/sendEmailApi';
+import { verifyEmail } from '@/api/account/verifyEmailApi';
 import CooldownButton from '../features/account/CooldownButton';
 
 interface VerificationFormProps {
