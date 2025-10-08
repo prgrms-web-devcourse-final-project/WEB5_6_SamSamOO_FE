@@ -9,9 +9,9 @@ interface Props {
 export const STYLE = tw(
   'w-full h-13 rounded-full text-xl font-bold',
 
-  'bg-primary text-primary-white',
+  'bg-brand-primary text-primary-white',
 
-  'dark:bg-accent',
+  'dark:bg-brand-accent',
 );
 
 function AccountButton({ children, type, onClick }: Props) {

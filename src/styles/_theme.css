@@ -52,7 +52,7 @@
   --shadow-filter-dark-active: 0 1px 5.7px 1px rgba(232, 232, 232, 0.39);
   --shadow-filter-light-active: 0 1px 5.7px 1px rgba(13, 24, 70, 0.39);
   --shadow-modal-dark: 0 4px 77px 8px rgba(124, 124, 124, 0.25);
-
+  --shadow-ai-floating: 0 4px 4px 5px rgba(0, 0, 0, 0.25);
   --radius-modal: 50px;
 }
 
