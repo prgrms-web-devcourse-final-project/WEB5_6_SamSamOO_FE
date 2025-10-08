@@ -2,7 +2,7 @@ import { ReadonlyURLSearchParams } from 'next/navigation';
 
 export default function makeSearchUrl(
   pathname: string,
-  params: ReadonlyURLSearchParams,
+  params: ReadonlyURLSearchParams | URLSearchParams,
   updates: Record<string, string | null>,
 ) {
   const newParams = new URLSearchParams(params.toString());

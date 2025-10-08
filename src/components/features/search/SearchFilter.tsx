@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 import TotalSearchFilterModal from './TotalSearchFilterModal';
@@ -24,7 +24,9 @@ interface Props {
 }
 
 function SearchFilter({ category, setAppliedFilterText }: Props) {
-  const params = useSearchParams();
+  const searchParams = useSearchParams();
+  const newParams = new URLSearchParams(searchParams);
+  newParams.delete('pageNumber');
   const router = useRouter();
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -62,68 +64,44 @@ function SearchFilter({ category, setAppliedFilterText }: Props) {
       );
     }
   };
-
   useEffect(() => {
+    const getCommonLawFields = () => ({
+      lawField: searchParams.get('lawField') ?? '',
+      authority: searchParams.get('authority') ?? '',
+      ministry: searchParams.get('ministry') ?? '',
+      promulgationDateStart: searchParams.get('promulgationDateStart') ?? '',
+      promulgationDateEnd: searchParams.get('promulgationDateEnd') ?? '',
+      enforcementDateStart: searchParams.get('enforcementDateStart') ?? '',
+      enforcementDateEnd: searchParams.get('enforcementDateEnd') ?? '',
+    });
+
+    const getCommonPrecedentFields = () => ({
+      sentencingDateStart: searchParams.get('sentencingDateStart') ?? '',
+      sentencingDateEnd: searchParams.get('sentencingDateEnd') ?? '',
+    });
+
     if (category === '통합') {
-      setLawSearchFilter({
-        lawField: '',
-        authority: '',
-        ministry: '',
-        promulgationDateStart: '',
-        promulgationDateEnd: '',
-        enforcementDateStart: '',
-        enforcementDateEnd: '',
-      });
-      setPrecedentSearchFilter({
-        sentencingDateStart: '',
-        sentencingDateEnd: '',
+      setTotalSearchFilter({
+        ...getCommonLawFields(),
+        ...getCommonPrecedentFields(),
       });
     }
     if (category === '법령') {
-      setPrecedentSearchFilter({
-        sentencingDateStart: '',
-        sentencingDateEnd: '',
-      });
-      setTotalSearchFilter({
-        lawField: '',
-        authority: '',
-        ministry: '',
-        promulgationDateStart: '',
-        promulgationDateEnd: '',
-        enforcementDateStart: '',
-        enforcementDateEnd: '',
-        sentencingDateStart: '',
-        sentencingDateEnd: '',
+      setLawSearchFilter({
+        ...getCommonLawFields(),
       });
     }
     if (category === '판례') {
-      setLawSearchFilter({
-        lawField: '',
-        authority: '',
-        ministry: '',
-        promulgationDateStart: '',
-        promulgationDateEnd: '',
-        enforcementDateStart: '',
-        enforcementDateEnd: '',
-      });
-      setTotalSearchFilter({
-        lawField: '',
-        authority: '',
-        ministry: '',
-        promulgationDateStart: '',
-        promulgationDateEnd: '',
-        enforcementDateStart: '',
-        enforcementDateEnd: '',
-        sentencingDateStart: '',
-        sentencingDateEnd: '',
+      setPrecedentSearchFilter({
+        ...getCommonPrecedentFields(),
       });
     }
-    setAppliedFilterText('');
-  }, [category, setAppliedFilterText]);
+  }, [category, searchParams]);
 
   useEffect(() => {
     if (category === '통합') {
       const mapLabel = mapFilterToLabel(totalSearchFilter, TotalSearchFilterLabel);
+      console.log(totalSearchFilter);
       const convert = convertObjectToString(mapLabel);
       if (convert.length === 0) setAppliedFilterText('적용된 필터가 없습니다');
       else setAppliedFilterText(convert);
@@ -144,15 +122,15 @@ function SearchFilter({ category, setAppliedFilterText }: Props) {
 
   useEffect(() => {
     if (category === '통합') {
-      const url = makeSearchUrl(pathname, params, totalSearchFilter);
+      const url = makeSearchUrl(pathname, newParams, totalSearchFilter);
       router.push(url);
     }
     if (category === '법령') {
-      const url = makeSearchUrl(pathname, params, lawSearchFilter);
+      const url = makeSearchUrl(pathname, newParams, lawSearchFilter);
       router.push(url);
     }
     if (category === '판례') {
-      const url = makeSearchUrl(pathname, params, precedentSearchFilter);
+      const url = makeSearchUrl(pathname, newParams, precedentSearchFilter);
       router.push(url);
     }
   }, [totalSearchFilter, precedentSearchFilter, lawSearchFilter]);

@@ -10,10 +10,11 @@ import MovePage from '@/assets/icons/movePage.svg';
 interface Props {
   showCount?: number;
   end?: number;
+  currentPage?: number;
 }
 
 // 첫 끝 페이지일때 prev,next 버튼 스타일 흐리기
-function Pagination({ showCount = 5, end = 10 }: Props) {
+function Pagination({ showCount = 5, end = 10, currentPage }: Props) {
   const router = useRouter();
   const pathname = usePathname();
   const params = useSearchParams();
@@ -23,9 +24,11 @@ function Pagination({ showCount = 5, end = 10 }: Props) {
   const half = Math.floor(showCount / 2);
   const start = clamp(activePageNumber - half, 1, maxStart);
 
+  useEffect(() => {
+    setActivePageNumber(currentPage ?? 1);
+  }, [currentPage]);
+
   const getPage = (index: number) => {
-    // console.log('페이지 요청');
-    // console.log(index);
     setActivePageNumber(index);
   };
 
@@ -33,8 +36,6 @@ function Pagination({ showCount = 5, end = 10 }: Props) {
     const url = makeSearchUrl(pathname, params, { pageNumber: String(activePageNumber - 1) });
     router.push(url);
   }, [activePageNumber]);
-
-  // console.log(activePageNumber);
 
   const prevPage = Math.max(1, activePageNumber - 1);
   const nextPage = Math.min(end, activePageNumber + 1);

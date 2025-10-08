@@ -8,7 +8,7 @@ interface Props {
 }
 
 function LawSearchResults({ content, showTag = false }: Props) {
-  console.log(content);
+  // console.log(content);
   return (
     <>
       {content &&
