@@ -1,19 +1,3 @@
-// function AIMessageSkeleton() {
-//   return (
-//     <div className="w-full animate-pulse">
-//       <div className="center-row w-fit gap-1 mb-4">
-//         <div className="w-9 h-9 rounded-sm center-row bg-gray-400 dark:bg-gray-600">
-//           <div className="w-6 h-6 rounded-lg  bg-gray-400 dark:bg-gray-600"></div>
-//         </div>
-//         <span className="w-9 h-6 rounded-xl bg-gray-400 dark:bg-gray-600"></span>
-//       </div>
-//       <div className="pt-6 w-full h-6 bg-gray-400 dark:bg-gray-600 mb-4"></div>
-//       <div className="pt-6 w-full h-6 bg-gray-400 dark:bg-gray-600 mb-4"></div>
-//       <div className="pt-6 w-[50%] h-6 bg-gray-400 dark:bg-gray-600 mb-4"></div>
-//     </div>
-//   );
-// }
-
 'use client';
 
 import { useState, useEffect } from 'react';
