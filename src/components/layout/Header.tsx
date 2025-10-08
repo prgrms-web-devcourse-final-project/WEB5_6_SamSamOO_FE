@@ -2,10 +2,12 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 import ToggleThemeButton from './ToggleThemeButton';
 import { useUserStore } from '@/store/useUserStore';
+import { logout } from '@/api/account/logout';
+import { showErrorToast } from '@/utils/showToast';
 
 const mainNavItems = [
   { href: '/advice', label: 'AI 상담' },
@@ -13,15 +15,22 @@ const mainNavItems = [
   { href: '/vote', label: '투표' },
 ];
 
-const subNavItems = [
-  { href: '/mypage', label: '마이페이지' },
-  { href: '/login', label: '로그인' },
-  // { href: '/register', label: '회원가입' },
-];
-
 function Header() {
+  const router = useRouter();
   const pathname = usePathname();
-  const user = useUserStore((state) => state.user);
+  const isAuthenticated = useUserStore((state) => state.isAuthenticated);
+  const clearSession = useUserStore((state) => state.clearSession);
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      clearSession();
+      router.replace('/');
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (error) {
+      showErrorToast('로그아웃에 실패했습니다. 다시 시도해주세요.');
+    }
+  };
 
   return (
     <header className="fixed z-40 w-full grid grid-cols-[1fr_2fr_1fr] h-[60px] pl-[30px] pr-8 items-center justify-between text-xl font-bold text-primary-black dark:text-primary-white bg-[rgba(255,255,255,0.89)] shadow-[0_4px_14.2px_0_rgba(0,0,0,0.25)] dark:bg-[rgba(0,0,0,0.89)] dark:shadow-[0_1px_2px_0_rgba(213,213,213,0.25)]">
@@ -68,7 +77,7 @@ function Header() {
         <h2 className="sr-only">서브 메뉴</h2>
         <ToggleThemeButton />
         <ul className="flex gap-4">
-          {user ? (
+          {isAuthenticated ? (
             <>
               {/* 로그인 상태 */}
               <li>
@@ -90,12 +99,7 @@ function Header() {
                 </Link>
               </li>
               <li>
-                <button
-                  onClick={() => {
-                    // TODO: 로그아웃 API 호출 + store.clearUser()
-                  }}
-                  className="hover:text-accent"
-                >
+                <button onClick={handleLogout} className="hover:text-brand-accent">
                   로그아웃
                 </button>
               </li>

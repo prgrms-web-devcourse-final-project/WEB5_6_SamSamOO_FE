@@ -79,3 +79,19 @@ export function formatDate(digits: string): string {
 
   return result;
 }
+
+/**
+ * 타임 스탬프 값을 년.월.일 시:분 으로 가공하는 함수
+ * @param timestamp
+ * @returns 년.월.일 시:분
+ */
+export function convertTimestampToDate(timestamp: number) {
+  return new Date(timestamp).toLocaleTimeString('ko-KR', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  });
+}
