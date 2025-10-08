@@ -1,6 +1,7 @@
 import { ChatHistory } from '@/types/chat';
 import Chat from '@/assets/icons/chat.svg';
-import { deleteChatHistory, getChatHistoryInfo } from '@/api/chat/chatHistoty';
+import Delete from '@/assets/icons/delete.svg';
+
 import { useRouter } from 'next/navigation';
 
 interface Props {
@@ -32,8 +33,8 @@ function ChatHistoryItem({ chatItem, onDelete }: Props) {
           <p className="truncate">
             {!chatItem.title
               ? '...'
-              : chatItem.title.length > 15
-                ? chatItem.title.slice(0, 15) + '...'
+              : chatItem.title.length > 13
+                ? chatItem.title.slice(0, 13) + '...'
                 : chatItem.title}
           </p>
           <p className="font-light text-xs">{chatItem.updatedAt.slice(0, 10)}</p>
@@ -43,7 +44,7 @@ function ChatHistoryItem({ chatItem, onDelete }: Props) {
           className="mr-1 hidden group-hover:block"
           onClick={(e) => handelChatDelete(e, chatItem.historyRoomId)}
         >
-          <img src="/icons/delete.svg" alt="삭제 아이콘" />
+          <Delete className="text-brand-primary dark:text-brand-accent group-hover:text-primary-white w-6 h-6" />
         </button>
       </div>
     </li>

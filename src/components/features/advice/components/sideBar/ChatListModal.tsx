@@ -9,6 +9,7 @@ import ChatHistoryItem from '../chatHistory/ChatHistoryItem';
 
 import { showErrorToast, showSuccessToast } from '@/utils/showToast';
 import ChatHistorySkeleton from '../../loading/ChatHistorySkeleton';
+import tw from '@/utils/tw';
 
 interface Props {
   onClose: () => void;
@@ -48,13 +49,20 @@ function ChatListModal({ onClose, isOpen }: Props) {
     }
   };
 
+  const MODAL_COLOR = 'bg-background-white dark:bg-background-black1 border border-primary-gray2';
+
   return (
-    <div className="w-[340px] h-[560px] bg-background-white dark:bg-background-black1 border border-primary-gray2 rounded-r-modal shadow-[0_4px_4px_5px_rgba(0,0,0,0.25)] flex flex-col items-center">
+    <div
+      className={tw(
+        'w-[340px] h-[580px]  rounded-modal shadow-ai-floating flex flex-col items-center',
+        MODAL_COLOR,
+      )}
+    >
       <div className="border-b border-b-primary-gray2 relative center-row p-4 mb-4 w-[300px]">
         <h2 className="text-2xl">채팅목록</h2>
         <CloseButton onClose={onClose} className="w-6 h-6" />
       </div>
-      <div className="w-[300px] overflow-y-auto">
+      <div className="w-[300px] mb-5 overflow-y-auto">
         <ul className="flex flex-col gap-4 w-[280px]">
           {isLoading && <ChatHistorySkeleton />}
           {!isLoading &&

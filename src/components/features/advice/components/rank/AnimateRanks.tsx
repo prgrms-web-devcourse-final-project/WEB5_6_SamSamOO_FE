@@ -22,9 +22,9 @@ function AnimateRanks({ rankList }: Props) {
     <AnimatePresence mode="wait">
       <motion.div
         key={currentItem.id}
-        initial={{ opacity: 0, y: 10 }}
+        initial={{ opacity: 0, y: 5 }}
         animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -10 }}
+        exit={{ opacity: 0, y: -5 }}
         transition={{ duration: 0.5, ease: 'easeInOut' }}
         className="w-70 h-10 lg:m-0 m-auto flex gap-8 items-center "
       >

@@ -1,22 +1,16 @@
 import AdviceSideBar from '@/components/features/advice/AdviceSideBar';
 import KeywordRank from '@/components/features/advice/KeywordRank';
-import KeywordRankSkeleton from '@/components/features/advice/loading/KeywordRankSkeleton';
-import { Suspense } from 'react';
 
 function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="w-full p-5 flex flex-col md:flex-row gap-6">
       <div className="flex relative">
         <AdviceSideBar />
-        <Suspense fallback={<KeywordRankSkeleton />}>
-          <KeywordRank className="md:hidden flex justify-center absolute z-50" />
-        </Suspense>
+        <KeywordRank className="md:hidden flex justify-center absolute z-50" />
       </div>
-      <article className="flex-1 shadow-[0_4px_4px_5px_rgba(0,0,0,0.25)] dark:bg-[#181A1B] rounded-4xl relative">
+      <article className="flex-1 shadow-ai-floating dark:bg-[#181A1B] rounded-4xl relative">
         <h2 className="a11y">AI 상담 메인 컨텐츠 영역</h2>
-        <Suspense fallback={<KeywordRankSkeleton />}>
-          <KeywordRank className="hidden md:block z-50" />
-        </Suspense>
+        <KeywordRank className="hidden md:block z-50" />
         {children}
       </article>
     </div>

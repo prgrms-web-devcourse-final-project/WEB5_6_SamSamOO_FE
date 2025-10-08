@@ -12,7 +12,10 @@ function IconButton({ fileName, label, onClick }: Props) {
     <li className="group w-16 h-18 hover:bg-brand-primary hover:text-primary-white dark:hover:bg-brand-accent text-primary-black dark:text-primary-white rounded-lg">
       <button
         className="flex flex-col justify-around items-center w-full h-full text-sm"
-        onClick={onClick}
+        onClick={(e) => {
+          e.stopPropagation();
+          onClick();
+        }}
       >
         <div className="relative w-6 h-6">
           {fileName === 'chatList' && (

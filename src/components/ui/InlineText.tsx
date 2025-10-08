@@ -35,7 +35,7 @@ function InlineText({ children, className }: Props) {
     <div className="relative">
       {selectedText && <InlineBlock ref={containerRef} selectedText={selectedText} />}
 
-      <p
+      <div
         onDoubleClick={(e) => {
           handleDoubleClick(e);
         }}
@@ -49,7 +49,7 @@ function InlineText({ children, className }: Props) {
         className={className}
       >
         {processChildren(children)}
-      </p>
+      </div>
     </div>
   );
 }

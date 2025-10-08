@@ -7,11 +7,9 @@ export default function useTextAreaHeight(
   textAreaRef: React.RefObject<HTMLTextAreaElement | null>,
   maxHeight: number = MAX_HEIGHT,
 ) {
-  // value 변경 시(입력 시) 높이 조절
   useEffect(() => {
     const ta = textAreaRef.current;
     if (!ta) return;
-    // reset -> measure -> set
     ta.style.height = 'auto';
     const needed = ta.scrollHeight;
     const height = Math.min(needed, maxHeight);

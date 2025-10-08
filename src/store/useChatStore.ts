@@ -1,4 +1,4 @@
-import { postExistingChat } from '@/api/chat/chatBot';
+import { postExistingChat, postNewChat } from '@/api/chat/chatBot';
 import { Message } from '@/types/chat';
 import { SimilarCase, SimilarLaw } from '@/types/chatBot';
 import { create } from 'zustand';
@@ -63,14 +63,12 @@ export const useChatStore = create<ChatState>()(
         try {
           setLoading(true);
           if (!roomId) {
-            const response = await fetch('/api/proxy/chat/message', {
-              method: 'POST',
-              body: JSON.stringify({ message: lastMessages.content }),
-            });
-            const res = await response.json();
+            const res = await postNewChat(lastMessages.content);
+
+            if (!res) return;
 
             // roomId 저장
-            setRoomId(res[0].roomId);
+            setRoomId(String(res[0].roomId));
 
             // AI 응답 추가
             set((state) => ({

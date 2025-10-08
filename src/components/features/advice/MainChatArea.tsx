@@ -10,6 +10,9 @@ import { useRouter } from 'next/navigation';
 import { convertMessage, messageGroup } from '@/utils/convertMessage';
 import AIMessageSkeleton from './loading/AIMessageSkeleton';
 import { useAutoScroll } from '@/hooks/useAutoScroll';
+import ScrollButton from '@/components/ui/ScrollButton';
+import { useScrollToBottom } from '@/hooks/useScrollToBottom';
+import ScrollToBottomButton from '@/components/ui/ScrollToBottomButton';
 
 interface Props {
   urlId: string;
@@ -17,6 +20,7 @@ interface Props {
 
 function MainChatArea({ urlId }: Props) {
   const router = useRouter();
+
   const { roomId, messages, sendMessage, setRoomId, setChatHistory, isLoading } = useChatStore(
     useShallow((state) => ({
       roomId: state.roomId,
@@ -28,6 +32,12 @@ function MainChatArea({ urlId }: Props) {
     })),
   );
   const autoScollRef = useAutoScroll([messages, isLoading]);
+
+  // 스크롤 훅 사용
+  const { showButton, scrollToBottom } = useScrollToBottom({
+    autoScollRef,
+    threshold: 100,
+  });
 
   useEffect(() => {
     if (roomId && urlId !== roomId) {
@@ -54,20 +64,23 @@ function MainChatArea({ urlId }: Props) {
   const groupedMessages = messageGroup(messages);
 
   return (
-    <div ref={autoScollRef} className="w-[80%] center-row overflow-y-auto">
-      <div className="w-full flex h-[50vh] flex-col items-end">
-        {groupedMessages.map((group, index) => {
-          const isLastGroup = index === groupedMessages.length - 1;
-          return (
-            <Fragment key={group.user.id}>
-              <UserMessage msg={group.user} />
-              {isLastGroup && isLoading && <AIMessageSkeleton />}
-              {group.ai && <AIMessage msg={group.ai} />}
-            </Fragment>
-          );
-        })}
+    <>
+      <div ref={autoScollRef} className="w-[80%] center-col overflow-y-auto relative">
+        <div className="w-full flex h-[50vh] flex-col items-end">
+          {groupedMessages.map((group, index) => {
+            const isLastGroup = index === groupedMessages.length - 1;
+            return (
+              <Fragment key={group.user.id}>
+                <UserMessage msg={group.user} />
+                {isLastGroup && isLoading && <AIMessageSkeleton />}
+                {group.ai && <AIMessage msg={group.ai} />}
+              </Fragment>
+            );
+          })}
+        </div>
       </div>
-    </div>
+      <ScrollToBottomButton show={showButton} onClick={scrollToBottom} />
+    </>
   );
 }
 export default MainChatArea;

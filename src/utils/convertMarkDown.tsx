@@ -1,3 +1,10 @@
+/**
+ * 마크다운 형식을 replace하는 함수
+ *
+ * @param text
+ * @returns
+ */
+
 export const parseMarkdown = (text: string) => {
   const lines = text.split('\n');
 
