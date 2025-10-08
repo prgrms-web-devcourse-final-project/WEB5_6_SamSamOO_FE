@@ -2,7 +2,7 @@ import 'server-only';
 import { cookies } from 'next/headers';
 import { cache } from 'react';
 import { jwtVerify, type JWTPayload } from 'jose';
-import { SessionSnapshot } from '@/types/Session';
+import { SessionSnapshot } from '@/types/tempSession';
 
 const UNVERIFIED_SESSION: SessionSnapshot = {
   isAuthenticated: false,

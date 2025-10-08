@@ -1,7 +1,7 @@
 'use client';
 import { ReactNode, useEffect } from 'react';
 import { useUserStore } from '@/store/useUserStore';
-import { SessionSnapshot } from '@/types/Session';
+import { SessionSnapshot } from '@/types/tempSession';
 
 interface UserProviderProps {
   initialSession: SessionSnapshot;
