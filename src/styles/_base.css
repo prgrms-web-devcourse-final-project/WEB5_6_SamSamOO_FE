@@ -5,7 +5,8 @@
     box-sizing: border-box;
   }
   html {
-    min-block-size: 99vh;
+    overflow-y: scroll;
+    /* min-height: 100%; */
     scrollbar-gutter: stable;
   }
 
