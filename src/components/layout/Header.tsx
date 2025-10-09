@@ -39,16 +39,18 @@ function Header() {
           <>
             <Image
               className="block dark:hidden"
-              src="/icons/balawLight.svg"
-              width={56}
+              src="/images/balawLight.png"
+              width={61}
               height={32}
+              style={{ height: 'auto' }}
               alt="바로 BaLaw"
             />
             <Image
               className="hidden dark:block"
-              src="/icons/balawDark.svg"
-              width={56}
+              src="/images/balawDark.png"
+              width={61}
               height={32}
+              style={{ height: 'auto' }}
               alt="바로 BaLaw"
             />
           </>
@@ -84,14 +86,14 @@ function Header() {
                 <Link href="/mypage" className={pathname === '/mypage' ? 'text-brand-accent' : ''}>
                   <Image
                     className="block dark:hidden"
-                    src="/icons/profileLight.svg"
+                    src="/images/profileLight.png"
                     width={34}
                     height={34}
                     alt="마이페이지"
                   />
                   <Image
                     className="hidden dark:block"
-                    src="/icons/profileDark.svg"
+                    src="/images/profileDark.png"
                     width={34}
                     height={34}
                     alt="마이페이지"
