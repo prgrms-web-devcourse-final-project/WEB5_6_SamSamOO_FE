@@ -50,6 +50,7 @@ function TotalSearchFilterModal({ isOpen, onClose = () => {}, setTotalSearchFilt
     isOpen: !!openCalendar,
     onClose: () => setOpenCalendar(null),
     ignoreSelectors: ['[data-radix-popper-content-wrapper]'],
+    hiddenOverflow: false,
   });
 
   return (
