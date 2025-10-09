@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 function Toc({ toc }: { toc: TableOfContent }) {
   const [target, setTarget] = useState<string>('');
-  // console.log(toc);
+
   return (
     <nav>
       <ul className="min-w-[290px] sm:w-[366px] flex flex-col gap-y-4 px-8">
@@ -51,22 +51,3 @@ function Toc({ toc }: { toc: TableOfContent }) {
   );
 }
 export default Toc;
-
-// function TocRegacy({ toc }: { toc: TableOfContent }) {
-//   console.log(toc);
-//   return (
-//     <nav>
-//       <ul className="w-full flex flex-col gap-y-4">
-//         {toc.map(({ id, text, level }) => (
-//           <a
-//             href={id}
-//             key={`${id}${text}`}
-//             className={tw(level === 1 ? 'font-medium text-2xl' : 'pl-4 text-xl')}
-//           >
-//             {text}
-//           </a>
-//         ))}
-//       </ul>
-//     </nav>
-//   );
-// }

@@ -31,16 +31,6 @@ async function Page({ searchParams }: { searchParams: Promise<SearchParams> }) {
     pageSize: 10,
   });
   const payload = await response;
-  // const getData = async () => {
-  //   const response = await getLawSearchResults({
-  //     lawName: search_query ?? null,
-  //     ...searchList,
-  //     pageSize: 10,
-  //   });
-  //   return response;
-  // };
-  // const payload = await getData();
-  // console.log(payload);
 
   return (
     <>

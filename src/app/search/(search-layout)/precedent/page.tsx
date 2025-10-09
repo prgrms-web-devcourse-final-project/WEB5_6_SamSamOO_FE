@@ -29,15 +29,6 @@ async function Page({ searchParams }: { searchParams: Promise<SearchParams> }) {
   });
 
   const payload = await response;
-  // const getData = async () => {
-  //   const response = await getPrecedentSearchResults({
-  //     keyword: search_query ?? null,
-  //     ...searchList,
-  //     pageSize: 10,
-  //   });
-  //   return response;
-  // };
-  // const payload = await getData();
 
   return (
     <>
