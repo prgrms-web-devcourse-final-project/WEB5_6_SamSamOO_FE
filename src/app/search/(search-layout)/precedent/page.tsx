@@ -22,15 +22,22 @@ async function Page({ searchParams }: { searchParams: Promise<SearchParams> }) {
   const searchList = await searchParams;
   const { search_query } = searchList;
 
-  const getData = async () => {
-    const response = await getPrecedentSearchResults({
-      keyword: search_query ?? null,
-      ...searchList,
-      pageSize: 10,
-    });
-    return response;
-  };
-  const payload = await getData();
+  const response = await getPrecedentSearchResults({
+    keyword: search_query ?? null,
+    ...searchList,
+    pageSize: 10,
+  });
+
+  const payload = await response;
+  // const getData = async () => {
+  //   const response = await getPrecedentSearchResults({
+  //     keyword: search_query ?? null,
+  //     ...searchList,
+  //     pageSize: 10,
+  //   });
+  //   return response;
+  // };
+  // const payload = await getData();
 
   return (
     <>

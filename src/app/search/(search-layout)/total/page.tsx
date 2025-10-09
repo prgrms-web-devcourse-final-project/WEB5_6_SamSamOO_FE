@@ -10,8 +10,6 @@ export const metadata: Metadata = {
   title: '바로 | 통합 검색',
   description: '바로 BaLaw 법령 판례 검색 페이지입니다',
 };
-// 통신해서 데이터 가져오기
-// 통합에서는 어떤 기준으로 렌더링할지..?
 
 type SearchParams = {
   search_query?: string;
@@ -51,7 +49,7 @@ async function Page({ searchParams }: { searchParams: Promise<SearchParams> }) {
   } = searchList;
   // const PAGE_SIZE = law === 'false' || precedent === 'false' ? 10 : 5;
   const PAGE_SIZE = 5;
-  console.log(searchList);
+  // console.log(searchList);
 
   const getLawData = async () => {
     // if (law === 'false') return { content: [], totalElements: 0, totalPages: 0 };
@@ -70,8 +68,8 @@ async function Page({ searchParams }: { searchParams: Promise<SearchParams> }) {
   };
 
   const lawPayload = await getLawData();
-  console.log('법령 개수 : ', lawPayload.totalElements);
-  console.log('법령 페이지 수 : ', lawPayload.totalPages);
+  // console.log('법령 개수 : ', lawPayload.totalElements);
+  // console.log('법령 페이지 수 : ', lawPayload.totalPages);
 
   const getPrecedentData = async () => {
     // if (precedent === 'false') return { content: [], totalElements: 0, totalPages: 0 };
@@ -86,8 +84,8 @@ async function Page({ searchParams }: { searchParams: Promise<SearchParams> }) {
   };
   const precedentPayload = await getPrecedentData();
 
-  console.log('판례 개수 : ', precedentPayload.totalElements);
-  console.log('판례 페이지 수 : ', precedentPayload.totalPages);
+  // console.log('판례 개수 : ', precedentPayload.totalElements);
+  // console.log('판례 페이지 수 : ', precedentPayload.totalPages);
 
   return (
     <div>
