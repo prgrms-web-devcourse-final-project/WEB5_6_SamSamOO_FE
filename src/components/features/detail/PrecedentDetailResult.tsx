@@ -1,12 +1,10 @@
-import Hamburger from '@/assets/icons/hamburger.svg';
-import { PrecedentDetailsResponse } from '@/types/precedent';
-import extractPrecedentHeadings from '@/utils/extractPrecedentHeadings';
-import Toc from './Toc';
-import { Metadata } from '@/types/detail';
-import MetadataGrid from './MetadataGrid';
 import CategoryTag from './CategoryTag';
 import Sidebar from './Sidebar';
+
 import ScrollButton from '@/components/ui/ScrollButton';
+import extractPrecedentHeadings from '@/utils/extractPrecedentHeadings';
+import { Metadata } from '@/types/detail';
+import { PrecedentDetailsResponse } from '@/types/precedent';
 
 function PrecedentDetailResult({ data }: { data: PrecedentDetailsResponse }) {
   console.log(data);
@@ -40,7 +38,7 @@ function PrecedentDetailResult({ data }: { data: PrecedentDetailsResponse }) {
   };
   return (
     <>
-      <div className="w-full h-full flex flex-1 min-w-0 overflow-x-hidden bg-background-white dark:bg-background-black1">
+      <div className="w-full h-full flex flex-1 bg-background-white dark:bg-background-black1">
         <Sidebar toc={toc} metadata={metadata} category="판례" />
         <section className="flex flex-1 justify-center sm:px-25 py-10">
           <div className="w-full max-w-[1200px]">

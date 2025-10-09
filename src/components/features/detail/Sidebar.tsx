@@ -71,18 +71,16 @@ function Sidebar({ toc, metadata, category }: Props) {
               className="overflow-y-scroll overflow-x-hidden w-[366px] flex-col text-primary-gray2 dark:text-primary-white border-r"
             >
               <h2 className="sr-only">네비게이션</h2>
-              <div>
-                <div className="w-full flex gap-2 items-center py-10 mb-12 px-8 border-b">
-                  <Hamburger className="dark:text-primary-white w-8 h-4" />
-                  <p className="font-bold text-3xl">
-                    {category === '법령' ? '법령 목차' : '판례 목차'}
-                  </p>
-                </div>
+              <div className="w-full flex gap-2 items-center py-10 mb-12 px-8 border-b">
+                <Hamburger className="dark:text-primary-white w-8 h-4" />
+                <p className="font-bold text-3xl">
+                  {category === '법령' ? '법령 목차' : '판례 목차'}
+                </p>
               </div>
-              <div className="flex-1">
+              <div className="flex-1 h-[calc(100dvh-460px)] overflow-y-scroll overflow-x-hidden">
                 <Toc toc={toc} />
               </div>
-              <div className="px-8 py-10">
+              <div className="w-full px-8 py-10">
                 <MetadataGrid metadata={metadata} />
               </div>
             </section>

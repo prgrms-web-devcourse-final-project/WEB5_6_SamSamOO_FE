@@ -1,14 +1,11 @@
-import Toc from './Toc';
+import Sidebar from './Sidebar';
+import CategoryTag from './CategoryTag';
 
 import tw from '@/utils/tw';
-import Hamburger from '@/assets/icons/hamburger.svg';
 import extractLawHeadings from '@/utils/extractLawHeadings';
-import MetadataGrid from './MetadataGrid';
+import ScrollButton from '@/components/ui/ScrollButton';
 import { Metadata } from '@/types/detail';
 import { LawDetailsResponse } from '@/types/law';
-import CategoryTag from './CategoryTag';
-import Sidebar from './Sidebar';
-import ScrollButton from '@/components/ui/ScrollButton';
 
 function LawDetailResult({ data }: { data: LawDetailsResponse }) {
   const {
