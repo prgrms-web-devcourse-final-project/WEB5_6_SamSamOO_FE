@@ -35,10 +35,16 @@
   --color-background-black2: oklch(21.6% 0.004 228.98);
 
   --color-background-black3: #000;
+  --color-background-black3: oklch(0% 0 0);
 
   --color-border-gray1: #353535;
+  --color-border-gray1: oklch(32.9% 0 0);
+
   --color-filter-outline1: #d2d2d2;
+  --color-filter-outline1: oklch(86.38% 0 0);
+
   --color-filter-outline2: #737373;
+  --color-filter-outline2: oklch(55.55% 0 0);
 
   --animate-toLight: toggle-toLight 1.1s forwards;
   --animate-toDark: toggle-toDark 1.1s forwards;
