@@ -52,13 +52,13 @@ function Header() {
   return (
     <header
       className={tw(
-        'fixed z-40 w-full grid grid-cols-[1fr_3fr_2.5fr] sm:grid-cols-[1fr_2fr_1fr] h-[60px] pl-[30px] pr-8 items-center justify-between text-xl font-bold text-primary-black dark:text-primary-white shadow-[0_4px_14.2px_0_rgba(0,0,0,0.25)]  dark:shadow-[0_1px_2px_0_rgba(213,213,213,0.25)]',
+        'fixed z-40 w-full flex sm:grid sm:grid-cols-[1fr_2fr_1fr] h-[60px] pl-[30px] pr-8 items-center justify-between text-lg md:text-xl font-bold text-primary-black dark:text-primary-white shadow-[0_4px_14.2px_0_rgba(0,0,0,0.25)]  dark:shadow-[0_1px_2px_0_rgba(213,213,213,0.25)]',
         isOpen
           ? 'bg-[rgba(255,255,255)] dark:bg-[rgba(0,0,0)]'
           : 'bg-[rgba(255,255,255,0.89)] dark:bg-[rgba(0,0,0,0.89)]',
       )}
     >
-      <div className="justify-self-start">
+      <div className="sm:justify-self-start flex items-center gap-3">
         <Link href="/">
           <>
             <Image
@@ -79,21 +79,18 @@ function Header() {
             />
           </>
         </Link>
-      </div>
-      <nav>
-        <h2 className="sr-only">메인 메뉴</h2>
         <button
           id="hamburger"
           type="button"
           className="flex sm:hidden"
           onClick={() => setIsOpen((prev) => !prev)}
         >
-          <Hamburger className="dark:text-primary-white w-8 h-4" />
+          <Hamburger className="dark:text-primary-white w-9 h-5" />
         </button>
         {isOpen && (
           <ul
             ref={hamburgerRef}
-            className="absolute bg-white dark:bg-black w-full left-0 top-15 flex sm:hidden gap-11 items-center justify-between px-18 py-20 shadow-[0_4px_6.2px_0_rgba(0,0,0,0.15)]  dark:shadow-[0_1px_2px_0_rgba(213,213,213,0.25)]"
+            className="absolute bg-white dark:bg-black w-full left-0 top-15 flex sm:hidden gap-7 items-center justify-center px-8 py-20 shadow-[0_4px_6.2px_0_rgba(0,0,0,0.15)]  dark:shadow-[0_1px_2px_0_rgba(213,213,213,0.25)]"
           >
             {mainNavItems.map(({ href, label }) => (
               <li key={href}>
@@ -111,6 +108,9 @@ function Header() {
             ))}
           </ul>
         )}
+      </div>
+      <nav>
+        <h2 className="sr-only">메인 메뉴</h2>
 
         <ul className="hidden sm:flex gap-11 justify-self-center">
           {mainNavItems.map(({ href, label }) => (
