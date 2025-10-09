@@ -43,14 +43,14 @@ function ToggleSwitchNavigation({
   const [activeWidth, setActiveWidth] = useState<number | null>(null);
 
   useEffect(() => {
-    const idx = items.findIndex((item) => item.href === pathname);
+    // const idx = items.findIndex((item) => item.href === pathname);
+    const idx = items.findIndex((item) => pathname.includes(item.href!));
     setActiveIndex(idx);
   }, [pathname, items]);
 
   const measure = useCallback(() => {
     const activeCategory = categoryRefs.current[activeIndex];
     const parent = parentRef.current;
-    // console.log('활성화된 카테고리 : ', activeCategory);
 
     if (activeCategory && parent) {
       const categoryRect = activeCategory.getBoundingClientRect();
@@ -66,7 +66,6 @@ function ToggleSwitchNavigation({
   }, [activeIndex, paddingX, paddingY]);
 
   useLayoutEffect(() => {
-    // measure();
     const ul = parentRef.current;
     if (!ul) return;
 

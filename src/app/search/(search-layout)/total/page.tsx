@@ -1,42 +1,105 @@
 import { Metadata } from 'next';
-import Link from 'next/link';
+
+import LawSearchResults from '@/components/features/search/LawSearchResults';
+import PrecedentSearchResults from '@/components/features/search/PrecedentSearchResults';
+import { getPrecedentSearchResults } from '@/api/getPrecedentSearchResults';
+import { getLawSearchResults } from '@/api/getLawSearchResults';
+import SetTotalElementsAndPages from '@/components/features/search/SetTotalElementsAndPages';
 
 export const metadata: Metadata = {
   title: '바로 | 통합 검색',
   description: '바로 BaLaw 법령 판례 검색 페이지입니다',
 };
+// 통신해서 데이터 가져오기
+// 통합에서는 어떤 기준으로 렌더링할지..?
 
-async function Page({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
-  const { q } = await searchParams;
-  // console.log(q);
+type SearchParams = {
+  search_query?: string;
+
+  lawField?: string;
+  ministry?: string;
+  promulgationDateStart?: string;
+  promulgationDateEnd?: string;
+  enforcementDateStart?: string;
+  enforcementDateEnd?: string;
+
+  sentencingDateStart?: string;
+  sentencingDateEnd?: string;
+
+  pageNumber: number;
+  pageSize: number;
+
+  law?: string;
+  precedent?: string;
+};
+
+async function Page({ searchParams }: { searchParams: Promise<SearchParams> }) {
+  const searchList = await searchParams;
+  const {
+    search_query,
+    lawField,
+    ministry,
+    promulgationDateStart,
+    promulgationDateEnd,
+    enforcementDateStart,
+    enforcementDateEnd,
+    sentencingDateStart,
+    sentencingDateEnd,
+    pageNumber,
+    // law,
+    // precedent,
+  } = searchList;
+  // const PAGE_SIZE = law === 'false' || precedent === 'false' ? 10 : 5;
+  const PAGE_SIZE = 5;
+  console.log(searchList);
+
+  const getLawData = async () => {
+    // if (law === 'false') return { content: [], totalElements: 0, totalPages: 0 };
+    const response = await getLawSearchResults({
+      lawName: search_query ?? null,
+      lawField,
+      ministry,
+      promulgationDateStart,
+      promulgationDateEnd,
+      enforcementDateStart,
+      enforcementDateEnd,
+      pageNumber,
+      pageSize: PAGE_SIZE,
+    });
+    return response;
+  };
+
+  const lawPayload = await getLawData();
+  console.log('법령 개수 : ', lawPayload.totalElements);
+  console.log('법령 페이지 수 : ', lawPayload.totalPages);
+
+  const getPrecedentData = async () => {
+    // if (precedent === 'false') return { content: [], totalElements: 0, totalPages: 0 };
+    const response = await getPrecedentSearchResults({
+      keyword: search_query ?? null,
+      sentencingDateStart,
+      sentencingDateEnd,
+      pageNumber,
+      pageSize: PAGE_SIZE,
+    });
+    return response;
+  };
+  const precedentPayload = await getPrecedentData();
+
+  console.log('판례 개수 : ', precedentPayload.totalElements);
+  console.log('판례 페이지 수 : ', precedentPayload.totalPages);
+
   return (
     <div>
-      {
-        // 컴포넌트 분리필요
-        Array(10)
-          .fill(null)
-          .map((_, index) => (
-            <li key={index} className="mb-10">
-              <Link href={`law/${1}`}>
-                <section className="flex gap-2 text-xl font-bold mb-2">
-                  <h2 className="sr-only">제목</h2>
-                  <p>[대통령령]</p>
-                  <p>건강가정기본법 시행령</p>
-                </section>
-                <p className="mb-3">
-                  임대인이 계약 기간 중 일방적으로 월세를 30% 인상하겠다고 통보하였고, 이에 임차인이
-                  정당한 사유 없이 과도한 인상이라고 판단하여 이를 거 기간 동안 임대료 인상은 법률이
-                  정한 범위 내에서만 허용됩니다. 특히 임대료 증액은 통상 계약 갱신 ...
-                </p>
-                <section className="flex gap-2 text-md text-primary-gray1">
-                  <h2 className="sr-only">기간</h2>
-                  <p>2024-04-01</p>
-                  <p>2024-04-01</p>
-                </section>
-              </Link>
-            </li>
-          ))
-      }
+      <LawSearchResults content={lawPayload.content} showTag={true} />
+      <PrecedentSearchResults content={precedentPayload.content} showTag={true} />
+      <SetTotalElementsAndPages
+        category="통합"
+        lawTotalElements={lawPayload.totalElements}
+        lawTotalPages={lawPayload.totalPages}
+        precedentTotalElements={precedentPayload.totalElements}
+        precedentTotalPages={precedentPayload.totalPages}
+      />
     </div>
   );
 }

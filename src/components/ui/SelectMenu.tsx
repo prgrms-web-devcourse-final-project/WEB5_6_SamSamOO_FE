@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 import tw from '@/utils/tw';
 import * as Select from '@radix-ui/react-select';
-import { MenuItem } from '@/types/global';
+import { MenuItem } from '@/types/filter';
 
 interface SelectMenuProps {
   field?: string;
@@ -20,6 +20,7 @@ interface SelectMenuProps {
   disabled?: boolean;
   placeholder?: string;
   onValueChange?: (value: string) => void;
+  onOpenChange?: (open: boolean) => void;
 }
 
 function SelectMenu({
@@ -34,6 +35,7 @@ function SelectMenu({
   disabled,
   placeholder,
   onValueChange,
+  onOpenChange,
 }: SelectMenuProps) {
   const [mounted, setMounted] = useState(false);
   const { resolvedTheme } = useTheme();
@@ -46,7 +48,11 @@ function SelectMenu({
   if (!mounted) return null;
 
   return (
-    <Select.Root value={value} onValueChange={(value) => onValueChange?.(value)}>
+    <Select.Root
+      value={value}
+      onValueChange={(value) => onValueChange?.(value)}
+      onOpenChange={(open) => onOpenChange?.(open)}
+    >
       <Select.Trigger
         id={field}
         disabled={disabled}
@@ -89,7 +95,7 @@ function SelectMenu({
         sideOffset={8}
         avoidCollisions={false}
         className={tw(
-          'w-[var(--radix-select-trigger-width)] max-h-[var(--radix-select-content-available-height)] rounded-3xl border border-[#D2D2D2] bg-white shadow-filter dark:bg-primary-gray3 dark:text-primary-white dark:border-filter-outline2',
+          'z-10 w-[var(--radix-select-trigger-width)] max-h-[var(--radix-select-content-available-height)] rounded-3xl border border-[#D2D2D2] bg-white shadow-filter dark:bg-primary-gray3 dark:text-primary-white dark:border-filter-outline2',
           contentStyle,
         )}
       >

@@ -1,4 +1,6 @@
 'use client';
+import CalendarWithDateInputRange from '@/components/features/search/CalendarWithDateInputRange';
+import Pagination from '@/components/features/search/Pagination';
 import ScrollButton from '@/components/ui/ScrollButton';
 import SelectMenu from '@/components/ui/SelectMenu';
 import convertObjectToString from '@/utils/convertObjectToString';
@@ -39,6 +41,8 @@ function page() {
   return (
     <div className="px-8 py-2">
       <h2>TEST PAGE</h2>
+      {/* 캘린더 테스트 */}
+      <CalendarWithDateInputRange />
 
       {/* 셀렉터 테스트 */}
       <div className="flex gap-5">
@@ -75,6 +79,8 @@ function page() {
             </p>
           </li>
         ))}
+      <Pagination />
+
       <ScrollButton direction="bottom" />
     </div>
   );
