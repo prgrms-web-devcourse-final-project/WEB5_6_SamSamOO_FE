@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 import PrecedentSearchResults from '@/components/features/search/PrecedentSearchResults';
 
-import { getPrecedentSearchResults } from '@/api/getPrecedentSearchResults';
+import { getPrecedentSearchResults } from '@/api/search/getPrecedentSearchResults';
 import SetTotalElementsAndPages from '@/components/features/search/SetTotalElementsAndPages';
 
 export const metadata: Metadata = {

@@ -2,8 +2,8 @@ import { Metadata } from 'next';
 
 import LawSearchResults from '@/components/features/search/LawSearchResults';
 import PrecedentSearchResults from '@/components/features/search/PrecedentSearchResults';
-import { getPrecedentSearchResults } from '@/api/getPrecedentSearchResults';
-import { getLawSearchResults } from '@/api/getLawSearchResults';
+import { getPrecedentSearchResults } from '@/api/search/getPrecedentSearchResults';
+import { getLawSearchResults } from '@/api/search/getLawSearchResults';
 import SetTotalElementsAndPages from '@/components/features/search/SetTotalElementsAndPages';
 
 export const metadata: Metadata = {

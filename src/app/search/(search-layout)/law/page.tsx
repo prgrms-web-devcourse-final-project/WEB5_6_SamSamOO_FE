@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 import LawSearchResults from '@/components/features/search/LawSearchResults';
 import SetTotalElementsAndPages from '@/components/features/search/SetTotalElementsAndPages';
-import { getLawSearchResults } from '@/api/getLawSearchResults';
+import { getLawSearchResults } from '@/api/search/getLawSearchResults';
 
 export const metadata: Metadata = {
   title: '바로 | 법령 검색',
