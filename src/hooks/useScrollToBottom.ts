@@ -1,40 +1,62 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 interface UseScrollToBottomProps {
-  autoScollRef: React.RefObject<HTMLDivElement | null>;
-  threshold?: number; // 하단으로 간주할 임계값 (px)
+  autoScrollRef: React.RefObject<HTMLDivElement | null>;
+  threshold?: number;
+  enabled?: boolean; // 활성화 여부 추가
 }
 
-export function useScrollToBottom({ autoScollRef, threshold = 100 }: UseScrollToBottomProps) {
+export function useScrollToBottom({
+  autoScrollRef,
+  threshold = 100,
+  enabled = true, // 기본값 true
+}: UseScrollToBottomProps) {
   const [showButton, setShowButton] = useState(false);
 
-  useEffect(() => {
-    const scrollElement = autoScollRef.current;
+  const handleScroll = useCallback(() => {
+    if (!enabled) return; // 비활성화 시 동작 안 함
+
+    const scrollElement = autoScrollRef.current;
     if (!scrollElement) return;
 
-    const handleScroll = () => {
-      const { scrollTop, scrollHeight, clientHeight } = scrollElement;
-      const distanceFromBottom = scrollHeight - scrollTop - clientHeight;
+    const { scrollTop, scrollHeight, clientHeight } = scrollElement;
+    const distanceFromBottom = scrollHeight - scrollTop - clientHeight;
 
-      setShowButton(distanceFromBottom > threshold);
-    };
+    setShowButton(distanceFromBottom > threshold);
+  }, [enabled, threshold]);
 
-    scrollElement.addEventListener('scroll', handleScroll);
-
-    // 초기 체크
-    handleScroll();
-
-    return () => scrollElement.removeEventListener('scroll', handleScroll);
-  }, [autoScollRef, threshold]);
-
-  const scrollToBottom = () => {
-    if (autoScollRef.current) {
-      autoScollRef.current.scrollTo({
-        top: autoScollRef.current.scrollHeight,
-        behavior: 'smooth',
-      });
+  useEffect(() => {
+    if (!enabled) {
+      setShowButton(false);
+      return;
     }
-  };
+
+    const scrollElement = autoScrollRef.current;
+
+    if (!scrollElement) return;
+
+    scrollElement.addEventListener('scroll', handleScroll, { passive: true });
+
+    const timeoutId = setTimeout(handleScroll, 100);
+
+    return () => {
+      scrollElement.removeEventListener('scroll', handleScroll);
+      clearTimeout(timeoutId);
+      setShowButton(false);
+    };
+  }, [enabled, handleScroll]);
+
+  const scrollToBottom = useCallback(() => {
+    if (!enabled) return;
+
+    const scrollElement = autoScrollRef.current;
+    if (!scrollElement) return;
+
+    scrollElement.scrollTo({
+      top: scrollElement.scrollHeight,
+      behavior: 'smooth',
+    });
+  }, [enabled]);
 
   return { showButton, scrollToBottom };
 }

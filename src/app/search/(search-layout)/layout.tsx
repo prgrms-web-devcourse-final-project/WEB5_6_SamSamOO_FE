@@ -1,4 +1,6 @@
+import ChatButton from '@/components/ui/ChatButton';
 import SearchArea from '@/components/features/search/SearchArea';
+
 import ToggleSwitchNavigation from '@/components/ui/ToggleSwitchNavigation';
 import { SearchProvider } from '@/context/SearchContext';
 import PaginationWrapper from '@/components/features/search/PaginationWrapper';
@@ -22,6 +24,7 @@ function SearchLayout({ children }: { children: React.ReactNode }) {
           <PaginationWrapper />
         </SearchProvider>
       </div>
+      <ChatButton />
     </div>
   );
 }

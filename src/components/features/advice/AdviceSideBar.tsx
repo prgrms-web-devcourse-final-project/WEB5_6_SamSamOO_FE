@@ -3,8 +3,8 @@ import { useState } from 'react';
 
 import CloseButton from '@/components/ui/CloseButton';
 import ChatMenuButton from './components/chatHistory/ChatMenuButton';
-import ChatListModal from './components/sideBar/ChatListModal';
 import ButtonList from './components/sideBar/ButtonList';
+import ChatListModal from '../modal/ChatListModal';
 
 function AdviceSideBar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
