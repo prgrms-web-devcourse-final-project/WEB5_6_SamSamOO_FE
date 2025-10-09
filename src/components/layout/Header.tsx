@@ -9,7 +9,7 @@ import ToggleThemeButton from './ToggleThemeButton';
 import { useUserStore } from '@/store/useUserStore';
 import { logout } from '@/api/account/logout';
 import { showErrorToast } from '@/utils/showToast';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import tw from '@/utils/tw';
 import useClosePopup from '@/hooks/useClosePopup';
 
@@ -37,7 +37,17 @@ function Header() {
       showErrorToast('로그아웃에 실패했습니다. 다시 시도해주세요.');
     }
   };
-  useClosePopup({ onClose: () => setIsOpen(false), isOpen, ref: hamburgerRef });
+
+  useClosePopup({
+    onClose: () => setIsOpen(false),
+    isOpen,
+    ref: hamburgerRef,
+    ignoreSelectors: ['#hamburger'],
+  });
+
+  useEffect(() => {
+    console.log(isOpen);
+  }, [isOpen]);
 
   return (
     <header
@@ -72,7 +82,12 @@ function Header() {
       </div>
       <nav>
         <h2 className="sr-only">메인 메뉴</h2>
-        <button type="button" className="flex sm:hidden" onClick={() => setIsOpen((prev) => !prev)}>
+        <button
+          id="hamburger"
+          type="button"
+          className="flex sm:hidden"
+          onClick={() => setIsOpen((prev) => !prev)}
+        >
           <Hamburger className="dark:text-primary-white w-8 h-4" />
         </button>
         {isOpen && (
