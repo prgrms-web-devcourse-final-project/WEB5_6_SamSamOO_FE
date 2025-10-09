@@ -65,7 +65,7 @@ function Sidebar({ toc, metadata, category }: Props) {
           )}
         </button>
         {isOpen && (
-          <div className="sticky left-0 top-0 flex h-100dvh">
+          <div className="sticky left-0 top-0 flex h-dvh">
             <section
               ref={sideRef}
               className="overflow-y-scroll overflow-x-hidden w-[366px] flex-col text-primary-gray2 dark:text-primary-white border-r"
