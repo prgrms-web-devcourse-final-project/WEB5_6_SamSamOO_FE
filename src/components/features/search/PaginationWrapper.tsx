@@ -36,7 +36,7 @@ function PaginationWrapper() {
     }
   }, [pathname, totalLawElements, totalPrecedentElements, fixedTotalElements]);
 
-  console.log('통합검색결과수 : ', fixedTotalElements);
+  // console.log('통합검색결과수 : ', fixedTotalElements);
   useEffect(() => {
     if (pathname === '/search/total') {
       setTotalElements(fixedTotalElements ?? totalLawElements + totalPrecedentElements);
