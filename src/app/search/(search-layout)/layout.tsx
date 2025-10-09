@@ -1,4 +1,5 @@
 import SearchArea from '@/components/features/search/SearchForm';
+import ChatButton from '@/components/ui/ChatButton';
 import ToggleSwitchNavigation from '@/components/ui/ToggleSwitchNavigation';
 
 function SearchLayout({ children }: { children: React.ReactNode }) {
@@ -17,6 +18,7 @@ function SearchLayout({ children }: { children: React.ReactNode }) {
           {children}
         </section>
       </div>
+      <ChatButton />
     </div>
   );
 }

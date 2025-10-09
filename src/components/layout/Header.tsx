@@ -8,6 +8,7 @@ import ToggleThemeButton from './ToggleThemeButton';
 import { useUserStore } from '@/store/useUserStore';
 import { logout } from '@/api/account/logout';
 import { showErrorToast } from '@/utils/showToast';
+import { useChatStore } from '@/store/useChatStore';
 
 const mainNavItems = [
   { href: '/advice', label: 'AI 상담' },
@@ -20,11 +21,13 @@ function Header() {
   const pathname = usePathname();
   const isAuthenticated = useUserStore((state) => state.isAuthenticated);
   const clearSession = useUserStore((state) => state.clearSession);
+  const resetStore = useChatStore((state) => state.resetStore);
 
   const handleLogout = async () => {
     try {
       await logout();
       clearSession();
+      resetStore();
       router.replace('/');
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
