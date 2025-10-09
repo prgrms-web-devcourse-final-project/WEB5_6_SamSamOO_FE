@@ -43,7 +43,7 @@ function Pagination({ showCount = 5, end = 10, currentPage }: Props) {
   return (
     <section>
       <h2 className="sr-only">페이지네이션</h2>
-      <ul className="flex items-center gap-4">
+      <ul className="flex items-center gap-2 sm:gap-4">
         <button
           type="button"
           title="첫 페이지로 이동"

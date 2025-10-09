@@ -6,7 +6,7 @@ import PaginationWrapper from '@/components/features/search/PaginationWrapper';
 function SearchLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="w-full h-full flex flex-1 items-center justify-center">
-      <div className="w-[1200px] px-[150px] flex flex-col justify-center">
+      <div className="px-3 xl:w-[1200px] sm:px-[150px] flex flex-col justify-center">
         <section className=" bg-white dark:bg-background-black1">
           <h2 className="sr-only">검색 및 필터링</h2>
           <nav className="flex itmes-center justify-center mb-4">
