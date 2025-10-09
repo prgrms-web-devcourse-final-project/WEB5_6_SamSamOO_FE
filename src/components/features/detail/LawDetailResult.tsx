@@ -33,7 +33,7 @@ function LawDetailResult({ data }: { data: LawDetailsResponse }) {
 
   return (
     <>
-      <div className="w-full h-full flex flex-1">
+      <div className="w-full h-full flex flex-1 bg-background-white dark:bg-background-black1">
         <Sidebar toc={toc} metadata={metadata} category="법령" />
         <section className="flex flex-1 justify-center sm:px-25 py-10">
           <div className="w-full max-w-[1200px]">
