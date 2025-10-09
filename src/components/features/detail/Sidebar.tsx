@@ -88,8 +88,8 @@ function Sidebar({ toc, metadata, category }: Props) {
             </section>
             <button
               type="button"
-              className="absolute top-[calc(50%-60px)] w-5 text-xs sm:text-[16px] sm:w-8 h-40 px-1 bg-brand-primary dark:bg-brand-accent rounded-r-2xl font-light text-primary-white dark:font-medium"
-              style={{ left: isOpen ? `${sidebarWith + 15}px` : 0 }}
+              className="absolute top-[calc(50%-130px)] w-5 text-xs sm:text-[16px] sm:w-8 h-40 px-1 bg-brand-primary dark:bg-brand-accent rounded-r-2xl font-light text-primary-white dark:font-medium"
+              style={{ left: isOpen ? `${sidebarWith + 16}px` : 0 }}
               onClick={() => setIsOpen((prev) => !prev)}
             >
               {category === '법령' ? (
