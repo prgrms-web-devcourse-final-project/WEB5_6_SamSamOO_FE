@@ -44,7 +44,7 @@ function Sidebar({ toc, metadata, category }: Props) {
         <button
           hidden={isOpen}
           type="button"
-          className="sticky top-[calc(50%-60px)] w-5 text-xs sm:text-[16px] sm:w-8 h-40 px-1 bg-brand-primary dark:bg-brand-accent rounded-r-2xl font-light text-primary-white dark:font-medium"
+          className="sticky top-[calc(50%-90px)] w-5 text-xs sm:text-[16px] sm:w-8 h-40 px-1 bg-brand-primary dark:bg-brand-accent rounded-r-2xl font-light text-primary-white dark:font-medium"
           style={{ left: isOpen ? `calc(${sidebarWith}px + 20px)` : 0 }}
           onClick={() => setIsOpen((prev) => !prev)}
         >
@@ -68,7 +68,7 @@ function Sidebar({ toc, metadata, category }: Props) {
           <div className="sticky left-0 top-0 flex h-dvh">
             <section
               ref={sideRef}
-              className="overflow-y-scroll overflow-x-hidden w-[366px] flex-col text-primary-gray2 dark:text-primary-white border-r"
+              className="overflow-x-hidden w-[366px] flex-col text-primary-gray2 dark:text-primary-white border-r"
             >
               <h2 className="sr-only">네비게이션</h2>
               <div className="w-full flex gap-2 items-center py-10 mb-12 px-8 border-b">
@@ -86,8 +86,8 @@ function Sidebar({ toc, metadata, category }: Props) {
             </section>
             <button
               type="button"
-              className="absolute top-[calc(50%-130px)] w-5 text-xs sm:text-[16px] sm:w-8 h-40 px-1 bg-brand-primary dark:bg-brand-accent rounded-r-2xl font-light text-primary-white dark:font-medium"
-              style={{ left: isOpen ? `${sidebarWith + 16}px` : 0 }}
+              className="absolute top-[calc(50%-157px)] w-5 text-xs sm:text-[16px] sm:w-8 h-40 px-1 bg-brand-primary dark:bg-brand-accent rounded-r-2xl font-light text-primary-white dark:font-medium"
+              style={{ left: isOpen ? `${sidebarWith}px` : 0 }}
               onClick={() => setIsOpen((prev) => !prev)}
             >
               {category === '법령' ? (
