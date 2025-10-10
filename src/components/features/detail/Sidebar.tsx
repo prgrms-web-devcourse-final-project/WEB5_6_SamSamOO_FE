@@ -44,7 +44,7 @@ function Sidebar({ toc, metadata, category }: Props) {
         <button
           hidden={isOpen}
           type="button"
-          className="sticky top-[calc(50%-90px)] w-5 text-xs sm:text-[16px] sm:w-8 h-40 px-1 bg-brand-primary dark:bg-brand-accent rounded-r-2xl font-light text-primary-white dark:font-medium"
+          className="sticky top-[calc(50%-90px)] text-[16px] w-8 h-40 px-1 bg-brand-primary dark:bg-brand-accent rounded-r-2xl font-light text-primary-white dark:font-medium"
           style={{ left: isOpen ? `calc(${sidebarWith}px + 20px)` : 0 }}
           onClick={() => setIsOpen((prev) => !prev)}
         >
@@ -86,7 +86,7 @@ function Sidebar({ toc, metadata, category }: Props) {
             </section>
             <button
               type="button"
-              className="absolute top-[calc(50%-157px)] w-5 text-xs sm:text-[16px] sm:w-8 h-40 px-1 bg-brand-primary dark:bg-brand-accent rounded-r-2xl font-light text-primary-white dark:font-medium"
+              className="absolute top-[calc(50%-157px)] text-[16px] w-8 h-40 px-1 bg-brand-primary dark:bg-brand-accent rounded-r-2xl font-light text-primary-white dark:font-medium"
               style={{ left: isOpen ? `${sidebarWith}px` : 0 }}
               onClick={() => setIsOpen((prev) => !prev)}
             >

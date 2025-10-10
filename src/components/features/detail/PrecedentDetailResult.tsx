@@ -28,7 +28,7 @@ function PrecedentDetailResult({ data }: { data: PrecedentDetailsResponse }) {
   } = data;
 
   let count = 0;
-  const regex = /^(?=.{0,2}\d+\.\s)/;
+  const regex = /^\s{0,2}(?:\d+\.|[가-힣]+\.|[가-힣]+\)|\([가-힣]+\)|\d+\)|\(\d+\))\s?/;
   const toc = extractPrecedentHeadings(notice, summaryOfTheJudgment, precedentContent);
   const metadata: Metadata = {
     사건번호: caseNumber,
@@ -84,7 +84,7 @@ function PrecedentDetailResult({ data }: { data: PrecedentDetailsResponse }) {
                 )}
                 {precedentContent && (
                   <div id={String(count++)} className="scroll-mt-12">
-                    <p className="text-2xl font-medium mb-5 pt-14 text-primary-gray2 dark:text-primary-white">
+                    <p className="text-2xl font-medium pt-14 -mb-5 text-primary-gray2 dark:text-primary-white">
                       판례내용
                     </p>
                     <span>
@@ -92,13 +92,13 @@ function PrecedentDetailResult({ data }: { data: PrecedentDetailsResponse }) {
                         if (row.includes('【') && row[1] !== '주') return '';
                         if (
                           (row.includes('【') && row[1] === '주') ||
-                          (regex.test(row) && row.length <= 30)
+                          (regex.test(row) && row.length <= 100)
                         ) {
                           return (
                             <li
                               key={index}
                               id={String(count++)}
-                              className="pb-3 text-red-700 scroll-mt-22"
+                              className="pt-10 pb-1 scroll-mt-18"
                             >
                               <p>{row}</p>
                             </li>
