@@ -1,5 +1,6 @@
 'use client';
 
+import { getLawWordDefinition } from '@/api/word/lawWord';
 import { TextSelection } from '@/types/inline';
 import { useEffect, useRef, useState } from 'react';
 
@@ -14,12 +15,20 @@ interface Props {
 function InlineBlock({ selectedText, ref }: Props) {
   const [definition, setDefinition] = useState('');
   const [isSearch, setIsSearch] = useState(false);
+  const [isLoading, setLoading] = useState(false);
   const definitionRef = useRef(null);
 
   useEffect(() => {
-    //todo - api 통신 로직 추가되어야 함
-    setDefinition(selectedText.selectedText);
-  }, []);
+    if (!isSearch) return;
+    const getDefinition = async () => {
+      setLoading(true);
+      const response = await getLawWordDefinition(selectedText.selectedText.trim());
+      if (!response) setDefinition('법률 용어 검색 결과가 없습니다.');
+      else setDefinition(`${selectedText.selectedText} - ${response}`);
+      setLoading(false);
+    };
+    getDefinition();
+  }, [selectedText, isSearch]);
 
   const handleSearchWord = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -32,7 +41,8 @@ function InlineBlock({ selectedText, ref }: Props) {
       style={{ left: selectedText.positionX, top: selectedText.positionY }}
       ref={ref}
     >
-      {!isSearch && (
+      {isLoading && <div className="p-2 m-2 w-12 animate-pulse bg-gray-400"></div>}
+      {!isLoading && !isSearch && (
         <button className="flex items-center justify-center gap-2 p-1 " onClick={handleSearchWord}>
           <img
             src="/icons/inlineSearchLight.svg"
@@ -47,7 +57,7 @@ function InlineBlock({ selectedText, ref }: Props) {
           <span>용어 검색</span>
         </button>
       )}
-      {isSearch && (
+      {!isLoading && isSearch && (
         <p ref={definitionRef} className="p-3.5 whitespace-pre-wrap">
           {definition === '' ? '검색결과가 없습니다' : definition}
         </p>

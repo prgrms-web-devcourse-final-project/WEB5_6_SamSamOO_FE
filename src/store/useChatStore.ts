@@ -1,25 +1,29 @@
 import { postExistingChat, postNewChat } from '@/api/chat/chatBot';
 import { Message } from '@/types/chat';
 import { SimilarCase, SimilarLaw } from '@/types/chatBot';
+import { useRouter } from 'next/navigation';
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
 
 interface AddMessageParams {
+  id: string;
   role: 'user' | 'ai';
   content: string;
   similarCases?: SimilarCase[];
   similarLaws?: SimilarLaw[];
+  isPending: boolean;
 }
 
 interface ChatState {
   roomId: string | null;
   messages: Message[];
   isLoading: boolean;
+  isReset: boolean;
   setRoomId: (roomId: string) => void;
   addMessage: (params: AddMessageParams) => void;
-  sendMessage: (content: string) => Promise<void>;
-  setChatHistory: (convertMessage: Message[]) => void;
-  resetStore: () => void; // 전체 초기화
+  sendNewMessage: (input: string, router?: ReturnType<typeof useRouter>) => void;
+  sendExistMessage: (input: string) => void;
+  setChatHistory: (convertMessage: Message[], roomId: string) => void;
+  resetStore: (callBack?: () => void) => void; // 전체 초기화
   setLoading: (isLoading: boolean) => void;
 }
 
@@ -27,6 +31,7 @@ const initialState = {
   roomId: null,
   messages: [],
   isLoading: false,
+  isReset: false,
 };
 
 export const useChatStore = create<ChatState>()((set, get) => ({
@@ -36,43 +41,46 @@ export const useChatStore = create<ChatState>()((set, get) => ({
     set({ roomId });
   },
 
-  addMessage: ({ role, content, similarCases, similarLaws }) =>
+  addMessage: ({ id, role, content, similarCases, similarLaws, isPending }) =>
     set((state) => ({
       messages: [
         ...state.messages,
         {
-          id: crypto.randomUUID(),
+          id,
           role,
           content,
           similarCases,
           similarLaws,
           timestamp: Date.now(),
-          isPending: true,
+          isPending,
         },
       ],
     })),
-
-  sendMessage: async () => {
-    const { roomId, setRoomId, setLoading, isLoading, messages } = get();
+  sendNewMessage: async (input: string, router) => {
+    const { roomId, setLoading, addMessage, isLoading } = get();
     if (isLoading) return;
 
-    const lastMessages = messages[messages.length - 1];
+    const data: AddMessageParams = {
+      id: crypto.randomUUID(),
+      role: 'user',
+      content: input,
+      isPending: true,
+    };
+
+    addMessage(data);
 
     try {
       setLoading(true);
       if (!roomId) {
-        const res = await postNewChat(lastMessages.content);
-
+        const res = await postNewChat(data.content);
         if (!res) return;
-
-        // roomId 저장
-        setRoomId(String(res[0].roomId));
 
         // AI 응답 추가
         set((state) => ({
+          roomId: String(res[0].roomId),
           messages: [
             ...state.messages.map((msg) =>
-              msg.id === lastMessages.id ? { ...msg, ispading: false } : msg,
+              msg.id === data.id ? { ...msg, isPending: false } : msg,
             ),
             {
               id: crypto.randomUUID(),
@@ -84,15 +92,40 @@ export const useChatStore = create<ChatState>()((set, get) => ({
             },
           ],
         }));
-      } else {
-        const response = await postExistingChat(lastMessages.content, roomId);
+        if (router) {
+          router.replace(`/chat/${res[0].roomId}`);
+        }
+      }
+    } catch (error) {
+      console.error('Failed to send message:', error);
+    } finally {
+      setLoading(false);
+    }
+  },
+  sendExistMessage: async (input: string) => {
+    const { roomId, setLoading, addMessage, isLoading } = get();
+    if (isLoading) return;
+
+    const data: AddMessageParams = {
+      id: crypto.randomUUID(),
+      role: 'user',
+      content: input,
+      isPending: true,
+    };
+
+    addMessage(data);
+
+    try {
+      setLoading(true);
+      if (roomId) {
+        const response = await postExistingChat(data.content, roomId);
         if (!response) return;
 
         // AI 응답 추가
         set((state) => ({
           messages: [
             ...state.messages.map((msg) =>
-              msg.id === lastMessages.id ? { ...msg, ispading: false } : msg,
+              msg.id === data.id ? { ...msg, isPending: false } : msg,
             ),
             {
               id: crypto.randomUUID(),
@@ -111,9 +144,13 @@ export const useChatStore = create<ChatState>()((set, get) => ({
       setLoading(false);
     }
   },
-  setChatHistory: (convertMessage: Message[]) => {
-    set({ messages: convertMessage });
+  setChatHistory: (convertMessage: Message[], roomId: string) => {
+    set({ messages: convertMessage, roomId });
   },
-  resetStore: () => set(initialState),
+  resetStore: (callBack) => {
+    set({ ...initialState, isReset: true });
+    if (callBack) callBack();
+    setTimeout(() => set({ isReset: false }), 0);
+  },
   setLoading: (isLoading) => set({ isLoading }),
 }));

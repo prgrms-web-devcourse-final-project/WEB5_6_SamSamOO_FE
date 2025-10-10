@@ -24,6 +24,11 @@ function KeywordRank({ className }: Props) {
     };
     getRanks();
   }, []);
+
+  if (!rankList || rankList.length === 0) {
+    return null;
+  }
+
   return (
     <div className={tw('md:absolute relative md:w-fit w-full md:right-10 md:top-4', className)}>
       <motion.div
