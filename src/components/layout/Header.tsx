@@ -9,6 +9,7 @@ import ToggleThemeButton from './ToggleThemeButton';
 import { useUserStore } from '@/store/useUserStore';
 import { logout } from '@/api/account/logout';
 import { showErrorToast } from '@/utils/showToast';
+import { useChatStore } from '@/store/useChatStore';
 import { useEffect, useRef, useState } from 'react';
 import tw from '@/utils/tw';
 import useClosePopup from '@/hooks/useClosePopup';
@@ -24,6 +25,7 @@ function Header() {
   const pathname = usePathname();
   const isAuthenticated = useUserStore((state) => state.isAuthenticated);
   const clearSession = useUserStore((state) => state.clearSession);
+  const resetStore = useChatStore((state) => state.resetStore);
   const hamburgerRef = useRef(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -31,6 +33,7 @@ function Header() {
     try {
       await logout();
       clearSession();
+      resetStore();
       router.replace('/');
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {

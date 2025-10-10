@@ -5,11 +5,10 @@ import { useEffect, useState } from 'react';
 import useClosePopup from '@/hooks/useClosePopup';
 import CloseButton from '@/components/ui/CloseButton';
 import { ChatHistoryList } from '@/types/chat';
-import ChatHistoryItem from '../chatHistory/ChatHistoryItem';
-
 import { showErrorToast, showSuccessToast } from '@/utils/showToast';
-import ChatHistorySkeleton from '../../loading/ChatHistorySkeleton';
 import tw from '@/utils/tw';
+import ChatHistorySkeleton from '../advice/loading/ChatHistorySkeleton';
+import ChatHistoryItem from '../advice/components/chatHistory/ChatHistoryItem';
 
 interface Props {
   onClose: () => void;
@@ -54,7 +53,7 @@ function ChatListModal({ onClose, isOpen }: Props) {
   return (
     <div
       className={tw(
-        'w-[340px] h-[580px]  rounded-modal shadow-ai-floating flex flex-col items-center',
+        'w-[340px] h-[580px] rounded-modal shadow-ai-floating flex flex-col items-center',
         MODAL_COLOR,
       )}
     >
