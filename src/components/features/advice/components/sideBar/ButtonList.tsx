@@ -11,10 +11,9 @@ function ButtonList({ handleSideBar }: Props) {
   const router = useRouter();
 
   const newChat = () => {
-    resetStore();
-    setTimeout(() => {
-      router.push(`/advice`);
-    }, 0);
+    resetStore(() => {
+      router.replace(`/advice`);
+    });
   };
 
   return (

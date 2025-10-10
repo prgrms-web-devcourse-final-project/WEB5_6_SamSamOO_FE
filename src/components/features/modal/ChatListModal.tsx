@@ -1,7 +1,7 @@
 'use client';
 
 import { deleteChatHistory, getChatHistoryList } from '@/api/chat/chatHistoty';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import useClosePopup from '@/hooks/useClosePopup';
 import CloseButton from '@/components/ui/CloseButton';
 import { ChatHistoryList } from '@/types/chat';
@@ -17,8 +17,9 @@ interface Props {
 
 function ChatListModal({ onClose, isOpen }: Props) {
   const [isLoading, setLoading] = useState(false);
+  const modalRef = useRef<HTMLDivElement>(null);
   const [chatHistoryList, setChatHistoryList] = useState<ChatHistoryList | null>(null);
-  useClosePopup({ onClose, isOpen });
+  useClosePopup({ onClose, isOpen, ref: modalRef });
 
   useEffect(() => {
     const getChat = async () => {
