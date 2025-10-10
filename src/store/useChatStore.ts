@@ -1,6 +1,5 @@
 import { postExistingChat, postNewChat } from '@/api/chat/chatBot';
-import { Message } from '@/types/chat';
-import { SimilarCase, SimilarLaw } from '@/types/chatBot';
+import { Laws, Message, Precedent } from '@/types/chat';
 import { useRouter } from 'next/navigation';
 import { create } from 'zustand';
 
@@ -8,8 +7,8 @@ interface AddMessageParams {
   id: string;
   role: 'user' | 'ai';
   content: string;
-  similarCases?: SimilarCase[];
-  similarLaws?: SimilarLaw[];
+  precedent?: Precedent;
+  law?: Laws;
   isPending: boolean;
 }
 
@@ -41,7 +40,7 @@ export const useChatStore = create<ChatState>()((set, get) => ({
     set({ roomId });
   },
 
-  addMessage: ({ id, role, content, similarCases, similarLaws, isPending }) =>
+  addMessage: ({ id, role, content, precedent, law, isPending }) =>
     set((state) => ({
       messages: [
         ...state.messages,
@@ -49,8 +48,8 @@ export const useChatStore = create<ChatState>()((set, get) => ({
           id,
           role,
           content,
-          similarCases,
-          similarLaws,
+          precedent,
+          law,
           timestamp: Date.now(),
           isPending,
         },
@@ -86,8 +85,8 @@ export const useChatStore = create<ChatState>()((set, get) => ({
               id: crypto.randomUUID(),
               role: 'ai',
               content: res[0].message,
-              similarCases: res[0].similarCases || [],
-              similarLaws: res[0].similarLaws || [],
+              precedent: res[0].precedent,
+              law: res[0].law,
               timestamp: Date.now(),
             },
           ],
@@ -131,8 +130,8 @@ export const useChatStore = create<ChatState>()((set, get) => ({
               id: crypto.randomUUID(),
               role: 'ai',
               content: response[0].message,
-              similarCases: response[0].similarCases || [],
-              similarLaws: response[0].similarLaws || [],
+              precedent: response[0].precedent,
+              law: response[0].law,
               timestamp: Date.now(),
             },
           ],
