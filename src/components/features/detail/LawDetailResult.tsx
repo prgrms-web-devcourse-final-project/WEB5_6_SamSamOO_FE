@@ -6,6 +6,7 @@ import extractLawHeadings from '@/utils/extractLawHeadings';
 import ScrollButton from '@/components/ui/ScrollButton';
 import { Metadata } from '@/types/detail';
 import { LawDetailsResponse } from '@/types/law';
+import InlineText from '@/components/ui/InlineText';
 
 function LawDetailResult({ data }: { data: LawDetailsResponse }) {
   const {
@@ -30,76 +31,78 @@ function LawDetailResult({ data }: { data: LawDetailsResponse }) {
 
   return (
     <>
-      <div className="w-full h-full flex flex-1 bg-background-white dark:bg-background-black1">
-        <Sidebar toc={toc} metadata={metadata} category="법령" />
-        <section className="flex flex-1 justify-center sm:px-25 py-10">
-          <div className="w-full max-w-[1200px]">
-            <h2 className="sr-only">컨텐츠</h2>
-            <header className="text-primary-gray1 dark:text-primary-white pb-10 px-8">
-              <div className="flex gap-2 items-center mb-5 sm:mb-3 flex-wrap">
-                <CategoryTag text="법령" />
-                <p className="text-2xl font-extrabold leading-[36px]">{lawName}</p>
-              </div>
-              <div className="flex gap-3 sm:gap-8 text-xl font-normal sm:pl-2 sm:flex-row flex-col">
-                <p>시행일자 : {enforcementDate}</p>
-                <p>공포일자 : {promulgationDate}</p>
-                <p>{lawField}</p>
-              </div>
-            </header>
-            <article className="leading-[26px] dark:text-primary-white px-8">
-              {jangList.map((jang, index) => (
-                <div key={`jang${index}`} className="pb-30">
-                  <h2
-                    id={jang.content !== null ? String(count++) : ''}
-                    className={tw(
-                      jang.content !== null
-                        ? 'text-2xl font-medium pb-6 text-primary-gray2 dark:text-primary-white scroll-mt-24'
-                        : '',
-                    )}
-                  >
-                    {jang.content}
-                  </h2>
-                  <div>
-                    {jang.joList.map((jo, index) => {
-                      if (jo.content.includes('조 삭제')) return '';
-                      return (
-                        <div key={`jo${index}`} className="pb-6">
-                          <h2
-                            id={String(count++)}
-                            className={tw(
-                              jang.content === null
-                                ? 'text-xl font-medium pb-6 text-primary-gray2 dark:text-primary-white scroll-mt-24'
-                                : 'text-xl font-medium text-primary-gray2 dark:text-primary-white scroll-mt-22',
-                            )}
-                          >
-                            {jo.content}
-                          </h2>
-                          <div>
-                            {jo.hangList.map((hang, index) => (
-                              <div key={`hang${index}`}>
-                                <div>{hang.content}</div>
-                                <div>
-                                  {hang.hoList.map((ho, index) => (
-                                    <div key={`ho${index}`}>
-                                      <div>{ho.content}</div>
-                                      <div>{ho.hang}</div>
-                                    </div>
-                                  ))}
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
+      <InlineText>
+        <div className="w-full h-full flex flex-1 bg-background-white dark:bg-background-black1">
+          <Sidebar toc={toc} metadata={metadata} category="법령" />
+          <section className="flex flex-1 justify-center sm:px-25 py-10">
+            <div className="w-full max-w-[1200px]">
+              <h2 className="sr-only">컨텐츠</h2>
+              <header className="text-primary-gray1 dark:text-primary-white pb-10 px-8">
+                <div className="flex gap-2 items-center mb-5 sm:mb-3 flex-wrap">
+                  <CategoryTag text="법령" />
+                  <p className="text-2xl font-extrabold leading-[36px]">{lawName}</p>
                 </div>
-              ))}
-            </article>
-          </div>
-        </section>
-        <ScrollButton />
-      </div>
+                <div className="flex gap-3 sm:gap-8 text-xl font-normal sm:pl-2 sm:flex-row flex-col">
+                  <p>시행일자 : {enforcementDate}</p>
+                  <p>공포일자 : {promulgationDate}</p>
+                  <p>{lawField}</p>
+                </div>
+              </header>
+              <article className="leading-[26px] dark:text-primary-white px-8">
+                {jangList.map((jang, index) => (
+                  <div key={`jang${index}`} className="pb-30">
+                    <h2
+                      id={jang.content !== null ? String(count++) : ''}
+                      className={tw(
+                        jang.content !== null
+                          ? 'text-2xl font-medium pb-6 text-primary-gray2 dark:text-primary-white scroll-mt-24'
+                          : '',
+                      )}
+                    >
+                      {jang.content}
+                    </h2>
+                    <div>
+                      {jang.joList.map((jo, index) => {
+                        if (jo.content.includes('조 삭제')) return '';
+                        return (
+                          <div key={`jo${index}`} className="pb-6">
+                            <h2
+                              id={String(count++)}
+                              className={tw(
+                                jang.content === null
+                                  ? 'text-xl font-medium pb-6 text-primary-gray2 dark:text-primary-white scroll-mt-24'
+                                  : 'text-xl font-medium text-primary-gray2 dark:text-primary-white scroll-mt-22',
+                              )}
+                            >
+                              {jo.content}
+                            </h2>
+                            <div>
+                              {jo.hangList.map((hang, index) => (
+                                <div key={`hang${index}`}>
+                                  <div>{hang.content}</div>
+                                  <div>
+                                    {hang.hoList.map((ho, index) => (
+                                      <div key={`ho${index}`}>
+                                        <div>{ho.content}</div>
+                                        <div>{ho.hang}</div>
+                                      </div>
+                                    ))}
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                ))}
+              </article>
+            </div>
+          </section>
+          <ScrollButton />
+        </div>
+      </InlineText>
     </>
   );
 }
