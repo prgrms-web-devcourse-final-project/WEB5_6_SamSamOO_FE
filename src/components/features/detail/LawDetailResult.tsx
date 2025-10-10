@@ -33,11 +33,11 @@ function LawDetailResult({ data }: { data: LawDetailsResponse }) {
     <>
       <div className="w-full h-full flex flex-1 bg-background-white dark:bg-background-black1">
         <Sidebar toc={toc} metadata={metadata} category="법령" />
-        <section className="flex flex-1 justify-center sm:px-25 py-10">
+        <section className="flex flex-1 overflow-x-auto justify-center min-w-[320px] px-16 sm:px-25 py-10">
           <InlineText>
             <div className="w-full max-w-[1200px]">
               <h2 className="sr-only">컨텐츠</h2>
-              <header className="text-primary-gray1 dark:text-primary-white pb-10 px-8">
+              <header className="text-primary-gray1 dark:text-primary-white pb-10">
                 <div className="flex gap-2 items-center mb-5 sm:mb-3 flex-wrap">
                   <CategoryTag text="법령" />
                   <p className="text-2xl font-extrabold leading-[36px]">{lawName}</p>
@@ -48,7 +48,7 @@ function LawDetailResult({ data }: { data: LawDetailsResponse }) {
                   <p>{lawField}</p>
                 </div>
               </header>
-              <article className="leading-[26px] dark:text-primary-white px-8">
+              <article className="leading-[26px] dark:text-primary-white">
                 {jangList.map((jang, index) => (
                   <div key={`jang${index}`} className="pb-30">
                     <h2

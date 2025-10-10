@@ -86,7 +86,7 @@ function Sidebar({ toc, metadata, category }: Props) {
             </section>
             <button
               type="button"
-              className="absolute top-[calc(50%-157px)] text-[16px] w-8 h-40 px-1 bg-brand-primary dark:bg-brand-accent rounded-r-2xl font-light text-primary-white dark:font-medium"
+              className="absolute z-20 top-[calc(50%-157px)] text-[16px] w-8 h-40 px-1 bg-brand-primary dark:bg-brand-accent rounded-r-2xl font-light text-primary-white dark:font-medium"
               style={{ left: isOpen ? `${sidebarWith}px` : 0 }}
               onClick={() => setIsOpen((prev) => !prev)}
             >
