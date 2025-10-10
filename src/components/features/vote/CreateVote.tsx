@@ -6,25 +6,21 @@ import CreateVoteForm from '../../forms/CreateVoteForm';
 
 interface Props {
   onClose: () => void;
+  onCreated?: () => void;
 }
 
-export default function CreateVote({ onClose }: Props) {
+export default function CreateVote({ onClose, onCreated }: Props) {
   const modalRef = useRef<HTMLDivElement>(null);
   const [isMouseDownInside, setIsMouseDownInside] = useState(false);
 
   const handleMouseDown = (e: React.MouseEvent) => {
-    if (modalRef.current?.contains(e.target as Node)) {
-      setIsMouseDownInside(true);
-    } else {
-      setIsMouseDownInside(false);
-    }
+    if (modalRef.current?.contains(e.target as Node)) setIsMouseDownInside(true);
+    else setIsMouseDownInside(false);
   };
 
   const handleMouseUp = (e: React.MouseEvent) => {
     const isOutside = modalRef.current && !modalRef.current.contains(e.target as Node);
-    if (isOutside && !isMouseDownInside) {
-      onClose();
-    }
+    if (isOutside && !isMouseDownInside) onClose();
   };
 
   return (
@@ -47,7 +43,14 @@ export default function CreateVote({ onClose }: Props) {
           flex flex-col gap-6
         "
       >
-        <CreateVoteForm onClose={onClose} />
+        <CreateVoteForm
+          onClose={() => {
+            onClose();
+          }}
+          onCreated={() => {
+            if (onCreated) onCreated();
+          }}
+        />
       </motion.div>
     </div>
   );

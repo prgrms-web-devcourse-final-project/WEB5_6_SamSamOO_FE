@@ -3,7 +3,11 @@
 import { useState } from 'react';
 import CreateVote from '@/components/features/vote/CreateVote';
 
-export default function CtaVote() {
+interface Props {
+  onCreated?: () => void;
+}
+
+export default function CtaVote({ onCreated }: Props) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -28,7 +32,14 @@ export default function CtaVote() {
         배심원단에게 물어보기✨
       </button>
 
-      {isOpen && <CreateVote onClose={() => setIsOpen(false)} />}
+      {isOpen && (
+        <CreateVote
+          onClose={() => setIsOpen(false)}
+          onCreated={() => {
+            if (onCreated) onCreated(); // 상위 전달
+          }}
+        />
+      )}
     </>
   );
 }
