@@ -9,6 +9,7 @@ import ToggleThemeButton from './ToggleThemeButton';
 import { useUserStore } from '@/store/useUserStore';
 import { logout } from '@/api/account/logout';
 import { showErrorToast } from '@/utils/showToast';
+import { useChatStore } from '@/store/useChatStore';
 import { useEffect, useRef, useState } from 'react';
 import tw from '@/utils/tw';
 import useClosePopup from '@/hooks/useClosePopup';
@@ -24,13 +25,15 @@ function Header() {
   const pathname = usePathname();
   const isAuthenticated = useUserStore((state) => state.isAuthenticated);
   const clearSession = useUserStore((state) => state.clearSession);
-  const hamburgerRef = useRef(null);
+  const resetStore = useChatStore((state) => state.resetStore);
+  const mainNavigationRef = useRef(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const handleLogout = async () => {
     try {
       await logout();
       clearSession();
+      resetStore();
       router.replace('/');
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
@@ -41,7 +44,7 @@ function Header() {
   useClosePopup({
     onClose: () => setIsOpen(false),
     isOpen,
-    ref: hamburgerRef,
+    ref: mainNavigationRef,
     ignoreSelectors: ['#hamburger'],
   });
 
@@ -89,8 +92,8 @@ function Header() {
         </button>
         {isOpen && (
           <ul
-            ref={hamburgerRef}
-            className="absolute bg-white dark:bg-black w-full left-0 top-15 flex sm:hidden gap-7 items-center justify-center px-8 py-20 shadow-[0_4px_6.2px_0_rgba(0,0,0,0.15)]  dark:shadow-[0_1px_2px_0_rgba(213,213,213,0.25)]"
+            ref={mainNavigationRef}
+            className="absolute bg-white dark:bg-black w-full left-0 top-15 flex sm:hidden gap-7 items-center justify-center px-8 py-6 shadow-[0_4px_6.2px_0_rgba(0,0,0,0.15)]  dark:shadow-[0_1px_2px_0_rgba(213,213,213,0.25)]"
           >
             {mainNavItems.map(({ href, label }) => (
               <li key={href}>

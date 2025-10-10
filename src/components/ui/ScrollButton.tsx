@@ -51,7 +51,7 @@ function ScrollButton({ direction = 'top' }: Props) {
       type="button"
       title="최상단 이동"
       className={tw(
-        'fixed right-8 bottom-22 opacity-0 transition-opacity ease-in-out pointer-events-none',
+        'fixed right-24 bottom-22 opacity-0 transition-opacity ease-in-out pointer-events-none',
         showVisible && 'opacity-100 pointer-events-auto',
       )}
       onClick={handleClick}

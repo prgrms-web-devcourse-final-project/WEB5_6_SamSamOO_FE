@@ -4,14 +4,19 @@ import Image from 'next/image';
 interface ScrollToBottomButtonProps {
   onClick: () => void;
   show: boolean;
+  className?: string;
 }
 
-function ScrollToBottomButton({ onClick, show }: ScrollToBottomButtonProps) {
+function ScrollToBottomButton({ onClick, show, className }: ScrollToBottomButtonProps) {
   if (!show) return null;
+
   return (
     <button
       onClick={onClick}
-      className="absolute bottom-[30%] right-[50%] z-50 hover:scale-110 active:scale-95"
+      className={tw(
+        'absolute bottom-[30%] right-[50%] z-150 hover:scale-110 active:scale-95',
+        className,
+      )}
       aria-label="맨 아래로 스크롤"
     >
       <Image

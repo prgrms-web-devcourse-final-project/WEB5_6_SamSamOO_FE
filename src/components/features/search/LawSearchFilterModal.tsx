@@ -20,6 +20,7 @@ function LawSearchFilterModal({ isOpen = false, onClose = () => {}, setLawSearch
   const [authority, setAuthority] = useState<string>('');
   const [ministry, setMinistry] = useState<string>('');
   const [openCalendar, setOpenCalendar] = useState<'promulgation' | 'enforcement' | null>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
   const promulgationRef = useRef<HTMLDivElement>(null);
   const enforcementRef = useRef<HTMLDivElement>(null);
   const [promulgationRange, setPromulgationRange] = useState<CalendarRange>({
@@ -39,22 +40,21 @@ function LawSearchFilterModal({ isOpen = false, onClose = () => {}, setLawSearch
     setMinistry('');
   }, [authority]);
 
-  useClosePopup({ onClose, isOpen });
+  useClosePopup({ onClose, isOpen, ref: modalRef });
   useClosePopup({
     isOpen: !!openCalendar,
     onClose: () => setOpenCalendar(null),
     ignoreSelectors: ['[data-radix-popper-content-wrapper]'],
     hiddenOverflow: false,
+    ref: openCalendar === 'promulgation' ? promulgationRef : enforcementRef,
   });
 
   return (
-    <div
-      className="fixed flex inset-0 z-10 bg-black/40 backdrop-blur-sm w-screen h-screen items-center justify-center"
-      onPointerDown={(e) => {
-        if (e.target === e.currentTarget) onClose();
-      }}
-    >
-      <section className="w-full h-screen overflow-y-scroll sm:overflow-y-visible sm:w-fit sm:h-fit px-10 pt-30 pb-10 sm:px-10 sm:py-10 bg-white sm:rounded-modal sm:mb-5  dark:bg-background-black3 dark:text-primary-white dark:shadow-modal-dark">
+    <div className="fixed flex inset-0 z-10 bg-black/40 backdrop-blur-sm w-screen h-screen items-center justify-center">
+      <section
+        ref={modalRef}
+        className="w-full h-screen overflow-y-scroll sm:overflow-y-visible sm:w-fit sm:h-fit px-10 pt-30 pb-10 sm:px-10 sm:py-10 bg-white sm:rounded-modal sm:mb-5  dark:bg-background-black3 dark:text-primary-white dark:shadow-modal-dark"
+      >
         <div className="flex flex-col gap-6 text-lg justify-center ">
           <h1 className="text-3xl font-bold text-brand-primary dark:text-primary-white">
             법령 상세 검색

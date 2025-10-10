@@ -10,12 +10,11 @@ import { useRouter } from 'next/navigation';
 import { convertMessage, messageGroup } from '@/utils/convertMessage';
 import AIMessageSkeleton from './loading/AIMessageSkeleton';
 import { useAutoScroll } from '@/hooks/useAutoScroll';
-import ScrollButton from '@/components/ui/ScrollButton';
 import { useScrollToBottom } from '@/hooks/useScrollToBottom';
 import ScrollToBottomButton from '@/components/ui/ScrollToBottomButton';
 
 interface Props {
-  urlId: string;
+  urlId?: string;
 }
 
 function MainChatArea({ urlId }: Props) {
@@ -31,17 +30,18 @@ function MainChatArea({ urlId }: Props) {
       isLoading: state.isLoading,
     })),
   );
-  const autoScollRef = useAutoScroll([messages, isLoading]);
+  const autoScrollRef = useAutoScroll([messages, isLoading]);
 
   // 스크롤 훅 사용
   const { showButton, scrollToBottom } = useScrollToBottom({
-    autoScollRef,
+    autoScrollRef,
     threshold: 100,
+    enabled: true,
   });
 
   useEffect(() => {
-    if (roomId && urlId !== roomId) {
-      getHistoryInfo(urlId);
+    if (urlId !== roomId) {
+      getHistoryInfo(urlId ?? '');
       router.replace(`/chat/${urlId}`);
       //데이터 타입이 달라서 새로운 가공 함수 추가해야함
     } else {
@@ -65,7 +65,7 @@ function MainChatArea({ urlId }: Props) {
 
   return (
     <>
-      <div ref={autoScollRef} className="w-[80%] center-col overflow-y-auto relative">
+      <div ref={autoScrollRef} className="w-[80%] center-col overflow-y-auto relative">
         <div className="w-full flex h-[50vh] flex-col items-end">
           {groupedMessages.map((group, index) => {
             const isLastGroup = index === groupedMessages.length - 1;
