@@ -5,7 +5,7 @@ export const getPrecedentDetails = async (id: string | number) => {
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/precedent/${queryID}`, {
       method: 'GET',
-      cache: 'no-store',
+      next: { revalidate: 3600 },
     });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     return (await response.json()) as PrecedentDetailsResponse;

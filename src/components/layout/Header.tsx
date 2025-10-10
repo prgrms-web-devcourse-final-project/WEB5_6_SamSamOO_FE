@@ -3,12 +3,16 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
+import Hamburger from '@/assets/icons/hamburger.svg';
 
 import ToggleThemeButton from './ToggleThemeButton';
 import { useUserStore } from '@/store/useUserStore';
 import { logout } from '@/api/account/logout';
 import { showErrorToast } from '@/utils/showToast';
 import { useChatStore } from '@/store/useChatStore';
+import { useEffect, useRef, useState } from 'react';
+import tw from '@/utils/tw';
+import useClosePopup from '@/hooks/useClosePopup';
 
 const mainNavItems = [
   { href: '/advice', label: 'AI 상담' },
@@ -22,6 +26,8 @@ function Header() {
   const isAuthenticated = useUserStore((state) => state.isAuthenticated);
   const clearSession = useUserStore((state) => state.clearSession);
   const resetStore = useChatStore((state) => state.resetStore);
+  const mainNavigationRef = useRef(null);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const handleLogout = async () => {
     try {
@@ -35,31 +41,81 @@ function Header() {
     }
   };
 
+  useClosePopup({
+    onClose: () => setIsOpen(false),
+    isOpen,
+    ref: mainNavigationRef,
+    ignoreSelectors: ['#hamburger'],
+  });
+
+  useEffect(() => {
+    console.log(isOpen);
+  }, [isOpen]);
+
   return (
-    <header className="fixed z-40 w-full grid grid-cols-[1fr_2fr_1fr] h-[60px] pl-[30px] pr-8 items-center justify-between text-xl font-bold text-primary-black dark:text-primary-white bg-[rgba(255,255,255,0.89)] shadow-[0_4px_14.2px_0_rgba(0,0,0,0.25)] dark:bg-[rgba(0,0,0,0.89)] dark:shadow-[0_1px_2px_0_rgba(213,213,213,0.25)]">
-      <div className="justify-self-start">
+    <header
+      className={tw(
+        'fixed z-40 w-full flex sm:grid sm:grid-cols-[1fr_2fr_1fr] h-[60px] pl-[30px] pr-8 items-center justify-between text-lg md:text-xl font-bold text-primary-black dark:text-primary-white shadow-[0_4px_14.2px_0_rgba(0,0,0,0.25)]  dark:shadow-[0_1px_2px_0_rgba(213,213,213,0.25)]',
+        isOpen
+          ? 'bg-[rgba(255,255,255)] dark:bg-[rgba(0,0,0)]'
+          : 'bg-[rgba(255,255,255,0.89)] dark:bg-[rgba(0,0,0,0.89)]',
+      )}
+    >
+      <div className="sm:justify-self-start flex items-center gap-3">
         <Link href="/">
           <>
             <Image
               className="block dark:hidden"
-              src="/icons/balawLight.svg"
-              width={56}
+              src="/images/balawLight.png"
+              width={61}
               height={32}
+              style={{ height: 'auto' }}
               alt="바로 BaLaw"
             />
             <Image
               className="hidden dark:block"
-              src="/icons/balawDark.svg"
-              width={56}
+              src="/images/balawDark.png"
+              width={61}
               height={32}
+              style={{ height: 'auto' }}
               alt="바로 BaLaw"
             />
           </>
         </Link>
+        <button
+          id="hamburger"
+          type="button"
+          className="flex sm:hidden"
+          onClick={() => setIsOpen((prev) => !prev)}
+        >
+          <Hamburger className="dark:text-primary-white w-9 h-5" />
+        </button>
+        {isOpen && (
+          <ul
+            ref={mainNavigationRef}
+            className="absolute bg-white dark:bg-black w-full left-0 top-15 flex sm:hidden gap-7 items-center justify-center px-8 py-6 shadow-[0_4px_6.2px_0_rgba(0,0,0,0.15)]  dark:shadow-[0_1px_2px_0_rgba(213,213,213,0.25)]"
+          >
+            {mainNavItems.map(({ href, label }) => (
+              <li key={href}>
+                <Link
+                  href={href}
+                  className={
+                    pathname.includes(href.split('/')[1])
+                      ? 'text-brand-accent'
+                      : 'text-primary-black dark:text-primary-white'
+                  }
+                >
+                  {label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
       <nav>
         <h2 className="sr-only">메인 메뉴</h2>
-        <ul className="flex gap-11 justify-self-center">
+
+        <ul className="hidden sm:flex gap-11 justify-self-center">
           {mainNavItems.map(({ href, label }) => (
             <li key={href}>
               <Link
@@ -87,14 +143,14 @@ function Header() {
                 <Link href="/mypage" className={pathname === '/mypage' ? 'text-brand-accent' : ''}>
                   <Image
                     className="block dark:hidden"
-                    src="/icons/profileLight.svg"
+                    src="/images/profileLight.png"
                     width={34}
                     height={34}
                     alt="마이페이지"
                   />
                   <Image
                     className="hidden dark:block"
-                    src="/icons/profileDark.svg"
+                    src="/images/profileDark.png"
                     width={34}
                     height={34}
                     alt="마이페이지"

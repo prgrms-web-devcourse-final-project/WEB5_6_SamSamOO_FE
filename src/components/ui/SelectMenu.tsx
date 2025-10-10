@@ -58,7 +58,7 @@ function SelectMenu({
         disabled={disabled}
         aria-label={`${aria} 선택`}
         className={tw(
-          'py-2 px-6 w-fit flex gap-3 items-center justify-between rounded-full bg-background-white  outline-none border border-filter-outline1 text-primary-gray2 focus:shadow-filter-light-active dark:bg-primary-gray3 dark:text-primary-white dark:border-filter-outline2 data-[state=open]:shadow-filter-light-active dark:data-[state=open]:shadow-filter-dark-active',
+          'text-sm sm:text-[16px] py-2 px-6 w-fit flex gap-3 items-center justify-between rounded-full bg-background-white  outline-none border border-filter-outline1 text-primary-gray2 focus:shadow-filter-light-active dark:bg-primary-gray3 dark:text-primary-white dark:border-filter-outline2 data-[state=open]:shadow-filter-light-active dark:data-[state=open]:shadow-filter-dark-active',
           triggerStyle,
         )}
       >

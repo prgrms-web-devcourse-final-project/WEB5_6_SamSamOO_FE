@@ -39,8 +39,6 @@ const CalendarWithDateInputRange = ({ id, cardStyle, onChangeValue }: Props) => 
     onChangeValue?.({
       start: formmatter(dateRange?.from),
       end: formmatter(dateRange?.to),
-      // start: dateRange?.from?.toLocaleDateString().split('. ').join('-').slice(0, -1) ?? null,
-      // end: dateRange?.to?.toLocaleDateString().split('. ').join('-').slice(0, -1) ?? null,
     });
   }, [dateRange, onChangeValue]);
 
@@ -66,15 +64,6 @@ const CalendarWithDateInputRange = ({ id, cardStyle, onChangeValue }: Props) => 
 
     return `${year}-${month}-${day}`;
   };
-
-  // 디버깅
-  // useEffect(() => {
-  //   console.log(formmatter(dateRange?.from));
-  //   console.log(formmatter(dateRange?.to));
-  //   // console.log(dateRange?.from?.toLocaleDateString().split('. ').join('-'));
-  //   // console.log(startDate);
-  //   // console.log(endDate);
-  // }, [dateRange, startDate, endDate]);
 
   const handleInputStartChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -112,27 +101,21 @@ const CalendarWithDateInputRange = ({ id, cardStyle, onChangeValue }: Props) => 
     }
   };
 
-  // useEffect(() => {
-  //   setInputStartValue(format(new Date(2025, 8, 12), 'yyyy-MM-dd'));
-  //   setInputEndValue(format(today, 'yyyy-MM-dd'));
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
-
   return (
     <div>
-      <Card className={tw('gap-5 py-5 w-fit rounded-modal', cardStyle)}>
-        <CardHeader className="w-full flex justify-between gap-2 border-b px-5">
-          <div className="flex flex-col gap-2">
-            <Label id={id} htmlFor={startID} className="shrink-0 text-lg">
+      <Card className={tw('gap-5 py-5 w-full rounded-modal sm:flex sm:flex-row', cardStyle)}>
+        <CardHeader className="sm:hidden w-full flex flex-col sm:flex-row justify-between gap-2 border-b px-4">
+          <div className="flex flex-row sm:flex-col gap-2 justify-center">
+            <Label id={id} htmlFor={startID} className="text-sm sm:text-lg">
               시작일
             </Label>
-            <div className="relative grow">
+            <div className="relative">
               <Input
                 id={startID}
                 type="date"
                 value={inputStartValue}
                 onChange={handleInputStartChange}
-                className="peer appearance-none pl-9 [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
+                className="text-sm sm:text-[16px] peer appearance-none pl-9 [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
                 aria-label="시작일 선택"
               />
               <div className="text-muted-foreground/80 pointer-events-none absolute inset-y-0 left-0 flex items-center justify-center pl-3 peer-disabled:opacity-50">
@@ -140,17 +123,17 @@ const CalendarWithDateInputRange = ({ id, cardStyle, onChangeValue }: Props) => 
               </div>
             </div>
           </div>
-          <div className="flex flex-col gap-2">
-            <Label htmlFor={endID} className="shrink-0 text-lg">
+          <div className="flex flex-row sm:flex-col gap-2">
+            <Label htmlFor={endID} className="text-sm sm:text-lg">
               종료일
             </Label>
-            <div className="relative grow">
+            <div className="relative">
               <Input
                 id={endID}
                 type="date"
                 value={inputEndValue}
                 onChange={handleInputEndChange}
-                className="peer appearance-none pl-9 [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
+                className="text-sm sm:text-[16px] peer appearance-none pl-9 [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
                 aria-label="종료일 선택"
               />
               <div className="text-muted-foreground/80 pointer-events-none absolute inset-y-0 left-0 flex items-center justify-center pl-3 peer-disabled:opacity-50">
@@ -159,7 +142,7 @@ const CalendarWithDateInputRange = ({ id, cardStyle, onChangeValue }: Props) => 
             </div>
           </div>
         </CardHeader>
-        <CardContent className="px-5">
+        <CardContent className="px-5 w-full sm:w-[70%]">
           <Calendar
             mode="range"
             selected={dateRange}
@@ -169,9 +152,47 @@ const CalendarWithDateInputRange = ({ id, cardStyle, onChangeValue }: Props) => 
             disabled={{
               after: today,
             }}
-            className="bg-transparent p-0 [--cell-size:--spacing(11)] md:[--cell-size:--spacing(13.5)]"
+            className="w-full bg-transparent p-0 [--cell-size:12%] sm:[--cell-size:--spacing(7)]"
           />
         </CardContent>
+        <CardHeader className="hidden sm:flex w-full flex-col gap-4 ">
+          <div className="flex flex-col gap-2 justify-center">
+            <Label id={id} htmlFor={startID} className="text-[16px]">
+              시작일
+            </Label>
+            <div className="relative">
+              <Input
+                id={startID}
+                type="date"
+                value={inputStartValue}
+                onChange={handleInputStartChange}
+                className="text-[16px] peer appearance-none pl-9 [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
+                aria-label="시작일 선택"
+              />
+              <div className="text-muted-foreground/80 pointer-events-none absolute inset-y-0 left-0 flex items-center justify-center pl-3 peer-disabled:opacity-50">
+                <CalendarIcon size={16} aria-hidden="true" />
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-col gap-2">
+            <Label htmlFor={endID} className="text-[16px]">
+              종료일
+            </Label>
+            <div className="relative">
+              <Input
+                id={endID}
+                type="date"
+                value={inputEndValue}
+                onChange={handleInputEndChange}
+                className="text-sm sm:text-[16px] peer appearance-none pl-9 [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
+                aria-label="종료일 선택"
+              />
+              <div className="text-muted-foreground/80 pointer-events-none absolute inset-y-0 left-0 flex items-center justify-center pl-3 peer-disabled:opacity-50">
+                <CalendarIcon size={16} aria-hidden="true" />
+              </div>
+            </div>
+          </div>
+        </CardHeader>
       </Card>
     </div>
   );

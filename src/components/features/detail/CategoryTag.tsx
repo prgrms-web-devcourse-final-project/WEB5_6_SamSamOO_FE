@@ -11,7 +11,7 @@ function CategoryTag({ text, className, hidden = false }: Props) {
     <span
       hidden={hidden}
       className={tw(
-        'border-4 border-brand-accent rounded-3xl px-4 py-1 text-brand-accent font-extrabold text-2xl',
+        'border-4 border-brand-accent rounded-3xl px-3 py-0.5 text-brand-accent font-extrabold text-xl',
         className,
       )}
     >

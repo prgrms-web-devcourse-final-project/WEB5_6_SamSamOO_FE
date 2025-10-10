@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Github from '@/assets/icons/github.svg';
 
 import tw from '@/utils/tw';
 
@@ -15,23 +16,17 @@ function Footer() {
         darkStyle,
       )}
     >
-      <p>Copyright &copy; 2025 BaLaw. All Rights Reserved</p>
-      <div className="flex gap-4">
+      <p className="text-xs sm:text-[16px]">Copyright &copy; 2025 BaLaw. All Rights Reserved</p>
+      <div className="flex gap-2 sm:gap-4">
         <a
           href="https://github.com/prgrms-web-devcourse-final-project/WEB5_6_SamSamOO_FE"
           target="_blank"
           rel="noreferrer"
           type="button"
           title="슬라이도 피드백 남기기"
+          className="w-7 h-7 shrink-0"
         >
-          <Image
-            className="w-7 h-auto"
-            src="/icons/slido.svg"
-            alt="슬라이도"
-            width={28}
-            height={28}
-            unoptimized
-          />
+          <Image src="/images/slido.png" alt="슬라이도" width={28} height={28} />
         </a>
         <a
           href="https://github.com/prgrms-web-devcourse-final-project/WEB5_6_SamSamOO_FE"
@@ -41,20 +36,7 @@ function Footer() {
           title="깃허브 바로가기"
           className="flex"
         >
-          <Image
-            className="block dark:hidden w-7 h-auto"
-            src="/icons/githubLight.svg"
-            alt="깃허브"
-            width={28}
-            height={28}
-          />
-          <Image
-            className="hidden dark:block w-7 h-auto"
-            src="/icons/githubDark.svg"
-            alt="깃허브"
-            width={28}
-            height={28}
-          />
+          <Github className="dark:text-white w-7 h-7" alt="깃허브" />
         </a>
       </div>
     </footer>

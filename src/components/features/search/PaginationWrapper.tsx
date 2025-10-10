@@ -2,7 +2,7 @@
 import { useSearch } from '@/context/SearchContext';
 import Pagination from './Pagination';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 function PaginationWrapper() {
   const pathname = usePathname();
@@ -12,28 +12,34 @@ function PaginationWrapper() {
   const { totalLawElements, totalPrecedentElements } = useSearch();
   const [pageSize, setPageSize] = useState<number>(1);
   const [fixedTotalElements, setFixedTotalElements] = useState<number | null>(null);
-  const [observerParams, setObserverParams] = useState<URLSearchParams | null>(null);
 
-  // const totalResult = totalElements;
-  useEffect(() => {
-    const cloned = new URLSearchParams(params);
-    cloned.delete('pageNumber');
-    setObserverParams(cloned);
-  }, [params]);
+  const prevFilter = useRef<string>('');
 
-  console.log(params);
   useEffect(() => {
     if (pathname !== '/search/total') return;
+
+    const cloned = new URLSearchParams(Array.from(params.entries()));
+    cloned.delete('pageNumber');
+    const currentFilter = cloned.toString();
+
     const calcTotalElements = totalLawElements + totalPrecedentElements;
+
     if (fixedTotalElements === null && calcTotalElements > 0) {
       setFixedTotalElements(calcTotalElements);
+      prevFilter.current = currentFilter;
+      return;
     }
-  }, [totalPrecedentElements, totalLawElements, pathname, observerParams?.toString()]);
 
+    if (prevFilter.current !== currentFilter) {
+      setFixedTotalElements(calcTotalElements);
+      prevFilter.current = currentFilter;
+    }
+  }, [pathname, totalLawElements, totalPrecedentElements, fixedTotalElements]);
+
+  console.log('통합검색결과수 : ', fixedTotalElements);
   useEffect(() => {
     if (pathname === '/search/total') {
       setTotalElements(fixedTotalElements ?? totalLawElements + totalPrecedentElements);
-      // setTotalElements(totalLawElements + totalPrecedentElements);
       setPageSize(Math.max(totalLawElements, totalPrecedentElements));
     } else if (pathname === '/search/law') {
       setTotalElements(totalLawElements);
@@ -48,7 +54,6 @@ function PaginationWrapper() {
     <div className="flex flex-col items-center pb-6 gap-2">
       <Pagination end={Math.ceil(pageSize / 10)} currentPage={currentPage} />
       <p className="font-light text-sm">검색결과 : 총 {totalElements}건</p>
-      {/* <p className="font-light text-sm">검색결과 : 총 {totalResult}건</p> */}
     </div>
   );
 }

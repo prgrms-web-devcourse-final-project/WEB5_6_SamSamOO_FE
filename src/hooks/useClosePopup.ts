@@ -29,14 +29,19 @@ function useClosePopup({
   }, [isOpen, hiddenOverflow]);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === 'undefined' || !isOpen) return;
+
     const handleClick = (e: MouseEvent) => {
       if (!closeOnOutsideClick) return;
-      const target = e.target as HTMLElement;
+      if (!ref?.current) return;
 
-      if (ref?.current) return;
-      if (ignoreSelectors?.some((ignoreTarget) => target.closest(ignoreTarget))) return;
-      if (!ref) return;
+      const target = e.target as HTMLElement;
+      const isInside = ref.current.contains(target);
+
+      if (ignoreSelectors?.some((sel) => target.closest(sel))) return;
+
+      if (isInside) return;
+
       onClose?.();
     };
 
@@ -46,7 +51,6 @@ function useClosePopup({
 
     document.addEventListener('mousedown', handleClick);
     document.addEventListener('keydown', handleKeyDown);
-
     return () => {
       document.removeEventListener('mousedown', handleClick);
       document.removeEventListener('keydown', handleKeyDown);

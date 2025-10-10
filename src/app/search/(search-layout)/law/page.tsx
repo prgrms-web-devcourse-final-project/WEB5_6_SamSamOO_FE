@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 import LawSearchResults from '@/components/features/search/LawSearchResults';
 import SetTotalElementsAndPages from '@/components/features/search/SetTotalElementsAndPages';
-import { getLawSearchResults } from '@/api/getLawSearchResults';
+import { getLawSearchResults } from '@/api/search/getLawSearchResults';
 
 export const metadata: Metadata = {
   title: '바로 | 법령 검색',
@@ -25,16 +25,12 @@ async function Page({ searchParams }: { searchParams: Promise<SearchParams> }) {
   const searchList = await searchParams;
   const { search_query } = searchList;
 
-  const getData = async () => {
-    const response = await getLawSearchResults({
-      lawName: search_query ?? null,
-      ...searchList,
-      pageSize: 10,
-    });
-    return response;
-  };
-  const payload = await getData();
-  console.log(payload);
+  const response = await getLawSearchResults({
+    lawName: search_query ?? null,
+    ...searchList,
+    pageSize: 10,
+  });
+  const payload = await response;
 
   return (
     <>

@@ -25,8 +25,7 @@ interface Props {
 
 function SearchFilter({ category, setAppliedFilterText }: Props) {
   const searchParams = useSearchParams();
-  const newParams = new URLSearchParams(searchParams);
-  newParams.delete('pageNumber');
+  const prevFilterRef = useRef<string>('');
   const router = useRouter();
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -101,7 +100,6 @@ function SearchFilter({ category, setAppliedFilterText }: Props) {
   useEffect(() => {
     if (category === '통합') {
       const mapLabel = mapFilterToLabel(totalSearchFilter, TotalSearchFilterLabel);
-      console.log(totalSearchFilter);
       const convert = convertObjectToString(mapLabel);
       if (convert.length === 0) setAppliedFilterText('적용된 필터가 없습니다');
       else setAppliedFilterText(convert);
@@ -121,18 +119,28 @@ function SearchFilter({ category, setAppliedFilterText }: Props) {
   }, [lawSearchFilter, totalSearchFilter, precedentSearchFilter, category, setAppliedFilterText]);
 
   useEffect(() => {
+    const currentFilter =
+      category === '통합'
+        ? JSON.stringify(totalSearchFilter)
+        : category === '법령'
+          ? JSON.stringify(lawSearchFilter)
+          : JSON.stringify(precedentSearchFilter);
+
+    if (prevFilterRef.current === currentFilter) return;
+
+    const baseParams = new URLSearchParams(searchParams);
+    baseParams.set('pageNumber', '0');
+
+    let url = '';
     if (category === '통합') {
-      const url = makeSearchUrl(pathname, newParams, totalSearchFilter);
-      router.push(url);
+      url = makeSearchUrl(pathname, baseParams, totalSearchFilter);
+    } else if (category === '법령') {
+      url = makeSearchUrl(pathname, baseParams, lawSearchFilter);
+    } else if (category === '판례') {
+      url = makeSearchUrl(pathname, baseParams, precedentSearchFilter);
     }
-    if (category === '법령') {
-      const url = makeSearchUrl(pathname, newParams, lawSearchFilter);
-      router.push(url);
-    }
-    if (category === '판례') {
-      const url = makeSearchUrl(pathname, newParams, precedentSearchFilter);
-      router.push(url);
-    }
+    router.replace(url);
+    prevFilterRef.current = currentFilter;
   }, [totalSearchFilter, precedentSearchFilter, lawSearchFilter]);
 
   return (
