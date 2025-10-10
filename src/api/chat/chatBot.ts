@@ -1,5 +1,5 @@
 import api from '@/api/axiosInstance';
-import { ChatBotAnswer } from '@/types/chatBot';
+import { ChatBotAnswer } from '@/types/chat';
 
 export async function postNewChat(message: string) {
   try {
