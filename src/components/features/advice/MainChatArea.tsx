@@ -1,85 +1,57 @@
 'use client';
 
 import { useChatStore } from '@/store/useChatStore';
-import AIMessage from './components/chat/AIMessage';
-import UserMessage from './components/chat/UserMessage';
-import { Fragment, useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { useShallow } from 'zustand/shallow';
 import { getChatHistoryInfo } from '@/api/chat/chatHistoty';
-import { useRouter } from 'next/navigation';
-import { convertMessage, messageGroup } from '@/utils/convertMessage';
-import AIMessageSkeleton from './loading/AIMessageSkeleton';
+import { convertMessage } from '@/utils/convertMessage';
 import { useAutoScroll } from '@/hooks/useAutoScroll';
-import { useScrollToBottom } from '@/hooks/useScrollToBottom';
-import ScrollToBottomButton from '@/components/ui/ScrollToBottomButton';
+import ChatContents from './components/chat/ChatContents';
+import ScrollManager from './components/chat/ScrollManager';
+import { showErrorToast } from '@/utils/showToast';
 
 interface Props {
   urlId?: string;
 }
 
 function MainChatArea({ urlId }: Props) {
-  const router = useRouter();
-
-  const { roomId, messages, sendMessage, setRoomId, setChatHistory, isLoading } = useChatStore(
+  const { roomId, messages, setChatHistory, isLoading, isReset } = useChatStore(
     useShallow((state) => ({
       roomId: state.roomId,
       messages: state.messages,
-      sendMessage: state.sendMessage,
       setRoomId: state.setRoomId,
       setChatHistory: state.setChatHistory,
       isLoading: state.isLoading,
+      isReset: state.isReset,
     })),
   );
+
   const autoScrollRef = useAutoScroll([messages, isLoading]);
 
-  // 스크롤 훅 사용
-  const { showButton, scrollToBottom } = useScrollToBottom({
-    autoScrollRef,
-    threshold: 100,
-    enabled: true,
-  });
-
   useEffect(() => {
-    if (urlId !== roomId) {
+    if (isLoading || isReset) return;
+
+    if (urlId !== 'first' && urlId !== roomId) {
       getHistoryInfo(urlId ?? '');
-      router.replace(`/chat/${urlId}`);
-      //데이터 타입이 달라서 새로운 가공 함수 추가해야함
-    } else {
-      const lastMessage = messages[messages.length - 1];
-      if (lastMessage?.role === 'user' && lastMessage.isPending) {
-        sendMessage(lastMessage.content);
-        router.replace(`/chat/${roomId}`);
-      }
     }
-  }, [messages, sendMessage]);
+  }, [urlId, roomId, isLoading]);
 
   const getHistoryInfo = async (historyId: string) => {
     const res = await getChatHistoryInfo(historyId);
-    if (!res) return;
+    if (!res) {
+      showErrorToast('채팅 이력을 불러오지 못했습니다.');
+      return;
+    }
     const convertChatInfo = convertMessage(res);
-    setRoomId(historyId);
-    setChatHistory(convertChatInfo);
+    setChatHistory(convertChatInfo, historyId);
   };
-
-  const groupedMessages = messageGroup(messages);
 
   return (
     <>
       <div ref={autoScrollRef} className="w-[80%] center-col overflow-y-auto relative">
-        <div className="w-full flex h-[50vh] flex-col items-end">
-          {groupedMessages.map((group, index) => {
-            const isLastGroup = index === groupedMessages.length - 1;
-            return (
-              <Fragment key={group.user.id}>
-                <UserMessage msg={group.user} />
-                {isLastGroup && isLoading && <AIMessageSkeleton />}
-                {group.ai && <AIMessage msg={group.ai} />}
-              </Fragment>
-            );
-          })}
-        </div>
+        <ChatContents messages={messages} isLoading={isLoading} />
       </div>
-      <ScrollToBottomButton show={showButton} onClick={scrollToBottom} />
+      <ScrollManager autoScrollRef={autoScrollRef} />
     </>
   );
 }
