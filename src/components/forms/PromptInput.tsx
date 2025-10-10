@@ -12,13 +12,23 @@ export default function PromptInput() {
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
   const router = useRouter();
   const pathname = usePathname();
-  const { sendNewMessage, sendExistMessage } = useChatStore(
+  const { roomId, message, sendNewMessage, sendExistMessage } = useChatStore(
     useShallow((state) => ({
+      roomId: state.roomId,
+      message: state.messages,
       sendNewMessage: state.sendNewMessage,
       sendExistMessage: state.sendExistMessage,
     })),
   );
   useTextAreaHeight(value, textAreaRef);
+
+  useEffect(() => {
+    if (pathname === '/advice') {
+      if (roomId && message.length > 1) {
+        router.push(`/chat/${roomId}`);
+      }
+    }
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

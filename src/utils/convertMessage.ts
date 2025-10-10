@@ -11,8 +11,8 @@ export function convertMessage(chatList: ChatInfo[]) {
       id: crypto.randomUUID(),
       role: chat.type === 'USER' ? 'user' : 'ai',
       content: chat.message,
-      similarCases: [],
-      similarLaws: [],
+      precedent: chat.precedent,
+      law: chat.law,
       timestamp: new Date(chat.createdAt).getTime(),
     });
     return acc;
