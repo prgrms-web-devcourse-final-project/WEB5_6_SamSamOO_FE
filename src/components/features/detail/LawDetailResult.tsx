@@ -31,10 +31,10 @@ function LawDetailResult({ data }: { data: LawDetailsResponse }) {
 
   return (
     <>
-      <InlineText>
-        <div className="w-full h-full flex flex-1 bg-background-white dark:bg-background-black1">
-          <Sidebar toc={toc} metadata={metadata} category="법령" />
-          <section className="flex flex-1 justify-center sm:px-25 py-10">
+      <div className="w-full h-full flex flex-1 bg-background-white dark:bg-background-black1">
+        <Sidebar toc={toc} metadata={metadata} category="법령" />
+        <section className="flex flex-1 justify-center sm:px-25 py-10">
+          <InlineText>
             <div className="w-full max-w-[1200px]">
               <h2 className="sr-only">컨텐츠</h2>
               <header className="text-primary-gray1 dark:text-primary-white pb-10 px-8">
@@ -99,10 +99,10 @@ function LawDetailResult({ data }: { data: LawDetailsResponse }) {
                 ))}
               </article>
             </div>
-          </section>
-          <ScrollButton />
-        </div>
-      </InlineText>
+          </InlineText>
+        </section>
+        <ScrollButton />
+      </div>
     </>
   );
 }
