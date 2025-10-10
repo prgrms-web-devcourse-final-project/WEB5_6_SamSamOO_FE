@@ -44,22 +44,23 @@ function TotalSearchFilterModal({ isOpen, onClose = () => {}, setTotalSearchFilt
     setMinistry('');
   }, [authority]);
 
-  useClosePopup({ onClose, isOpen });
+  useClosePopup({ onClose, isOpen, ref: modalRef });
 
   useClosePopup({
     isOpen: !!openCalendar,
     onClose: () => setOpenCalendar(null),
+    ref:
+      openCalendar === 'enforcement'
+        ? enforcementRef
+        : openCalendar === 'promulgation'
+          ? promulgationRef
+          : precedentRef,
     ignoreSelectors: ['[data-radix-popper-content-wrapper]'],
     hiddenOverflow: false,
   });
 
   return (
-    <div
-      className="fixed flex inset-0 z-10 bg-black/40 backdrop-blur-sm w-screen h-screen items-center justify-center"
-      onPointerDown={(e) => {
-        if (e.target === e.currentTarget) onClose();
-      }}
-    >
+    <div className="fixed flex inset-0 z-10 bg-black/40 backdrop-blur-sm w-screen h-screen items-center justify-center">
       <section
         ref={modalRef}
         className="w-full h-screen overflow-y-scroll sm:overflow-y-visible sm:w-fit sm:h-fit px-10 pt-30 pb-10 sm:px-10 sm:py-10 bg-white sm:rounded-modal sm:mb-5  dark:bg-background-black3 dark:text-primary-white dark:shadow-modal-dark"

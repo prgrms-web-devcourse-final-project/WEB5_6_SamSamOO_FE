@@ -56,29 +56,5 @@ function useClosePopup({
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, [isOpen, onClose, ref, ignoreSelectors, closeOnEscape, closeOnOutsideClick]);
-  // useEffect(() => {
-  //   if (typeof window === 'undefined') return;
-  //   const handleClick = (e: MouseEvent) => {
-  //     if (!closeOnOutsideClick) return;
-  //     const target = e.target as HTMLElement;
-
-  //     if (ref?.current) return;
-  //     if (ignoreSelectors?.some((ignoreTarget) => target.closest(ignoreTarget))) return;
-  //     if (!ref) return;
-  //     onClose?.();
-  //   };
-
-  //   const handleKeyDown = (e: KeyboardEvent) => {
-  //     if (closeOnEscape && e.key === 'Escape') onClose?.();
-  //   };
-
-  //   document.addEventListener('mousedown', handleClick);
-  //   document.addEventListener('keydown', handleKeyDown);
-
-  //   return () => {
-  //     document.removeEventListener('mousedown', handleClick);
-  //     document.removeEventListener('keydown', handleKeyDown);
-  //   };
-  // }, [isOpen, onClose, ref, ignoreSelectors, closeOnEscape, closeOnOutsideClick]);
 }
 export default useClosePopup;
