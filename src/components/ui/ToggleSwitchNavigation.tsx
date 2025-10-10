@@ -20,7 +20,7 @@ interface Props {
 }
 
 const defaultParentStyle =
-  'px-8 py-3 gap-[83px] bg-[#0D1846] rounded-full font-medium text-xl text-primary-white dark:bg-primary-black dark:border dark:border-border-gray1';
+  'mx-5 px-8 py-3 w-full max-w-[354px] flex justify-between bg-[#0D1846] rounded-full font-medium text-xl text-primary-white dark:bg-primary-black dark:border dark:border-border-gray1';
 const defaultActiveBlockStyle = 'bg-background-white rounded-4xl';
 const defaultActiveTextStyle = 'text-primary-black';
 const defaultInactiveTextStyle = 'text-primary-white';

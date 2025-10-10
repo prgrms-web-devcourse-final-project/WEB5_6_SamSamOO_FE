@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 import PrecedentSearchResults from '@/components/features/search/PrecedentSearchResults';
 
-import { getPrecedentSearchResults } from '@/api/getPrecedentSearchResults';
+import { getPrecedentSearchResults } from '@/api/search/getPrecedentSearchResults';
 import SetTotalElementsAndPages from '@/components/features/search/SetTotalElementsAndPages';
 
 export const metadata: Metadata = {
@@ -22,15 +22,13 @@ async function Page({ searchParams }: { searchParams: Promise<SearchParams> }) {
   const searchList = await searchParams;
   const { search_query } = searchList;
 
-  const getData = async () => {
-    const response = await getPrecedentSearchResults({
-      keyword: search_query ?? null,
-      ...searchList,
-      pageSize: 10,
-    });
-    return response;
-  };
-  const payload = await getData();
+  const response = await getPrecedentSearchResults({
+    keyword: search_query ?? null,
+    ...searchList,
+    pageSize: 10,
+  });
+
+  const payload = await response;
 
   return (
     <>

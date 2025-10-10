@@ -1,4 +1,6 @@
+import SearchSkeleton from '@/components/features/search/SearchSkeleton';
+
 function loading() {
-  return <div>검색 결과 로딩중...</div>;
+  return <SearchSkeleton />;
 }
 export default loading;
