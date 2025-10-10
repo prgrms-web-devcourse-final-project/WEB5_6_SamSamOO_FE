@@ -1,5 +1,3 @@
-import { SimilarCase, SimilarLaw } from './chatBot';
-
 export type ChatHistoryList = {
   historyRoomId: number;
   title: string;
@@ -14,12 +12,20 @@ export type ChatHistory = {
   updatedAt: string;
 };
 
+export type ChatBotAnswer = {
+  roomId: number;
+  title: string;
+  message: string;
+  law: Laws;
+  precedent: Precedent;
+};
+
 export type Message = {
   id: string;
   role: 'user' | 'ai';
   content: string;
-  similarCases?: SimilarCase[];
-  similarLaws?: SimilarLaw[];
+  precedent?: Precedent;
+  law?: Laws;
   timestamp: number;
   isPending?: boolean;
 };
@@ -27,8 +33,8 @@ export type Message = {
 export type ChatInfo = {
   type: 'USER' | 'ASSISTANT';
   message: string;
-  precedents: Precedent[];
-  laws: Laws[];
+  precedents: Precedent;
+  laws: Laws;
   createdAt: string;
 };
 
