@@ -38,7 +38,6 @@ function MainChatArea({ urlId }: Props) {
 
   const getHistoryInfo = async (historyId: string) => {
     const res = await getChatHistoryInfo(historyId);
-    console.log('res,', res);
     if (!res) {
       showErrorToast('채팅 이력을 불러오지 못했습니다.');
       return;

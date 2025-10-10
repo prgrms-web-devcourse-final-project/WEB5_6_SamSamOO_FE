@@ -72,7 +72,6 @@ export const useChatStore = create<ChatState>()((set, get) => ({
       setLoading(true);
       if (!roomId) {
         const res = await postNewChat(data.content);
-        console.log('res', res);
         if (!res) return;
 
         // AI 응답 추가

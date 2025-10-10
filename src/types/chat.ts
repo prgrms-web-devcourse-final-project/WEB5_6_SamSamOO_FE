@@ -33,8 +33,8 @@ export type Message = {
 export type ChatInfo = {
   type: 'USER' | 'ASSISTANT';
   message: string;
-  precedents: Precedent;
-  laws: Laws;
+  precedent: Precedent;
+  law: Laws;
   createdAt: string;
 };
 
