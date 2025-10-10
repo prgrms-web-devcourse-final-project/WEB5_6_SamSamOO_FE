@@ -10,6 +10,7 @@ import Footer from '@/components/layout/Footer';
 import ThemeProvider from '@/components/provider/ThemeProvider';
 import ServerUserProvider from '@/components/provider/ServerUserProvider';
 import { Toaster } from 'sonner';
+import ConfirmAlert from '@/components/ui/ConfirmAlert';
 
 export const metadata: Metadata = {
   title: '바로 BaLaw',
@@ -60,6 +61,7 @@ export default function RootLayout({
             <Footer />
           </ThemeProvider>
         </ServerUserProvider>
+        <ConfirmAlert />
         <SpeedInsights />
         <Analytics />
       </body>
