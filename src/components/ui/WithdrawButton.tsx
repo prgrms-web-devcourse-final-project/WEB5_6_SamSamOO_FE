@@ -16,7 +16,6 @@ function WithdrawButton() {
   const resetStore = useChatStore((state) => state.resetStore);
 
   const handleWithdraw = async () => {
-    console.log('클릭');
     showAlert('회원탈퇴', '정말 탈퇴하시겠습니까? 회원정보는 복구되지 않습니다.', () => {
       userWithDraw();
     });
@@ -24,15 +23,14 @@ function WithdrawButton() {
 
   const userWithDraw = async () => {
     const res = await withdraw();
-    console.log('res', res);
-    // if (res) {
-    //   showInfoToast('탈퇴되었습니다.');
-    //   clearSession();
-    //   resetStore();
-    //   router.push('/');
-    // } else {
-    //   showErrorToast('회원 탈퇴를 실패하였습니다.');
-    // }
+    if (res) {
+      showInfoToast('탈퇴되었습니다.');
+      clearSession();
+      resetStore();
+      router.push('/');
+    } else {
+      showErrorToast('회원 탈퇴를 실패하였습니다.');
+    }
   };
   return (
     <>
