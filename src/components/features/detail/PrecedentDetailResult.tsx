@@ -3,7 +3,7 @@ import Sidebar from './Sidebar';
 // import SidebarRagcay from './SidebarRegacy';
 
 import extractPrecedentHeadings from '@/utils/extractPrecedentHeadings';
-import ScrollButton from '@/components/ui/ScrollButton';
+import ScrollToTopButton from '@/components/ui/ScrollToTopButton';
 import InlineText from '@/components/ui/InlineText';
 import { Metadata } from '@/types/detail';
 import { PrecedentDetailsResponse } from '@/types/precedent';
@@ -118,7 +118,7 @@ function PrecedentDetailResult({ data }: { data: PrecedentDetailsResponse }) {
             </div>
           </InlineText>
         </section>
-        <ScrollButton />
+        <ScrollToTopButton />
       </div>
     </>
   );

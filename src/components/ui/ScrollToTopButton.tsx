@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 import tw from '@/utils/tw';
 
-function ScrollButton() {
+function ScrollToTopButton() {
   const [showVisible, setShowVisible] = useState<boolean>(false);
 
   useEffect(() => {
@@ -47,4 +47,4 @@ function ScrollButton() {
     </button>
   );
 }
-export default ScrollButton;
+export default ScrollToTopButton;
