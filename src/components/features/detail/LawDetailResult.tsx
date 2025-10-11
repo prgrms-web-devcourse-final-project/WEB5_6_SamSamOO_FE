@@ -1,12 +1,13 @@
 import Sidebar from './Sidebar';
+// import SidebarRagcay from './SidebarRegacy';
 import CategoryTag from './CategoryTag';
 
 import tw from '@/utils/tw';
 import extractLawHeadings from '@/utils/extractLawHeadings';
 import ScrollButton from '@/components/ui/ScrollButton';
+import InlineText from '@/components/ui/InlineText';
 import { Metadata } from '@/types/detail';
 import { LawDetailsResponse } from '@/types/law';
-import InlineText from '@/components/ui/InlineText';
 
 function LawDetailResult({ data }: { data: LawDetailsResponse }) {
   const {
@@ -33,7 +34,7 @@ function LawDetailResult({ data }: { data: LawDetailsResponse }) {
     <>
       <div className="w-full h-full flex flex-1 bg-background-white dark:bg-background-black1">
         <Sidebar toc={toc} metadata={metadata} category="법령" />
-        <section className="flex flex-1 overflow-x-auto justify-center min-w-[320px] px-16 sm:px-25 py-10">
+        <section className="flex-1 justify-center px-8 pt-22 pb-10 md:px-25 md:py-10">
           <InlineText>
             <div className="w-full max-w-[1200px]">
               <h2 className="sr-only">컨텐츠</h2>
@@ -48,14 +49,14 @@ function LawDetailResult({ data }: { data: LawDetailsResponse }) {
                   <p>{lawField}</p>
                 </div>
               </header>
-              <article className="leading-[26px] dark:text-primary-white">
+              <article className="leading-[26px] dark:text-primary-white pb-20">
                 {jangList.map((jang, index) => (
                   <div key={`jang${index}`} className="pb-30">
                     <h2
                       id={jang.content !== null ? String(count++) : ''}
                       className={tw(
                         jang.content !== null
-                          ? 'text-2xl font-medium pb-6 text-primary-gray2 dark:text-primary-white scroll-mt-24'
+                          ? 'text-2xl font-medium pb-6 text-primary-gray2 dark:text-primary-white scroll-mt-38 md:scroll-mt-25'
                           : '',
                       )}
                     >
@@ -70,8 +71,8 @@ function LawDetailResult({ data }: { data: LawDetailsResponse }) {
                               id={String(count++)}
                               className={tw(
                                 jang.content === null
-                                  ? 'text-xl font-medium pb-6 text-primary-gray2 dark:text-primary-white scroll-mt-24'
-                                  : 'text-xl font-medium text-primary-gray2 dark:text-primary-white scroll-mt-22',
+                                  ? 'text-xl font-medium pb-6 text-primary-gray2 dark:text-primary-white scroll-mt-38 md:scroll-mt-22'
+                                  : 'text-xl font-medium text-primary-gray2 dark:text-primary-white scroll-mt-36 md:scroll-mt-22',
                               )}
                             >
                               {jo.content}

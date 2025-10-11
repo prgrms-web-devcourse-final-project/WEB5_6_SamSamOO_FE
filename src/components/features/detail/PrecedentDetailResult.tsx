@@ -1,11 +1,12 @@
 import CategoryTag from './CategoryTag';
 import Sidebar from './Sidebar';
+// import SidebarRagcay from './SidebarRegacy';
 
-import ScrollButton from '@/components/ui/ScrollButton';
 import extractPrecedentHeadings from '@/utils/extractPrecedentHeadings';
+import ScrollButton from '@/components/ui/ScrollButton';
+import InlineText from '@/components/ui/InlineText';
 import { Metadata } from '@/types/detail';
 import { PrecedentDetailsResponse } from '@/types/precedent';
-import InlineText from '@/components/ui/InlineText';
 
 function PrecedentDetailResult({ data }: { data: PrecedentDetailsResponse }) {
   console.log(data);
@@ -41,9 +42,9 @@ function PrecedentDetailResult({ data }: { data: PrecedentDetailsResponse }) {
     <>
       <div className="w-full h-full flex flex-1 bg-background-white dark:bg-background-black1">
         <Sidebar toc={toc} metadata={metadata} category="판례" />
-        <section className="flex flex-1 overflow-x-auto justify-center min-w-[320px] sm:pl-[260px] px-16 sm:px-25 py-10">
+        <section className="flex-1 justify-center px-8 pt-22 pb-10 md:px-25 md:py-10">
           <InlineText>
-            <div className="w-full max-w-[1200px] ">
+            <div className="w-full max-w-[1200px]">
               <h2 className="sr-only">컨텐츠</h2>
 
               <header className="text-primary-gray1 dark:text-primary-white pb-10">
@@ -59,9 +60,9 @@ function PrecedentDetailResult({ data }: { data: PrecedentDetailsResponse }) {
                 </div>
               </header>
 
-              <article className="leading-[26px] dark:text-primary-white">
+              <article className="leading-[26px] dark:text-primary-white pb-20">
                 {notice && (
-                  <div id={String(count++)} className="scroll-mt-24">
+                  <div id={String(count++)} className="scroll-mt-38 md:scroll-mt-24">
                     <p className="text-2xl font-medium pb-6 text-primary-gray2 dark:text-primary-white">
                       판시사항
                     </p>
@@ -69,7 +70,7 @@ function PrecedentDetailResult({ data }: { data: PrecedentDetailsResponse }) {
                   </div>
                 )}
                 {summaryOfTheJudgment && (
-                  <div id={String(count++)} className="scroll-mt-12">
+                  <div id={String(count++)} className="scroll-mt-24 md:scroll-mt-12">
                     <p className="text-2xl font-medium mb-5 pt-14 text-primary-gray2 dark:text-primary-white ">
                       판결요지
                     </p>
@@ -83,7 +84,7 @@ function PrecedentDetailResult({ data }: { data: PrecedentDetailsResponse }) {
                   </div>
                 )}
                 {precedentContent && (
-                  <div id={String(count++)} className="scroll-mt-12">
+                  <div id={String(count++)} className="scroll-mt-24 md:scroll-mt-12">
                     <p className="text-2xl font-medium pt-14 -mb-5 text-primary-gray2 dark:text-primary-white">
                       판례내용
                     </p>
@@ -98,7 +99,7 @@ function PrecedentDetailResult({ data }: { data: PrecedentDetailsResponse }) {
                             <li
                               key={index}
                               id={String(count++)}
-                              className="pt-10 pb-1 scroll-mt-18"
+                              className="pt-10 pb-1 scroll-mt-30 md:scroll-mt-18"
                             >
                               <p>{row}</p>
                             </li>

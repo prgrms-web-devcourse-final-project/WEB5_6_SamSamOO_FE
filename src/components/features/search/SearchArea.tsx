@@ -28,6 +28,8 @@ function SearchArea() {
     input.value = '';
   };
 
+  // document.documentElement.style.overflow = '';
+
   return (
     <>
       <form
