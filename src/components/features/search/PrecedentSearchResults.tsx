@@ -38,7 +38,7 @@ function PrecedentSearchResults({ content, showTag = false }: Props) {
               <p className="mb-3 line-clamp-2 text-sm sm:text-[16px]">
                 {contents.split('<br/>')[0].length > 10
                   ? contents.split('<br/>')[0]
-                  : `【주 문】 ${contents.split('<br/>')[1]}`}
+                  : `【주 문】 ${contents.split('<br/>').slice(1).join(' ')}`}
               </p>
 
               <section className="flex gap-2 text-xs sm:text-[16px] text-primary-gray1">
