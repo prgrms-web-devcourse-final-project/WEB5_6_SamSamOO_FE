@@ -3,12 +3,16 @@ import DividerWithText from '@/components/features/account/DividerWithText';
 import Link from 'next/link';
 import AuthHeader from '@/components/features/account/AuthHeader';
 
-function Page() {
+async function Page({
+  searchParams,
+}: {
+  searchParams: Promise<{ message?: string; from?: string }>;
+}) {
   return (
     <div className="w-[420px] center-col">
       <AuthHeader title="👋 안녕하세요!" subtitle="다시 만나게 되어서 반가워요!" />
 
-      <LoginForm />
+      <LoginForm Params={await searchParams} />
 
       <DividerWithText text="간편 로그인" />
 

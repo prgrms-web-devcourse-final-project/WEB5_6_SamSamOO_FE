@@ -57,6 +57,7 @@ function ChatListModal({ onClose, isOpen }: Props) {
         'w-[340px] h-[580px] rounded-modal shadow-ai-floating flex flex-col items-center',
         MODAL_COLOR,
       )}
+      ref={modalRef}
     >
       <div className="border-b border-b-primary-gray2 relative center-row p-4 mb-4 w-[300px]">
         <h2 className="text-2xl">채팅목록</h2>

@@ -1,18 +1,28 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { login } from '@/api/account/loginApi';
 import { useUserStore } from '@/store/useUserStore';
 import AccountInput from '@/components/features/account/AccountInput';
 import AccountButton from '@/components/features/account/AccountButton';
 import FormErrorMessage from '@/components/features/account/FormErrorMessage';
-import { showSuccessToast } from '@/utils/showToast';
+import { showErrorToast, showSuccessToast } from '@/utils/showToast';
 
-export default function LoginForm() {
+interface Props {
+  Params: { message?: string; from?: string };
+}
+
+export default function LoginForm({ Params }: Props) {
   const router = useRouter();
   const setSession = useUserStore((state) => state.setSession);
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (Params.message === 'login-required') {
+      showErrorToast('로그인이 필요한 페이지입니다.');
+    }
+  }, [Params.message]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -44,7 +54,11 @@ export default function LoginForm() {
       const response = await login(formData);
       setSession({ isAuthenticated: true, user: response });
       showSuccessToast('로그인 성공! 환영합니다♥️');
-      router.replace('/');
+      if (Params.from) {
+        router.replace(Params.from);
+      } else {
+        router.replace('/');
+      }
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (_err) {
       setError('이메일 또는 비밀번호가 올바르지 않습니다.');
