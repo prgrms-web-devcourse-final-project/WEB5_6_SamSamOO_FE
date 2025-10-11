@@ -6,7 +6,7 @@ import { useUserStore } from '@/store/useUserStore';
 import AccountInput from '@/components/features/account/AccountInput';
 import AccountButton from '@/components/features/account/AccountButton';
 import FormErrorMessage from '@/components/features/account/FormErrorMessage';
-import { showSuccessToast } from '@/utils/showToast';
+import { showErrorToast, showSuccessToast } from '@/utils/showToast';
 
 interface Props {
   Params: { message?: string; from?: string };
@@ -20,7 +20,7 @@ export default function LoginForm({ Params }: Props) {
 
   useEffect(() => {
     if (Params.message === 'login-required') {
-      alert('로그인이 필요한 페이지입니다.');
+      showErrorToast('로그인이 필요한 페이지입니다.');
     }
   }, [Params.message]);
 
