@@ -51,7 +51,7 @@ function PaginationWrapper() {
   }, [pathname, totalLawElements, totalPrecedentElements, fixedTotalElements]);
 
   return (
-    <div className="flex flex-col items-center pb-6 gap-2">
+    <div className="flex flex-col items-center pb-28 gap-2">
       <Pagination end={Math.ceil(pageSize / 10)} currentPage={currentPage} />
       <p className="font-light text-sm">검색결과 : 총 {totalElements}건</p>
     </div>

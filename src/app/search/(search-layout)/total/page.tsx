@@ -68,6 +68,7 @@ async function Page({ searchParams }: { searchParams: Promise<SearchParams> }) {
   };
 
   const lawPayload = await getLawData();
+
   // console.log('법령 개수 : ', lawPayload.totalElements);
   // console.log('법령 페이지 수 : ', lawPayload.totalPages);
 

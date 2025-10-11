@@ -5,11 +5,7 @@ import { useEffect, useState } from 'react';
 
 import tw from '@/utils/tw';
 
-interface Props {
-  direction?: string;
-}
-
-function ScrollButton({ direction = 'top' }: Props) {
+function ScrollToTopButton() {
   const [showVisible, setShowVisible] = useState<boolean>(false);
 
   useEffect(() => {
@@ -18,32 +14,17 @@ function ScrollButton({ direction = 'top' }: Props) {
       const doc = document.documentElement;
       const maxScroll = doc.scrollHeight - window.innerHeight;
 
-      if (direction === 'top') {
-        setShowVisible(scroll > 200);
-      } else {
-        if (doc.scrollHeight > window.innerHeight) {
-          setShowVisible(scroll < maxScroll - 200);
-        } else {
-          setShowVisible(false);
-        }
-      }
+      setShowVisible(scroll > 200 && scroll < maxScroll - 200);
     };
     window.addEventListener('scroll', handleShowScrollButton);
     return () => window.removeEventListener('scroll', handleShowScrollButton);
   }, []);
 
   const handleClick = () => {
-    if (direction === 'top') {
-      window.scroll({
-        top: 0,
-        behavior: 'smooth',
-      });
-    } else {
-      window.scroll({
-        top: document.documentElement.scrollHeight - window.innerHeight,
-        behavior: 'smooth',
-      });
-    }
+    window.scroll({
+      top: 0,
+      behavior: 'smooth',
+    });
   };
 
   return (
@@ -57,10 +38,7 @@ function ScrollButton({ direction = 'top' }: Props) {
       onClick={handleClick}
     >
       <Image
-        className={tw(
-          'drop-shadow-[var(--shadow-floating)]',
-          direction === 'bottom' ? 'rotate-180' : '',
-        )}
+        className={tw('drop-shadow-[var(--shadow-floating)]')}
         src="/icons/floatingUpButton.svg"
         width={50}
         height={50}
@@ -69,4 +47,4 @@ function ScrollButton({ direction = 'top' }: Props) {
     </button>
   );
 }
-export default ScrollButton;
+export default ScrollToTopButton;

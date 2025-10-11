@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import ArrowUpward from '@/assets/icons/arrowUpward.svg';
 import { useChatStore } from '@/store/useChatStore';
@@ -11,23 +11,36 @@ export default function PromptInput() {
   const [value, setValue] = useState('');
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
   const router = useRouter();
-  const { roomId, addMessage } = useChatStore(
-    useShallow((state) => ({ roomId: state.roomId, addMessage: state.addMessage })),
+  const pathname = usePathname();
+  const { roomId, message, sendNewMessage, sendExistMessage } = useChatStore(
+    useShallow((state) => ({
+      roomId: state.roomId,
+      message: state.messages,
+      sendNewMessage: state.sendNewMessage,
+      sendExistMessage: state.sendExistMessage,
+    })),
   );
   useTextAreaHeight(value, textAreaRef);
 
   useEffect(() => {
-    if (roomId) {
-      router.push(`/chat/${roomId}`);
+    if (pathname === '/advice') {
+      if (roomId && message.length > 1) {
+        router.push(`/chat/${roomId}`);
+      }
     }
-  }, [roomId]);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!value.trim()) return;
-    addMessage({ role: 'user', content: value });
-    router.push(`/chat/temp-${Date.now()}`);
+    const input = value;
     setValue('');
+    if (pathname === '/advice') {
+      sendNewMessage(input, router);
+      router.push(`/chat/first`);
+    } else {
+      sendExistMessage(input);
+    }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
