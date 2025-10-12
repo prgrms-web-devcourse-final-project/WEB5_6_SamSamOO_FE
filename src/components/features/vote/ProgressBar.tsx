@@ -1,4 +1,3 @@
-// src/components/features/vote/ProgressBar.tsx
 'use client';
 
 import * as Progress from '@radix-ui/react-progress';
