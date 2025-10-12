@@ -1,7 +1,7 @@
-import { OngoingVoteResponse } from '@/types/vote';
+import { VoteResponse } from '@/types/vote';
 import { VoteCardModel } from '@/types/voteCard';
 
-export function normalizeVoteResponse(data: OngoingVoteResponse): VoteCardModel[] {
+export function normalizeVoteResponse(data: VoteResponse): VoteCardModel[] {
   if (!data?.result?.content) return [];
 
   return data.result.content.map((post) => {

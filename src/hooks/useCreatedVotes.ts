@@ -6,7 +6,7 @@ import { fetchCreated } from '@/api/vote/fetchCreated';
 import { normalizeVoteResponse } from '@/utils/normalizeVoteResponse';
 import type { CreatedVoteResponse } from '@/api/vote/fetchCreated';
 import type { VoteCardModel } from '@/types/voteCard';
-import type { OngoingVoteResponse } from '@/types/vote';
+import type { VoteResponse } from '@/types/vote';
 
 /**
  * 내가 생성한 투표 목록 훅
@@ -19,7 +19,7 @@ export function useCreatedVotes() {
     queryFn: fetchCreated,
 
     select: (data) => {
-      const mockPaginated: OngoingVoteResponse = {
+      const mockPaginated: VoteResponse = {
         code: data.code,
         message: data.message,
         result: {
