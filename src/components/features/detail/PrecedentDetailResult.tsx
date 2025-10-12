@@ -1,6 +1,5 @@
 import CategoryTag from './CategoryTag';
 import Sidebar from './Sidebar';
-// import SidebarRagcay from './SidebarRegacy';
 
 import extractPrecedentHeadings from '@/utils/extractPrecedentHeadings';
 import ScrollToTopButton from '@/components/ui/ScrollToTopButton';
@@ -9,7 +8,6 @@ import { Metadata } from '@/types/detail';
 import { PrecedentDetailsResponse } from '@/types/precedent';
 
 function PrecedentDetailResult({ data }: { data: PrecedentDetailsResponse }) {
-  console.log(data);
   const {
     precedentNumber, // 판례일련번호
     caseName, // 사건명
@@ -47,7 +45,7 @@ function PrecedentDetailResult({ data }: { data: PrecedentDetailsResponse }) {
             <div className="w-full max-w-[1200px]">
               <h2 className="sr-only">컨텐츠</h2>
 
-              <header className="text-primary-gray1 dark:text-primary-white pb-10">
+              <header className="text-primary-gray2 dark:text-primary-white pb-10">
                 <div className="flex gap-2 items-center mb-5 sm:mb-3 flex-wrap">
                   <CategoryTag text="판례" />
                   <p className="text-2xl font-extrabold leading-[36px]">{caseName}</p>

@@ -7,7 +7,7 @@ function Toc({ toc }: { toc: TableOfContent }) {
 
   return (
     <nav>
-      <ul className="min-w-[290px] md:w-[366px] flex flex-col gap-y-4 md:pl-8 pr-12">
+      <ul className="min-w-[290px] md:w-[366px] flex flex-col gap-y-4 md:pl-8 pr-12 text-primary-gray2 dark:text-primary-white">
         {toc.map(({ id, text, children }) => {
           if (children && children.length > 1) {
             return (

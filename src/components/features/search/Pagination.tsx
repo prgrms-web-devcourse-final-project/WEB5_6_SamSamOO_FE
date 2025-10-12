@@ -28,7 +28,7 @@ function Pagination({ showCount = 5, end = 10, currentPage }: Props) {
   useEffect(() => {
     if (currentPage !== undefined && !Number.isNaN(currentPage)) {
       setActivePageNumber(currentPage);
-      console.log(currentPage);
+      // console.log(currentPage);
     }
   }, [currentPage]);
 
@@ -42,7 +42,7 @@ function Pagination({ showCount = 5, end = 10, currentPage }: Props) {
         pageNumber: String(index - 1),
       });
       router.push(url, { scroll: false });
-      console.log('router pushed to', url);
+      // console.log('router pushed to', url);
 
       setTimeout(() => setIsNavigating(false), 400);
     });

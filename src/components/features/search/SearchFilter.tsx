@@ -130,7 +130,7 @@ function SearchFilter({ category, setAppliedFilterText }: Props) {
           ? JSON.stringify(lawSearchFilter)
           : JSON.stringify(precedentSearchFilter);
 
-    console.log({ prev: prevFilterRef.current, currentFilter });
+    // console.log({ prev: prevFilterRef.current, currentFilter });
     if (prevFilterRef.current === currentFilter) return;
 
     const baseParams = new URLSearchParams(searchParams);

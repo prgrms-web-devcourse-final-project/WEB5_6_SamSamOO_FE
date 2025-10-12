@@ -10,7 +10,7 @@ import { useUserStore } from '@/store/useUserStore';
 import { logout } from '@/api/account/logout';
 import { showErrorToast } from '@/utils/showToast';
 import { useChatStore } from '@/store/useChatStore';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import tw from '@/utils/tw';
 import useClosePopup from '@/hooks/useClosePopup';
 
@@ -47,10 +47,6 @@ function Header() {
     ref: mainNavigationRef,
     ignoreSelectors: ['#hamburger'],
   });
-
-  useEffect(() => {
-    console.log(isOpen);
-  }, [isOpen]);
 
   return (
     <header
