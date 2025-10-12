@@ -51,7 +51,7 @@ function Header() {
   return (
     <header
       className={tw(
-        'fixed z-40 w-full flex sm:grid sm:grid-cols-[1fr_2fr_1fr] h-[60px] pl-[30px] pr-8 items-center justify-between text-lg md:text-xl font-bold text-primary-black dark:text-primary-white shadow-[0_4px_14.2px_0_rgba(0,0,0,0.25)]  dark:shadow-[0_1px_2px_0_rgba(213,213,213,0.25)]',
+        'fixed z-40 w-full flex md:grid md:grid-cols-[1fr_2fr_1fr] h-[60px] pl-[30px] pr-8 items-center justify-between text-lg md:text-xl font-bold text-primary-black dark:text-primary-white shadow-[0_4px_14.2px_0_rgba(0,0,0,0.25)]  dark:shadow-[0_1px_2px_0_rgba(213,213,213,0.25)]',
         isOpen
           ? 'bg-[rgba(255,255,255)] dark:bg-[rgba(0,0,0)]'
           : 'bg-[rgba(255,255,255,0.89)] dark:bg-[rgba(0,0,0,0.89)]',
@@ -81,7 +81,7 @@ function Header() {
         <button
           id="hamburger"
           type="button"
-          className="flex sm:hidden"
+          className="flex md:hidden"
           onClick={() => setIsOpen((prev) => !prev)}
         >
           <Hamburger className="dark:text-primary-white w-9 h-5" />
@@ -111,7 +111,7 @@ function Header() {
       <nav>
         <h2 className="sr-only">메인 메뉴</h2>
 
-        <ul className="hidden sm:flex gap-11 justify-self-center">
+        <ul className="hidden md:flex gap-11 justify-self-center">
           {mainNavItems.map(({ href, label }) => (
             <li key={href}>
               <Link
@@ -128,10 +128,10 @@ function Header() {
           ))}
         </ul>
       </nav>
-      <nav className="flex gap-4 justify-self-end items-center">
+      <nav className="flex gap-3 justify-self-end items-center">
         <h2 className="sr-only">서브 메뉴</h2>
         <ToggleThemeButton />
-        <ul className="flex gap-4">
+        <ul className="flex gap-2 items-center text-lg">
           {isAuthenticated ? (
             <>
               {/* 로그인 상태 */}
@@ -140,15 +140,15 @@ function Header() {
                   <Image
                     className="block dark:hidden"
                     src="/images/profileLight.png"
-                    width={34}
-                    height={34}
+                    width={30}
+                    height={30}
                     alt="마이페이지"
                   />
                   <Image
                     className="hidden dark:block"
                     src="/images/profileDark.png"
-                    width={34}
-                    height={34}
+                    width={30}
+                    height={30}
                     alt="마이페이지"
                   />
                 </Link>

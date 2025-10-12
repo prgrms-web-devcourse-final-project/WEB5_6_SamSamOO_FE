@@ -40,7 +40,7 @@ function ToggleThemeButton() {
     <button
       type="button"
       className={tw(
-        'flex items-center w-[72px] h-[32px] rounded-[67px] p-1 bg-[#E5E5E5] ',
+        'flex items-center w-[60px] h-[32px] rounded-[67px] p-1 bg-[#E5E5E5] ',
         isDark && 'bg-[#404040]',
       )}
       onClick={() => {
