@@ -61,7 +61,7 @@ async function Page({ searchParams }: { searchParams: Promise<SearchParams> }) {
       promulgationDateEnd,
       enforcementDateStart,
       enforcementDateEnd,
-      pageNumber,
+      pageNumber: pageNumber,
       pageSize: PAGE_SIZE,
     });
     return response;
@@ -78,7 +78,7 @@ async function Page({ searchParams }: { searchParams: Promise<SearchParams> }) {
       keyword: search_query ?? null,
       sentencingDateStart,
       sentencingDateEnd,
-      pageNumber,
+      pageNumber: pageNumber,
       pageSize: PAGE_SIZE,
     });
     return response;

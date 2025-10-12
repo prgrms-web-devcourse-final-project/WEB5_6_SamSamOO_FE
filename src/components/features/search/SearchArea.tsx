@@ -23,7 +23,7 @@ function SearchArea() {
     const keyword = input.value.trim();
     console.log(keyword);
 
-    const url = makeSearchUrl(pathname, newParams, { search_query: keyword });
+    const url = makeSearchUrl(pathname, newParams, { search_query: keyword, pageNumber: '0' });
     router.push(url);
     input.value = '';
   };

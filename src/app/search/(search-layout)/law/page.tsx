@@ -28,15 +28,23 @@ async function Page({ searchParams }: { searchParams: SearchParams }) {
   const payload = await getLawSearchResults({
     lawName: search_query ?? null,
     ...searchList,
+    pageNumber: searchList.pageNumber,
     pageSize: 10,
   });
 
   if (!payload || payload.content.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center py-20">
-        <h1 className="text-3xl font-bold mb-3">검색 결과가 없습니다.</h1>
-        <p className="text-gray-500">입력하신 조건에 맞는 법령이 존재하지 않습니다.</p>
-      </div>
+      <>
+        <div className="flex flex-col items-center justify-center py-20">
+          <h1 className="text-3xl font-bold mb-3">검색 결과가 없습니다.</h1>
+          <p className="text-gray-500">입력하신 조건에 맞는 법령이 존재하지 않습니다.</p>
+        </div>
+        <SetTotalElementsAndPages
+          category="법령"
+          precedentTotalElements={0}
+          precedentTotalPages={0}
+        />
+      </>
     );
   }
 

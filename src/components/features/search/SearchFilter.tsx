@@ -26,6 +26,7 @@ interface Props {
 function SearchFilter({ category, setAppliedFilterText }: Props) {
   const searchParams = useSearchParams();
   const prevFilterRef = useRef<string>('');
+  const [changeFilter, setChangeFilter] = useState<boolean>(false);
   const router = useRouter();
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -41,6 +42,7 @@ function SearchFilter({ category, setAppliedFilterText }: Props) {
           isOpen={isOpen}
           onClose={() => setIsOpen(false)}
           setTotalSearchFilter={setTotalSearchFilter}
+          setChangeFilter={setChangeFilter}
         />
       );
     }
@@ -50,6 +52,7 @@ function SearchFilter({ category, setAppliedFilterText }: Props) {
           isOpen={isOpen}
           onClose={() => setIsOpen(false)}
           setLawSearchFilter={setLawSearchFilter}
+          setChangeFilter={setChangeFilter}
         />
       );
     }
@@ -59,6 +62,7 @@ function SearchFilter({ category, setAppliedFilterText }: Props) {
           isOpen={isOpen}
           onClose={() => setIsOpen(false)}
           setPrecedentSearchFilter={setPrecedentSearchFilter}
+          setChangeFilter={setChangeFilter}
         />
       );
     }
@@ -126,10 +130,15 @@ function SearchFilter({ category, setAppliedFilterText }: Props) {
           ? JSON.stringify(lawSearchFilter)
           : JSON.stringify(precedentSearchFilter);
 
+    console.log({ prev: prevFilterRef.current, currentFilter });
     if (prevFilterRef.current === currentFilter) return;
 
     const baseParams = new URLSearchParams(searchParams);
-    baseParams.set('pageNumber', '0');
+
+    if (changeFilter) {
+      baseParams.set('pageNumber', '0');
+      setChangeFilter(false);
+    }
 
     let url = '';
     if (category === '통합') {
@@ -141,7 +150,7 @@ function SearchFilter({ category, setAppliedFilterText }: Props) {
     }
     router.replace(url);
     prevFilterRef.current = currentFilter;
-  }, [totalSearchFilter, precedentSearchFilter, lawSearchFilter]);
+  }, [totalSearchFilter, precedentSearchFilter, lawSearchFilter, category]);
 
   return (
     <>

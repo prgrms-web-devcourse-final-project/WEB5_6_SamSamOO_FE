@@ -3,10 +3,9 @@ import { clamp } from '@/utils/date';
 import makeSearchUrl from '@/utils/makeSearchUrl';
 import tw from '@/utils/tw';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { startTransition, useEffect, useLayoutEffect, useState } from 'react';
+import { startTransition, useEffect, useState } from 'react';
 import SkipPage from '@/assets/icons/skipPage.svg';
 import MovePage from '@/assets/icons/movePage.svg';
-import { flushSync } from 'react-dom';
 
 interface Props {
   showCount?: number;
@@ -27,20 +26,23 @@ function Pagination({ showCount = 5, end = 10, currentPage }: Props) {
   const [isNavigating, setIsNavigating] = useState(false);
 
   useEffect(() => {
-    setActivePageNumber(currentPage ?? 1);
+    if (currentPage !== undefined && !Number.isNaN(currentPage)) {
+      setActivePageNumber(currentPage);
+      console.log(currentPage);
+    }
   }, [currentPage]);
 
   const getPage = (index: number) => {
     if (isNavigating) return;
     setIsNavigating(true);
 
-    flushSync(() => setActivePageNumber(index));
-
+    setActivePageNumber(index);
     startTransition(() => {
       const url = makeSearchUrl(pathname, params, {
         pageNumber: String(index - 1),
       });
-      router.replace(url, { scroll: false });
+      router.push(url, { scroll: false });
+      console.log('router pushed to', url);
 
       setTimeout(() => setIsNavigating(false), 400);
     });
