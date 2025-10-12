@@ -30,7 +30,7 @@ export default function SelectCategory({
       <Select.Trigger
         aria-label="카테고리 선택"
         className={tw(
-          'flex h-10 items-center gap-2 justify-between rounded-full bg-brand-primary px-5 text-primary-white outline-none transition-all text-lg hover:brightness-110 hover:-translate-y-[1px] dark:bg-brand-accent focus-visible:ring-2 focus-visible:ring-brand-accent disabled:opacity-60 disabled:cursor-not-allowed',
+          'flex items-center gap-2 justify-between rounded-full bg-brand-primary px-5 py-3 text-primary-white outline-none transition-all text-lg hover:brightness-110 hover:-translate-y-[1px] dark:bg-brand-accent focus-visible:ring-2 disabled:opacity-60 disabled:cursor-not-allowed',
           className,
         )}
       >

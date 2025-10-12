@@ -99,7 +99,7 @@ export default function CreateVoteForm({ onClose }: Props) {
         <button
           type="submit"
           disabled={isPending}
-          className="h-10 bg-brand-primary rounded-full flex items-center gap-1 px-4 
+          className="bg-brand-primary rounded-full flex items-center gap-1 px-4 py-3
             dark:bg-brand-accent hover:brightness-110 hover:-translate-y-[2px] 
             disabled:opacity-60 disabled:cursor-not-allowed"
         >
