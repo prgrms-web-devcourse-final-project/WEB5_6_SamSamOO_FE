@@ -2,7 +2,6 @@
 
 import { withdraw } from '@/api/account/withdraw';
 import ConfirmAlert from './ConfirmAlert';
-import { useAlertDialog } from '@/hooks/useAlertDialog';
 import { showErrorToast, showInfoToast } from '@/utils/showToast';
 import { useRouter } from 'next/navigation';
 import { useUserStore } from '@/store/useUserStore';

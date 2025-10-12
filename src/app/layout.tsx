@@ -61,6 +61,7 @@ export default function RootLayout({
             <Footer />
           </ThemeProvider>
         </ServerUserProvider>
+
         <ConfirmAlert />
         <SpeedInsights />
         <Analytics />
