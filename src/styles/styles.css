@@ -12,3 +12,9 @@
 @import 'tw-animate-css';
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+@plugin 'tailwind-scrollbar';
+
+@plugin 'tailwind-scrollbar' {
+  nocompatible: true;
+}

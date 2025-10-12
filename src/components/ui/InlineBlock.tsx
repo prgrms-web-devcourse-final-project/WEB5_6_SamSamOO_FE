@@ -5,7 +5,7 @@ import { TextSelection } from '@/types/inline';
 import { useEffect, useRef, useState } from 'react';
 
 const inline =
-  'bg-background-black1 text-primary-white shadow-[0_0px_1px_1px_rgba(255,255,255,0.40)] dark:bg-background-white dark:text-primary-black dark:shadow-[4_4px_10px_10px_rgba(0,0,0,0.25)] text-xs rounded-lg absolute max-h-[150px] overflow-y-auto';
+  'bg-background-black1 text-primary-white shadow-[0_0px_1px_1px_rgba(255,255,255,0.40)] dark:bg-background-white dark:text-primary-black dark:shadow-[4_4px_10px_10px_rgba(0,0,0,0.25)] text-xs rounded-lg absolute max-h-[150px]';
 
 interface Props {
   selectedText: TextSelection;
@@ -37,7 +37,7 @@ function InlineBlock({ selectedText, ref }: Props) {
 
   return (
     <div
-      className={`${inline} ${isSearch ? `w-fit max-w-[350px]` : 'w-24'}`}
+      className={`${inline} ${isSearch ? `w-fit max-w-[350px]` : 'w-24'} overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 dark:scrollbar-thumb-gray-300 scrollbar-track-transparent`}
       style={{ left: selectedText.positionX, top: selectedText.positionY }}
       ref={ref}
     >

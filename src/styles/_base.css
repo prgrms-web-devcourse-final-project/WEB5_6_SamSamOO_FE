@@ -4,11 +4,49 @@
   ::after {
     box-sizing: border-box;
   }
+
   html {
     overflow-y: scroll;
     overflow-x: hidden;
     /* min-height: 100%; */
     scrollbar-gutter: stable;
+  }
+
+  /* 모든 스크롤바 스타일 */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: theme(colors.gray.300) transparent;
+  }
+
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: theme(colors.gray.300);
+    border-radius: 4px;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background: theme(colors.gray.400);
+  }
+
+  /* 다크모드 */
+  .dark * {
+    scrollbar-color: theme(colors.gray.600);
+  }
+
+  .dark *::-webkit-scrollbar-thumb {
+    background: theme(colors.gray.600);
+  }
+
+  .dark *::-webkit-scrollbar-thumb:hover {
+    background: theme(colors.gray.500);
   }
 
   body {
@@ -31,6 +69,7 @@
     line-height: 1.2;
     text-decoration: none;
   }
+
   a:active,
   a:hover {
     outline: 0;

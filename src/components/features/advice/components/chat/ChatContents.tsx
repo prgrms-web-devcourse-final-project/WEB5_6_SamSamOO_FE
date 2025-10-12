@@ -13,7 +13,7 @@ interface Props {
 function ChatContents({ messages, isLoading }: Props) {
   const groupedMessages = messageGroup(messages);
   return (
-    <div className="w-full flex h-[50vh] flex-col items-end">
+    <div className="w-full flex h-[50vh] p-3 flex-col items-end">
       {groupedMessages.map((group, index) => {
         const isLastGroup = index === groupedMessages.length - 1;
         return (
