@@ -77,7 +77,7 @@ export default function ProgressBar({
 
         <div
           className={tw(
-            'absolute inset-0 flex justify-between items-center px-3 text-md',
+            'absolute inset-0 flex justify-between items-center px-3 text-md pr-4',
             outerText,
           )}
         >
@@ -93,7 +93,7 @@ export default function ProgressBar({
 
         <div
           className={tw(
-            'pointer-events-none absolute inset-0 flex justify-between items-center px-3 text-md transition-[clip-path] duration-500 ease-out',
+            'pointer-events-none absolute inset-0 flex justify-between items-center px-3 text-md transition-[clip-path] duration-500 ease-out pr-4',
             innerText,
           )}
           style={{ clipPath: `inset(0 calc(100% - ${percent}%) 0 0)` }}

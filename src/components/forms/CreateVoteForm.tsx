@@ -3,11 +3,11 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { useCreateVoteMutation } from '@/hooks/useCreateVoteMutation';
-import Gavel from '@/assets/icons/gavel.svg';
 import Plus from '@/assets/icons/plus.svg';
 import Time from '@/assets/icons/time.svg';
 import { TimeSlider } from '@/components/features/vote/TimeSlider';
 import { calSliderTime } from '@/utils/calSliderTime';
+import SelectCategory, { CategoryOption } from '@/components/features/vote/SelectCategory';
 
 interface Props {
   onClose: () => void;
@@ -16,7 +16,19 @@ interface Props {
 export default function CreateVoteForm({ onClose }: Props) {
   const router = useRouter();
   const { mutate, isPending, isError, error } = useCreateVoteMutation();
+
   const [duration, setDuration] = React.useState<number>(72);
+
+  const [category, setCategory] = React.useState<string>('');
+
+  const categoryOptions: CategoryOption[] = [
+    { label: '임대차 분쟁', value: '임대차 분쟁' },
+    { label: '형사 분쟁', value: '형사 분쟁' },
+    { label: '민사 분쟁', value: '민사 분쟁' },
+    { label: '노동 분쟁', value: '노동 분쟁' },
+    { label: '행정 분쟁', value: '행정 분쟁' },
+    { label: '기타', value: '기타' },
+  ];
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -27,7 +39,7 @@ export default function CreateVoteForm({ onClose }: Props) {
     const option1 = formData.get('option1') as string;
     const option2 = formData.get('option2') as string;
 
-    if (!title || !content || !option1 || !option2) {
+    if (!category || !title || !content || !option1 || !option2) {
       alert('모든 항목을 입력해주세요.');
       return;
     }
@@ -36,7 +48,7 @@ export default function CreateVoteForm({ onClose }: Props) {
       post: {
         postName: title,
         postContent: content,
-        category: '임대차 분쟁',
+        category,
       },
       poll: {
         voteTitle: '당신의 선택은?',
@@ -58,14 +70,13 @@ export default function CreateVoteForm({ onClose }: Props) {
       {/* 헤더 */}
       <header className="flex justify-between items-center">
         <div className="flex items-center gap-4">
-          <button
-            type="button"
-            className="h-10 bg-brand-primary rounded-full flex items-center gap-2 px-5 
-              dark:bg-brand-accent hover:brightness-110 hover:-translate-y-[2px]"
-          >
-            <Gavel className="text-primary-white scale-150" />
-            <p className="text-primary-white">임대차 분쟁</p>
-          </button>
+          <SelectCategory
+            options={categoryOptions}
+            value={category}
+            onChange={setCategory}
+            disabled={isPending}
+            className="min-w-[160px]"
+          />
 
           <div className="w-[280px] flex flex-col gap-2">
             <div className="flex items-center gap-2">
