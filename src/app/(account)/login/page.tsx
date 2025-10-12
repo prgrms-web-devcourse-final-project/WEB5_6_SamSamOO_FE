@@ -2,6 +2,7 @@ import LoginForm from '@/components/forms/LoginForm';
 import DividerWithText from '@/components/features/account/DividerWithText';
 import Link from 'next/link';
 import AuthHeader from '@/components/features/account/AuthHeader';
+import Oauth from '@/components/features/account/Oauth';
 
 async function Page({
   searchParams,
@@ -16,10 +17,7 @@ async function Page({
 
       <DividerWithText text="간편 로그인" />
 
-      <div className="w-full flex gap-6 mb-6">
-        <button className="flex-1 h-13 bg-[#03C75A] px-[35px] rounded-sm">네이버 로그인</button>
-        <button className="flex-1 h-13 bg-[#FEE500] px-[35px] rounded-sm">카카오 로그인</button>
-      </div>
+      <Oauth mode="login" />
 
       <Link
         href="find-account"
