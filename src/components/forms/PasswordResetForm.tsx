@@ -5,7 +5,6 @@ import AccountInput from '@/components/features/account/AccountInput';
 import AccountButton from '@/components/features/account/AccountButton';
 import FormErrorMessage from '@/components/features/account/FormErrorMessage';
 import { passwordReset } from '@/api/account/passwordReset';
-import { showSuccessToast } from '@/utils/showToast';
 
 interface Props {
   email: string;
@@ -52,7 +51,6 @@ export default function PasswordResetForm({ email, onSuccess }: Props) {
 
       if (res.success) {
         setError(null);
-        showSuccessToast('비밀번호가 성공적으로 설정되었습니다.');
         onSuccess();
       } else {
         setError('비밀번호 설정에 실패했습니다.');

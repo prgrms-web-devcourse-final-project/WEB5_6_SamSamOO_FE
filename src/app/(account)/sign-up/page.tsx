@@ -2,6 +2,13 @@ import AuthHeader from '@/components/features/account/AuthHeader';
 import DividerWithText from '@/components/features/account/DividerWithText';
 import Oauth from '@/components/features/account/Oauth';
 import SignupForm from '@/components/forms/SignUpForm';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '바로 | 회원가입',
+  description: '바로 BaLaw 회원가입 페이지입니다',
+  robots: { index: false, follow: false },
+};
 
 function Page() {
   return (

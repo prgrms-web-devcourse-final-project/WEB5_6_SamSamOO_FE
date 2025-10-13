@@ -3,6 +3,13 @@ import DividerWithText from '@/components/features/account/DividerWithText';
 import Link from 'next/link';
 import AuthHeader from '@/components/features/account/AuthHeader';
 import Oauth from '@/components/features/account/Oauth';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '바로 | 로그인',
+  description: '바로 BaLaw 로그인 페이지입니다',
+  robots: { index: false, follow: false },
+};
 
 async function Page({
   searchParams,
