@@ -15,5 +15,5 @@ export default function useTextAreaHeight(
     const height = Math.min(needed, maxHeight);
     ta.style.height = `${height}px`;
     ta.style.overflowY = needed > maxHeight ? 'auto' : 'hidden';
-  }, [value, maxHeight]);
+  }, [value, maxHeight, textAreaRef]);
 }

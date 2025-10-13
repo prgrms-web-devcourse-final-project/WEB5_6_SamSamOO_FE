@@ -34,7 +34,7 @@ function MainChatArea({ urlId }: Props) {
     if (urlId !== 'first' && urlId !== roomId) {
       getHistoryInfo(urlId ?? '');
     }
-  }, [urlId, roomId, isLoading]);
+  }, [urlId, roomId, isLoading, isReset]);
 
   const getHistoryInfo = async (historyId: string) => {
     const res = await getChatHistoryInfo(historyId);

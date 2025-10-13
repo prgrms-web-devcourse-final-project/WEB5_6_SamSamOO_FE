@@ -1,6 +1,6 @@
 'use client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+// import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import CtaVote from '@/components/features/vote/CtaVote';
 import ToggleNavigation from '@/components/features/vote/ToggleNavigation';
 import CreateVoteModal from '@/components/features/vote/CreateVoteModal';
@@ -31,7 +31,7 @@ export default function VoteLayout({ children }: { children: React.ReactNode }) 
         </nav>
 
         {children}
-        <ReactQueryDevtools initialIsOpen={false} />
+        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
       </section>
 
       <CreateVoteModal />

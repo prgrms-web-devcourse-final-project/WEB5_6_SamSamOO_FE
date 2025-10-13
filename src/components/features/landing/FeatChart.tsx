@@ -15,7 +15,7 @@ function FeatChart() {
     <section className="center-col gap-20" ref={containerRef} aria-labelledby="feat-chart-title">
       <h2 className="a11y">투표 상세 팝업</h2>
       <div className="flex flex-col-reverse lg:flex-row lg:gap-24 gap-12 w-[80%]">
-        <div className="stagger-item">
+        <div className="stagger-item center-col">
           <Image
             src={imageSrc}
             alt="투표 상세 이미지"

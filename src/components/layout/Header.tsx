@@ -56,10 +56,6 @@ function Header() {
     ignoreSelectors: ['#hamburger'],
   });
 
-  useEffect(() => {
-    console.log(isOpen);
-  }, [isOpen]);
-
   return (
     <header
       className={tw(
