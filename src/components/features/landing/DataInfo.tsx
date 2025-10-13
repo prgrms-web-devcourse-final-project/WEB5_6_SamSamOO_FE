@@ -25,7 +25,7 @@ function DataInfo() {
     <section className="min-h-[50vh] center-col text-primary-black dark:text-primary-white bg-[#f4f4f4] dark:bg-background-black1">
       <h2 className="a11y">데이터 정보 섹션</h2>
       <div
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-8 bg-background-white dark:bg-primary-black shadow-landing-1 rounded-[30px] max-w-[1200px] w-full"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 m-8 bg-background-white dark:bg-primary-black shadow-landing-1 rounded-[30px] max-w-[1200px] w-[90%]"
         role="list"
         aria-label="서비스 주요 통계"
       >

@@ -1,45 +1,46 @@
+import { useMounted } from '@/hooks/useMounted';
 import { useStaggerFade } from '@/hooks/useStaggerFade';
+import { useTheme } from 'next-themes';
 import Image from 'next/image';
 
 function FeatChart() {
   const containerRef = useStaggerFade({ stagger: 0.4, duration: 1 });
+  const { resolvedTheme } = useTheme();
+  const mounted = useMounted();
+
+  if (!mounted) return null;
+  const imageSrc =
+    resolvedTheme === 'dark' ? '/images/landingVoteDtDark.png' : '/images/landingVoteDt.png';
   return (
-    <section className="center-col gap-78" ref={containerRef}>
-      <div className="flex flex-col-reverse md:flex-row md:gap-24 gap-12">
+    <section className="center-col gap-20" ref={containerRef} aria-labelledby="feat-chart-title">
+      <h2 className="a11y">투표 상세 팝업</h2>
+      <div className="flex flex-col-reverse lg:flex-row lg:gap-24 gap-12 w-[80%]">
         <div className="stagger-item">
           <Image
-            src={'/images/landingVoteDt.png'}
+            src={imageSrc}
             alt="투표 상세 이미지"
             width={630}
             height={663}
-            className="shadow-landing-card rounded-[30px] dark:hidden"
-          />
-          <Image
-            src={'/images/landingVoteDtDark.png'}
-            alt="투표 상세 이미지"
-            width={630}
-            height={663}
-            className="shadow-landing-card-dark rounded-[30px] hidden dark:block"
+            className="shadow-landing-card dark:shadow-landing-card-dark rounded-[30px]"
+            loading="lazy"
           />
         </div>
         <div className="center-col stagger-item">
-          <p className="landing-content">
-            참여한 투표의 결과를 통해,
-            <br />
-            간단하고 빠르게 반응을 확인해보세요
-            <br />
-            다양한 차트로 여러 인사이트를 얻을 수 있어요
-          </p>
+          <div className="flex flex-col landing-content">
+            <p>참여한 투표의 결과를 통해,</p>
+            <p>간단하고 빠르게 반응을 확인해보세요</p>
+            <p>다양한 차트로 여러 인사이트를 얻을 수 있어요</p>
+          </div>
         </div>
       </div>
-      <div className="center-col mb-50 w-[80%]">
-        <p className="md:landing-sub text-3xl font-semibold">
+      <aside aria-label="법적 고지사항" className="center-col mb-12 lg:mb-20 w-[80%]">
+        <p className="lg:landing-sub md:text-3xl text-2xl font-semibold">
           본 서비스는 참고용 법률 정보만을 제공합니다.
         </p>
-        <p className="md:text-4xl text-2xl font-medium">
+        <p className="lg:text-4xl md:text-2xl text-base font-medium">
           법적 효력이나 책임은 없으며, 구체적인 사안은 반드시 전문가와 상담하시기 바랍니다.
         </p>
-      </div>
+      </aside>
     </section>
   );
 }
