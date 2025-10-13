@@ -22,8 +22,8 @@ function SetTotalElementsAndPages({
     setTotalLawPages,
     setTotalPrecedentElements,
     setTotalPrecedentPages,
+    setTotalElements,
   } = useSearch();
-
   useEffect(() => {
     if (category === '법령') {
       setTotalLawElements(lawTotalElements ?? 0);
@@ -38,18 +38,19 @@ function SetTotalElementsAndPages({
       setTotalLawPages(lawTotalPages ?? 0);
       setTotalPrecedentElements(precedentTotalElements ?? 0);
       setTotalPrecedentPages(precedentTotalPages ?? 0);
+      setTotalElements((lawTotalElements ?? 0) + (precedentTotalElements ?? 0));
     }
-  }, [
-    lawTotalElements,
-    lawTotalPages,
-    precedentTotalElements,
-    precedentTotalPages,
-    setTotalLawElements,
-    setTotalLawPages,
-    setTotalPrecedentElements,
-    setTotalPrecedentPages,
-    category,
-  ]);
+  }, [category, lawTotalElements, lawTotalPages, precedentTotalElements, precedentTotalPages]);
+
+  // useEffect(() => {
+  //   console.log('SetTotalElementsAndPages :', {
+  //     lawTotalElements,
+  //     lawTotalPages,
+  //     precedentTotalElements,
+  //     precedentTotalPages,
+  //     category,
+  //   });
+  // }, []);
 
   return '';
 }

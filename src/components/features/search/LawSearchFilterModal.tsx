@@ -13,9 +13,15 @@ interface Props {
   isOpen?: boolean;
   onClose?: () => void;
   setLawSearchFilter: React.Dispatch<React.SetStateAction<LawSearchFilter>>;
+  setChangeFilter: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function LawSearchFilterModal({ isOpen = false, onClose = () => {}, setLawSearchFilter }: Props) {
+function LawSearchFilterModal({
+  isOpen = false,
+  onClose = () => {},
+  setLawSearchFilter,
+  setChangeFilter,
+}: Props) {
   const [lawField, setLawField] = useState<string>('');
   const [authority, setAuthority] = useState<string>('');
   const [ministry, setMinistry] = useState<string>('');
@@ -184,6 +190,7 @@ function LawSearchFilterModal({ isOpen = false, onClose = () => {}, setLawSearch
                   enforcementDateStart: enforcementRange.start ?? '',
                   enforcementDateEnd: enforcementRange.end ?? '',
                 });
+                setChangeFilter(true);
                 onClose();
               }}
             >

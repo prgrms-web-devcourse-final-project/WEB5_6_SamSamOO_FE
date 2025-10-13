@@ -1,12 +1,14 @@
 'use client';
 
-import Hamburger from '@/assets/icons/hamburger.svg';
+import { useState, useRef, useEffect } from 'react';
+
 import MetadataGrid from './MetadataGrid';
 import Toc from './Toc';
-import { Metadata, TableOfContent } from '@/types/detail';
-import { useState, useRef, useEffect } from 'react';
+
 import tw from '@/utils/tw';
+import NavArrow from '@/assets/icons/navArrow.svg';
 import { useMobileDetection } from '@/hooks/useMobileDetection';
+import { Metadata, TableOfContent } from '@/types/detail';
 
 interface Props {
   toc: TableOfContent;
@@ -48,10 +50,12 @@ function Sidebar({ toc, metadata, category }: Props) {
           <button
             type="button"
             onClick={() => setIsOpen((prev) => !prev)}
-            className="w-full flex gap-2 items-center pl-8"
+            className="w-full flex items-center pl-8"
           >
-            <Hamburger className="dark:text-primary-white w-6 h-3" />
-            <p className="font-bold text-xl">{category === '법령' ? '법령 목차' : '판례 목차'}</p>
+            <NavArrow className="dark:text-primary-white w-6 h-6" />
+            <p className="font-bold text-xl pt-1.5">
+              {category === '법령' ? '법령 목차' : '판례 목차'}
+            </p>
           </button>
         </header>
       )}
@@ -77,9 +81,11 @@ function Sidebar({ toc, metadata, category }: Props) {
             'hidden sticky md:flex flex-col top-0 h-dvh w-[366px] border-r border-border-gray1 bg-background-white dark:bg-background-black1',
           )}
         >
-          <div className="w-full flex gap-2 items-center py-10 mb-12 px-8 border-b">
-            <Hamburger className="dark:text-primary-white w-8 h-4" />
-            <p className="font-bold text-3xl">{category === '법령' ? '법령 목차' : '판례 목차'}</p>
+          <div className="w-full flex items-center py-10 mb-12 px-8 border-b">
+            <NavArrow className="dark:text-primary-white text-primary-gray2 w-9 h-9" />
+            <p className="font-bold text-3xl text-primary-gray2 dark:text-primary-white pt-1.5">
+              {category === '법령' ? '법령 목차' : '판례 목차'}
+            </p>
           </div>
           <div className="flex-1 overflow-y-scroll overflow-x-hidden">
             <Toc toc={toc} />

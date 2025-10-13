@@ -10,12 +10,14 @@ interface Props {
   isOpen?: boolean;
   onClose?: () => void;
   setPrecedentSearchFilter: React.Dispatch<React.SetStateAction<PrecedentSearchFilter>>;
+  setChangeFilter: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function PrecedentSearchFilterModal({
   isOpen,
   onClose = () => {},
   setPrecedentSearchFilter,
+  setChangeFilter,
 }: Props) {
   const calendarRef = useRef(null);
   const modalRef = useRef<HTMLDivElement>(null);
@@ -74,6 +76,7 @@ function PrecedentSearchFilterModal({
                   sentencingDateStart: sentencingRange.start ?? '',
                   sentencingDateEnd: sentencingRange.end ?? '',
                 });
+                setChangeFilter(true);
                 onClose();
               }}
             >

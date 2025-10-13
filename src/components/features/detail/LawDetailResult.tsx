@@ -1,10 +1,8 @@
 import Sidebar from './Sidebar';
-// import SidebarRagcay from './SidebarRegacy';
 import CategoryTag from './CategoryTag';
 
 import tw from '@/utils/tw';
 import extractLawHeadings from '@/utils/extractLawHeadings';
-import ScrollToTopButton from '@/components/ui/ScrollToTopButton';
 import InlineText from '@/components/ui/InlineText';
 import { Metadata } from '@/types/detail';
 import { LawDetailsResponse } from '@/types/law';
@@ -38,7 +36,7 @@ function LawDetailResult({ data }: { data: LawDetailsResponse }) {
           <InlineText>
             <div className="w-full max-w-[1200px]">
               <h2 className="sr-only">컨텐츠</h2>
-              <header className="text-primary-gray1 dark:text-primary-white pb-10">
+              <header className="text-primary-gray2 dark:text-primary-white pb-10">
                 <div className="flex gap-2 items-center mb-5 sm:mb-3 flex-wrap">
                   <CategoryTag text="법령" />
                   <p className="text-2xl font-extrabold leading-[36px]">{lawName}</p>
@@ -102,7 +100,6 @@ function LawDetailResult({ data }: { data: LawDetailsResponse }) {
             </div>
           </InlineText>
         </section>
-        <ScrollToTopButton />
       </div>
     </>
   );
