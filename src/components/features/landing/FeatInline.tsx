@@ -8,9 +8,10 @@ function FeatInline() {
   const { resolvedTheme } = useTheme();
   const mounted = useMounted();
 
-  if (!mounted) return null;
   const imageSrc =
-    resolvedTheme === 'dark' ? '/images/landingInlineDark.png' : '/images/landingInline.png';
+    mounted && resolvedTheme === 'dark'
+      ? '/images/landingInlineDark.png'
+      : '/images/landingInline.png';
   return (
     <section className="h-screen center-col" ref={containerRef} aria-labelledby="feat-inline-title">
       <div className="flex flex-col-reverse lg:flex-row gap-8 lg:gap-20 w-[80%]">
