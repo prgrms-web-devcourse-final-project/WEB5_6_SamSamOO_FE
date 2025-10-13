@@ -48,7 +48,10 @@
   .dark *::-webkit-scrollbar-thumb:hover {
     background: theme(colors.gray.500);
   }
-
+  ::selection {
+    background-color: #ffca28;
+    color: theme(colors.primary.black);
+  }
   body {
     margin: 0;
     padding: 0;

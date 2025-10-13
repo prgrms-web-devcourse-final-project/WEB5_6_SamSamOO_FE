@@ -43,6 +43,7 @@ export const appleSD = localFont({
   ],
   variable: '--font-apple-sd',
   display: 'swap',
+  preload: true,
 });
 
 export default function RootLayout({
@@ -61,6 +62,7 @@ export default function RootLayout({
             <Footer />
           </ThemeProvider>
         </ServerUserProvider>
+
         <ConfirmAlert />
         <SpeedInsights />
         <Analytics />
