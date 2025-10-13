@@ -8,9 +8,10 @@ function FeatChart() {
   const { resolvedTheme } = useTheme();
   const mounted = useMounted();
 
-  if (!mounted) return null;
   const imageSrc =
-    resolvedTheme === 'dark' ? '/images/landingVoteDtDark.png' : '/images/landingVoteDt.png';
+    mounted && resolvedTheme === 'dark'
+      ? '/images/landingVoteDtDark.png'
+      : '/images/landingVoteDt.png';
   return (
     <section className="center-col gap-20" ref={containerRef} aria-labelledby="feat-chart-title">
       <h2 className="a11y">투표 상세 팝업</h2>

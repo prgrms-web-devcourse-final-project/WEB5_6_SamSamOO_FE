@@ -8,9 +8,10 @@ function FeatFilter() {
   const { resolvedTheme } = useTheme();
   const mounted = useMounted();
 
-  if (!mounted) return null;
   const imageSrc =
-    resolvedTheme === 'dark' ? '/images/landingFilterDark.png' : '/images/landingFilter.png';
+    mounted && resolvedTheme === 'dark'
+      ? '/images/landingFilterDark.png'
+      : '/images/landingFilter.png';
   return (
     <section className="h-screen center-col" ref={containerRef}>
       <h2 className="a11y">검색 필터링 팝업</h2>

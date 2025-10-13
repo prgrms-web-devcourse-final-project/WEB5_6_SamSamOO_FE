@@ -8,9 +8,8 @@ function FeatChat() {
   const { resolvedTheme } = useTheme();
   const mounted = useMounted();
 
-  if (!mounted) return null;
   const imageSrc =
-    resolvedTheme === 'dark' ? '/images/landingChatDark.png' : '/images/landingChat.png';
+    mounted && resolvedTheme === 'dark' ? '/images/landingChatDark.png' : '/images/landingChat.png';
   return (
     <section className="h-screen center-col" ref={containerRef} aria-labelledby="feat-chat-title">
       <h2 className="a11y">법률 상담 채팅</h2>
