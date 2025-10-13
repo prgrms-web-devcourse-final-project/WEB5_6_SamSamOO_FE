@@ -1,6 +1,5 @@
 'use client';
 
-import { useAlertDialog } from '@/hooks/useAlertDialog';
 import {
   AlertDialog,
   AlertDialogAction,
