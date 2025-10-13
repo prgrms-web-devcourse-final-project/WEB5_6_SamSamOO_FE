@@ -12,7 +12,12 @@ function Page() {
   const [verifiedEmail, setVerifiedEmail] = useState<string | null>(null);
 
   return (
-    <div className="center-col">
+    <div
+      className="
+        w-full max-w-[420px] px-6
+        center-col
+        sm:px-0"
+    >
       <AuthHeader
         title="👋 안심하세요!"
         subtitle="지금부터 계정을 다시 찾을 수 있도록 도와드릴게요!"

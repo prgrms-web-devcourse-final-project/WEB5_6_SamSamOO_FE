@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import AccountInput from '@/components/features/account/AccountInput';
@@ -44,7 +44,10 @@ export default function VerifyPasswordForm({ onVerified }: Props) {
   };
 
   return (
-    <form className="center-col mb-10 w-[420px] gap-7" onSubmit={handleSubmit}>
+    <form
+      className="center-col mb-10 w-full max-w-[420px] gap-7 px-5 sm:px-0"
+      onSubmit={handleSubmit}
+    >
       <AccountInput
         name="currentPassword"
         type="password"
@@ -52,9 +55,9 @@ export default function VerifyPasswordForm({ onVerified }: Props) {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <div className="w-full center-col">
+      <div className="center-col w-full gap-3">
         <FormErrorMessage message={error} />
-        <AccountButton type="submit">인증하기</AccountButton>
+        <AccountButton type="submit">확인하기</AccountButton>
       </div>
     </form>
   );

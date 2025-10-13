@@ -4,15 +4,16 @@ import { useState } from 'react';
 import AccountInput from '@/components/features/account/AccountInput';
 import AccountButton from '@/components/features/account/AccountButton';
 import FormErrorMessage from '@/components/features/account/FormErrorMessage';
+import CooldownButton from '@/components/features/account/CooldownButton';
 import { sendEmail } from '@/api/account/sendEmail';
 import { verifyEmail } from '@/api/account/verifyEmail';
-import CooldownButton from '../features/account/CooldownButton';
+import { showSuccessToast } from '@/utils/showToast';
 
-interface VerificationFormProps {
+interface VerifyEmailFormProps {
   onVerified: (email: string) => void;
 }
 
-export default function VerificationForm({ onVerified }: VerificationFormProps) {
+export default function VerifyEmailForm({ onVerified }: VerifyEmailFormProps) {
   const [formData, setFormData] = useState({
     email: '',
     verificationCode: '',
@@ -31,6 +32,7 @@ export default function VerificationForm({ onVerified }: VerificationFormProps) 
       setError('이메일을 입력해주세요.');
       return;
     }
+
     if (!validateEmail(formData.email)) {
       setError('유효한 이메일을 입력해주세요.');
       return;
@@ -39,7 +41,7 @@ export default function VerificationForm({ onVerified }: VerificationFormProps) 
     try {
       await sendEmail({ email: formData.email });
       setError(null);
-      alert('인증 메일을 발송했습니다.');
+      showSuccessToast('인증 메일을 발송했습니다.');
     } catch {
       setError('인증 메일 발송에 실패했습니다. 다시 시도해주세요.');
     }
@@ -47,6 +49,7 @@ export default function VerificationForm({ onVerified }: VerificationFormProps) 
 
   const handleVerifyCode = async (e: React.FormEvent) => {
     e.preventDefault();
+
     if (!formData.verificationCode.trim()) {
       setError('인증번호를 입력해주세요.');
       return;
@@ -70,7 +73,10 @@ export default function VerificationForm({ onVerified }: VerificationFormProps) 
   };
 
   return (
-    <form className="center-col mb-10 w-[420px] gap-7" onSubmit={handleVerifyCode}>
+    <form
+      className="center-col mb-10 w-full max-w-[420px] gap-7 px-5 sm:px-0"
+      onSubmit={handleVerifyCode}
+    >
       <AccountInput
         name="email"
         type="text"
@@ -86,7 +92,8 @@ export default function VerificationForm({ onVerified }: VerificationFormProps) 
         value={formData.verificationCode}
         onChange={handleInputChange}
       />
-      <div className="w-full center-col">
+
+      <div className="center-col w-full gap-3">
         <FormErrorMessage message={error} />
         <AccountButton type="submit">인증하기</AccountButton>
       </div>
