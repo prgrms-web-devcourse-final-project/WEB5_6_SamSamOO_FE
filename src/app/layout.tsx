@@ -10,6 +10,7 @@ import Footer from '@/components/layout/Footer';
 import ThemeProvider from '@/components/provider/ThemeProvider';
 import ServerUserProvider from '@/components/provider/ServerUserProvider';
 import { Toaster } from 'sonner';
+import ConfirmAlert from '@/components/ui/ConfirmAlert';
 import ScrollToTopButton from '@/components/ui/ScrollToTopButton';
 
 export const metadata: Metadata = {
@@ -43,6 +44,7 @@ export const appleSD = localFont({
   ],
   variable: '--font-apple-sd',
   display: 'swap',
+  preload: true,
 });
 
 export default function RootLayout({
@@ -52,6 +54,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko-KR" suppressHydrationWarning>
+      <head></head>
       <body className={`${appleSD.className} antialiased`}>
         <ServerUserProvider>
           <ThemeProvider enableSystem>
@@ -62,6 +65,8 @@ export default function RootLayout({
             <ScrollToTopButton />
           </ThemeProvider>
         </ServerUserProvider>
+
+        <ConfirmAlert />
         <SpeedInsights />
         <Analytics />
       </body>

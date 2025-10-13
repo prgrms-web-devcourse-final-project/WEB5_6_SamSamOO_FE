@@ -45,7 +45,7 @@ export default function BirthdayInput({ value, onChange }: BirthdayInputProps) {
       placeholder="YYYY - MM - DD"
       inputMode="numeric"
       maxLength={10}
-      className="flex-1 h-13 rounded-full bg-[#F4F4F4] pl-6 placeholder-primary-black shadow-[inset_0_4px_10px_rgba(0,0,0,0.3)] outline-none"
+      className="flex-1 h-13 rounded-full bg-[#F4F4F4] pl-6 placeholder-primary-black dark:text-primary-black shadow-[inset_0_4px_10px_rgba(0,0,0,0.3)] outline-none"
     />
   );
 }

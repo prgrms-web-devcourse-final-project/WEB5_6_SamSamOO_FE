@@ -8,16 +8,17 @@ import Hamburger from '@/assets/icons/hamburger.svg';
 import ToggleThemeButton from './ToggleThemeButton';
 import { useUserStore } from '@/store/useUserStore';
 import { logout } from '@/api/account/logout';
-import { showErrorToast } from '@/utils/showToast';
+import { showErrorToast, showSuccessToast } from '@/utils/showToast';
 import { useChatStore } from '@/store/useChatStore';
 import { useRef, useState } from 'react';
 import tw from '@/utils/tw';
 import useClosePopup from '@/hooks/useClosePopup';
+import { useAlertStore } from '@/store/useAlertStore';
 
 const mainNavItems = [
   { href: '/advice', label: 'AI 상담' },
   { href: '/search/total', label: '법령ㆍ판례 검색' },
-  { href: '/vote', label: '투표' },
+  { href: '/vote/ongoing', label: '투표' },
 ];
 
 function Header() {
@@ -26,21 +27,28 @@ function Header() {
   const isAuthenticated = useUserStore((state) => state.isAuthenticated);
   const clearSession = useUserStore((state) => state.clearSession);
   const resetStore = useChatStore((state) => state.resetStore);
+  const showAlert = useAlertStore((s) => s.showAlert);
   const mainNavigationRef = useRef(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const handleLogout = async () => {
+    showAlert('로그아웃', '정말 로그아웃 하시겠습니까?', () => {
+      logOut();
+    });
+  };
+
+  const logOut = async () => {
     try {
       await logout();
       clearSession();
       resetStore();
+      showSuccessToast('로그아웃 되었습니다.');
       router.replace('/');
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       showErrorToast('로그아웃에 실패했습니다. 다시 시도해주세요.');
     }
   };
-
   useClosePopup({
     onClose: () => setIsOpen(false),
     isOpen,
