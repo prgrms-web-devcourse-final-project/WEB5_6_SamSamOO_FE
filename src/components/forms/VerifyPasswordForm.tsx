@@ -4,7 +4,7 @@ import { useState } from 'react';
 import AccountInput from '@/components/features/account/AccountInput';
 import AccountButton from '@/components/features/account/AccountButton';
 import FormErrorMessage from '@/components/features/account/FormErrorMessage';
-import { verifyPassword } from '@/api/account/verifyPasswordApi';
+import { verifyPassword } from '@/api/account/verifyPassword';
 
 interface Props {
   onVerified: (email: string) => void;

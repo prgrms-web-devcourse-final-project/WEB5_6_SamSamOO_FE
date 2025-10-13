@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { login } from '@/api/account/loginApi';
+import { login } from '@/api/account/login';
 import { useUserStore } from '@/store/useUserStore';
 import AccountInput from '@/components/features/account/AccountInput';
 import AccountButton from '@/components/features/account/AccountButton';

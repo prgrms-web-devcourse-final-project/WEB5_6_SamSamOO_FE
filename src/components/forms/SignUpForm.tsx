@@ -7,7 +7,7 @@ import SelectGender from '@/components/features/account/SelectGender';
 import BirthdayInput from '@/components/features/account/BirthdayInput';
 import FormErrorMessage from '@/components/features/account/FormErrorMessage';
 import calAge from '@/utils/calAge';
-import { signUp } from '@/api/account/signUpApi';
+import { signUp } from '@/api/account/signUp';
 import { useUserStore } from '@/store/useUserStore';
 import { useRouter } from 'next/navigation';
 import { showSuccessToast } from '@/utils/showToast';
