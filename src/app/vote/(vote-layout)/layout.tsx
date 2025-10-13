@@ -31,7 +31,6 @@ export default function VoteLayout({ children }: { children: React.ReactNode }) 
         </nav>
 
         {children}
-        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
       </section>
 
       <CreateVoteModal />

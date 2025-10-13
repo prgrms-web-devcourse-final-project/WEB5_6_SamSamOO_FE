@@ -39,6 +39,10 @@ api.interceptors.response.use(
     // 401 처리
     if (status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
+      console.log('[axiosInstance] 401 detected – attempting refresh', {
+        url: originalRequest?.url,
+        method: originalRequest?.method,
+      });
 
       if (getIsRefreshing()) {
         return new Promise((resolve) => {
@@ -51,11 +55,14 @@ api.interceptors.response.use(
       const newToken = await tokenRefresh();
       setIsRefreshing(false);
 
+      console.log('[axiosInstance] tokenRefresh result', { hasToken: !!newToken });
+
       if (newToken) {
         onRefreshed(newToken);
         return api(originalRequest);
       } else {
-        showErrorToast('세션이 만료되었습니다.\n다시 로그인해주세요.');
+        console.log('[axiosInstance] token refresh failed – redirecting to /login');
+        showErrorToast('세션이 만료되었어요.\n다시 로그인해주세요.');
         if (typeof window !== 'undefined') window.location.href = '/login';
         return Promise.reject(error);
       }
