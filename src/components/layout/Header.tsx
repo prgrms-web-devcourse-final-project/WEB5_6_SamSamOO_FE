@@ -51,7 +51,7 @@ function Header() {
   return (
     <header
       className={tw(
-        'fixed z-40 w-full flex md:grid md:grid-cols-[1fr_2fr_1fr] h-[60px] pl-[30px] pr-8 items-center justify-between text-lg md:text-xl font-bold text-primary-black dark:text-primary-white shadow-[0_4px_14.2px_0_rgba(0,0,0,0.25)]  dark:shadow-[0_1px_2px_0_rgba(213,213,213,0.25)]',
+        'fixed z-40 w-full min-w-[320px] flex md:grid md:grid-cols-[1fr_2fr_1fr] h-[60px] pl-[30px] pr-8 items-center justify-between text-lg md:text-xl font-bold text-primary-black dark:text-primary-white shadow-[0_4px_14.2px_0_rgba(0,0,0,0.25)]  dark:shadow-[0_1px_2px_0_rgba(213,213,213,0.25)]',
         isOpen
           ? 'bg-[rgba(255,255,255)] dark:bg-[rgba(0,0,0)]'
           : 'bg-[rgba(255,255,255,0.89)] dark:bg-[rgba(0,0,0,0.89)]',

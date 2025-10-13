@@ -12,7 +12,7 @@ function Footer() {
   return (
     <footer
       className={tw(
-        'h-[50px] px-8 flex items-center justify-between text-primary-black font-light bg-[rgba(255,255,255,0.89)] shadow-[0_-3px_14.2px_0_rgba(0,0,0,0.25)]',
+        'h-[50px] min-w-[320px] w-full px-8 flex items-center justify-between text-primary-black font-light bg-[rgba(255,255,255,0.89)] shadow-[0_-3px_14.2px_0_rgba(0,0,0,0.25)]',
         darkStyle,
       )}
     >
