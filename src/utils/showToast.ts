@@ -3,7 +3,7 @@ import { toast } from 'sonner';
 export function showErrorToast(message: string) {
   toast.error(message, {
     duration: 2500,
-    position: 'top-center',
+    position: 'top-right',
     className: '!border-2 whitespace-pre-line',
     style: {
       '--normal-bg': 'color-mix(in oklab, var(--destructive) 10%, var(--background))',
@@ -16,7 +16,7 @@ export function showErrorToast(message: string) {
 export function showSuccessToast(message: string) {
   toast.success(message, {
     duration: 2500,
-    position: 'top-center',
+    position: 'top-right',
     className: '!border-2 whitespace-pre-line',
     style: {
       '--normal-bg':
@@ -30,7 +30,7 @@ export function showSuccessToast(message: string) {
 export function showInfoToast(message: string) {
   toast.info(message, {
     duration: 2500,
-    position: 'top-center',
+    position: 'top-right',
     className: '!border-2 whitespace-pre-line',
     style: {
       '--normal-bg':
@@ -44,7 +44,7 @@ export function showInfoToast(message: string) {
 export function showWarningToast(message: string) {
   toast.warning(message, {
     duration: 2500,
-    position: 'top-center',
+    position: 'top-right',
     className: '!border-2 whitespace-pre-line',
     style: {
       '--normal-bg':

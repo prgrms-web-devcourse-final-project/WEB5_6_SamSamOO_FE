@@ -10,7 +10,7 @@ export default function OauthFailurePage() {
 
     const timer = setTimeout(() => {
       window.close();
-    }, 500);
+    }, 300);
 
     return () => clearTimeout(timer);
   }, []);

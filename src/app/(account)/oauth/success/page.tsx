@@ -11,7 +11,7 @@ export default function OauthSuccessPage() {
     // 약간의 지연 후 창 닫기 (postMessage 전송 후 안전하게 닫기)
     const timer = setTimeout(() => {
       window.close();
-    }, 500);
+    }, 300);
 
     return () => clearTimeout(timer);
   }, []);
