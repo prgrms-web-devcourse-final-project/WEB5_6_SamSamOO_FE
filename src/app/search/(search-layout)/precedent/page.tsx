@@ -1,9 +1,8 @@
 import { Metadata } from 'next';
 
 import PrecedentSearchResults from '@/components/features/search/PrecedentSearchResults';
-
-import { getPrecedentSearchResults } from '@/api/search/getPrecedentSearchResults';
 import SetTotalElementsAndPages from '@/components/features/search/SetTotalElementsAndPages';
+import { getPrecedentSearchResults } from '@/api/search/getPrecedentSearchResults';
 
 export const metadata: Metadata = {
   title: '바로 | 판례 검색',
@@ -14,21 +13,36 @@ type SearchParams = {
   search_query?: string;
   sentencingDateStart?: string;
   sentencingDateEnd?: string;
-  pageNumber: number;
-  pageSize: number;
+  pageNumber: string;
+  pageSize: string;
 };
 
-async function Page({ searchParams }: { searchParams: Promise<SearchParams> }) {
+async function Page({ searchParams }: { searchParams: SearchParams }) {
   const searchList = await searchParams;
   const { search_query } = searchList;
 
-  const response = await getPrecedentSearchResults({
+  const payload = await getPrecedentSearchResults({
     keyword: search_query ?? null,
     ...searchList,
+    pageNumber: Number(searchList.pageNumber) ?? 0,
     pageSize: 10,
   });
 
-  const payload = await response;
+  if (!payload || payload.content.length === 0) {
+    return (
+      <>
+        <div className="flex flex-col items-center justify-center py-20">
+          <h1 className="text-3xl font-bold mb-3">검색 결과가 없습니다.</h1>
+          <p className="text-gray-500">입력하신 조건에 맞는 판례가 존재하지 않습니다.</p>
+        </div>
+        <SetTotalElementsAndPages
+          category="판례"
+          precedentTotalElements={0}
+          precedentTotalPages={0}
+        />
+      </>
+    );
+  }
 
   return (
     <>

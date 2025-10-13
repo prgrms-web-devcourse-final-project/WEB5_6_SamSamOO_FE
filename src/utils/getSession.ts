@@ -2,12 +2,31 @@ import 'server-only';
 import { cookies } from 'next/headers';
 import { cache } from 'react';
 import { jwtVerify, type JWTPayload } from 'jose';
+import {
+  JWSSignatureVerificationFailed,
+  JWTClaimValidationFailed,
+  JWTExpired,
+  JWTInvalid,
+} from 'jose/errors';
 import { SessionSnapshot } from '@/types/session';
 
 const UNVERIFIED_SESSION: SessionSnapshot = {
   isAuthenticated: false,
   user: null,
 };
+
+interface JoseErrorLike extends Error {
+  code?: string;
+}
+
+function hasJoseErrorCode(error: unknown, ...codes: string[]): error is JoseErrorLike {
+  if (!error || typeof error !== 'object') {
+    return false;
+  }
+
+  const candidate = error as JoseErrorLike;
+  return typeof candidate.code === 'string' && codes.includes(candidate.code);
+}
 
 function createSecretCandidates(rawSecret: string): Uint8Array[] {
   const trimmed = rawSecret.trim();
@@ -61,19 +80,27 @@ export const getSession = cache(async (): Promise<SessionSnapshot> => {
         payload = verified.payload;
         break;
       } catch (error) {
-        if (error instanceof Error) {
-          if (error.name === 'JWSSignatureVerificationFailed') {
-            continue;
-          }
+        if (
+          error instanceof JWSSignatureVerificationFailed ||
+          hasJoseErrorCode(error, 'ERR_JWS_SIGNATURE_VERIFICATION_FAILED')
+        ) {
+          continue;
+        }
 
-          if (
-            error.name === 'JWTExpired' ||
-            error.name === 'JWTInvalid' ||
-            error.name === 'JWTClaimValidationFailed'
-          ) {
-            console.warn('[getSession] JWT verification rejected token:', error.message);
-            return UNVERIFIED_SESSION;
-          }
+        if (
+          error instanceof JWTExpired ||
+          error instanceof JWTInvalid ||
+          error instanceof JWTClaimValidationFailed ||
+          hasJoseErrorCode(
+            error,
+            'ERR_JWT_EXPIRED',
+            'ERR_JWT_INVALID',
+            'ERR_JWT_CLAIM_VALIDATION_FAILED',
+          )
+        ) {
+          const message = error instanceof Error ? error.message : 'Unknown JWT verification error';
+          console.warn('[getSession] JWT verification rejected token:', message);
+          return UNVERIFIED_SESSION;
         }
 
         throw error;

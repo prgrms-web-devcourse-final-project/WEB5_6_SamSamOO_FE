@@ -61,13 +61,15 @@ async function Page({ searchParams }: { searchParams: Promise<SearchParams> }) {
       promulgationDateEnd,
       enforcementDateStart,
       enforcementDateEnd,
-      pageNumber,
+      pageNumber: pageNumber ?? 0,
       pageSize: PAGE_SIZE,
     });
+    console.log('통합 법령 : ', response);
     return response;
   };
 
   const lawPayload = await getLawData();
+
   // console.log('법령 개수 : ', lawPayload.totalElements);
   // console.log('법령 페이지 수 : ', lawPayload.totalPages);
 
@@ -77,9 +79,10 @@ async function Page({ searchParams }: { searchParams: Promise<SearchParams> }) {
       keyword: search_query ?? null,
       sentencingDateStart,
       sentencingDateEnd,
-      pageNumber,
+      pageNumber: pageNumber ?? 0,
       pageSize: PAGE_SIZE,
     });
+    console.log('판례 법령 : ', response);
     return response;
   };
   const precedentPayload = await getPrecedentData();

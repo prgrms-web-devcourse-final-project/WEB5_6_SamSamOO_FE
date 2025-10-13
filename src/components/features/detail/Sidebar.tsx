@@ -1,10 +1,15 @@
 'use client';
-import Hamburger from '@/assets/icons/hamburger.svg';
+
+import { useState, useRef, useEffect } from 'react';
+
 import MetadataGrid from './MetadataGrid';
 import Toc from './Toc';
+
+import tw from '@/utils/tw';
+import NavArrow from '@/assets/icons/navArrow.svg';
+import { useMobileDetection } from '@/hooks/useMobileDetection';
 import { Metadata, TableOfContent } from '@/types/detail';
-import { useLayoutEffect, useRef, useState } from 'react';
-import { debounce } from '@/utils/debounce';
+
 interface Props {
   toc: TableOfContent;
   metadata: Metadata;
@@ -12,104 +17,86 @@ interface Props {
 }
 
 function Sidebar({ toc, metadata, category }: Props) {
-  const [isOpen, setIsOpen] = useState<boolean>(true);
-  const [sidebarWith, setSidebarWith] = useState<number>(0);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const isMobile = useMobileDetection(768);
   const sideRef = useRef<HTMLElement>(null);
 
-  const calcSideWidth = () => {
-    if (!sideRef.current) return;
-    const target = sideRef.current;
-    setSidebarWith(target.clientWidth);
-  };
-
-  useLayoutEffect(() => {
-    calcSideWidth();
-
-    const observer = new ResizeObserver(() => {
-      calcSideWidth();
-    });
-    if (sideRef.current) observer.observe(sideRef.current);
-    const handleResize = debounce(calcSideWidth, 200);
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-      observer.disconnect();
-    };
+  useEffect(() => {
+    if (isOpen) {
+      // document.documentElement.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
+    } else {
+      // document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+    }
   }, [isOpen]);
 
+  useEffect(() => {
+    if (!isMobile) setIsOpen(false);
+  }, [isMobile]);
+
   return (
-    <div className="relative flex">
-      <>
-        <button
-          hidden={isOpen}
-          type="button"
-          className="sticky top-[calc(50%-60px)] w-5 text-xs sm:text-[16px] sm:w-8 h-40 px-1 bg-brand-primary dark:bg-brand-accent rounded-r-2xl font-light text-primary-white dark:font-medium"
-          style={{ left: isOpen ? `calc(${sidebarWith}px + 20px)` : 0 }}
-          onClick={() => setIsOpen((prev) => !prev)}
-        >
-          {category === '법령' ? (
-            <>
-              <p>법</p>
-              <p>령</p>
-              <p>목</p>
-              <p>차</p>
-            </>
-          ) : (
-            <>
-              <p>판</p>
-              <p>례</p>
-              <p>목</p>
-              <p>차</p>
-            </>
+    <>
+      {/* 토글 버튼 */}
+      {isMobile && (
+        <header
+          className={tw(
+            'fixed z-10 flex items-center top-15 w-full h-18 border-b border-b-filter-outline1',
+            isOpen
+              ? 'bg-[rgba(255,255,255)] dark:bg-[rgba(0,0,0)]'
+              : 'bg-[rgba(255,255,255,0.89)] dark:bg-[rgba(0,0,0,0.89)]',
           )}
-        </button>
-        {isOpen && (
-          <div className="sticky left-0 top-0 flex h-dvh">
-            <section
-              ref={sideRef}
-              className="overflow-y-scroll overflow-x-hidden w-[366px] flex-col text-primary-gray2 dark:text-primary-white border-r"
-            >
-              <h2 className="sr-only">네비게이션</h2>
-              <div className="w-full flex gap-2 items-center py-10 mb-12 px-8 border-b">
-                <Hamburger className="dark:text-primary-white w-8 h-4" />
-                <p className="font-bold text-3xl">
-                  {category === '법령' ? '법령 목차' : '판례 목차'}
-                </p>
-              </div>
-              <div className="flex-1 h-[calc(100dvh-460px)] overflow-y-scroll overflow-x-hidden">
-                <Toc toc={toc} />
-              </div>
-              <div className="w-full px-8 py-10">
-                <MetadataGrid metadata={metadata} />
-              </div>
-            </section>
-            <button
-              type="button"
-              className="absolute top-[calc(50%-130px)] w-5 text-xs sm:text-[16px] sm:w-8 h-40 px-1 bg-brand-primary dark:bg-brand-accent rounded-r-2xl font-light text-primary-white dark:font-medium"
-              style={{ left: isOpen ? `${sidebarWith + 16}px` : 0 }}
-              onClick={() => setIsOpen((prev) => !prev)}
-            >
-              {category === '법령' ? (
-                <>
-                  <p>법</p>
-                  <p>령</p>
-                  <p>목</p>
-                  <p>차</p>
-                </>
-              ) : (
-                <>
-                  <p>판</p>
-                  <p>례</p>
-                  <p>목</p>
-                  <p>차</p>
-                </>
-              )}
-            </button>
+        >
+          <button
+            type="button"
+            onClick={() => setIsOpen((prev) => !prev)}
+            className="w-full flex items-center pl-8"
+          >
+            <NavArrow className="dark:text-primary-white w-6 h-6" />
+            <p className="font-bold text-xl pt-1.5">
+              {category === '법령' ? '법령 목차' : '판례 목차'}
+            </p>
+          </button>
+        </header>
+      )}
+      {/* 768 사이드바 오버레이 */}
+      {isMobile && isOpen && (
+        <section
+          ref={sideRef}
+          className="fixed inset-0 z-10 left-0 top-33 bottom-0 p-8 flex bg-background-white dark:bg-primary-black shadow-lg "
+        >
+          <div className="relative h-[calc(100%-225px)] flex-1 overflow-y-scroll">
+            <Toc toc={toc} />
           </div>
-        )}
-      </>
-    </div>
+          <div className="absolute w-[88%] bottom-0 pb-6">
+            <MetadataGrid metadata={metadata} />
+          </div>
+        </section>
+      )}
+
+      <div className="relative">
+        {/* 1024 사이드바 fixed*/}
+        <section
+          className={tw(
+            'hidden sticky md:flex flex-col top-0 h-dvh w-[366px] border-r border-border-gray1 bg-background-white dark:bg-background-black1',
+          )}
+        >
+          <div className="w-full flex items-center py-10 mb-12 px-8 border-b">
+            <NavArrow className="dark:text-primary-white text-primary-gray2 w-9 h-9" />
+            <p className="font-bold text-3xl text-primary-gray2 dark:text-primary-white pt-1.5">
+              {category === '법령' ? '법령 목차' : '판례 목차'}
+            </p>
+          </div>
+          <div className="flex-1 overflow-y-scroll overflow-x-hidden">
+            <Toc toc={toc} />
+          </div>
+          <div className="w-full px-8 py-10">
+            <MetadataGrid metadata={metadata} />
+          </div>
+        </section>
+      </div>
+    </>
   );
 }
+
 export default Sidebar;

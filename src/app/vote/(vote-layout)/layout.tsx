@@ -32,9 +32,8 @@ export default function VoteLayout({ children }: { children: React.ReactNode }) 
             <ToggleNavigation className="w-full" />
           </nav>
 
-          {children}
-          {/* <ReactQueryDevtools initialIsOpen={false} /> */}
-        </section>
+        {children}
+      </section>
 
         <CreateVoteModal />
       </QueryClientProvider>

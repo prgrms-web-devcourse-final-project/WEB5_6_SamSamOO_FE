@@ -10,12 +10,14 @@ interface Props {
   isOpen?: boolean;
   onClose?: () => void;
   setPrecedentSearchFilter: React.Dispatch<React.SetStateAction<PrecedentSearchFilter>>;
+  setChangeFilter: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function PrecedentSearchFilterModal({
   isOpen,
   onClose = () => {},
   setPrecedentSearchFilter,
+  setChangeFilter,
 }: Props) {
   const calendarRef = useRef(null);
   const modalRef = useRef<HTMLDivElement>(null);
@@ -31,7 +33,7 @@ function PrecedentSearchFilterModal({
     ref: calendarRef,
   });
   return (
-    <div className="absolute inset-0 z-10 bg-black/40 backdrop-blur-sm w-screen h-screen flex items-center justify-center">
+    <div className="fixed inset-0 z-10 bg-black/40 backdrop-blur-sm w-screen h-screen flex items-center justify-center">
       <section
         ref={modalRef}
         className="w-full sm:min-w-[593px] h-screen overflow-y-scroll sm:overflow-y-visible sm:w-fit sm:h-fit px-10 pt-30 pb-10 sm:px-10 sm:py-10 bg-white sm:rounded-modal sm:mb-5  dark:bg-background-black3 dark:text-primary-white dark:shadow-modal-dark"
@@ -74,6 +76,7 @@ function PrecedentSearchFilterModal({
                   sentencingDateStart: sentencingRange.start ?? '',
                   sentencingDateEnd: sentencingRange.end ?? '',
                 });
+                setChangeFilter(true);
                 onClose();
               }}
             >
