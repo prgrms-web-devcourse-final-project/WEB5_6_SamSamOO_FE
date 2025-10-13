@@ -1,4 +1,4 @@
-﻿/* eslint-disable @next/next/no-img-element */
+/* eslint-disable @next/next/no-img-element */
 'use client';
 
 import * as Select from '@radix-ui/react-select';
@@ -11,8 +11,8 @@ type SelectGenderProps = {
 };
 
 const genderOptions = [
-  { label: '남자', value: 'MALE' },
-  { label: '여자', value: 'FEMALE' },
+  { label: '남성', value: 'MALE' },
+  { label: '여성', value: 'FEMALE' },
 ];
 
 function SelectGender({ className, value, onChange }: SelectGenderProps) {
@@ -21,7 +21,7 @@ function SelectGender({ className, value, onChange }: SelectGenderProps) {
       <Select.Trigger
         aria-label="성별 선택"
         className={tw(
-          'flex h-13 items-center justify-between rounded-full bg-[#F4F4F4] px-6 shadow-[inset_0_4px_10px_rgba(0,0,0,0.3)] outline-none dark:text-primary-black',
+          'flex h-13 w-full items-center justify-between rounded-full bg-[#F4F4F4] px-5 text-sm shadow-[inset_0_4px_10px_rgba(0,0,0,0.3)] outline-none dark:text-primary-black sm:px-6 sm:text-base',
           className,
         )}
       >
@@ -30,7 +30,7 @@ function SelectGender({ className, value, onChange }: SelectGenderProps) {
           className="flex items-center text-primary-black data-[placeholder]:text-primary-black"
         />
         <Select.Icon>
-          <img src="/icons/selectDown.svg" alt="선택 아이콘" />
+          <img src="/icons/selectDown.svg" alt="성별 " />
         </Select.Icon>
       </Select.Trigger>
 
@@ -47,7 +47,7 @@ function SelectGender({ className, value, onChange }: SelectGenderProps) {
             <Select.Item
               key={option.value}
               value={option.value}
-              className="flex h-10 cursor-pointer select-none items-center rounded-[18px] px-3 outline-none hover:bg-[#f7f7f7] text-primary-black"
+              className="flex h-10 cursor-pointer select-none items-center rounded-[18px] px-3 text-primary-black outline-none hover:bg-[#f7f7f7]"
             >
               <Select.ItemText>{option.label}</Select.ItemText>
             </Select.Item>

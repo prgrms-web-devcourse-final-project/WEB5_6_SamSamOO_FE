@@ -14,8 +14,6 @@ async function Page({
       className="
         w-full max-w-[420px] px-6
         center-col
-        min-h-screen
-        justify-center
         sm:px-0
       "
     >
