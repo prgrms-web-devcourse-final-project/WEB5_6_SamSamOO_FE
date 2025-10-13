@@ -53,10 +53,10 @@ export default function Oauth({ mode = 'login' }: Props) {
   }, [router, setSession]);
 
   return (
-    <div className="mb-6 flex w-full gap-6">
+    <div className="mb-6 flex w-full flex-col gap-4 sm:flex-row sm:gap-6">
       <button
         type="button"
-        className="h-13 flex flex-1 items-center justify-center gap-3 rounded-sm bg-[#03C75A] px-9 text-primary-white"
+        className="flex w-full items-center justify-center gap-3 rounded-sm bg-[#03C75A] px-6 py-3 text-primary-white sm:h-13 sm:flex-1 sm:px-9"
         onClick={() => handleOauthPopup('naver')}
       >
         <NaverIcon width={18} height={18} />
@@ -65,7 +65,7 @@ export default function Oauth({ mode = 'login' }: Props) {
 
       <button
         type="button"
-        className="h-13 flex flex-1 items-center justify-center gap-3 rounded-sm bg-[#FEE500] px-9 text-primary-black"
+        className="flex w-full items-center justify-center gap-3 rounded-sm bg-[#FEE500] px-6 py-3 text-primary-black sm:h-13 sm:flex-1 sm:px-9"
         onClick={() => handleOauthPopup('kakao')}
       >
         <KakaoIcon width={20} height={20} />
