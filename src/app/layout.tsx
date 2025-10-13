@@ -10,6 +10,7 @@ import Footer from '@/components/layout/Footer';
 import ThemeProvider from '@/components/provider/ThemeProvider';
 import ServerUserProvider from '@/components/provider/ServerUserProvider';
 import { Toaster } from 'sonner';
+import ScrollToTopButton from '@/components/ui/ScrollToTopButton';
 
 export const metadata: Metadata = {
   title: '바로 BaLaw',
@@ -58,6 +59,7 @@ export default function RootLayout({
             <Header />
             <main className="w-full min-h-[calc(100vh-50px)] pt-[70px]">{children}</main>
             <Footer />
+            <ScrollToTopButton />
           </ThemeProvider>
         </ServerUserProvider>
         <SpeedInsights />

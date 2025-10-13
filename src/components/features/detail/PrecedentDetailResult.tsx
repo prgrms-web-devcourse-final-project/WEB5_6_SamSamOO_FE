@@ -2,7 +2,6 @@ import CategoryTag from './CategoryTag';
 import Sidebar from './Sidebar';
 
 import extractPrecedentHeadings from '@/utils/extractPrecedentHeadings';
-import ScrollToTopButton from '@/components/ui/ScrollToTopButton';
 import InlineText from '@/components/ui/InlineText';
 import { Metadata } from '@/types/detail';
 import { PrecedentDetailsResponse } from '@/types/precedent';
@@ -116,7 +115,6 @@ function PrecedentDetailResult({ data }: { data: PrecedentDetailsResponse }) {
             </div>
           </InlineText>
         </section>
-        <ScrollToTopButton />
       </div>
     </>
   );

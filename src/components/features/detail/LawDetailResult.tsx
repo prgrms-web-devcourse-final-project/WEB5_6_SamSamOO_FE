@@ -3,7 +3,6 @@ import CategoryTag from './CategoryTag';
 
 import tw from '@/utils/tw';
 import extractLawHeadings from '@/utils/extractLawHeadings';
-import ScrollToTopButton from '@/components/ui/ScrollToTopButton';
 import InlineText from '@/components/ui/InlineText';
 import { Metadata } from '@/types/detail';
 import { LawDetailsResponse } from '@/types/law';
@@ -101,7 +100,6 @@ function LawDetailResult({ data }: { data: LawDetailsResponse }) {
             </div>
           </InlineText>
         </section>
-        <ScrollToTopButton />
       </div>
     </>
   );
