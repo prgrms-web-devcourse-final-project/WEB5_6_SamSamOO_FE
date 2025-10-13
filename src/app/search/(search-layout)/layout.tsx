@@ -4,7 +4,7 @@ import SearchArea from '@/components/features/search/SearchArea';
 import ToggleSwitchNavigation from '@/components/ui/ToggleSwitchNavigation';
 import { SearchProvider } from '@/context/SearchContext';
 import PaginationWrapper from '@/components/features/search/PaginationWrapper';
-import ScrollButton from '@/components/ui/ScrollButton';
+import ScrollToTopButton from '@/components/ui/ScrollToTopButton';
 
 function SearchLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -26,7 +26,7 @@ function SearchLayout({ children }: { children: React.ReactNode }) {
         </SearchProvider>
       </div>
       <ChatButton />
-      <ScrollButton />
+      <ScrollToTopButton />
     </div>
   );
 }
