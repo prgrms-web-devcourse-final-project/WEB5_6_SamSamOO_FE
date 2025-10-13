@@ -53,6 +53,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko-KR" suppressHydrationWarning>
+      <head></head>
       <body className={`${appleSD.className} antialiased`}>
         <ServerUserProvider>
           <ThemeProvider enableSystem>

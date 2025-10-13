@@ -38,7 +38,12 @@ function StaticRanks({ rankList }: Props) {
           >
             {index + 1}
           </div>
-          <p className="font-medium text-primary-black dark:text-primary-white">{item.keyword}</p>
+          <p
+            className="font-medium text-primary-black dark:text-primary-white"
+            title={item.keyword}
+          >
+            {item.keyword.length > 12 ? item.keyword.slice(0, 12) + '...' : item.keyword}
+          </p>
         </motion.li>
       ))}
     </motion.ul>

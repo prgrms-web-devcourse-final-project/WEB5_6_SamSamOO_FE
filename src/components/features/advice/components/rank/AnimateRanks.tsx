@@ -15,7 +15,7 @@ function AnimateRanks({ rankList }: Props) {
     }, 4000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [rankList.length]);
   const currentItem = rankList[currentIndex];
 
   return (
@@ -35,7 +35,11 @@ function AnimateRanks({ rankList }: Props) {
         >
           {currentIndex + 1}
         </div>
-        <p>{currentItem.keyword}</p>
+        <p title={currentItem.keyword}>
+          {currentItem.keyword.length > 10
+            ? currentItem.keyword.slice(0, 10) + '...'
+            : currentItem.keyword}
+        </p>
       </motion.div>
     </AnimatePresence>
   );
