@@ -2,7 +2,6 @@ import { useMounted } from '@/hooks/useMounted';
 import { useStaggerFade } from '@/hooks/useStaggerFade';
 import { useTheme } from 'next-themes';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
 
 function FeatAdvice() {
   const containerRef = useStaggerFade({ stagger: 0.5, duration: 1 });
@@ -25,7 +24,7 @@ function FeatAdvice() {
           >
             AI 상담
           </span>
-          <div className="md:text-4xl text-2xl">
+          <div className="lg:text-4xl md:text-3xl text-2xl">
             <p>어떻게 시작해야할지 막막한가요?</p>
             <p>디케와 함께하는 AI 상담으로</p>
           </div>

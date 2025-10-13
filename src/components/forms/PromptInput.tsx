@@ -12,10 +12,11 @@ export default function PromptInput() {
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
   const router = useRouter();
   const pathname = usePathname();
-  const { roomId, message, sendNewMessage, sendExistMessage } = useChatStore(
+  const { roomId, message, isLoading, sendNewMessage, sendExistMessage } = useChatStore(
     useShallow((state) => ({
       roomId: state.roomId,
       message: state.messages,
+      isLoading: state.isLoading,
       sendNewMessage: state.sendNewMessage,
       sendExistMessage: state.sendExistMessage,
     })),
@@ -32,6 +33,7 @@ export default function PromptInput() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isLoading) return;
     if (!value.trim()) return;
     const input = value;
     setValue('');

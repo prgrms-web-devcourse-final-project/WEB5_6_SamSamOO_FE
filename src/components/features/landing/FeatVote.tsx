@@ -18,7 +18,7 @@ function FeatVote() {
           <h2 className="landing-title dark:bg-background-white dark:text-primary-black w-fit mb-5 stagger-item">
             배심원단 투표
           </h2>
-          <div className="flex flex-col lg:landing-sub text-3xl font-semibold stagger-item">
+          <div className="flex flex-col lg:landing-sub md:text-3xl text-2xl font-semibold stagger-item">
             <p>다른 사람의 고민,</p>
             <p>배심원단이 되어 판단해볼까요?</p>
           </div>

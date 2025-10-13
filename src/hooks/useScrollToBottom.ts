@@ -23,7 +23,7 @@ export function useScrollToBottom({
     const distanceFromBottom = scrollHeight - scrollTop - clientHeight;
 
     setShowButton(distanceFromBottom > threshold);
-  }, [enabled, threshold]);
+  }, [enabled, threshold, autoScrollRef]);
 
   useEffect(() => {
     if (!enabled) {
@@ -44,7 +44,7 @@ export function useScrollToBottom({
       clearTimeout(timeoutId);
       setShowButton(false);
     };
-  }, [enabled, handleScroll]);
+  }, [enabled, handleScroll, autoScrollRef]);
 
   const scrollToBottom = useCallback(() => {
     if (!enabled) return;
@@ -56,7 +56,7 @@ export function useScrollToBottom({
       top: scrollElement.scrollHeight,
       behavior: 'smooth',
     });
-  }, [enabled]);
+  }, [enabled, autoScrollRef]);
 
   return { showButton, scrollToBottom };
 }
