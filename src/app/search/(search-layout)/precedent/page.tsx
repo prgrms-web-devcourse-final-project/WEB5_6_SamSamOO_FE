@@ -24,7 +24,7 @@ async function Page({ searchParams }: { searchParams: SearchParams }) {
   const payload = await getPrecedentSearchResults({
     keyword: search_query ?? null,
     ...searchList,
-    pageNumber: Number(searchList.pageNumber),
+    pageNumber: Number(searchList.pageNumber) ?? 0,
     pageSize: 10,
   });
 
