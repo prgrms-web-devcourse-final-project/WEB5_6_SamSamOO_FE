@@ -3,9 +3,10 @@ import { clamp } from '@/utils/date';
 import makeSearchUrl from '@/utils/makeSearchUrl';
 import tw from '@/utils/tw';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { startTransition, useEffect, useState } from 'react';
+import { useEffect, useState, useTransition } from 'react';
 import SkipPage from '@/assets/icons/skipPage.svg';
 import MovePage from '@/assets/icons/movePage.svg';
+import { useSearchPending } from '@/context/SearchPendingContext';
 
 interface Props {
   showCount?: number;
@@ -23,28 +24,25 @@ function Pagination({ showCount = 5, end = 10, currentPage }: Props) {
   const maxStart = Math.max(1, end - showCount + 1);
   const half = Math.floor(showCount / 2);
   const start = clamp(activePageNumber - half, 1, maxStart);
-  const [isNavigating, setIsNavigating] = useState(false);
+  // const [isPending, startTransition] = useTransition();
+  const { startPending, isPending } = useSearchPending();
 
   useEffect(() => {
     if (currentPage !== undefined && !Number.isNaN(currentPage)) {
       setActivePageNumber(currentPage);
-      // console.log(currentPage);
     }
   }, [currentPage]);
 
   const getPage = (index: number) => {
-    if (isNavigating) return;
-    setIsNavigating(true);
-
+    if (isPending) return;
     setActivePageNumber(index);
-    startTransition(() => {
+
+    startPending(() => {
       const url = makeSearchUrl(pathname, params, {
         pageNumber: String(index - 1),
       });
-      router.push(url, { scroll: false });
-      // console.log('router pushed to', url);
-
-      setTimeout(() => setIsNavigating(false), 400);
+      router.push(url);
+      // router.refresh();
     });
   };
 
