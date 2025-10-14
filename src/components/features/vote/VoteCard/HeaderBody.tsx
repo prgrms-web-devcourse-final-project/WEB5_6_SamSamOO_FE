@@ -51,56 +51,62 @@ export default function HeaderBody({
     <>
       {/* 헤더 */}
       <header className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
-        {/* 왼쪽: 카테고리 / 상태 / 참여자 / 시간 */}
-        <div className="flex flex-col w-full sm:flex-row sm:items-center sm:gap-3">
-          {/* 첫 줄: 카테고리 + 상태 (같은 줄) */}
-          <div className="flex items-center justify-between w-full sm:w-auto sm:gap-3">
-            {/* 카테고리 */}
-            <div className="flex items-center h-10 sm:h-11 bg-brand-primary rounded-full gap-2 px-3 sm:px-5 dark:bg-primary-gray3 dark:border dark:border-[#a3a3a3]">
-              <Gavel className="text-primary-white w-4 h-4 sm:w-5 sm:h-5" />
-              <p className="text-primary-white text-sm sm:text-base">{category}</p>
+        {/* 상단: 카테고리 / 참여자 / 시간 / (보트액션+상태) */}
+        <div className="flex flex-col w-full sm:flex-row sm:items-center sm:justify-between">
+          {/* 왼쪽 영역 */}
+          <div className="flex flex-col w-full sm:flex-row sm:items-center sm:gap-3 sm:flex-wrap">
+            {/* 1️⃣ 첫 줄: 카테고리 + 보트액션 + 상태 (모바일) */}
+            <div className="flex items-center justify-between w-full sm:w-auto sm:justify-start sm:gap-3 flex-wrap">
+              {/* 카테고리 */}
+              <div className="flex items-center h-10 sm:h-11 bg-brand-primary rounded-full gap-2 px-3 sm:px-5 dark:bg-primary-gray3 dark:border dark:border-[#a3a3a3]">
+                <Gavel className="text-primary-white w-4 h-4 sm:w-5 sm:h-5" />
+                <p className="text-primary-white text-sm sm:text-base">{category}</p>
+              </div>
+
+              {/* 모바일 전용: 보트액션 + 상태 */}
+              <div className="flex items-center flex-nowrap gap-2 sm:hidden">
+                {showActionMenu && (
+                  <div className="flex-shrink-0">
+                    <VoteActionMenu draft={draft} onDelete={handleDelete} />
+                  </div>
+                )}
+                <div className="flex items-center gap-1 flex-nowrap whitespace-nowrap">
+                  <Indicator style={{ color: statusInfo.color }} />
+                  <p className="font-bold text-sm" style={{ color: statusInfo.color }}>
+                    {statusInfo.text}
+                  </p>
+                </div>
+              </div>
             </div>
 
-            {/* 상태 (같은 줄 오른쪽) */}
-            <div className="flex items-center gap-1 ml-3 sm:ml-0 sm:hidden">
+            {/* 2️⃣ 두 번째 줄: 참여자 + 게시 시간 */}
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mt-1.5 sm:mt-0 sm:gap-4 text-sm sm:text-base">
+              <div className="flex items-center gap-1 flex-shrink-0">
+                <Voter className="text-brand-primary dark:text-brand-accent w-4 h-4 sm:w-6 sm:h-6" />
+                <p>{participants.toLocaleString()}명 참여</p>
+              </div>
+
+              <div className="flex items-center gap-1 flex-shrink-0">
+                <Time className="text-brand-primary dark:text-brand-accent w-4 h-4 sm:w-6 sm:h-6" />
+                <span className="text-brand-primary dark:text-primary-white">게시 시간 :</span>
+                <span className="font-bold text-brand-primary dark:text-brand-accent">
+                  {remainingTime}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* 데스크탑 전용: 보트액션 + 상태 */}
+          <div className="hidden sm:flex items-center gap-3 ml-auto">
+            {showActionMenu && <VoteActionMenu draft={draft} onDelete={handleDelete} />}
+            <div className="flex items-center gap-1 text-base whitespace-nowrap">
               <Indicator style={{ color: statusInfo.color }} />
-              <p className="font-bold text-sm" style={{ color: statusInfo.color }}>
+              <p className="font-bold" style={{ color: statusInfo.color }}>
                 {statusInfo.text}
               </p>
             </div>
           </div>
-
-          {/* 두 번째 줄: 참여자 + 게시 시간 */}
-          <div className="flex items-center justify-start gap-3 mt-1.5 sm:mt-0 sm:ml-2 sm:gap-3 sm:flex-row text-sm sm:text-base">
-            <div className="flex items-center gap-1 sm:gap-2">
-              <Voter className="text-brand-primary dark:text-brand-accent w-4 h-4 sm:w-5 sm:h-5" />
-              <p>{participants.toLocaleString()}명 참여</p>
-            </div>
-
-            <div className="flex items-center gap-1 sm:gap-2">
-              <Time className="text-brand-primary dark:text-brand-accent w-4 h-4 sm:w-5 sm:h-5" />
-              <span className="text-brand-primary dark:text-primary-white">게시 시간 :</span>
-              <span className="font-bold text-brand-primary dark:text-brand-accent">
-                {remainingTime}
-              </span>
-            </div>
-          </div>
-
-          {/* 상태 (데스크탑 전용, 맨 오른쪽) */}
-          <div className="hidden sm:flex items-center gap-1 text-sm sm:text-base ml-auto">
-            <Indicator style={{ color: statusInfo.color }} />
-            <p className="font-bold" style={{ color: statusInfo.color }}>
-              {statusInfo.text}
-            </p>
-          </div>
         </div>
-
-        {/* 우측 메뉴 */}
-        {showActionMenu && (
-          <div className="flex justify-end sm:justify-start mt-2 sm:mt-0">
-            <VoteActionMenu draft={draft} onDelete={handleDelete} />
-          </div>
-        )}
       </header>
 
       {/* 본문 */}

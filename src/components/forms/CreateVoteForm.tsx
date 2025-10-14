@@ -179,7 +179,7 @@ export default function CreateVoteForm({
             autoFocus
             placeholder="분쟁 제목을 입력해 주세요."
             maxLength={100}
-            className="text-base sm:text-xl outline-none font-semibold text-brand-primary flex-1 dark:text-primary-white"
+            className="text-base sm:text-xl outline-none font-semibold text-brand-primary flex-1 dark:text-primary-white select-text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             disabled={isSubmitting}
@@ -190,7 +190,7 @@ export default function CreateVoteForm({
           <textarea
             name="content"
             placeholder="분쟁 내용을 입력해 주세요."
-            className="w-full h-full resize-none outline-none text-sm sm:text-md bg-transparent text-brand-primary dark:text-primary-white"
+            className="w-full h-full resize-none outline-none text-sm sm:text-lg bg-transparent text-brand-primary dark:text-primary-white select-text"
             value={content}
             onChange={(e) => setContent(e.target.value)}
             disabled={isSubmitting}
@@ -205,7 +205,7 @@ export default function CreateVoteForm({
           name="option1"
           placeholder="투표 옵션 1"
           maxLength={100}
-          className="bg-[#f4f4f4] w-full rounded-3xl shadow-[inset_0_4px_10px_rgba(0,0,0,0.3)] py-3 sm:py-4 px-4 sm:px-5 font-bold outline-none text-brand-primary text-base sm:text-lg dark:bg-background-black1 dark:text-primary-white"
+          className="bg-[#f4f4f4] w-full rounded-3xl shadow-[inset_0_4px_10px_rgba(0,0,0,0.3)] py-3 sm:py-4 px-4 sm:px-5 font-bold outline-none text-brand-primary text-base sm:text-lg dark:bg-background-black1 dark:text-primary-white select-text"
           value={option1}
           onChange={(e) => setOption1(e.target.value)}
           disabled={isSubmitting}
@@ -215,7 +215,7 @@ export default function CreateVoteForm({
           name="option2"
           placeholder="투표 옵션 2"
           maxLength={100}
-          className="bg-[#f4f4f4] w-full rounded-3xl shadow-[inset_0_4px_10px_rgba(0,0,0,0.3)] py-3 sm:py-4 px-4 sm:px-5 font-bold outline-none text-brand-primary text-base sm:text-lg dark:bg-background-black1 dark:text-primary-white"
+          className="bg-[#f4f4f4] w-full rounded-3xl shadow-[inset_0_4px_10px_rgba(0,0,0,0.3)] py-3 sm:py-4 px-4 sm:px-5 font-bold outline-none text-brand-primary text-base sm:text-lg dark:bg-background-black1 dark:text-primary-white select-text"
           value={option2}
           onChange={(e) => setOption2(e.target.value)}
           disabled={isSubmitting}
