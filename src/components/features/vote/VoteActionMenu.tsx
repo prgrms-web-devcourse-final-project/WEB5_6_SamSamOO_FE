@@ -35,7 +35,7 @@ export default function VoteActionMenu({ onEdit, onDelete, className }: VoteActi
       <DropdownMenuContent
         align="end"
         sideOffset={8}
-        className="w-[140px] border border-primary-gray2"
+        className="w-[140px] border border-primary-white"
       >
         <DropdownMenuGroup>
           <DropdownMenuItem

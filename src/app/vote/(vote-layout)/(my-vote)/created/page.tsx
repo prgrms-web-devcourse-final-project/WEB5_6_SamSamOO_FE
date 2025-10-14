@@ -43,7 +43,7 @@ export default function CreatedPage() {
             status={post.status}
             title={post.title}
             content={post.content}
-            showActionMenu
+            showActionMenu={post.participants === 0}
           />
           <VoteCard.Graph status={post.status}>
             <GraphWrapper pollId={post.id} />
