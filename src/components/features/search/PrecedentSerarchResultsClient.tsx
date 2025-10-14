@@ -1,4 +1,3 @@
-// LawSearchResults.client.tsx
 'use client';
 import { useEffect } from 'react';
 
@@ -10,9 +9,12 @@ interface Props {
 }
 
 export default function PrecedentSearchResultsClient({ content, showTag }: Props) {
-  console.time('판례 Hydration');
   useEffect(() => {
-    console.timeEnd('판례 Hydration');
+    const start = performance.now();
+    requestAnimationFrame(() => {
+      const end = performance.now();
+      console.log('판례 Hydration + Paint:', Math.round(end - start), 'ms');
+    });
   }, []);
   return <PrecedentSearchResults content={content} showTag={showTag} />;
 }

@@ -87,6 +87,27 @@ async function Page({ searchParams }: { searchParams: Promise<SearchParams> }) {
   // console.log('판례 개수 : ', precedentPayload.totalElements);
   // console.log('판례 페이지 수 : ', precedentPayload.totalPages);
 
+  if (
+    (!lawPayload && !precedentPayload) ||
+    (lawPayload.content.length === 0 && precedentPayload.content.length === 0)
+  ) {
+    return (
+      <>
+        <div className="flex flex-col items-center justify-center py-20">
+          <h1 className="text-2xl font-bold mb-3">검색 결과가 없습니다.</h1>
+          <p className="text-gray-500">입력하신 조건에 맞는 결과가 존재하지 않습니다.</p>
+        </div>
+        <SetTotalElementsAndPages
+          category="통합"
+          lawTotalElements={0}
+          lawTotalPages={0}
+          precedentTotalElements={0}
+          precedentTotalPages={0}
+        />
+      </>
+    );
+  }
+
   return (
     <div>
       <LawSearchResultsClient content={lawPayload.content} showTag={true} />
