@@ -18,8 +18,9 @@ function RelevantInfoArea({ laws, precedent, className }: Props) {
         <div className="flex gap-2 flex-wrap mb-2">
           <p className="font-bold">관련 법령 :</p>
           <Link
-            className="underline decoration-2 decoration-brand-primary dark:decoration-primary-white hover:decoration-brand-accent center-col"
+            className="border-b border-brand-primary dark:border-primary-white hover:border-brand-accent center-col"
             href={`/search/total?search_query=${laws?.lawName}`}
+            title="검색으로 이동"
           >
             {laws?.lawName}
           </Link>
@@ -30,8 +31,9 @@ function RelevantInfoArea({ laws, precedent, className }: Props) {
         <div className="flex mb-2 gap-2 flex-wrap">
           <p className="font-bold">관련 판례 :</p>
           <Link
-            className="underline decoration-2 decoration-brand-primary dark:decoration-primary-white hover:decoration-brand-accent center-col"
+            className="border-b border-brand-primary dark:border-primary-white hover:border-brand-accent center-col"
             href={`/search/total?search_query=${precedent?.caseNumber}`}
+            title="검색으로 이동"
           >
             {precedent?.caseNumber}
           </Link>

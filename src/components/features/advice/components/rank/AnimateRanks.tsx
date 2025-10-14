@@ -26,7 +26,7 @@ function AnimateRanks({ rankList }: Props) {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -5 }}
         transition={{ duration: 0.5, ease: 'easeInOut' }}
-        className="w-70 h-10 lg:m-0 m-auto flex gap-8 items-center "
+        className="w-70 h-15 lg:m-0 m-auto flex gap-8 items-center "
       >
         <div
           className={`flex items-center justify-center w-8 h-8 rounded-full text-sm font-bold text-primary-white ${
