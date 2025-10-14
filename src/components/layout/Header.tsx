@@ -97,7 +97,7 @@ function Header() {
         {isOpen && (
           <ul
             ref={mainNavigationRef}
-            className="absolute bg-white dark:bg-black w-full left-0 top-15 flex md:hidden gap-7 items-center justify-center px-8 py-6 shadow-[0_4px_6.2px_0_rgba(0,0,0,0.15)]  dark:shadow-[0_1px_2px_0_rgba(213,213,213,0.25)]"
+            className="absolute z-20 bg-white dark:bg-black w-full left-0 top-15 flex md:hidden gap-7 items-center justify-center px-8 py-6 shadow-[0_4px_6.2px_0_rgba(0,0,0,0.15)]  dark:shadow-[0_1px_2px_0_rgba(213,213,213,0.25)]"
           >
             {mainNavItems.map(({ href, label }) => (
               <li key={href}>

@@ -6,7 +6,7 @@ function Layout({ children }: { children: React.ReactNode }) {
     <div className="w-full p-5 flex flex-col md:flex-row gap-6">
       <div className="flex relative">
         <AdviceSideBar />
-        <KeywordRank className="md:hidden flex justify-center absolute z-50" />
+        <KeywordRank className="md:hidden flex justify-center absolute z-10" />
       </div>
       <article className="flex-1 shadow-ai-floating dark:bg-[#181A1B] rounded-4xl relative">
         <h2 className="a11y">AI 상담 메인 컨텐츠 영역</h2>
