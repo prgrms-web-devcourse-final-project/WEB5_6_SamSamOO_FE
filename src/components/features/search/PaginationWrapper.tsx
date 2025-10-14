@@ -11,7 +11,6 @@ function PaginationWrapper() {
   const currentPage =
     paramPage !== null && !Number.isNaN(Number(paramPage)) ? Number(paramPage) + 1 : 0;
   const [pageSize, setPageSize] = useState<number>(1);
-  // console.log('pageSize: ', pageSize);
   const prevFilter = useRef<string>('');
   const filterChanged = useRef<boolean>(false);
   const resetAfterCategoryChange = useRef<boolean>(false);
