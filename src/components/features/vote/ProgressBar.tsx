@@ -74,34 +74,56 @@ export default function ProgressBar({
           style={{ transform: `translateX(-${100 - percent}%)` }}
         />
 
+        {/* ────────── 외부(밝은 배경) 텍스트 ────────── */}
         <div
           className={tw(
-            'absolute inset-0 flex justify-between items-center px-3 text-md pr-4',
+            'absolute inset-0 flex items-center justify-between px-4 text-md',
             outerText,
           )}
         >
-          <div className="flex items-center gap-2">
-            {isSelected && <Select className={tw('size-6 shrink-0', iconOuter)} />}
-            <p className={tw('truncate', !isSelected && 'pl-2')}>{label}</p>
+          {/* 왼쪽: 라벨 */}
+          <div className="flex items-center gap-2 min-w-0 flex-1">
+            {isSelected && <Select className={tw('size-4 sm:size-6 shrink-0', iconOuter)} />}
+            <p
+              className={tw(
+                'truncate text-ellipsis overflow-hidden whitespace-nowrap',
+                !isSelected && 'pl-2',
+              )}
+              title={label}
+            >
+              {label}
+            </p>
           </div>
-          <div className="flex items-end gap-3 leading-tight">
+
+          {/* 오른쪽: 퍼센트 + 득표수 — 공간 동적, 줄바꿈 없음 */}
+          <div className="flex items-end gap-2 sm:gap-3 leading-tight whitespace-nowrap flex-shrink-0 justify-end">
             <p>{percent}%</p>
             <p>{currentVotes.toLocaleString()}표</p>
           </div>
         </div>
 
+        {/* ────────── 내부(채워진 영역) 텍스트 ────────── */}
         <div
           className={tw(
-            'pointer-events-none absolute inset-0 flex justify-between items-center px-3 text-md transition-[clip-path] duration-500 ease-out pr-4',
+            'pointer-events-none absolute inset-0 flex items-center justify-between px-4 text-md transition-[clip-path] duration-500 ease-out',
             innerText,
           )}
           style={{ clipPath: `inset(0 calc(100% - ${percent}%) 0 0)` }}
         >
-          <div className="flex items-center gap-2">
-            {isSelected && <Select className={tw('size-6 shrink-0', iconInner)} />}
-            <p className={tw('truncate', !isSelected && 'pl-2')}>{label}</p>
+          <div className="flex items-center gap-2 min-w-0 flex-1">
+            {isSelected && <Select className={tw('size-4 sm:size-6 shrink-0', iconInner)} />}
+            <p
+              className={tw(
+                'truncate text-ellipsis overflow-hidden whitespace-nowrap',
+                !isSelected && 'pl-2',
+              )}
+              title={label}
+            >
+              {label}
+            </p>
           </div>
-          <div className="flex items-end gap-3 leading-tight">
+
+          <div className="flex items-end gap-2 sm:gap-3 leading-tight whitespace-nowrap flex-shrink-0 justify-end">
             <p>{percent}%</p>
             <p>{currentVotes.toLocaleString()}표</p>
           </div>
