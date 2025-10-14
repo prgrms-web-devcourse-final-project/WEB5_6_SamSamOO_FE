@@ -94,12 +94,12 @@ function DataCountArea() {
 
   return (
     <div
-      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 m-8 bg-background-white dark:bg-primary-black shadow-landing-1 rounded-[30px] max-w-[1200px] w-[90%]"
+      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 m-15 bg-background-white dark:bg-primary-black shadow-landing-1 rounded-[30px] max-w-[1200px] w-[95%]"
       role="list"
       aria-label="서비스 주요 통계"
     >
       {dataInfo.map((info, index) => (
-        <div key={index} className="center-row gap-3 py-10" role="listitem">
+        <div key={index} className="center-row gap-3 py-10 mr-2 ml-2" role="listitem">
           <Image
             src={`/images/${info.imageName}.png`}
             width={60}
@@ -107,7 +107,7 @@ function DataCountArea() {
             alt={`${info.content} 아이콘`}
             loading="lazy"
           />
-          <div className="w-[150px]">
+          <div className="w-[140px]">
             <CountUp
               start={info.start}
               end={info.count}
