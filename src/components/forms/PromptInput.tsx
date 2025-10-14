@@ -24,6 +24,10 @@ export default function PromptInput() {
   useTextAreaHeight(value, textAreaRef);
 
   useEffect(() => {
+    textAreaRef.current?.focus();
+  }, []);
+
+  useEffect(() => {
     if (pathname === '/advice') {
       if (roomId && message.length > 1) {
         router.push(`/chat/${roomId}`);
@@ -56,6 +60,8 @@ export default function PromptInput() {
     <form
       className="w-[100%] flex border-[0.5px] h-auto border-primary-gray1 rounded-3xl shadow-[5px_5px_0_1px_rgba(0,0,0,0.10)]"
       onSubmit={handleSubmit}
+      role="search"
+      aria-label="채팅 메시지 입력"
     >
       <textarea
         ref={textAreaRef}
@@ -66,9 +72,20 @@ export default function PromptInput() {
         rows={1}
         placeholder="무엇이든 물어보세요."
         style={{ overflowY: 'hidden' }}
+        aria-label="채팅 메시지 입력창"
+        aria-describedby="input-hint"
+        disabled={isLoading}
+        aria-busy={isLoading}
       />
+      <span id="input-hint" className="a11y">
+        Enter 키를 눌러 전송, Shift+Enter로 줄바꿈
+      </span>
       <div className="center-row mr-3">
-        <button type="submit" className="border-1 border-primary-gray1 rounded-[50%]">
+        <button
+          type="submit"
+          className="border-1 border-primary-gray1 rounded-[50%]"
+          aria-label="메시지 전송"
+        >
           <ArrowUpward className="text-[#406EB7] dark:text-brand-accent w-9 h-9" />
         </button>
       </div>

@@ -23,8 +23,9 @@ function ChatHistoryItem({ chatItem, onDelete }: Props) {
 
   return (
     <li
-      className="w-full group border rounded-xl hover:bg-brand-primary hover:dark:bg-brand-accent"
+      className="w-full group border-[0.5px] rounded-xl hover:bg-brand-primary hover:dark:bg-brand-accent"
       onClick={handleChatRoom}
+      title={chatItem.title}
     >
       <div className="flex w-full ml-1 gap-4 h-11 items-center">
         <Chat className="text-brand-primary dark:text-brand-accent group-hover:text-primary-white w-9 h-9" />
@@ -41,10 +42,11 @@ function ChatHistoryItem({ chatItem, onDelete }: Props) {
         </div>
         <button
           type="button"
-          className="mr-1 hidden group-hover:block"
+          className="mr-3 hidden group-hover:block"
+          title="채팅 삭제"
           onClick={(e) => handelChatDelete(e, chatItem.historyRoomId)}
         >
-          <Delete className="text-brand-primary dark:text-brand-accent group-hover:text-primary-white w-6 h-6" />
+          <Delete className="text-brand-primary dark:text-brand-accent group-hover:text-primary-white w-4 h-4" />
         </button>
       </div>
     </li>
