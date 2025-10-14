@@ -23,7 +23,7 @@ function AdviceSideBar() {
 
   return (
     <>
-      <div className="relative z-100 ">
+      <div className="relative z-20 ">
         <ChatMenuButton
           isSidebarOpen={isSidebarOpen}
           toggleSidebar={handleSideBar}

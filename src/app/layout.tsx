@@ -16,6 +16,32 @@ import ScrollToTopButton from '@/components/ui/ScrollToTopButton';
 export const metadata: Metadata = {
   title: '바로 BaLaw',
   description: 'AI 기술을 활용하여 법률 정보의 문턱을 낮추는 "내 손안의 법률 비서"',
+  openGraph: {
+    title: '바로 BaLaw',
+    description: 'AI 기술을 활용하여 법률 정보의 문턱을 낮추는 "내 손안의 법률 비서',
+    url: 'https://www.trybalaw.com/',
+    siteName: '바로 BaLaw',
+    images: [
+      {
+        url: 'https://github.com/user-attachments/assets/ee793fa8-d43c-4b22-a95f-7a90f5ae30d1',
+        width: 800,
+        height: 600,
+        alt: '바로 BaLaw',
+      },
+    ],
+    locale: 'ko_KR',
+    type: 'website',
+  },
+  icons: {
+    icon: [
+      { url: '/images/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/images/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/images/favicon-64x64.png', sizes: '64x64', type: 'image/png' },
+      { url: '/images/favicon-192x192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/images/favicon-512x512.png', sizes: '512x512', type: 'image/png' },
+    ],
+    apple: { url: '/images/favicon-192x192.png', sizes: '192x192', type: 'image/png' },
+  },
 };
 
 export const appleSD = localFont({

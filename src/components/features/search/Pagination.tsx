@@ -52,12 +52,13 @@ function Pagination({ showCount = 5, end = 10, currentPage }: Props) {
   return (
     <section>
       <h2 className="sr-only">페이지네이션</h2>
-      <ul className="flex items-center gap-2 sm:gap-4">
+      <ul className="flex items-center gap-0.5 sm:gap-4">
         <button
           type="button"
           title="첫 페이지로 이동"
           inert={activePageNumber === 1}
           onClick={() => getPage(1)}
+          className="w-4"
         >
           <SkipPage className="relative bottom-0.5" />
         </button>
@@ -77,12 +78,12 @@ function Pagination({ showCount = 5, end = 10, currentPage }: Props) {
               <button
                 type="button"
                 className={tw(
-                  'w-6 hover:bg-stone-100 rounded-full ',
+                  'w-11 h-11 hover:bg-stone-100 rounded-full ',
                   activePageNumber === start + index ? 'text-brand-accent' : '',
                 )}
                 onClick={() => getPage(start + index)}
               >
-                <p className="relative top-0.5">{start + index}</p>
+                <p className="relative top-0 sm:top-0.5">{start + index}</p>
               </button>
             </li>
           ))}

@@ -5,9 +5,9 @@ import PrecedentSearchResults from '@/components/features/search/PrecedentSearch
 import { getPrecedentSearchResults } from '@/api/search/getPrecedentSearchResults';
 import { getLawSearchResults } from '@/api/search/getLawSearchResults';
 import SetTotalElementsAndPages from '@/components/features/search/SetTotalElementsAndPages';
-import LawSearchResultsClient from '@/components/features/search/LawSearchResultsClient';
-import PrecedentDetailResult from '@/components/features/detail/PrecedentDetailResult';
-import PrecedentSearchResultsClient from '@/components/features/search/PrecedentSerarchResultsClient';
+// import LawSearchResultsClient from '@/components/features/search/LawSearchResultsClient';
+// import PrecedentDetailResult from '@/components/features/detail/PrecedentDetailResult';
+// import PrecedentSearchResultsClient from '@/components/features/search/PrecedentSerarchResultsClient';
 
 export const metadata: Metadata = {
   title: '바로 | 통합 검색',
@@ -80,9 +80,9 @@ async function Page({ searchParams }: { searchParams: Promise<SearchParams> }) {
     // console.log('판례 법령 : ', response);
     return response;
   };
-  console.time('서버 패칭 전체');
+  // console.time('서버 패칭 전체');
   const [lawPayload, precedentPayload] = await Promise.all([getLawData(), getPrecedentData()]);
-  console.timeEnd('서버 패칭 전체');
+  // console.timeEnd('서버 패칭 전체');
 
   // console.log('판례 개수 : ', precedentPayload.totalElements);
   // console.log('판례 페이지 수 : ', precedentPayload.totalPages);
@@ -110,10 +110,10 @@ async function Page({ searchParams }: { searchParams: Promise<SearchParams> }) {
 
   return (
     <div>
-      <LawSearchResultsClient content={lawPayload.content} showTag={true} />
-      <PrecedentSearchResultsClient content={precedentPayload.content} showTag={true} />
-      {/* <LawSearchResults content={lawPayload.content} showTag={true} /> */}
-      {/* <PrecedentSearchResults content={precedentPayload.content} showTag={true} /> */}
+      {/* <LawSearchResultsClient content={lawPayload.content} showTag={true} /> */}
+      {/* <PrecedentSearchResultsClient content={precedentPayload.content} showTag={true} /> */}
+      <LawSearchResults content={lawPayload.content} showTag={true} />
+      <PrecedentSearchResults content={precedentPayload.content} showTag={true} />
       <SetTotalElementsAndPages
         category="통합"
         lawTotalElements={lawPayload.totalElements}
