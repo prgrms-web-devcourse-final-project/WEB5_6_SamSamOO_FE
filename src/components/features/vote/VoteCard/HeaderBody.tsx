@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import * as React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -7,34 +7,51 @@ import Time from '@/assets/icons/time.svg';
 import Indicator from '@/assets/icons/indicator.svg';
 import Voter from '@/assets/icons/voter.svg';
 import SelectDown from '@/assets/icons/selectDown.svg';
+import VoteActionMenu from '@/components/features/vote/VoteActionMenu';
+import { useDeleteVoteMutation } from '@/hooks/useDeleteVoteMutation';
 
 interface HeaderBodyProps {
+  postId?: number;
   category: string;
   participants: number;
   remainingTime: string;
   status: 'ongoing' | 'closed';
   title: string;
   content: string;
+  showActionMenu?: boolean;
 }
 
 /**
  * VoteCard.HeaderBody
- * - 헤더(카테고리, 참여자, 남은 시간, 상태) + 본문(질문/내용)
+ * - 헤더(카테고리, 참여자, 남은 시간, 상태)
+ * - 본문(질문/내용)
+ * - 삭제 메뉴 연동
  */
 export default function HeaderBody({
+  postId,
   category,
   participants,
   remainingTime,
   status,
   title,
   content,
+  showActionMenu = false,
 }: HeaderBodyProps) {
   const [isOpen, setIsOpen] = React.useState(false);
+  const { mutate: deleteVote } = useDeleteVoteMutation();
 
   const statusInfo =
     status === 'ongoing'
       ? { text: '진행중', color: '#259D00' }
       : { text: '마감', color: '#EE4444' };
+
+  const handleDelete = () => {
+    if (!postId) return;
+    const confirmDelete = window.confirm('정말 삭제하시겠습니까?');
+    if (confirmDelete) {
+      deleteVote(postId);
+    }
+  };
 
   return (
     <>
@@ -65,12 +82,17 @@ export default function HeaderBody({
           </div>
         </div>
 
-        {/* 상태 표시 */}
-        <div className="center-row gap-2">
-          <Indicator style={{ color: statusInfo.color }} />
-          <p className="font-bold" style={{ color: statusInfo.color }}>
-            {statusInfo.text}
-          </p>
+        {/* 상태 표시 + 메뉴 */}
+        <div className="center-row gap-6">
+          {showActionMenu && (
+            <VoteActionMenu onEdit={() => console.log('edit action')} onDelete={handleDelete} />
+          )}
+          <div className="center-row gap-2">
+            <Indicator style={{ color: statusInfo.color }} />
+            <p className="font-bold" style={{ color: statusInfo.color }}>
+              {statusInfo.text}
+            </p>
+          </div>
         </div>
       </header>
 

@@ -7,12 +7,12 @@ import { useCreatedVotes } from '@/hooks/useCreatedVotes';
 /**
  * 내가 생성한 투표 페이지
  * - 진행중 + 마감 혼합
- * - 진행중: 투표 가능 / 마감: 통계 표시
+ * - 수정/삭제 메뉴 포함
  */
 export default function CreatedPage() {
   const { data: votes = [], status, refetch } = useCreatedVotes();
 
-  if (status === 'pending') return <div className="py-40 text-center">불러오는 중...</div>;
+  if (status === 'pending') return <div className="py-40 text-center text-lg">불러오는 중...</div>;
 
   if (status === 'error')
     return (
@@ -26,7 +26,7 @@ export default function CreatedPage() {
 
   if (!votes.length)
     return (
-      <div className="center-col py-40 text-center">
+      <div className="center-col py-40 text-center text-lg">
         <p>생성한 투표가 없습니다.</p>
       </div>
     );
@@ -35,15 +35,19 @@ export default function CreatedPage() {
     <div className="center-col gap-15 pb-20 pt-10">
       {votes.map((post) => (
         <VoteCard key={post.id} status={post.status}>
-          {/* 제목 + 본문 */}
-          <VoteCard.HeaderBody {...post} />
-
-          {/* 마감 시 그래프 표시 */}
+          <VoteCard.HeaderBody
+            postId={post.id}
+            category={post.category}
+            participants={post.participants}
+            remainingTime={post.remainingTime}
+            status={post.status}
+            title={post.title}
+            content={post.content}
+            showActionMenu
+          />
           <VoteCard.Graph status={post.status}>
             <GraphWrapper pollId={post.id} />
           </VoteCard.Graph>
-
-          {/* 옵션 (진행중이면 투표 가능 / 마감이면 비활성화) */}
           <VoteCard.Options
             pollId={post.id}
             options={post.options}

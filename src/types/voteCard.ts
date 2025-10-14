@@ -6,6 +6,7 @@ export interface VoteOptionModel {
 }
 
 export interface VoteCardModel {
+  postId?: number;
   id: number;
   category: string;
   participants: number;
