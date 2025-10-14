@@ -13,8 +13,8 @@ type SearchParams = {
   search_query?: string;
   sentencingDateStart?: string;
   sentencingDateEnd?: string;
-  pageNumber: string;
-  pageSize: string;
+  pageNumber: number;
+  pageSize: number;
 };
 
 async function Page({ searchParams }: { searchParams: SearchParams }) {
@@ -24,7 +24,7 @@ async function Page({ searchParams }: { searchParams: SearchParams }) {
   const payload = await getPrecedentSearchResults({
     keyword: search_query ?? null,
     ...searchList,
-    pageNumber: Number(searchList.pageNumber) ?? 0,
+    pageNumber: searchList.pageNumber ?? 0,
     pageSize: 10,
   });
 
