@@ -3,6 +3,13 @@ import DividerWithText from '@/components/features/account/DividerWithText';
 import Link from 'next/link';
 import AuthHeader from '@/components/features/account/AuthHeader';
 import Oauth from '@/components/features/account/Oauth';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '바로 | 로그인',
+  description: '바로 BaLaw 로그인 페이지입니다',
+  robots: { index: false, follow: false },
+};
 
 async function Page({
   searchParams,
@@ -10,7 +17,13 @@ async function Page({
   searchParams: Promise<{ message?: string; from?: string }>;
 }) {
   return (
-    <div className="w-[420px] center-col">
+    <div
+      className="
+        w-full max-w-[420px] px-6
+        center-col
+        sm:px-0
+      "
+    >
       <AuthHeader title="👋 안녕하세요!" subtitle="다시 만나게 되어서 반가워요!" />
 
       <LoginForm Params={await searchParams} />
@@ -19,18 +32,20 @@ async function Page({
 
       <Oauth mode="login" />
 
-      <Link
-        href="find-account"
-        className="text-[#7b7b7b] underline underline-offset-4 mb-6 dark:text-primary-white"
-      >
-        혹시 계정이 기억나지 않으신가요?
-      </Link>
-      <Link
-        href="sign-up"
-        className="text-[#7b7b7b] underline underline-offset-4 dark:text-primary-white"
-      >
-        회원가입 하러가기
-      </Link>
+      <div className="flex flex-col items-center gap-2 text-center mt-4">
+        <Link
+          href="find-account"
+          className="text-sm sm:text-base text-[#7b7b7b] underline underline-offset-4 dark:text-primary-white"
+        >
+          혹시 계정이 기억나지 않으신가요?
+        </Link>
+        <Link
+          href="sign-up"
+          className="text-sm sm:text-base text-[#7b7b7b] underline underline-offset-4 dark:text-primary-white"
+        >
+          회원가입 하러가기
+        </Link>
+      </div>
     </div>
   );
 }

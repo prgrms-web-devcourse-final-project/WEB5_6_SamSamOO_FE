@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
@@ -16,8 +16,9 @@ export default function Oauth({ mode = 'login' }: Props) {
   const router = useRouter();
   const setSession = useUserStore((state) => state.setSession);
 
-  const kakaoText = `카카오 ${mode === 'signup' ? '회원가입' : '로그인'}`;
-  const naverText = `네이버 ${mode === 'signup' ? '회원가입' : '로그인'}`;
+  const isSignup = mode === 'signup';
+  const kakaoText = isSignup ? '카카오 회원가입' : '카카오 로그인';
+  const naverText = isSignup ? '네이버 회원가입' : '네이버 로그인';
 
   const handleOauthPopup = (provider: 'kakao' | 'naver') => {
     const width = 500;
@@ -39,7 +40,6 @@ export default function Oauth({ mode = 'login' }: Props) {
 
       if (event.data?.type === 'OAUTH_SUCCESS') {
         setSession({ isAuthenticated: true, user: null });
-
         router.replace('/');
       }
 
@@ -53,23 +53,23 @@ export default function Oauth({ mode = 'login' }: Props) {
   }, [router, setSession]);
 
   return (
-    <div className="mb-6 flex w-full gap-6">
+    <div className="mb-6 flex w-full flex-col gap-4 sm:flex-row sm:gap-6">
       <button
         type="button"
-        className="h-13 flex flex-1 items-center justify-center gap-3 rounded-sm bg-[#03C75A] px-9 text-primary-white"
+        className="flex w-full items-center justify-center gap-3 rounded-sm bg-[#03C75A] px-6 py-3 text-primary-white sm:h-13 sm:flex-1 sm:px-9"
         onClick={() => handleOauthPopup('naver')}
       >
         <NaverIcon width={18} height={18} />
-        <span>{naverText}</span>
+        <span className="whitespace-nowrap">{naverText}</span>
       </button>
 
       <button
         type="button"
-        className="h-13 flex flex-1 items-center justify-center gap-3 rounded-sm bg-[#FEE500] px-9 text-primary-black"
+        className="flex w-full items-center justify-center gap-3 rounded-sm bg-[#FEE500] px-6 py-3 text-primary-black sm:h-13 sm:flex-1 sm:px-9"
         onClick={() => handleOauthPopup('kakao')}
       >
         <KakaoIcon width={20} height={20} />
-        <span>{kakaoText}</span>
+        <span className="whitespace-nowrap">{kakaoText}</span>
       </button>
     </div>
   );
