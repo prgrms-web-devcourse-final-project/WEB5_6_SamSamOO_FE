@@ -7,6 +7,7 @@ import AccountInput from '@/components/features/account/AccountInput';
 import AccountButton from '@/components/features/account/AccountButton';
 import FormErrorMessage from '@/components/features/account/FormErrorMessage';
 import { showErrorToast, showSuccessToast } from '@/utils/showToast';
+import { setSessionLogin } from '@/types/sessionStorage';
 
 interface Props {
   params: { message?: string; from?: string };
@@ -51,6 +52,7 @@ export default function LoginForm({ params }: Props) {
     try {
       const response = await login(formData);
       setSession({ isAuthenticated: true, user: response });
+      setSessionLogin('email');
       showSuccessToast('로그인 성공! 환영합니다♥️');
 
       if (params.from) {

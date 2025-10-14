@@ -11,6 +11,7 @@ import { signUp } from '@/api/account/signUp';
 import { useUserStore } from '@/store/useUserStore';
 import { useRouter } from 'next/navigation';
 import { showSuccessToast } from '@/utils/showToast';
+import { setSessionLogin } from '@/types/sessionStorage';
 
 export default function SignupForm() {
   const router = useRouter();
@@ -88,6 +89,7 @@ export default function SignupForm() {
 
       const response = await signUp(payload);
       setSession({ isAuthenticated: true, user: response });
+      setSessionLogin('email');
       showSuccessToast('환영합니다! 지금부터 서비스를 자유롭게 이용하실 수 있어요.');
       router.replace('/');
     } catch (err) {

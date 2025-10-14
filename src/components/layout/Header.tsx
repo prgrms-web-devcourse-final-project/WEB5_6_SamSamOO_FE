@@ -42,6 +42,7 @@ function Header() {
       await logout();
       clearSession();
       resetStore();
+      sessionStorage.removeItem('loginWay');
       showSuccessToast('로그아웃 되었습니다.');
       router.replace('/');
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
