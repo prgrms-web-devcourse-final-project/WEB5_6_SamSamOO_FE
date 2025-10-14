@@ -7,7 +7,7 @@ import SelectGender from '@/components/features/account/SelectGender';
 import BirthdayInput from '@/components/features/account/BirthdayInput';
 import FormErrorMessage from '@/components/features/account/FormErrorMessage';
 import calAge from '@/utils/calAge';
-import { signUp } from '@/api/account/signUpApi';
+import { signUp } from '@/api/account/signUp';
 import { useUserStore } from '@/store/useUserStore';
 import { useRouter } from 'next/navigation';
 import { showSuccessToast } from '@/utils/showToast';
@@ -90,14 +90,22 @@ export default function SignupForm() {
       setSession({ isAuthenticated: true, user: response });
       showSuccessToast('환영합니다! 지금부터 서비스를 자유롭게 이용하실 수 있어요.');
       router.replace('/');
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (err) {
       setError('회원가입 중 오류가 발생했습니다. 다시 시도해주세요.');
     }
   };
 
   return (
-    <form className="center-col mb-10 w-[420px] gap-7" onSubmit={handleSubmit}>
+    <form
+      onSubmit={handleSubmit}
+      className="
+        center-col
+        mb-10
+        w-full max-w-[420px]
+        px-6 sm:px-0
+        gap-5 sm:gap-7
+      "
+    >
       <AccountInput
         name="email"
         type="text"
@@ -127,18 +135,24 @@ export default function SignupForm() {
         onChange={handleInputChange}
       />
 
-      <div className="center-row w-full gap-7">
+      <div className="flex w-full flex-col gap-4 sm:flex-row sm:gap-7">
         <SelectGender
-          className="flex-1"
+          className="w-full sm:flex-1"
           value={formData.gender || undefined}
           onChange={handleGenderChange}
         />
-        <BirthdayInput value={formData.birthday} onChange={handleBirthdayChange} />
+        <BirthdayInput
+          className="w-full sm:flex-1"
+          value={formData.birthday}
+          onChange={handleBirthdayChange}
+        />
       </div>
 
       <div className="w-full center-col">
         <FormErrorMessage message={error} />
-        <AccountButton type="submit">회원가입</AccountButton>
+        <AccountButton type="submit" className="w-full">
+          회원가입
+        </AccountButton>
       </div>
     </form>
   );

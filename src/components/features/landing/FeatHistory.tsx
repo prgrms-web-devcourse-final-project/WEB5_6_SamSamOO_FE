@@ -6,11 +6,13 @@ import Image from 'next/image';
 function FeatHistory() {
   const containerRef = useStaggerFade({ stagger: 0.4, duration: 1 });
   const { resolvedTheme } = useTheme();
+
   const mounted = useMounted();
 
-  if (!mounted) return null;
   const imageSrc =
-    resolvedTheme === 'dark' ? '/images/landingChatbotDark.png' : '/images/landingChatbot.png';
+    mounted && resolvedTheme === 'dark'
+      ? '/images/landingChatbotDark.png'
+      : '/images/landingChatbot.png';
   return (
     <section className="h-screen center-col" ref={containerRef}>
       <div className="flex flex-col gap-10 w-[80%]">

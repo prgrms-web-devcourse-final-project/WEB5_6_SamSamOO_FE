@@ -8,9 +8,10 @@ function FeatSearch() {
   const { resolvedTheme } = useTheme();
   const mounted = useMounted();
 
-  if (!mounted) return null;
   const imageSrc =
-    resolvedTheme === 'dark' ? '/images/landingDetailDark.png' : '/images/landingDetail.png';
+    mounted && resolvedTheme === 'dark'
+      ? '/images/landingDetailDark.png'
+      : '/images/landingDetail.png';
   return (
     <section className="h-screen center-col" ref={containerRef} aria-labelledby="feat-search-title">
       <div className="flex flex-col gap-10 w-[80%]">

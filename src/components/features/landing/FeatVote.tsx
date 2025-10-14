@@ -8,9 +8,8 @@ function FeatVote() {
   const { resolvedTheme } = useTheme();
   const mounted = useMounted();
 
-  if (!mounted) return null;
   const imageSrc =
-    resolvedTheme === 'dark' ? '/images/landingVoteDark.png' : '/images/landingVote.png';
+    mounted && resolvedTheme === 'dark' ? '/images/landingVoteDark.png' : '/images/landingVote.png';
   return (
     <section className="h-screen center-col" ref={containerRef} aria-labelledby="feat-vote-title">
       <div className="flex lg:flex-row flex-col gap-8 w-[80%]">

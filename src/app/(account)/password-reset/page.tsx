@@ -1,34 +1,14 @@
-'use client';
+import type { Metadata } from 'next';
+import PasswordResetPageClient from '../../../components/features/account/PasswordResetPageClient';
 
-import { useState } from 'react';
-import AuthHeader from '@/components/features/account/AuthHeader';
-import VerifyPasswordForm from '@/components/forms/VerifyPasswordForm';
-import PasswordResetForm from '@/components/forms/PasswordResetForm';
-import { showSuccessToast } from '@/utils/showToast';
+export const metadata: Metadata = {
+  title: '바로 | 비밀번호 재설정',
+  description: '바로 BaLaw 비밀번호 재설정 페이지입니다',
+  robots: { index: false, follow: false },
+};
 
 function Page() {
-  const [verifiedEmail, setVerifiedEmail] = useState<string | null>(null);
-
-  return (
-    <div className="center-col">
-      <AuthHeader
-        title="👋 걱정마세요!"
-        subtitle="지금부터 비밀번호를 다시 설정할 수 있도록 도와드릴게요."
-      />
-
-      {verifiedEmail ? (
-        <PasswordResetForm
-          email={verifiedEmail}
-          onSuccess={() => {
-            showSuccessToast('비밀번호 재설정 성공!');
-            // router.replace('/') 같은 후속 처리 가능
-          }}
-        />
-      ) : (
-        <VerifyPasswordForm onVerified={(email) => setVerifiedEmail(email)} />
-      )}
-    </div>
-  );
+  return <PasswordResetPageClient />;
 }
 
 export default Page;
