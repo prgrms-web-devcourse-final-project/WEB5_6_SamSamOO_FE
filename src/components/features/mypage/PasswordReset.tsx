@@ -1,13 +1,29 @@
+'use client';
 import Lock from '@/assets/icons/lock.svg';
 
 import ArrowRight from '@/assets/icons/arrowRight.svg';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { showErrorToast } from '@/utils/showToast';
 
 function PasswordReset() {
+  const route = useRouter();
+
+  const handlePassWordRoute = () => {
+    const isSocial = sessionStorage.getItem('loginWay') === 'social';
+
+    if (isSocial) {
+      showErrorToast('소셜 로그인은 비밀번호 변경을 할 수 없습니다.');
+      return;
+    } else {
+      route.replace('/password-reset');
+      return;
+    }
+  };
+
   return (
     <section className="bg-[#406EB7]/40 dark:bg-[#121212] w-[80%] rounded-3xl shadow-[5px_5px_4px_0_rgba(0,0,0,0.25)] p-8 flex flex-col gap-3 text-brand-primary dark:text-primary-white">
       <h2 className="font-medium md:text-[28px] text-xl">비밀번호 변경</h2>
-      <Link href={'/password-reset'}>
+      <button type="button" onClick={handlePassWordRoute}>
         <div className="flex h-15 rounded-2xl items-center gap-4 hover:bg-primary-white dark:hover:bg-primary-gray2">
           <div className="rounded-[50%] bg-[#406EB7] dark:bg-[#181A1B] w-12 h-12 center-col ml-3">
             <Lock className="text-primary-black dark:text-brand-accent w-8 h-8" />
@@ -17,7 +33,7 @@ function PasswordReset() {
           </div>
           <ArrowRight className="w-10 h-10 text-brand-primary dark:text-brand-accent mr-3" />
         </div>
-      </Link>
+      </button>
     </section>
   );
 }

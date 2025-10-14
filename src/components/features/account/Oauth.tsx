@@ -7,6 +7,7 @@ import { useUserStore } from '@/store/useUserStore';
 import KakaoIcon from '@/assets/icons/kakao.svg';
 import NaverIcon from '@/assets/icons/naver.svg';
 import { showErrorToast } from '@/utils/showToast';
+import { setSessionLogin } from '@/types/sessionStorage';
 
 interface Props {
   mode?: 'login' | 'signup';
@@ -41,10 +42,9 @@ export default function Oauth({ mode = 'login', params }: Props) {
 
       if (event.data?.type === 'OAUTH_SUCCESS') {
         setSession({ isAuthenticated: true, user: null });
-
-        console.log('Params.from', params);
+        setSessionLogin('social');
         if (params && params.from) {
-          router.replace(params.from);
+          window.location.href = params.from;
         } else {
           router.replace('/');
         }
