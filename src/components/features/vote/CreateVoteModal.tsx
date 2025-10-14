@@ -6,7 +6,7 @@ import { useVoteModalStore } from '@/store/voteModalStore';
 import CreateVoteForm from '@/components/forms/CreateVoteForm';
 
 export default function CreateVoteModal() {
-  const { isOpen, close } = useVoteModalStore();
+  const { isOpen, mode, draft, close } = useVoteModalStore();
   const modalRef = useRef<HTMLDivElement>(null);
   const [isMouseDownInside, setIsMouseDownInside] = useState(false);
 
@@ -49,7 +49,13 @@ export default function CreateVoteModal() {
             transition={{ duration: 0.2, ease: 'easeInOut' }}
             className="w-[800px] rounded-4xl p-6 bg-background-white dark:bg-background-black2 text-primary-black dark:text-primary-white shadow-[0_4px_20px_rgba(0,0,0,0.25)] flex flex-col gap-6"
           >
-            <CreateVoteForm onClose={close} />
+            {/* mode/draft를 전달해서 폼이 생성·수정 모드를 구분할 수 있게 함 */}
+            <CreateVoteForm
+              mode={mode}
+              initialData={draft}
+              postId={draft?.postId}
+              onClose={close}
+            />
           </motion.div>
         </div>
       )}

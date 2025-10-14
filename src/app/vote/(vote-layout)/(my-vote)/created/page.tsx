@@ -3,6 +3,7 @@
 import VoteCard from '@/components/features/vote/VoteCard';
 import GraphWrapper from '@/components/features/vote/GraphWrapper';
 import { useCreatedVotes } from '@/hooks/useCreatedVotes';
+import type { VoteDraft } from '@/store/voteModalStore';
 
 /**
  * 내가 생성한 투표 페이지
@@ -33,29 +34,46 @@ export default function CreatedPage() {
 
   return (
     <div className="center-col gap-15 pb-20 pt-10">
-      {votes.map((post) => (
-        <VoteCard key={post.id} status={post.status}>
-          <VoteCard.HeaderBody
-            postId={post.id}
-            category={post.category}
-            participants={post.participants}
-            remainingTime={post.remainingTime}
-            status={post.status}
-            title={post.title}
-            content={post.content}
-            showActionMenu={post.participants === 0}
-          />
-          <VoteCard.Graph status={post.status}>
-            <GraphWrapper pollId={post.id} />
-          </VoteCard.Graph>
-          <VoteCard.Options
-            pollId={post.id}
-            options={post.options}
-            totalVotes={post.participants}
-            status={post.status}
-          />
-        </VoteCard>
-      ))}
+      {votes.map((post) => {
+        const draft: VoteDraft | undefined =
+          post.participants === 0 && post.pollId !== undefined
+            ? {
+                postId: post.id,
+                pollId: post.pollId,
+                category: post.category,
+                title: post.title,
+                content: post.content,
+                option1: post.options[0]?.label ?? '',
+                option2: post.options[1]?.label ?? '',
+                reservedCloseAt: post.reservedCloseAt ?? new Date().toISOString(),
+              }
+            : undefined;
+
+        return (
+          <VoteCard key={post.id} status={post.status}>
+            <VoteCard.HeaderBody
+              postId={post.id}
+              category={post.category}
+              participants={post.participants}
+              remainingTime={post.remainingTime}
+              status={post.status}
+              title={post.title}
+              content={post.content}
+              showActionMenu={post.participants === 0}
+              draft={draft}
+            />
+            <VoteCard.Graph status={post.status}>
+              <GraphWrapper pollId={post.pollId ?? post.id} />
+            </VoteCard.Graph>
+            <VoteCard.Options
+              pollId={post.pollId ?? post.id}
+              options={post.options}
+              totalVotes={post.participants}
+              status={post.status}
+            />
+          </VoteCard>
+        );
+      })}
     </div>
   );
 }

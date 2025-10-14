@@ -9,6 +9,7 @@ import Voter from '@/assets/icons/voter.svg';
 import SelectDown from '@/assets/icons/selectDown.svg';
 import VoteActionMenu from '@/components/features/vote/VoteActionMenu';
 import { useDeleteVoteMutation } from '@/hooks/useDeleteVoteMutation';
+import type { VoteDraft } from '@/store/voteModalStore';
 
 interface HeaderBodyProps {
   postId?: number;
@@ -19,6 +20,7 @@ interface HeaderBodyProps {
   title: string;
   content: string;
   showActionMenu?: boolean;
+  draft?: VoteDraft;
 }
 
 /**
@@ -36,6 +38,7 @@ export default function HeaderBody({
   title,
   content,
   showActionMenu = false,
+  draft,
 }: HeaderBodyProps) {
   const [isOpen, setIsOpen] = React.useState(false);
   const { mutate: deleteVote } = useDeleteVoteMutation();
@@ -84,9 +87,7 @@ export default function HeaderBody({
 
         {/* 상태 표시 + 메뉴 */}
         <div className="center-row gap-6">
-          {showActionMenu && (
-            <VoteActionMenu onEdit={() => console.log('edit action')} onDelete={handleDelete} />
-          )}
+          {showActionMenu && <VoteActionMenu draft={draft} onDelete={handleDelete} />}
           <div className="center-row gap-2">
             <Indicator style={{ color: statusInfo.color }} />
             <p className="font-bold" style={{ color: statusInfo.color }}>

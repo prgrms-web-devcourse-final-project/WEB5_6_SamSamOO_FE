@@ -12,7 +12,7 @@ export default function VoteLayout({ children }: { children: React.ReactNode }) 
   return (
     <LoginStateProvider>
       <QueryClientProvider client={queryClient}>
-        <section className="flex flex-col items-center min-h-[calc(100vh-50px-70px)] pt-18 bg-background-white dark:bg-background-black1">
+        <section className="flex flex-col items-center min-h-[calc(100vh-50px-70px)] pt-18 bg-background-white dark:bg-background-black1 overflow-y-auto [scrollbar-gutter:stable_both]">
           <h2 className="mb-4 text-5xl font-bold text-primary-black dark:text-primary-white">
             온라인 유저 배심원단
           </h2>
@@ -32,8 +32,8 @@ export default function VoteLayout({ children }: { children: React.ReactNode }) 
             <ToggleNavigation className="w-full" />
           </nav>
 
-        {children}
-      </section>
+          {children}
+        </section>
 
         <CreateVoteModal />
       </QueryClientProvider>

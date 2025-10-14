@@ -1,4 +1,4 @@
-import { VoteResponse } from '@/types/vote';
+﻿import { VoteResponse } from '@/types/vote';
 import { VoteCardModel } from '@/types/voteCard';
 
 export function normalizeVoteResponse(data: VoteResponse): VoteCardModel[] {
@@ -10,9 +10,12 @@ export function normalizeVoteResponse(data: VoteResponse): VoteCardModel[] {
 
     return {
       id: post.postId,
+      postId: post.postId,
+      pollId: poll.pollId,
       category: post.category,
       participants: totalVotes,
       remainingTime: calculateRemainingTime(poll.expectedCloseAt),
+      reservedCloseAt: poll.expectedCloseAt,
       status: poll.status === 'CLOSED' ? 'closed' : 'ongoing',
       title: post.postName || poll.voteTitle,
       content: post.postContent,
@@ -26,7 +29,7 @@ export function normalizeVoteResponse(data: VoteResponse): VoteCardModel[] {
 }
 
 function calculateRemainingTime(expectedCloseAt?: string): string {
-  if (!expectedCloseAt) return '알 수 없음';
+  if (!expectedCloseAt) return '기간 정보 없음';
   const now = new Date();
   const end = new Date(expectedCloseAt);
   const diffMs = end.getTime() - now.getTime();
