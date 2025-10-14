@@ -20,6 +20,7 @@ export function middleware(request: NextRequest) {
     loginUrl.searchParams.set('message', 'login-required');
     // 로그인 후 돌아갈 페이지 저장
     loginUrl.searchParams.set('from', request.nextUrl.pathname);
+    console.log('request.nextUrl.pathname', request.nextUrl.pathname);
     return NextResponse.redirect(loginUrl);
   }
   return NextResponse.next();
