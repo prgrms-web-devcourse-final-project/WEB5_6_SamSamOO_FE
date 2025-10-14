@@ -1,6 +1,13 @@
 import MemberWithdrawal from '@/components/features/mypage/MemberWithdrawal';
 import PasswordReset from '@/components/features/mypage/PasswordReset';
 import LoginStateProvider from '@/components/provider/LoginStateProvider';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '바로 | 마이페이지',
+  description: '바로 BaLaw 마이 페이지입니다',
+  robots: { index: false, follow: false },
+};
 
 function page() {
   return (

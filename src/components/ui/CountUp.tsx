@@ -8,15 +8,15 @@ interface CountUpProps {
   duration?: number;
   decimals?: number;
   separator?: boolean;
-  prefix?: string; // 접두사 (예: "$", "₩")
-  suffix?: string; // 접미사 (예: "+", "%", "명")
+  prefix?: string;
+  suffix?: string;
   className?: string;
 }
 
 export function CountUp({
   end,
   start = 0,
-  duration = 8,
+  duration = 2,
   decimals = 0,
   separator = true,
   prefix = '',
@@ -25,10 +25,18 @@ export function CountUp({
 }: CountUpProps) {
   const countRef = useCountUp({ end, start, duration, decimals, separator });
 
+  // ✅ 초기값 포맷팅
+  const formattedStart = separator
+    ? start.toLocaleString('ko-KR', {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals,
+      })
+    : start.toFixed(decimals);
+
   return (
     <span className={className}>
       {prefix}
-      <span ref={countRef}>{start}</span>
+      <span ref={countRef}>{formattedStart}</span>
       {suffix}
     </span>
   );

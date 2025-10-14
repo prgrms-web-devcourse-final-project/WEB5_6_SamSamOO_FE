@@ -35,10 +35,10 @@ function FeatChart() {
         </div>
       </div>
       <aside aria-label="법적 고지사항" className="center-col mb-12 lg:mb-20 w-[80%]">
-        <p className="lg:landing-sub md:text-3xl text-2xl font-semibold">
+        <p className="lg:landing-sub md:text-3xl text-2xl font-semibold break-words">
           본 서비스는 참고용 법률 정보만을 제공합니다.
         </p>
-        <p className="lg:text-4xl md:text-2xl text-base font-medium">
+        <p className="lg:text-4xl md:text-2xl text-base font-medium whitespace-pre-wrap break-words">
           법적 효력이나 책임은 없으며, 구체적인 사안은 반드시 전문가와 상담하시기 바랍니다.
         </p>
       </aside>

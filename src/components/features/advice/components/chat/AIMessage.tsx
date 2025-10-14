@@ -13,7 +13,7 @@ function AIMessage({ msg }: Props) {
     <div className="w-full">
       <Mascot />
       <div className="pt-3">
-        <InlineText className="whitespace-pre-wrap">{msg.content}</InlineText>
+        <InlineText className="whitespace-pre-wrap text-xl">{msg.content}</InlineText>
         <RelevantInfoArea laws={msg.law ?? null} precedent={msg.precedent ?? null} />
         <span className="text-xs text-[#555555] dark:text-primary-white">
           {' '}

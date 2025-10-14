@@ -47,8 +47,8 @@ function ChatModal({ isOpenPop }: Props) {
     <div className={CHAT_MODAL_CLASS}>
       <ChatModalHeader />
       <div ref={autoScrollRef} className={CHAT_CONTENTS_CLASS}>
-        {(messages.length === 0 || !roomId) && <p>대화 내역이 존재하지 않습니다.</p>}
-        {(messages.length !== 0 || roomId) && (
+        {messages.length <= 1 && !roomId && <p>대화 내역이 존재하지 않습니다.</p>}
+        {messages.length > 1 && roomId && (
           <>
             <ChatModalList messages={messages} />
             <ScrollToBottomButton show={showButton} onClick={scrollToBottom} className="bottom-5" />

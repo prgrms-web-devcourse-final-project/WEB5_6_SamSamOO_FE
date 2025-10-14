@@ -1,8 +1,11 @@
 // import { NextResponse } from 'next/server';
-// import type { NextRequest } from 'next/server';
+import type { NextRequest } from 'next/server';
 
-export function middleware() {
-  // export function middleware(request: NextRequest) {
+// export function middleware() {
+export function middleware(request: NextRequest) {
+  console.log('request', request);
+  console.log('request.cookies', request.cookies);
+
   //todo - 쿠키 도메인 변경 시 추후 개발
   // // 쿠키에서 인증 토큰 확인
   // const token = request.cookies.get('refreshToken');

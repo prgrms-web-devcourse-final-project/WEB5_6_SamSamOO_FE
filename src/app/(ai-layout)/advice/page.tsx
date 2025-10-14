@@ -1,5 +1,12 @@
 import PromptArea from '@/components/features/advice/components/chat/PromptArea';
 import LoginStateProvider from '@/components/provider/LoginStateProvider';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '바로 | AI 상담',
+  description: '바로 BaLaw AI 상담 페이지입니다',
+  robots: { index: false, follow: false },
+};
 
 function page() {
   return (
