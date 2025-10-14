@@ -53,7 +53,7 @@ export default function HeaderBody({
       <header className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
         {/* 왼쪽: 카테고리 / 상태 / 참여자 / 시간 */}
         <div className="flex flex-col w-full sm:flex-row sm:items-center sm:gap-3">
-          {/* 1️⃣ 첫 줄: 카테고리 + 상태 (같은 줄) */}
+          {/* 첫 줄: 카테고리 + 상태 (같은 줄) */}
           <div className="flex items-center justify-between w-full sm:w-auto sm:gap-3">
             {/* 카테고리 */}
             <div className="flex items-center h-10 sm:h-11 bg-brand-primary rounded-full gap-2 px-3 sm:px-5 dark:bg-primary-gray3 dark:border dark:border-[#a3a3a3]">
@@ -70,7 +70,7 @@ export default function HeaderBody({
             </div>
           </div>
 
-          {/* 2️⃣ 두 번째 줄: 참여자 + 게시 시간 */}
+          {/* 두 번째 줄: 참여자 + 게시 시간 */}
           <div className="flex items-center justify-start gap-3 mt-1.5 sm:mt-0 sm:ml-2 sm:gap-3 sm:flex-row text-sm sm:text-base">
             <div className="flex items-center gap-1 sm:gap-2">
               <Voter className="text-brand-primary dark:text-brand-accent w-4 h-4 sm:w-5 sm:h-5" />

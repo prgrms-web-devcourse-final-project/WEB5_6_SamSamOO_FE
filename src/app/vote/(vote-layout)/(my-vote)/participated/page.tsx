@@ -30,7 +30,7 @@ export default function ParticipatedPage() {
       }
     },
     !!hasNextPage,
-    '300px',
+    '200px',
   );
 
   // 로딩 상태

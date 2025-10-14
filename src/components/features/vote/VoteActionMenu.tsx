@@ -24,9 +24,6 @@ interface VoteActionMenuProps {
   className?: string;
 }
 
-/**
- * Vote card action menu (edit / delete)
- */
 export default function VoteActionMenu({
   draft,
   onEdit,

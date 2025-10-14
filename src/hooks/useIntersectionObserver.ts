@@ -1,10 +1,9 @@
-// src/hooks/useIntersectionObserver.ts
 import { useEffect, useRef } from 'react';
 
 export function useIntersectionObserver(
   onIntersect: () => void,
   enabled: boolean,
-  rootMargin: string = '300px',
+  rootMargin: string = '200px',
 ) {
   const ref = useRef<HTMLDivElement | null>(null);
 

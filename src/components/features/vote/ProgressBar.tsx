@@ -74,14 +74,12 @@ export default function ProgressBar({
           style={{ transform: `translateX(-${100 - percent}%)` }}
         />
 
-        {/* ────────── 외부(밝은 배경) 텍스트 ────────── */}
         <div
           className={tw(
             'absolute inset-0 flex items-center justify-between px-4 text-md',
             outerText,
           )}
         >
-          {/* 왼쪽: 라벨 */}
           <div className="flex items-center gap-2 min-w-0 flex-1">
             {isSelected && <Select className={tw('size-4 sm:size-6 shrink-0', iconOuter)} />}
             <p
@@ -95,14 +93,12 @@ export default function ProgressBar({
             </p>
           </div>
 
-          {/* 오른쪽: 퍼센트 + 득표수 — 공간 동적, 줄바꿈 없음 */}
           <div className="flex items-end gap-2 sm:gap-3 leading-tight whitespace-nowrap flex-shrink-0 justify-end">
             <p>{percent}%</p>
             <p>{currentVotes.toLocaleString()}표</p>
           </div>
         </div>
 
-        {/* ────────── 내부(채워진 영역) 텍스트 ────────── */}
         <div
           className={tw(
             'pointer-events-none absolute inset-0 flex items-center justify-between px-4 text-md transition-[clip-path] duration-500 ease-out',

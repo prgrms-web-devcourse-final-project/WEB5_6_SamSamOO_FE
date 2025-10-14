@@ -8,7 +8,6 @@ import LoginStateProvider from '@/components/provider/LoginStateProvider';
 
 const queryClient = new QueryClient();
 
-/** 전체 투표 레이아웃 (타이틀, CTA, 네비게이션, children 렌더링) */
 export default function VoteLayout({ children }: { children: React.ReactNode }) {
   return (
     <LoginStateProvider>
