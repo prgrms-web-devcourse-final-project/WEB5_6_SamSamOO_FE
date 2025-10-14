@@ -52,7 +52,7 @@ function Pagination({ showCount = 5, end = 10, currentPage }: Props) {
   return (
     <section>
       <h2 className="sr-only">페이지네이션</h2>
-      <ul className="flex items-center gap-3.5 sm:gap-4">
+      <ul className="flex items-center gap-0.5 sm:gap-4">
         <button
           type="button"
           title="첫 페이지로 이동"
@@ -78,7 +78,7 @@ function Pagination({ showCount = 5, end = 10, currentPage }: Props) {
               <button
                 type="button"
                 className={tw(
-                  'w-9 h-9 hover:bg-stone-100 rounded-full ',
+                  'w-11 h-11 hover:bg-stone-100 rounded-full ',
                   activePageNumber === start + index ? 'text-brand-accent' : '',
                 )}
                 onClick={() => getPage(start + index)}
