@@ -10,9 +10,10 @@ import { showErrorToast } from '@/utils/showToast';
 
 interface Props {
   mode?: 'login' | 'signup';
+  params?: { message?: string; from?: string };
 }
 
-export default function Oauth({ mode = 'login' }: Props) {
+export default function Oauth({ mode = 'login', params }: Props) {
   const router = useRouter();
   const setSession = useUserStore((state) => state.setSession);
 
@@ -40,7 +41,12 @@ export default function Oauth({ mode = 'login' }: Props) {
       if (event.data?.type === 'OAUTH_SUCCESS') {
         setSession({ isAuthenticated: true, user: null });
 
-        router.replace('/');
+        console.log('Params.from', params);
+        if (params && params.from) {
+          router.replace(params.from);
+        } else {
+          router.replace('/');
+        }
       }
 
       if (event.data?.type === 'OAUTH_FAILURE') {

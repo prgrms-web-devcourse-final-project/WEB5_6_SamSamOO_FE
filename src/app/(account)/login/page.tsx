@@ -13,11 +13,11 @@ async function Page({
     <div className="w-[420px] center-col">
       <AuthHeader title="👋 안녕하세요!" subtitle="다시 만나게 되어서 반가워요!" />
 
-      <LoginForm Params={await searchParams} />
+      <LoginForm params={await searchParams} />
 
       <DividerWithText text="간편 로그인" />
 
-      <Oauth mode="login" />
+      <Oauth mode="login" params={await searchParams} />
 
       <Link
         href="find-account"
