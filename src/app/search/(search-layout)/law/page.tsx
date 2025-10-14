@@ -28,7 +28,7 @@ async function Page({ searchParams }: { searchParams: SearchParams }) {
   const payload = await getLawSearchResults({
     lawName: search_query ?? null,
     ...searchList,
-    pageNumber: searchList.pageNumber,
+    pageNumber: searchList.pageNumber ?? 0,
     pageSize: 10,
   });
 
