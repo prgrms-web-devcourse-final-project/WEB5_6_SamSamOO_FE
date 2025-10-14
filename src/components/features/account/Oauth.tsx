@@ -42,9 +42,8 @@ export default function Oauth({ mode = 'login', params }: Props) {
       if (event.data?.type === 'OAUTH_SUCCESS') {
         setSession({ isAuthenticated: true, user: null });
 
-        console.log('Params.from', params);
         if (params && params.from) {
-          router.replace(params.from);
+          window.location.href = params.from;
         } else {
           router.replace('/');
         }

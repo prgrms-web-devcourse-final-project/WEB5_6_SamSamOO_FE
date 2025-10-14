@@ -52,9 +52,8 @@ export default function LoginForm({ params }: Props) {
       const response = await login(formData);
       setSession({ isAuthenticated: true, user: response });
       showSuccessToast('로그인 성공! 환영합니다♥️');
-      console.log('Params.from', params.from);
+
       if (params.from) {
-        // router.refresh();
         window.location.href = params.from;
       } else {
         router.replace('/');
