@@ -1,14 +1,9 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-// export function middleware() {
 export function middleware(request: NextRequest) {
-  console.log('request', request);
-  console.log('request.cookies', request.cookies);
-  console.log('refreshToken', request.cookies.get('refreshToken'));
-
   // 쿠키에서 인증 토큰 확인
-  const token = request.cookies.get('refreshToken');
+  const token = request.cookies.get('accessToken');
   // 로그인 페이지는 체크 안 함
   if (request.nextUrl.pathname.startsWith('/login')) {
     return NextResponse.next();
