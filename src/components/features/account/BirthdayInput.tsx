@@ -6,9 +6,10 @@ import { formatDate } from '@/utils/date';
 type BirthdayInputProps = {
   value?: string;
   onChange?: (birthday: string) => void;
+  className?: string;
 };
 
-export default function BirthdayInput({ value, onChange }: BirthdayInputProps) {
+export default function BirthdayInput({ value, onChange, className = '' }: BirthdayInputProps) {
   const [digits, setDigits] = useState('');
 
   useEffect(() => {
@@ -45,7 +46,18 @@ export default function BirthdayInput({ value, onChange }: BirthdayInputProps) {
       placeholder="YYYY - MM - DD"
       inputMode="numeric"
       maxLength={10}
-      className="flex-1 h-13 rounded-full bg-[#F4F4F4] pl-6 placeholder-primary-black dark:text-primary-black shadow-[inset_0_4px_10px_rgba(0,0,0,0.3)] outline-none"
+      className={`
+        h-13 w-full
+        rounded-full
+        bg-[#F4F4F4]
+        px-5 sm:px-6
+        placeholder-primary-black
+        dark:text-primary-black
+        shadow-[inset_0_4px_10px_rgba(0,0,0,0.3)]
+        outline-none
+        text-sm sm:text-base
+        ${className}
+      `}
     />
   );
 }

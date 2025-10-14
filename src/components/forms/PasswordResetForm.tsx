@@ -4,7 +4,7 @@ import { useState } from 'react';
 import AccountInput from '@/components/features/account/AccountInput';
 import AccountButton from '@/components/features/account/AccountButton';
 import FormErrorMessage from '@/components/features/account/FormErrorMessage';
-import { passwordReset } from '@/api/account/passwordResetApi';
+import { passwordReset } from '@/api/account/passwordReset';
 
 interface Props {
   email: string;
@@ -51,18 +51,20 @@ export default function PasswordResetForm({ email, onSuccess }: Props) {
 
       if (res.success) {
         setError(null);
-        alert('비밀번호가 성공적으로 재설정되었습니다.');
         onSuccess();
       } else {
-        setError('비밀번호 재설정에 실패했습니다.');
+        setError('비밀번호 설정에 실패했습니다.');
       }
     } catch {
-      setError('비밀번호 재설정 요청 중 오류가 발생했습니다.');
+      setError('비밀번호 설정 요청 처리 중 오류가 발생했습니다.');
     }
   };
 
   return (
-    <form className="center-col mb-10 w-[420px] gap-7" onSubmit={handleSubmit}>
+    <form
+      className="center-col mb-10 w-full max-w-[420px] gap-7 px-5 sm:px-0"
+      onSubmit={handleSubmit}
+    >
       <AccountInput
         name="password"
         type="password"
@@ -78,9 +80,9 @@ export default function PasswordResetForm({ email, onSuccess }: Props) {
         onChange={handleInputChange}
       />
 
-      <div className="w-full center-col">
+      <div className="center-col w-full gap-3">
         <FormErrorMessage message={error} />
-        <AccountButton type="submit">비밀번호 재설정</AccountButton>
+        <AccountButton type="submit">비밀번호 설정</AccountButton>
       </div>
     </form>
   );

@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { login } from '@/api/account/loginApi';
+import { login } from '@/api/account/login';
 import { useUserStore } from '@/store/useUserStore';
 import AccountInput from '@/components/features/account/AccountInput';
 import AccountButton from '@/components/features/account/AccountButton';
@@ -33,11 +33,9 @@ export default function LoginForm({ params }: Props) {
     if (!formData.email.trim()) return '이메일을 입력해주세요.';
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) return '유효한 이메일을 입력해주세요.';
-
     if (!formData.password.trim()) return '비밀번호를 입력해주세요.';
     if (formData.password.length < 4 || formData.password.length > 16)
       return '비밀번호는 4자 이상 16자 이하로 입력해주세요.';
-
     return null;
   };
 
@@ -60,14 +58,16 @@ export default function LoginForm({ params }: Props) {
       } else {
         router.replace('/');
       }
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (_err) {
+    } catch {
       setError('이메일 또는 비밀번호가 올바르지 않습니다.');
     }
   };
 
   return (
-    <form onSubmit={submitLoginForm} className="w-full center-col gap-8 mb-[30px]">
+    <form
+      onSubmit={submitLoginForm}
+      className="w-full center-col gap-6 sm:gap-8 mb-[24px] sm:mb-[30px]"
+    >
       <div className="w-full flex flex-col gap-6">
         <AccountInput
           name="email"
@@ -84,6 +84,7 @@ export default function LoginForm({ params }: Props) {
           onChange={handleInputChange}
         />
       </div>
+
       <div className="w-full center-col">
         <FormErrorMessage message={error} />
         <AccountButton type="submit">로그인</AccountButton>
