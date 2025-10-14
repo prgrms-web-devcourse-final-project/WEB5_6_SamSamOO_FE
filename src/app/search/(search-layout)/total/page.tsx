@@ -5,6 +5,9 @@ import PrecedentSearchResults from '@/components/features/search/PrecedentSearch
 import { getPrecedentSearchResults } from '@/api/search/getPrecedentSearchResults';
 import { getLawSearchResults } from '@/api/search/getLawSearchResults';
 import SetTotalElementsAndPages from '@/components/features/search/SetTotalElementsAndPages';
+import LawSearchResultsClient from '@/components/features/search/LawSearchResultsClient';
+import PrecedentDetailResult from '@/components/features/detail/PrecedentDetailResult';
+import PrecedentSearchResultsClient from '@/components/features/search/PrecedentSerarchResultsClient';
 
 export const metadata: Metadata = {
   title: '바로 | 통합 검색',
@@ -44,15 +47,10 @@ async function Page({ searchParams }: { searchParams: Promise<SearchParams> }) {
     sentencingDateStart,
     sentencingDateEnd,
     pageNumber,
-    // law,
-    // precedent,
   } = searchList;
-  // const PAGE_SIZE = law === 'false' || precedent === 'false' ? 10 : 5;
   const PAGE_SIZE = 5;
-  // console.log(searchList);
 
   const getLawData = async () => {
-    // if (law === 'false') return { content: [], totalElements: 0, totalPages: 0 };
     const response = await getLawSearchResults({
       lawName: search_query ?? null,
       lawField,
@@ -64,17 +62,14 @@ async function Page({ searchParams }: { searchParams: Promise<SearchParams> }) {
       pageNumber: pageNumber ?? 0,
       pageSize: PAGE_SIZE,
     });
-    console.log('통합 법령 : ', response);
+    // console.log('통합 법령 : ', response);
     return response;
   };
-
-  const lawPayload = await getLawData();
 
   // console.log('법령 개수 : ', lawPayload.totalElements);
   // console.log('법령 페이지 수 : ', lawPayload.totalPages);
 
   const getPrecedentData = async () => {
-    // if (precedent === 'false') return { content: [], totalElements: 0, totalPages: 0 };
     const response = await getPrecedentSearchResults({
       keyword: search_query ?? null,
       sentencingDateStart,
@@ -82,18 +77,43 @@ async function Page({ searchParams }: { searchParams: Promise<SearchParams> }) {
       pageNumber: pageNumber ?? 0,
       pageSize: PAGE_SIZE,
     });
-    console.log('판례 법령 : ', response);
+    // console.log('판례 법령 : ', response);
     return response;
   };
-  const precedentPayload = await getPrecedentData();
+  console.time('서버 패칭 전체');
+  const [lawPayload, precedentPayload] = await Promise.all([getLawData(), getPrecedentData()]);
+  console.timeEnd('서버 패칭 전체');
 
   // console.log('판례 개수 : ', precedentPayload.totalElements);
   // console.log('판례 페이지 수 : ', precedentPayload.totalPages);
 
+  if (
+    (!lawPayload && !precedentPayload) ||
+    (lawPayload.content.length === 0 && precedentPayload.content.length === 0)
+  ) {
+    return (
+      <>
+        <div className="flex flex-col items-center justify-center py-20">
+          <h1 className="text-2xl font-bold mb-3">검색 결과가 없습니다.</h1>
+          <p className="text-gray-500">입력하신 조건에 맞는 결과가 존재하지 않습니다.</p>
+        </div>
+        <SetTotalElementsAndPages
+          category="통합"
+          lawTotalElements={0}
+          lawTotalPages={0}
+          precedentTotalElements={0}
+          precedentTotalPages={0}
+        />
+      </>
+    );
+  }
+
   return (
     <div>
-      <LawSearchResults content={lawPayload.content} showTag={true} />
-      <PrecedentSearchResults content={precedentPayload.content} showTag={true} />
+      <LawSearchResultsClient content={lawPayload.content} showTag={true} />
+      <PrecedentSearchResultsClient content={precedentPayload.content} showTag={true} />
+      {/* <LawSearchResults content={lawPayload.content} showTag={true} /> */}
+      {/* <PrecedentSearchResults content={precedentPayload.content} showTag={true} /> */}
       <SetTotalElementsAndPages
         category="통합"
         lawTotalElements={lawPayload.totalElements}

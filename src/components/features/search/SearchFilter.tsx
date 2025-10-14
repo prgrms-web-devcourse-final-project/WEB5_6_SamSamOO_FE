@@ -17,6 +17,7 @@ import makeSearchUrl from '@/utils/makeSearchUrl';
 import convertObjectToString from '@/utils/convertObjectToString';
 import { mapFilterToLabel } from '@/utils/mapFilterToLabel';
 import { LawSearchFilter, PrecedentSearchFilter, TotalSearchFilter } from '@/types/filter';
+import { useSearchPending } from '@/context/SearchPendingContext';
 
 interface Props {
   category: string;
@@ -29,6 +30,7 @@ function SearchFilter({ category, setAppliedFilterText }: Props) {
   const [changeFilter, setChangeFilter] = useState<boolean>(false);
   const router = useRouter();
   const pathname = usePathname();
+  const { startPending } = useSearchPending();
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const [totalSearchFilter, setTotalSearchFilter] = useState<TotalSearchFilter>({});
@@ -148,7 +150,9 @@ function SearchFilter({ category, setAppliedFilterText }: Props) {
     } else if (category === '판례') {
       url = makeSearchUrl(pathname, baseParams, precedentSearchFilter);
     }
-    router.replace(url);
+    startPending(() => {
+      router.push(url);
+    });
     prevFilterRef.current = currentFilter;
   }, [totalSearchFilter, precedentSearchFilter, lawSearchFilter, category]);
 
