@@ -7,27 +7,20 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
   const { id } = await params;
   const data = await getLawDetails(id);
   return {
-    title: `바로 | 법령 - ${data.lawName}`,
+    title: `바로 | 법령 - ${data?.lawName}`,
   };
 }
 async function Page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  try {
-    const data = await getLawDetails(id);
-    return (
-      <>
-        <LawDetailResult data={data} />
-        <ChatButton />
-      </>
-    );
-  } catch (error: unknown) {
-    if (typeof error === 'object' && error !== null && 'status' in error) {
-      if (error.status === 401) {
-        console.warn(error, '존재하지 않는 법령상세 정보 요청입니다');
-        notFound();
-      }
-    }
-    throw error;
-  }
+
+  const data = await getLawDetails(id);
+  if (!data) notFound();
+
+  return (
+    <>
+      <LawDetailResult data={data} />
+      <ChatButton />
+    </>
+  );
 }
 export default Page;

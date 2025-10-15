@@ -7,7 +7,8 @@ export const getPrecedentDetails = async (id: string | number) => {
     method: 'GET',
     next: { revalidate: 3600 },
   });
-  if (response.status === 401) throw { status: 401 };
-  if (!response.ok) throw new Error(`판례 데이터 패치 오류 : HTTP ${response.status}`);
+  // if (response.status === 401) throw { status: 401 };
+  // if (!response.ok) throw new Error(`판례 데이터 패치 오류 : HTTP ${response.status}`);
+  if (response.status === 401 || !response.ok) return null;
   return (await response.json()) as PrecedentDetailsResponse;
 };
