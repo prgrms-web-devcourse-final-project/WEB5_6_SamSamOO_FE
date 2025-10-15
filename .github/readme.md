@@ -263,12 +263,12 @@ RESTful API통신, 인증/보안 처리, 에러 핸들링을 구현하고, API �
 <table>
   <tr>
     <td>
-      <img width="2923" height="854" alt="1" src="https://github.com/user-attachments/assets/ec621571-5b33-4ad9-80cb-36c0efb17047" />
+      <img width="2923" height="854" alt="1" src="https://github.com/user-attachments/assets/c2701ef2-2638-4f3c-b0f6-ee8f82327c8e" />
     </td>
     </tr>
   <tr>
     <td>
-      <img width="2938" height="865" alt="2" src="https://github.com/user-attachments/assets/a181849d-dc85-43c4-83db-0d0169a20494" />
+      <img width="2923" height="863" alt="2" src="https://github.com/user-attachments/assets/7a494942-05fb-4de4-b2a6-bbbc5ec99ca5" />
     </td>
     </tr>
     <tr>
@@ -298,7 +298,7 @@ RESTful API통신, 인증/보안 처리, 에러 핸들링을 구현하고, API �
     </td>
   </tr>
 </table>
----
+
 
 ## 🧑‍💻 협업 컨벤션
 
