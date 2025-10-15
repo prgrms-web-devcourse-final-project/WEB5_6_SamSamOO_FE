@@ -11,11 +11,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-async function Page({
-  searchParams,
-}: {
-  searchParams: Promise<{ message?: string; from?: string }>;
-}) {
+async function Page() {
   return (
     <div
       className="
@@ -26,11 +22,11 @@ async function Page({
     >
       <AuthHeader title="👋 안녕하세요!" subtitle="다시 만나게 되어서 반가워요!" />
 
-      <LoginForm params={await searchParams} />
+      <LoginForm />
 
       <DividerWithText text="간편 로그인" />
 
-      <Oauth mode="login" params={await searchParams} />
+      <Oauth mode="login" />
 
       <div className="flex flex-col items-center gap-2 text-center mt-4">
         <Link
