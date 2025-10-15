@@ -8,7 +8,7 @@ function Toc({ toc }: { toc: TableOfContent }) {
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
     setTarget(id);
-    console.log(id);
+    // console.log(id);
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });

@@ -9,7 +9,7 @@ export const getPrecedentSearchResults = async (body: PrecedentRequest) => {
       },
       body: JSON.stringify(body),
     });
-    console.log(response);
+    // console.log(response);
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     return (await response.json()) as PrecedentResponse;
   } catch (error) {
