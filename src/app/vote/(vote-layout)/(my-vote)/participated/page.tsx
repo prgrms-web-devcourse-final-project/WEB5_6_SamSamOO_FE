@@ -73,13 +73,13 @@ export default function ParticipatedPage() {
             {/* 마감된 투표만 그래프 표시 */}
             {post.status === 'closed' && (
               <VoteCard.Graph status={post.status}>
-                <GraphWrapper pollId={post.id} />
+                <GraphWrapper pollId={post.pollId} />
               </VoteCard.Graph>
             )}
 
             {/* 투표 옵션 */}
             <VoteCard.Options
-              pollId={post.id}
+              pollId={post.pollId}
               options={post.options}
               totalVotes={post.participants}
               status={post.status}
