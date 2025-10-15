@@ -4,7 +4,7 @@ import KeywordRank from '@/components/features/advice/KeywordRank';
 function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="w-full p-5 flex flex-col md:flex-row gap-6">
-      <div className="flex relative">
+      <div className="flex items-center relative">
         <AdviceSideBar />
         <KeywordRank className="md:hidden flex justify-center absolute z-10" />
       </div>
