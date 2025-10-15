@@ -33,7 +33,17 @@ function Footer() {
           target="_blank"
           rel="noreferrer"
           type="button"
-          title="깃허브 바로가기"
+          title="프론트엔드 깃허브 바로가기"
+          className="flex"
+        >
+          <Github className="dark:text-white w-7 h-7" alt="깃허브" />
+        </a>
+        <a
+          href="https://github.com/prgrms-web-devcourse-final-project/WEB6_8_SamSamOO_BE"
+          target="_blank"
+          rel="noreferrer"
+          type="button"
+          title="백엔드 깃허브 바로가기"
           className="flex"
         >
           <Github className="dark:text-white w-7 h-7" alt="깃허브" />
