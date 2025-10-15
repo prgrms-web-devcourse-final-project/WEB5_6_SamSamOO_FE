@@ -10,6 +10,8 @@ import SelectDown from '@/assets/icons/selectDown.svg';
 import VoteActionMenu from '@/components/features/vote/VoteActionMenu';
 import { useDeleteVoteMutation } from '@/hooks/useDeleteVoteMutation';
 import type { VoteDraft } from '@/store/voteModalStore';
+import { useAlertStore } from '@/store/useAlertStore';
+import { showErrorToast, showSuccessToast } from '@/utils/showToast';
 
 interface HeaderBodyProps {
   postId?: number;
@@ -36,6 +38,7 @@ export default function HeaderBody({
 }: HeaderBodyProps) {
   const [isOpen, setIsOpen] = React.useState(false);
   const { mutate: deleteVote } = useDeleteVoteMutation();
+  const showAlert = useAlertStore((s) => s.showAlert);
 
   const statusInfo =
     status === 'ongoing'
@@ -44,7 +47,17 @@ export default function HeaderBody({
 
   const handleDelete = () => {
     if (!postId) return;
-    if (window.confirm('정말 삭제하시겠습니까?')) deleteVote(postId);
+
+    showAlert('투표 삭제', '정말 이 투표를 삭제하시겠습니까?', async () => {
+      try {
+        deleteVote(postId);
+        showSuccessToast('투표가 삭제되었습니다.');
+
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      } catch (error) {
+        showErrorToast('삭제 중 오류가 발생했습니다. 다시 시도해주세요.');
+      }
+    });
   };
 
   return (
@@ -55,7 +68,7 @@ export default function HeaderBody({
         <div className="flex flex-col w-full sm:flex-row sm:items-center sm:justify-between">
           {/* 왼쪽 영역 */}
           <div className="flex flex-col w-full sm:flex-row sm:items-center sm:gap-3 sm:flex-wrap">
-            {/* 1️⃣ 첫 줄: 카테고리 + 보트액션 + 상태 (모바일) */}
+            {/* 첫 줄: 카테고리 + 보트액션 + 상태 (모바일) */}
             <div className="flex items-center justify-between w-full sm:w-auto sm:justify-start sm:gap-3 flex-wrap">
               {/* 카테고리 */}
               <div className="flex items-center h-10 sm:h-11 bg-brand-primary rounded-full gap-2 px-3 sm:px-5 dark:bg-primary-gray3 dark:border dark:border-[#a3a3a3]">
@@ -79,7 +92,7 @@ export default function HeaderBody({
               </div>
             </div>
 
-            {/* 2️⃣ 두 번째 줄: 참여자 + 게시 시간 */}
+            {/* 두 번째 줄: 참여자 + 게시 시간 */}
             <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mt-1.5 sm:mt-0 sm:gap-4 text-sm sm:text-base">
               <div className="flex items-center gap-1 flex-shrink-0">
                 <Voter className="text-brand-primary dark:text-brand-accent w-4 h-4 sm:w-6 sm:h-6" />
