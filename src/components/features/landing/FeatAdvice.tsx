@@ -10,8 +10,8 @@ function FeatAdvice() {
 
   const imageSrc =
     mounted && resolvedTheme === 'dark'
-      ? '/images/ladingAdviceDark.png'
-      : '/images/ladingAdvice.png';
+      ? '/images/landingAdviceDark.png'
+      : '/images/landingAdvice.png';
   return (
     <section className="h-screen center-col" ref={containerRef}>
       <h2 className="a11y">AI 상담</h2>

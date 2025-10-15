@@ -7,7 +7,6 @@ export const getLawSearchResults = async (body: LawRequest) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      next: { revalidate: 600 },
       body: JSON.stringify(body),
     });
     console.log(response);

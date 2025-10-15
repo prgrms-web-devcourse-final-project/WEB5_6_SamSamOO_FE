@@ -54,8 +54,8 @@
   --shadow-landing-input-outer-dark: 0 4px 28.5px 0 rgba(99, 99, 99, 0.25);
   --shadow-landing-input-inner: 0 4px 13px 0 rgba(0, 0, 0, 0.25) inset;
   --shadow-landing-1: 0 4px 14.3px 0 rgba(0, 0, 0, 0.25);
-  --shadow-landing-card: 13px 22px 26.5px 10px rgba(0, 0, 0, 0.15);
-  --shadow-landing-card-dark: 0 4px 28px 4px rgba(83, 83, 83, 0.98);
+  --shadow-landing-card: 13px 22px 26.5px rgba(0, 0, 0, 0.15);
+  --shadow-landing-card-dark: 0 4px 28px rgba(83, 83, 83, 0.98);
   --shadow-filter: 0 6px 21.6px -3px rgba(0, 0, 0, 0.25);
   --shadow-filter-dark-active: 0 1px 5.7px 1px rgba(232, 232, 232, 0.39);
   --shadow-filter-light-active: 0 1px 5.7px 1px rgba(13, 24, 70, 0.39);

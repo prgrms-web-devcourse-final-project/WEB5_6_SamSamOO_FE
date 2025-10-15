@@ -7,7 +7,6 @@ export const getPrecedentSearchResults = async (body: PrecedentRequest) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      next: { revalidate: 600 },
       body: JSON.stringify(body),
     });
     console.log(response);
