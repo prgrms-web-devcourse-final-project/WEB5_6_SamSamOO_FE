@@ -160,7 +160,7 @@ function SearchFilter({ category, setAppliedFilterText }: Props) {
     <>
       <button
         type="button"
-        className="flex w-17 gap-2 items-center"
+        className="flex w-17 gap-2 items-center text-sm sm:text-base"
         title="필터 설정"
         aria-label="필터 설정"
         onClick={() => setIsOpen((prev) => !prev)}

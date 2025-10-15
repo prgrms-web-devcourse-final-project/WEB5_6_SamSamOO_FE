@@ -7,7 +7,7 @@ function SearchInput() {
         type="search"
         id="search"
         placeholder="검색어를 입력하세요"
-        className="px-4 py-3 w-full"
+        className="px-2 py-1.5 sm:px-4 sm:py-3 w-full text-sm sm:text-base"
       />
       <button type="submit" className="w-6 h-6 mr-4">
         <Search alt="검색" />
