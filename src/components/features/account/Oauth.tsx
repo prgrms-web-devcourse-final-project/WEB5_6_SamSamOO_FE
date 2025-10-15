@@ -11,10 +11,9 @@ import { setSessionLogin } from '@/types/sessionStorage';
 
 interface Props {
   mode?: 'login' | 'signup';
-  params?: { message?: string; from?: string };
 }
 
-export default function Oauth({ mode = 'login', params }: Props) {
+export default function Oauth({ mode = 'login' }: Props) {
   const router = useRouter();
   const setSession = useUserStore((state) => state.setSession);
 
@@ -43,11 +42,7 @@ export default function Oauth({ mode = 'login', params }: Props) {
       if (event.data?.type === 'OAUTH_SUCCESS') {
         setSession({ isAuthenticated: true, user: null });
         setSessionLogin('social');
-        if (params && params.from) {
-          window.location.href = params.from;
-        } else {
-          router.replace('/');
-        }
+        router.replace('/');
       }
 
       if (event.data?.type === 'OAUTH_FAILURE') {

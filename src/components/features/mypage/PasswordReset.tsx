@@ -4,10 +4,11 @@ import Lock from '@/assets/icons/lock.svg';
 import ArrowRight from '@/assets/icons/arrowRight.svg';
 import { useRouter } from 'next/navigation';
 import { showErrorToast } from '@/utils/showToast';
+import { useCheckLogin } from '@/hooks/useCheckLogin';
 
 function PasswordReset() {
   const route = useRouter();
-
+  useCheckLogin();
   const handlePassWordRoute = () => {
     const isSocial = sessionStorage.getItem('loginWay') === 'social';
 

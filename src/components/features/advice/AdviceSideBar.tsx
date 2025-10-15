@@ -5,10 +5,12 @@ import CloseButton from '@/components/ui/CloseButton';
 import ChatMenuButton from './components/chatHistory/ChatMenuButton';
 import ButtonList from './components/sideBar/ButtonList';
 import ChatListModal from '../modal/ChatListModal';
+import { useCheckLogin } from '@/hooks/useCheckLogin';
 
 function AdviceSideBar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isOpenPop, setIsOpenPop] = useState(false);
+  useCheckLogin();
 
   const handleSideBar = () => setIsSidebarOpen((prev) => !prev);
   const handleOpenPop = () => setIsOpenPop((prev) => !prev);
