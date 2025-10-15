@@ -157,15 +157,16 @@ RESTful API통신, 인증/보안 처리, 에러 핸들링을 구현하고, API �
 ---
 
 ## 🏗️ 시스템 아키텍처
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/66c8a14e-0c3e-4563-8f7a-602e85571451" />
+<img width="1920" height="1080" alt="'바로 BaLaw' 시스템 아키텍처" src="https://github.com/user-attachments/assets/0a9cb00f-44d5-4be5-b9ac-973887b9e711" />
 
 ---
 
 ## ⚙️ 주요 기능
 ### 회원 관리, 유저 세션 관리
 - 일반 로그인/네이버,카카오 소셜 로그인 등 다양한 로그인 방법 제공
-- Next.js 서버에서 jose라이브러리로 JWT 유효성 및 만료 검증을 수행
 - 자동 로그인 제공
+- Next.js 서버에서 jose라이브러리로 JWT 유효성 및 만료 검증을 수행
+- Axios 인터셉터 기반의 공용 에러 처리 및 자동 토큰 재발급 구현
 ### AI 상담
 - 채팅 목록 팝업으로 과거 채팅 이력 제공
 - 유저의 프롬프트 기반으로 키워드 랭킹 제공
@@ -176,14 +177,22 @@ RESTful API통신, 인증/보안 처리, 에러 핸들링을 구현하고, API �
 - 카테고리별 필터로 상세 검색 제공
 - 내용 미리보기 제공
 - url기반 검색 상태 관리로 공유, 북마크 등에 최적화
+- SSR을 적용해 메타 태그, 구조화 데이터 노출 등 검색엔진 최적화
 ### 상세
 - 목차 네비게이션 (TOC) 제공
 - 읽기 쉬운 글 구성 제공
+- SSR을 적용해 메타 태그, 구조화 데이터 노출 등 검색엔진 최적화
 ### 투표
 - 투표 등록, 수정, 예약 종료, 자동 마감, 중복 투표 방지 제공
 - 투표 집계 및 성별, 나이별 차트를 통한 시각화
 - 진행 중 / 마감 / 참여한 투표 카테고리 제공
 - 무한 스크롤 및 낙관적 업데이트
+### 인라인 용어 해설
+- 인라인으로 용어 검색및 툴팁 해설 제공
+- 드래그 / 더블 클릭 이벤트 트리거 기반 동작
+### 챗봇
+- 전역 상태를 기반으로 마지막 AI 상담 내역을 제공
+- 사용자가 이전 대화를 보조 패널 형태로 참고하며 검색 및 상세 페이지에서 자료 탐색과 의사결정을 돕도록 구현
 
 ### 반응형 / 테마 지원
 - 모바일 ~ 데스크탑 해상도까지 지원
@@ -193,15 +202,102 @@ RESTful API통신, 인증/보안 처리, 에러 핸들링을 구현하고, API �
 ### 회원 관리, 유저 세션 관리
 
 ### AI 상담
+<table>
+  <tr>
+    <td>
+      <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/8ce65d1a-48ee-44cb-b3a9-bc3dcdb28f92" />
+    </td>
+    <td>
+      <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/7ed7cbab-03a9-4284-a078-5a352a8d7e5c" />
+    </td>
+  </tr>
+</table>
+
 
 ### 검색
+<table>
+  <tr>
+    <td>
+      <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/2dbbf33c-cd31-41c7-8a9d-91ef9ed6fa32" />
+    </td>
+    <td>
+      <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/b8e689de-93ff-4422-af21-232c5af01602" />
+    </td>
+  </tr>
+</table>
 
 ### 상세
+<table>
+  <tr>
+    <td>
+      <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/0e26b3e0-0908-4b08-8611-e9e819d8911b" />
+    </td>
+    <td>
+      <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/5c2c0358-fe75-4ce7-9335-f4c00e7e75bc" />
+    </td>
+  </tr>
+</table>
 
 ### 투표
+<table>
+  <tr>
+    <td>
+      <img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/a098a0f6-87c7-45b7-abac-de7d38c0c268" />
+    </td>
+    <td>
+      <img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/171a432b-d225-4e48-bf59-20e7dd19c3f9" />
+    </td>
+  </tr>
+</table>
 
-### 반응형 / 테마 지원
+### 인라인 용어 해설 / 실시간 랭킹 / 챗봇
+<table>
+  <tr>
+    <td>
+      <img width="1704" height="857" alt="4" src="https://github.com/user-attachments/assets/2cda9aa4-998b-4ca4-b8c4-0a5513753846" />
+    </td>
+  </tr>
+</table>
 
+### 반응형
+<table>
+  <tr>
+    <td>
+      <img width="2923" height="854" alt="1" src="https://github.com/user-attachments/assets/ec621571-5b33-4ad9-80cb-36c0efb17047" />
+    </td>
+    </tr>
+  <tr>
+    <td>
+      <img width="2938" height="865" alt="2" src="https://github.com/user-attachments/assets/890e11e0-2984-4066-aeae-cf3b7cf1ef07" />
+    </td>
+    </tr>
+    <tr>
+    <td>
+      <img width="2923" height="853" alt="3" src="https://github.com/user-attachments/assets/08b1b661-ba70-4fc8-8a5c-b92829ca767b" />
+    </td>
+    </tr>
+</table>
+
+
+### 다크모드
+<table>
+  <tr>
+    <td>
+      <img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/8ada6b4a-ae9c-477a-adf3-639b2239d671" />
+    </td>
+    <td>
+      <img width="2558" height="1400" alt="image" src="https://github.com/user-attachments/assets/4979e524-a6a5-4e1b-95f5-6c775c2edf00" />
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/a1fdc821-0f3a-479f-859f-28105a29837a" />
+    </td>
+    <td>
+      <img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/43cadb2a-f1dd-4e6d-8dd9-cede0152fc53" />
+    </td>
+  </tr>
+</table>
 ---
 
 ## 🧑‍💻 협업 컨벤션
@@ -262,7 +358,7 @@ RESTful API통신, 인증/보안 처리, 에러 핸들링을 구현하고, API �
 
 |                                                   Frontend                                                   |                                                   Frontend                                                   |                                                   Frontend                                                   |
 | :----------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------: |
-| <img src="https://github.com/user-attachments/assets/8806b4c4-7452-4e57-b10f-581b82a913f3" width="120" style="border-radius:50%;" /> | <img src="https://github.com/user-attachments/assets/87ac58b9-5e45-4009-87d9-3f07c76472c0" width="120" style="border-radius:50%;" /> | <img src="https://github.com/user-attachments/assets/511e4cad-9b88-4118-8e77-296aa086b082" width="120" style="border-radius:50%;" /> |
+| <img src="https://github.com/user-attachments/assets/8806b4c4-7452-4e57-b10f-581b82a913f3" width="120" style="border-radius:50%;" /> | <img src="https://github.com/user-attachments/assets/87ac58b9-5e45-4009-87d9-3f07c76472c0" width="120" style="border-radius:50%;" /> | <img src="https://github.com/user-attachments/assets/4dfd6a15-1429-44eb-877c-0e1d2a3e20ca" width="120" style="border-radius:50%;" /> |
 |                                                   👑 팀장                                                    |                                                   🧑‍💻 팀원                                                    |                                                   🧑‍💻 팀원                                                    |
 |                                                  **백효영**                                                  |                                                  **황유정**                                                  |                                                  **김영민**                                                  |
 |                                  [GitHub](https://github.com/HyoYoung0829)                                   |                                     [GitHub](https://github.com/YooJeong01)                                     |                                   [GitHub](https://github.com/kimym98)                                    |
