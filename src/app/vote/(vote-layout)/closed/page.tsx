@@ -60,11 +60,11 @@ export default function ClosedPage() {
             <VoteCard.HeaderBody {...post} />
 
             <VoteCard.Graph status={post.status}>
-              <GraphWrapper pollId={post.id} />
+              <GraphWrapper pollId={post.pollId} />
             </VoteCard.Graph>
 
             <VoteCard.Options
-              pollId={post.id}
+              pollId={post.pollId}
               options={post.options}
               totalVotes={post.participants}
               status={post.status}
