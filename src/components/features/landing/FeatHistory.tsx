@@ -33,7 +33,7 @@ function FeatHistory() {
               alt="채팅 히스토리 화면"
               width={300}
               height={682}
-              className="rounded-[30px] shadow-landing-card dark:shadow-landing-card-dark"
+              className="rounded-[30px] drop-shadow-[var(--shadow-landing-card)] dark:drop-shadow-[var(--shadow-landing-card-dark)]"
               loading="lazy"
             />
           </div>

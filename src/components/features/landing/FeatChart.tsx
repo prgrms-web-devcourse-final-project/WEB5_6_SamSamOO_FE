@@ -22,7 +22,7 @@ function FeatChart() {
             alt="투표 상세 이미지"
             width={630}
             height={663}
-            className="shadow-landing-card dark:shadow-landing-card-dark rounded-[30px]"
+            className="drop-shadow-[var(--shadow-landing-card)] dark:drop-shadow-[var(--shadow-landing-card-dark)] rounded-[30px]"
             loading="lazy"
           />
         </div>

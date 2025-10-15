@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import LadingArrow from '@/assets/icons/landingArrow.svg';
+import LandingArrow from '@/assets/icons/landingArrow.svg';
 import Image from 'next/image';
 import tw from '@/utils/tw';
 
@@ -66,7 +66,7 @@ function Hero() {
                     'dark:bg-[#0c0c0c]',
                   )}
                 >
-                  <LadingArrow
+                  <LandingArrow
                     className="lg:w-[27px] md:w-[20px] w-[18px] lg:h-[27px] md:h-[20px] h-[18px] text-brand-primary dark:text-background-white"
                     aria-hidden="true"
                   />
