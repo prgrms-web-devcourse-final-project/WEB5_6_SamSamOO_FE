@@ -30,19 +30,22 @@ function KeywordRank({ className }: Props) {
   }
 
   return (
-    <div className={tw('md:absolute relative md:w-fit w-full md:right-10 md:top-4', className)}>
+    <div
+      className={tw('md:absolute relative -top-3 md:w-fit w-full md:right-10 md:top-4', className)}
+    >
       <motion.div
         animate={{
           height: isOpen ? 'auto' : 60, // 헤더 높이만큼
         }}
+        style={{ overflow: 'hidden' }}
         transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-        className="w-70 rounded-[30px] border-[0.5px] border-[#7B7B7B] dark:bg-background-black1 bg-white"
+        className="w-50 sm:w-70 rounded-[30px] border-[0.5px] border-[#7B7B7B] dark:bg-background-black1 bg-white absolute md:relative z-20"
       >
         <div className="flex w-full h-15 justify-between pl-3 pr-3 items-center">
           {!isOpen && rankList && <AnimateRanks rankList={rankList} />}
           {isOpen && (
             <div>
-              <p className="font-semibold text-brand-primary dark:text-brand-accent">
+              <p className="font-semibold text-brand-primary dark:text-brand-accent pl-3">
                 실시간 키워드 순위
               </p>
             </div>
