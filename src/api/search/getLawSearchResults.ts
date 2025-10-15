@@ -7,7 +7,7 @@ export const getLawSearchResults = async (body: LawRequest) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      cache: 'no-store',
+      next: { revalidate: 600 },
       body: JSON.stringify(body),
     });
     console.log(response);

@@ -11,7 +11,6 @@ function PaginationWrapper() {
   const currentPage =
     paramPage !== null && !Number.isNaN(Number(paramPage)) ? Number(paramPage) + 1 : 0;
   const [pageSize, setPageSize] = useState<number>(1);
-  // console.log('pageSize: ', pageSize);
   const prevFilter = useRef<string>('');
   const filterChanged = useRef<boolean>(false);
   const resetAfterCategoryChange = useRef<boolean>(false);
@@ -117,7 +116,7 @@ function PaginationWrapper() {
   return (
     <div className="flex flex-col items-center pb-28 gap-2">
       <Pagination end={Math.ceil(pageSize / 10)} currentPage={currentPage} />
-      <p className="font-light text-sm">검색결과 : 총 {total ?? 0}건</p>
+      <p className="font-light text-xs sm:text-sm">검색 결과 : 총 {total ?? 0}건</p>
     </div>
   );
 }

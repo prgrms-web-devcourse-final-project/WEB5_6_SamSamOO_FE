@@ -3,9 +3,10 @@ import { clamp } from '@/utils/date';
 import makeSearchUrl from '@/utils/makeSearchUrl';
 import tw from '@/utils/tw';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { startTransition, useEffect, useState } from 'react';
+import { useEffect, useState, useTransition } from 'react';
 import SkipPage from '@/assets/icons/skipPage.svg';
 import MovePage from '@/assets/icons/movePage.svg';
+import { useSearchPending } from '@/context/SearchPendingContext';
 
 interface Props {
   showCount?: number;
@@ -23,28 +24,25 @@ function Pagination({ showCount = 5, end = 10, currentPage }: Props) {
   const maxStart = Math.max(1, end - showCount + 1);
   const half = Math.floor(showCount / 2);
   const start = clamp(activePageNumber - half, 1, maxStart);
-  const [isNavigating, setIsNavigating] = useState(false);
+  // const [isPending, startTransition] = useTransition();
+  const { startPending, isPending } = useSearchPending();
 
   useEffect(() => {
     if (currentPage !== undefined && !Number.isNaN(currentPage)) {
       setActivePageNumber(currentPage);
-      // console.log(currentPage);
     }
   }, [currentPage]);
 
   const getPage = (index: number) => {
-    if (isNavigating) return;
-    setIsNavigating(true);
-
+    if (isPending) return;
     setActivePageNumber(index);
-    startTransition(() => {
+
+    startPending(() => {
       const url = makeSearchUrl(pathname, params, {
         pageNumber: String(index - 1),
       });
-      router.push(url, { scroll: false });
-      // console.log('router pushed to', url);
-
-      setTimeout(() => setIsNavigating(false), 400);
+      router.push(url);
+      // router.refresh();
     });
   };
 
@@ -54,12 +52,13 @@ function Pagination({ showCount = 5, end = 10, currentPage }: Props) {
   return (
     <section>
       <h2 className="sr-only">페이지네이션</h2>
-      <ul className="flex items-center gap-2 sm:gap-4">
+      <ul className="flex items-center gap-0.5 sm:gap-4">
         <button
           type="button"
           title="첫 페이지로 이동"
           inert={activePageNumber === 1}
           onClick={() => getPage(1)}
+          className="w-4"
         >
           <SkipPage className="relative bottom-0.5" />
         </button>
@@ -79,12 +78,12 @@ function Pagination({ showCount = 5, end = 10, currentPage }: Props) {
               <button
                 type="button"
                 className={tw(
-                  'w-6 hover:bg-stone-100 rounded-full ',
+                  'w-11 h-11 hover:bg-stone-100 rounded-full ',
                   activePageNumber === start + index ? 'text-brand-accent' : '',
                 )}
                 onClick={() => getPage(start + index)}
               >
-                <p className="relative top-0.5">{start + index}</p>
+                <p className="relative top-0 sm:top-0.5">{start + index}</p>
               </button>
             </li>
           ))}

@@ -7,22 +7,23 @@ import AccountInput from '@/components/features/account/AccountInput';
 import AccountButton from '@/components/features/account/AccountButton';
 import FormErrorMessage from '@/components/features/account/FormErrorMessage';
 import { showErrorToast, showSuccessToast } from '@/utils/showToast';
+import { setSessionLogin } from '@/types/sessionStorage';
 
 interface Props {
-  Params: { message?: string; from?: string };
+  params: { message?: string; from?: string };
 }
 
-export default function LoginForm({ Params }: Props) {
+export default function LoginForm({ params }: Props) {
   const router = useRouter();
   const setSession = useUserStore((state) => state.setSession);
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (Params.message === 'login-required') {
+    if (params.message === 'login-required') {
       showErrorToast('로그인이 필요한 페이지입니다.');
     }
-  }, [Params.message]);
+  }, [params.message]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -51,9 +52,11 @@ export default function LoginForm({ Params }: Props) {
     try {
       const response = await login(formData);
       setSession({ isAuthenticated: true, user: response });
-      showSuccessToast('로그인 성공! 환영합니다');
-      if (Params.from) {
-        router.replace(Params.from);
+      setSessionLogin('email');
+      showSuccessToast('로그인 성공! 환영합니다♥️');
+
+      if (params.from) {
+        window.location.href = params.from;
       } else {
         router.replace('/');
       }

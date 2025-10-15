@@ -6,11 +6,13 @@ import SearchInput from './SearchInput';
 import SearchFilter from './SearchFilter';
 import { useState } from 'react';
 import makeSearchUrl from '@/utils/makeSearchUrl';
+import { useSearchPending } from '@/context/SearchPendingContext';
 
 function SearchArea() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const { startPending } = useSearchPending();
   const newParams = new URLSearchParams(searchParams);
   newParams.delete('pageNumber');
   const [appliedFilterText, setAppliedFilterText] = useState<string>('');
@@ -24,7 +26,10 @@ function SearchArea() {
     console.log(keyword);
 
     const url = makeSearchUrl(pathname, newParams, { search_query: keyword, pageNumber: '0' });
-    router.push(url);
+
+    startPending(() => {
+      router.push(url);
+    });
     input.value = '';
   };
 

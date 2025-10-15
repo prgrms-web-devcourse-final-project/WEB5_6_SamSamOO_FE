@@ -13,8 +13,7 @@ function AdviceSideBar() {
   const handleSideBar = () => setIsSidebarOpen((prev) => !prev);
   const handleOpenPop = () => setIsOpenPop((prev) => !prev);
 
-  const SIDE_BAR_STYLE = `w-40 font-semibold absolute z-50 border rounded-2xl border-primary-gray1 bg-background-white dark:bg-background-black1 
-        transition-all duration-300 ease-in-out
+  const SIDE_BAR_STYLE = `w-40 font-semibold absolute z-50 border rounded-2xl border-primary-gray1 bg-background-white dark:bg-background-black1   
         md:static md:w-20 md:translate-x-0 md:opacity-100 md:pointer-events-auto md:bg-none md:dark:bg-none md:border-none
         ${
           isSidebarOpen
@@ -24,7 +23,7 @@ function AdviceSideBar() {
 
   return (
     <>
-      <div className="relative z-100 ">
+      <div className="relative z-20 ">
         <ChatMenuButton
           isSidebarOpen={isSidebarOpen}
           toggleSidebar={handleSideBar}

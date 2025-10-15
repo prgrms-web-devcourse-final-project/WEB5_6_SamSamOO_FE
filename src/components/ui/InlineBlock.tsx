@@ -38,11 +38,11 @@ function InlineBlock({ selectedText, ref }: Props) {
 
   return (
     <div
-      className={`${inline} ${isSearch ? `w-fit max-w-[350px]` : 'w-24'} overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 dark:scrollbar-thumb-gray-300 scrollbar-track-transparent`}
+      className={`${inline} ${isSearch ? `w-fit min-w-[150px] max-w-[350px]` : 'w-24'} overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 dark:scrollbar-thumb-gray-300 scrollbar-track-transparent`}
       style={{ left: selectedText.positionX, top: selectedText.positionY }}
       ref={ref}
     >
-      {isLoading && <div className="p-2 m-2 w-12 animate-pulse bg-gray-400"></div>}
+      {isLoading && <div className="p-2 m-2 w-30 animate-pulse bg-gray-400"></div>}
       {!isLoading && !isSearch && (
         <button className="flex items-center justify-center gap-2 p-1 " onClick={handleSearchWord}>
           <IninlineSearch className="w-6 h-6 text-primary-white dark:text-primary-black" />
