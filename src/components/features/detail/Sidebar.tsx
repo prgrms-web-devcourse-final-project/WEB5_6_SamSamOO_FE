@@ -51,6 +51,7 @@ function Sidebar({ toc, metadata, category }: Props) {
             type="button"
             onClick={() => setIsOpen((prev) => !prev)}
             className="w-full flex items-center pl-8"
+            title="목차 보기"
           >
             <NavArrow className="dark:text-primary-white w-6 h-6" />
             <p className="font-bold text-xl pt-0.5">
