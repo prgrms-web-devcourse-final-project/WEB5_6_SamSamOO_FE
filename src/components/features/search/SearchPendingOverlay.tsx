@@ -27,7 +27,7 @@ function SearchPendingOverlay() {
   }, []);
   if (!isPending) return null;
   return (
-    <div className="w-full flex flex-col items-center justify-center p-8 space-y-4 fixed inset-0 z-[20] bg-white">
+    <div className="w-full flex flex-col items-center justify-center p-8 space-y-4 fixed inset-0 z-[20] bg-white dark:bg-black">
       <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-accent" />
       <p
         className={`text-gray-600 dark:text-gray-300 transition-opacity duration-300 ${
