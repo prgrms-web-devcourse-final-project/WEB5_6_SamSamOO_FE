@@ -14,7 +14,7 @@ function FeatHistory() {
       ? '/images/landingChatbotDark.png'
       : '/images/landingChatbot.png';
   return (
-    <section className="h-screen center-col" ref={containerRef}>
+    <section className="h-screen center-col mb-10 md:mb-0" ref={containerRef}>
       <div className="flex flex-col gap-10 w-[80%]">
         <div className="stagger-item">
           <h2 className="landing-title dark:bg-background-white dark:text-primary-black w-fit">

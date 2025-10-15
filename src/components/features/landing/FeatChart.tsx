@@ -13,7 +13,7 @@ function FeatChart() {
       ? '/images/landingVoteDtDark.png'
       : '/images/landingVoteDt.png';
   return (
-    <section className="center-col gap-20" ref={containerRef} aria-labelledby="feat-chart-title">
+    <section className="center-col gap-100" ref={containerRef} aria-labelledby="feat-chart-title">
       <h2 className="a11y">투표 상세 팝업</h2>
       <div className="flex flex-col-reverse lg:flex-row lg:gap-24 gap-12 w-[80%]">
         <div className="stagger-item center-col">
@@ -35,10 +35,10 @@ function FeatChart() {
         </div>
       </div>
       <aside aria-label="법적 고지사항" className="center-col mb-12 lg:mb-20 w-[80%]">
-        <p className="lg:landing-sub md:text-3xl text-2xl font-semibold break-words">
+        <p className="text-3xl font-semibold break-words mb-4">
           본 서비스는 참고용 법률 정보만을 제공합니다.
         </p>
-        <p className="lg:text-4xl md:text-2xl text-base font-medium whitespace-pre-wrap break-words">
+        <p className="md:text-2xl text-base font-medium whitespace-pre-wrap break-words text-center">
           법적 효력이나 책임은 없으며, 구체적인 사안은 반드시 전문가와 상담하시기 바랍니다.
         </p>
       </aside>

@@ -52,7 +52,7 @@ function AnimateFeature() {
   }, []);
 
   return (
-    <div ref={containerRef}>
+    <div ref={containerRef} className="lg:space-y-40">
       <DataInfo />
 
       <div className="feature-section">

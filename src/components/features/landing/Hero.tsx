@@ -5,7 +5,7 @@ import tw from '@/utils/tw';
 
 function Hero() {
   const INPUT_STYLE =
-    'bg-background-white/80 rounded-modal lg:p-3 md:p-2 p-1 dark:bg-background-black1/80';
+    'bg-background-white/80 rounded-modal lg:p-3 p-2 dark:bg-background-black1/80';
   const INPUT_BUTTON = 'bg-background-white rounded-[50%] center-col';
 
   return (
@@ -16,17 +16,19 @@ function Hero() {
       <h2 className="a11y">메인 히어로 섹션</h2>
       <div className="center-col gap-[162px]">
         <header className="center-col relative">
-          <p className="lg:text-[64px] md:text-5xl text-3xl md:font-extrabold font-semibold">
+          <p className="hidden md:flex lg:text-[64px] md:text-5xl md:font-extrabold font-semibold px-4 text-center">
             혼자 고민하지 말고, 당신 곁에
           </p>
-          <div className="flex lg:text-[40px] md:text-3xl text-2xl md:font-semibold font-medium">
+          <p className="md:hidden text-3xl font-extrabold px-4 text-center">혼자 고민하지 말고,</p>
+          <p className="md:hidden text-3xl font-extrabold px-4 text-center">당신 곁에</p>
+          <div className="lg:text-[40px] md:text-3xl text-2xl md:font-semibold font-medium px-4 text-center">
             <span
               className="bg-brand-primary dark:bg-background-white text-primary-white dark:text-brand-primary px-1"
               aria-label="바로"
             >
               바로
             </span>
-            <p>가 언제나 함께 고민해볼게요</p>
+            <span>가 언제나 함께 고민해볼게요</span>
           </div>
           <Image
             className="absolute  lg:left-[-300px] lg:top-[-40px] left-[-350px] top-[-90px] dark:drop-shadow-[0_4px_76px_0_rgb(74,74,74)] md:block hidden"
@@ -39,7 +41,7 @@ function Hero() {
             fetchPriority="high"
           />
         </header>
-        <div className="max-w-[900px] w-[95%]">
+        <div className="max-w-[900px] w-[95%] px-4">
           <Link href={'/advice'} aria-label="법률 상담 시작하기">
             <div
               className={`${INPUT_STYLE} shadow-landing-input-outer w-full mb-[30px] relative dark:shadow-landing-input-outer-dark`}
@@ -53,7 +55,7 @@ function Hero() {
               </div>
               <div
                 className={tw(
-                  `${INPUT_BUTTON} lg:w-[74px] md:w-[58px] w-[42px] lg:h-[74px] md:h-[58px] h-[42px] drop-shadow-[3px_6px_10.9px_rgba(0,0,0,0.25)] dark:drop-shadow-[3px_6px_10.9px_rgba(91,91,91,0.25)] absolute lg:right-[-30px] md:right-[-20px] right-[-10px] md:top-[40px] top-[20px]`,
+                  `${INPUT_BUTTON} lg:w-[74px] md:w-[58px] w-[42px] lg:h-[74px] md:h-[58px] h-[42px] drop-shadow-[3px_6px_10.9px_rgba(0,0,0,0.25)] dark:drop-shadow-[3px_6px_10.9px_rgba(91,91,91,0.25)] absolute lg:right-[-30px] md:right-[-20px] right-[-10px] md:top-[40px] top-[35px]`,
                   'dark:bg-primary-gray3',
                 )}
                 aria-hidden="true"
