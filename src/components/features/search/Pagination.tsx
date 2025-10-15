@@ -78,7 +78,7 @@ function Pagination({ showCount = 5, end = 10, currentPage }: Props) {
               <button
                 type="button"
                 className={tw(
-                  'w-11 h-11 hover:bg-stone-100 rounded-full ',
+                  'w-11 h-11 hover:bg-stone-100 transition-colors rounded-full hover:text-primary-black ',
                   activePageNumber === start + index ? 'text-brand-accent' : '',
                 )}
                 onClick={() => getPage(start + index)}

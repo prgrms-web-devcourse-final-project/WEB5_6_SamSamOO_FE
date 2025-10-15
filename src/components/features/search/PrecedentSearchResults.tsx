@@ -22,7 +22,11 @@ function PrecedentSearchResults({ content, showTag = false }: Props) {
     <>
       {content &&
         content.map(({ id, caseName, caseNumber, contents, sentencingDate }) => (
-          <li key={id} className="mb-10 px-5">
+          <li
+            key={id}
+            className="mb-5 px-5 mx-3 py-5 hover:bg-stone-50 dark:hover:bg-stone-900 transition-colors rounded-2xl"
+            title={`[ ${caseName} ] 글 보러가기`}
+          >
             <Link href={`/detail/precedent/${id}`}>
               <section className="space-x-2 sm:text-xl font-bold mb-0.5 sm:mb-2 items-center">
                 <h2 className="sr-only">제목</h2>

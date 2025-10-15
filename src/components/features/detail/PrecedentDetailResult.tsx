@@ -50,10 +50,10 @@ function PrecedentDetailResult({ data }: { data: PrecedentDetailsResponse }) {
                   <p className="text-2xl font-extrabold leading-[36px]">{caseName}</p>
                 </div>
                 <div className="flex gap-3 sm:gap-8 text-xl font-normal sm:pl-2 sm:flex-row flex-col">
-                  <p>{typeOfJudgment}</p>
-                  <p>선고일자 : {sentencingDate}</p>
-                  <p>판례일련번호 : {precedentNumber}</p>
-                  <p>사건종류코드 : {caseTypeCode}</p>
+                  {typeOfJudgment ?? <p>{typeOfJudgment}</p>}
+                  {sentencingDate ?? <p>선고일자 : {sentencingDate}</p>}
+                  {precedentNumber ?? <p>판례일련번호 : {precedentNumber}</p>}
+                  {caseTypeCode ?? <p>사건종류코드 : {caseTypeCode}</p>}
                 </div>
               </header>
 

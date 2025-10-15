@@ -7,7 +7,7 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
   const { id } = await params;
   const data = await getPrecedentDetails(id);
   return {
-    title: `바로 | 판례 - ${data.caseName}`,
+    title: `바로 | 판례 - ${data?.caseName}`,
   };
 }
 
@@ -15,6 +15,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   try {
     const data = await getPrecedentDetails(id);
+    if (!data) notFound();
 
     return (
       <>
