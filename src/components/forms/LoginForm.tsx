@@ -9,21 +9,11 @@ import FormErrorMessage from '@/components/features/account/FormErrorMessage';
 import { showErrorToast, showSuccessToast } from '@/utils/showToast';
 import { setSessionLogin } from '@/types/sessionStorage';
 
-interface Props {
-  params: { message?: string; from?: string };
-}
-
-export default function LoginForm({ params }: Props) {
+export default function LoginForm() {
   const router = useRouter();
   const setSession = useUserStore((state) => state.setSession);
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (params.message === 'login-required') {
-      showErrorToast('로그인이 필요한 페이지입니다.');
-    }
-  }, [params.message]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -55,11 +45,7 @@ export default function LoginForm({ params }: Props) {
       setSessionLogin('email');
       showSuccessToast('로그인 성공! 환영합니다♥️');
 
-      if (params.from) {
-        window.location.href = params.from;
-      } else {
-        router.replace('/');
-      }
+      router.replace('/');
     } catch {
       setError('이메일 또는 비밀번호가 올바르지 않습니다.');
     }

@@ -103,6 +103,7 @@ function Header() {
             {mainNavItems.map(({ href, label }) => (
               <li key={href}>
                 <Link
+                  prefetch={true}
                   href={href}
                   className={
                     pathname.includes(href.split('/')[1])
@@ -145,7 +146,11 @@ function Header() {
             <>
               {/* 로그인 상태 */}
               <li>
-                <Link href="/mypage" className={pathname === '/mypage' ? 'text-brand-accent' : ''}>
+                <Link
+                  href="/mypage"
+                  prefetch={false}
+                  className={pathname === '/mypage' ? 'text-brand-accent' : ''}
+                >
                   <Image
                     className="block dark:hidden"
                     src="/images/profileLight.png"

@@ -1,5 +1,6 @@
 import { postExistingChat, postNewChat } from '@/api/chat/chatBot';
 import { Laws, Message, Precedent } from '@/types/chat';
+import { showErrorToast } from '@/utils/showToast';
 import { useRouter } from 'next/navigation';
 import { create } from 'zustand';
 
@@ -56,7 +57,7 @@ export const useChatStore = create<ChatState>()((set, get) => ({
       ],
     })),
   sendNewMessage: async (input: string, router) => {
-    const { roomId, setLoading, addMessage, isLoading } = get();
+    const { roomId, setLoading, addMessage, isLoading, resetStore } = get();
     if (isLoading) return;
 
     const data: AddMessageParams = {
@@ -96,13 +97,15 @@ export const useChatStore = create<ChatState>()((set, get) => ({
         }
       }
     } catch (error) {
+      showErrorToast('AI분석 중 오류가 발생하였습니다.');
+      resetStore();
       console.error('Failed to send message:', error);
     } finally {
       setLoading(false);
     }
   },
   sendExistMessage: async (input: string) => {
-    const { roomId, setLoading, addMessage, isLoading } = get();
+    const { roomId, setLoading, addMessage, isLoading, resetStore } = get();
     if (isLoading) return;
 
     const data: AddMessageParams = {
@@ -138,6 +141,8 @@ export const useChatStore = create<ChatState>()((set, get) => ({
         }));
       }
     } catch (error) {
+      showErrorToast('AI분석 중 오류가 발생하였습니다.');
+      resetStore();
       console.error('Failed to send message:', error);
     } finally {
       setLoading(false);

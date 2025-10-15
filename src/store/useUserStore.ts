@@ -5,6 +5,7 @@ import { User } from '@/types/user';
 interface UserState extends SessionSnapshot {
   setSession: (session: SessionSnapshot) => void;
   updateUser: (user: User | null) => void;
+  setLoading: (isLoading: boolean) => void;
   clearSession: () => void;
 }
 
@@ -20,7 +21,10 @@ interface UserState extends SessionSnapshot {
 export const useUserStore = create<UserState>((set) => ({
   isAuthenticated: false,
   user: null,
-  setSession: ({ isAuthenticated, user }) => set(() => ({ isAuthenticated, user })),
+  isLoading: false,
+  setSession: ({ isAuthenticated, user }) =>
+    set(() => ({ isAuthenticated, user, isLoading: false })),
+  setLoading: (isLoading) => set({ isLoading }),
   updateUser: (user) => set(() => ({ user, isAuthenticated: !!user })),
   clearSession: () => set({ user: null, isAuthenticated: false }),
 }));
