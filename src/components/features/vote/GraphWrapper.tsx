@@ -20,16 +20,24 @@ export default function GraphWrapper({ pollId }: { pollId: number }) {
     return <p className="text-center py-8 text-gray-500">통계 데이터가 부족합니다.</p>;
 
   return (
-    <div className="flex flex-col items-center gap-8">
-      {/* 도넛 2개 + 연령별 막대 차트 */}
-      <div className="flex justify-center items-center gap-8">
-        <DonutChart data={maleData} label="남성" />
-        <DonutChart data={femaleData} label="여성" />
-        <DivergingBarChart data={ageData} />
+    <div className="flex flex-col items-center gap-4 sm:gap-3">
+      {/* 도넛 그룹 + 막대 차트 */}
+      <div className="flex flex-col sm:flex-row justify-center items-center gap-6 sm:gap-1 w-full">
+        {/* 도넛 그룹 (남성/여성) */}
+        <div className="flex flex-row items-center justify-center gap-3 sm:gap-1">
+          <DonutChart data={maleData} label="남성" className="w-32 h-32 sm:w-44 sm:h-44" />
+          <DonutChart data={femaleData} label="여성" className="w-32 h-32 sm:w-44 sm:h-44" />
+        </div>
+
+        {/* 막대 차트 */}
+        <DivergingBarChart
+          data={ageData}
+          className="w-full max-w-xs sm:max-w-sm lg:max-w-md mt-6 sm:mt-0"
+        />
       </div>
 
       {/* 범례 */}
-      <div className="flex justify-center items-center gap-5">
+      <div className="flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-5">
         <Legend color="bg-brand-primary dark:bg-brand-accent" text={optionLabels[0] ?? '옵션 1'} />
         <Legend color="bg-[#AFCFFF] dark:bg-[#DBD3D3]" text={optionLabels[1] ?? '옵션 2'} />
       </div>

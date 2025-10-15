@@ -20,7 +20,7 @@ export default function OngoingPage() {
       }
     },
     !!hasNextPage,
-    '300px',
+    '200px',
   );
 
   if (status === 'pending') return <div className="py-40 text-center">불러오는 중...</div>;

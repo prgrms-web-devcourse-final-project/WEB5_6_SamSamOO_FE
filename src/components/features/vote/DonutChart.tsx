@@ -30,12 +30,11 @@ export function DonutChart({
   const circumference = 2 * Math.PI * radius;
   const positiveOffset = circumference * (1 - positive / 100);
   const negativeOffset = circumference * (positive / 100);
-
   const [hoveredSegment, setHoveredSegment] = useState<'positive' | 'negative' | null>(null);
 
   return (
     <div className={tw('flex flex-col items-center relative', className)}>
-      <div className="relative w-48 h-48">
+      <div className="relative w-32 h-32 sm:w-48 sm:h-48">
         <svg
           className="w-full h-full transform -rotate-90 transition-transform duration-200"
           viewBox="0 0 200 200"
@@ -43,7 +42,6 @@ export function DonutChart({
             transform: `rotate(-90deg) ${hoveredSegment ? 'scale(1.05)' : 'scale(1)'}`,
           }}
         >
-          {/* Positive 영역 */}
           <circle
             cx="100"
             cy="100"
@@ -58,8 +56,6 @@ export function DonutChart({
             onMouseEnter={() => setHoveredSegment('positive')}
             onMouseLeave={() => setHoveredSegment(null)}
           />
-
-          {/* Negative 영역 */}
           <circle
             cx="100"
             cy="100"
@@ -76,17 +72,17 @@ export function DonutChart({
           />
         </svg>
 
-        {/* 중앙 라벨 (항상 고정) */}
         {label && (
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <span className="text-lg font-bold text-gray-800 dark:text-primary-white">{label}</span>
+            <span className="text-sm sm:text-lg font-bold text-gray-800 dark:text-primary-white">
+              {label}
+            </span>
           </div>
         )}
 
-        {/* 호버 시 해당 영역의 퍼센트만 표시 */}
         {hoveredSegment && (
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div className="bg-gray-800 text-white dark:bg-gray-200 dark:text-gray-900 text-sm px-3 py-1.5 rounded-md shadow-lg">
+            <div className="bg-gray-800 text-white dark:bg-gray-200 dark:text-gray-900 text-xs sm:text-sm px-2 py-1.5 rounded-md shadow-lg">
               {hoveredSegment === 'positive' ? `${positive}%` : `${negative}%`}
             </div>
           </div>

@@ -14,9 +14,9 @@ interface TimeSliderProps {
 }
 
 /**
- * TimeSlider
- * 시간 단위 슬라이더 (1틱 = 1시간)
- * 1시간 ~ 168시간(7일) 범위 내 조정 가능
+ * TimeSlider (반응형 개선)
+ * - 모바일: 손잡이 크기 확대
+ * - 데스크탑: 기존 유지
  */
 export function TimeSlider({
   className,
@@ -45,13 +45,13 @@ export function TimeSlider({
         className,
       )}
     >
-      <SliderPrimitive.Track className="bg-[#d9d9d9] relative grow overflow-hidden rounded-full h-1.5">
+      <SliderPrimitive.Track className="bg-[#d9d9d9] relative grow overflow-hidden rounded-full h-1 sm:h-1.5">
         <SliderPrimitive.Range className="bg-brand-primary absolute h-full dark:bg-brand-accent" />
       </SliderPrimitive.Track>
 
       <SliderPrimitive.Thumb
         data-slot="slider-thumb"
-        className="ring-ring/50 block size-4 shrink-0 rounded-full border bg-brand-primary shadow-sm transition-[color,box-shadow] hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50 dark:bg-brand-accent"
+        className="ring-ring/50 block size-5 sm:size-4 shrink-0 rounded-full border bg-brand-primary shadow-sm transition-[color,box-shadow] hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50 dark:bg-brand-accent"
       />
     </SliderPrimitive.Root>
   );

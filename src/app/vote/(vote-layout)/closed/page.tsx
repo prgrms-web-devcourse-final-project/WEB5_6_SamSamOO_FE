@@ -28,7 +28,7 @@ export default function ClosedPage() {
       }
     },
     !!hasNextPage,
-    '300px',
+    '200px',
   );
 
   if (status === 'pending') return <div className="py-40 text-center">불러오는 중...</div>;
@@ -50,7 +50,6 @@ export default function ClosedPage() {
       </div>
     );
 
-  // 메인 렌더링
   return (
     <div className="center-col gap-15 pb-20 pt-10">
       {votes.map((post, index) => {
@@ -58,15 +57,12 @@ export default function ClosedPage() {
 
         return (
           <VoteCard key={post.id} ref={isSecondLast ? loadMoreRef : undefined} status={post.status}>
-            {/* 제목 + 본문 */}
             <VoteCard.HeaderBody {...post} />
 
-            {/* 마감된 투표는 pollId로 통계 그래프 자동 호출 */}
             <VoteCard.Graph status={post.status}>
               <GraphWrapper pollId={post.id} />
             </VoteCard.Graph>
 
-            {/* 투표 옵션 (클릭 불가능 + 색상 매칭) */}
             <VoteCard.Options
               pollId={post.id}
               options={post.options}

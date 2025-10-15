@@ -7,9 +7,12 @@ export interface VoteOptionModel {
 
 export interface VoteCardModel {
   id: number;
+  postId?: number;
+  pollId?: number;
   category: string;
   participants: number;
   remainingTime: string;
+  reservedCloseAt?: string;
   status: 'ongoing' | 'closed';
   title: string;
   content: string;

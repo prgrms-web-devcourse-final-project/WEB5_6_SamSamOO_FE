@@ -8,8 +8,8 @@ import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 /**
  * ParticipatedPage
  * - 내가 참여한 투표 목록 페이지
- * - 진행중 + 마감 투표가 혼합되어 있음
- * - 진행중은 투표 가능 / 마감은 그래프 표시
+ * - 진행중 + 마감 투표 혼합
+ * - 반응형: 모바일에서는 간격 축소, 여백 줄임
  * - 무한스크롤 지원
  */
 export default function ParticipatedPage() {
@@ -25,23 +25,25 @@ export default function ParticipatedPage() {
   // Intersection Observer로 다음 페이지 로딩
   const loadMoreRef = useIntersectionObserver(
     () => {
-      if (hasNextPage && !isFetchingNextPage) {
-        fetchNextPage();
-      }
+      if (hasNextPage && !isFetchingNextPage) fetchNextPage();
     },
     !!hasNextPage,
-    '300px',
+    '200px',
   );
 
   // 로딩 상태
-  if (status === 'pending') return <div className="py-40 text-center">불러오는 중...</div>;
+  if (status === 'pending')
+    return <div className="py-32 sm:py-40 text-center text-base sm:text-lg">불러오는 중...</div>;
 
   // 오류 처리
   if (status === 'error')
     return (
-      <div className="center-col py-40 gap-3 text-center">
-        <p className="text-red-500 font-bold">서버 오류가 발생했습니다.</p>
-        <button onClick={() => refetch()} className="btn-primary">
+      <div className="center-col py-32 sm:py-40 gap-3 text-center">
+        <p className="text-red-500 font-bold text-base sm:text-lg">서버 오류가 발생했습니다.</p>
+        <button
+          onClick={() => refetch()}
+          className="btn-primary text-sm sm:text-base px-4 py-2 rounded-full"
+        >
           다시 시도
         </button>
       </div>
@@ -50,8 +52,10 @@ export default function ParticipatedPage() {
   // 빈 목록 처리
   if (!votes.length)
     return (
-      <div className="center-col py-40 text-center">
-        <p>참여한 투표가 없습니다.</p>
+      <div className="center-col py-32 sm:py-40 text-center">
+        <p className="text-gray-600 dark:text-gray-300 text-base sm:text-lg">
+          참여한 투표가 없습니다.
+        </p>
       </div>
     );
 
@@ -66,14 +70,14 @@ export default function ParticipatedPage() {
             {/* 제목 + 본문 */}
             <VoteCard.HeaderBody {...post} />
 
-            {/* 마감된 투표는 통계 그래프 표시 */}
+            {/* 마감된 투표만 그래프 표시 */}
             {post.status === 'closed' && (
               <VoteCard.Graph status={post.status}>
                 <GraphWrapper pollId={post.id} />
               </VoteCard.Graph>
             )}
 
-            {/* 투표 옵션: 진행중은 클릭 가능, 마감은 비활성화 */}
+            {/* 투표 옵션 */}
             <VoteCard.Options
               pollId={post.id}
               options={post.options}
@@ -84,9 +88,16 @@ export default function ParticipatedPage() {
         );
       })}
 
-      <div className="h-12 flex items-center justify-center">
-        {isFetchingNextPage && <p>불러오는 중...</p>}
-        {!hasNextPage && <p className="text-gray-500">모든 투표를 불러왔습니다.</p>}
+      {/* 페이지 하단 로더 */}
+      <div className="h-10 sm:h-12 flex items-center justify-center">
+        {isFetchingNextPage && (
+          <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300">불러오는 중...</p>
+        )}
+        {!hasNextPage && (
+          <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
+            모든 투표를 불러왔습니다.
+          </p>
+        )}
       </div>
     </div>
   );
