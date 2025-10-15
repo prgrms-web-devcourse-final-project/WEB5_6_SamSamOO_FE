@@ -8,7 +8,7 @@ export interface VoteOptionModel {
 export interface VoteCardModel {
   id: number;
   postId?: number;
-  pollId?: number;
+  pollId: number;
   category: string;
   participants: number;
   remainingTime: string;

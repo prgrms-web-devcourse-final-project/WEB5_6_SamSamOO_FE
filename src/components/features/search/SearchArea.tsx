@@ -4,7 +4,7 @@ import AppliedFilter from '@/components/features/search/AppliedFilter';
 import { categoryItems } from './navigationItems';
 import SearchInput from './SearchInput';
 import SearchFilter from './SearchFilter';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import makeSearchUrl from '@/utils/makeSearchUrl';
 import { useSearchPending } from '@/context/SearchPendingContext';
 
@@ -23,16 +23,19 @@ function SearchArea() {
 
     const input = e.currentTarget.querySelector<HTMLInputElement>('#search')!;
     const keyword = input.value.trim();
-    console.log(keyword);
+    // console.log(keyword);
 
     const url = makeSearchUrl(pathname, newParams, { search_query: keyword, pageNumber: '0' });
 
     startPending(() => {
       router.push(url);
     });
-    // input.value = '';
   };
 
+  useEffect(() => {
+    const input = document.querySelector<HTMLInputElement>('#search')!;
+    input.value = '';
+  }, [pathname]);
   // document.documentElement.style.overflow = '';
 
   return (

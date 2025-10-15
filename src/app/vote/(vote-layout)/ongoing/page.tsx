@@ -52,7 +52,7 @@ export default function OngoingPage() {
             <VoteCard.HeaderBody {...post} />
 
             <VoteCard.Options
-              pollId={post.id}
+              pollId={post.pollId}
               options={post.options}
               totalVotes={post.participants}
             />
