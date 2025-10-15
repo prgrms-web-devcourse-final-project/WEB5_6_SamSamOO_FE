@@ -52,7 +52,7 @@ function Pagination({ showCount = 5, end = 10, currentPage }: Props) {
   return (
     <section>
       <h2 className="sr-only">페이지네이션</h2>
-      <ul className="flex items-center gap-0.5 sm:gap-4">
+      <ul className="flex items-center gap-3">
         <button
           type="button"
           title="첫 페이지로 이동"
@@ -66,27 +66,28 @@ function Pagination({ showCount = 5, end = 10, currentPage }: Props) {
           type="button"
           title="이전 페이지로 이동"
           inert={activePageNumber === 1}
-          className={tw('inset')}
           onClick={() => getPage(prevPage)}
         >
           <MovePage className="relative bottom-0.5 w-2 h-[10]" />
         </button>
-        {Array(showCount)
-          .fill(null)
-          .map((_, index) => (
-            <li key={index}>
-              <button
-                type="button"
-                className={tw(
-                  'w-11 h-11 hover:bg-stone-100 transition-colors rounded-full hover:text-primary-black ',
-                  activePageNumber === start + index ? 'text-brand-accent' : '',
-                )}
-                onClick={() => getPage(start + index)}
-              >
-                <p className="relative top-0 sm:top-0.5">{start + index}</p>
-              </button>
-            </li>
-          ))}
+        <ul className="flex items-center gap-0.5 sm:gap-4">
+          {Array(showCount)
+            .fill(null)
+            .map((_, index) => (
+              <li key={index}>
+                <button
+                  type="button"
+                  className={tw(
+                    'w-8 h-8 sm:w-11 sm:h-11 hover:bg-stone-100 transition-colors rounded-full hover:text-primary-black ',
+                    activePageNumber === start + index ? 'text-brand-accent' : '',
+                  )}
+                  onClick={() => getPage(start + index)}
+                >
+                  <p className="relative text-xs sm:text-base top-0 sm:top-0">{start + index}</p>
+                </button>
+              </li>
+            ))}
+        </ul>
         <button
           type="button"
           title="다음 페이지로 이동"

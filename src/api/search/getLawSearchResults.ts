@@ -9,7 +9,7 @@ export const getLawSearchResults = async (body: LawRequest) => {
       },
       body: JSON.stringify(body),
     });
-    console.log(response);
+    // console.log(response);
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     return (await response.json()) as LawResponse;
   } catch (error) {

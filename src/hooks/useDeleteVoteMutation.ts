@@ -47,7 +47,7 @@ export function useDeleteVoteMutation() {
 
     /** 성공 시 정합성 보장 */
     async onSuccess(_res, postId) {
-      console.log('[useDeleteVoteMutation] 삭제 성공:', postId);
+      // console.log('[useDeleteVoteMutation] 삭제 성공:', postId);
       await Promise.all(
         voteQueryKeys.map((key) => queryClient.invalidateQueries({ queryKey: key })),
       );

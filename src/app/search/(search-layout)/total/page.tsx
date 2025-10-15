@@ -93,9 +93,9 @@ async function Page({ searchParams }: { searchParams: Promise<SearchParams> }) {
   ) {
     return (
       <>
-        <div className="flex flex-col items-center justify-center py-20">
-          <h1 className="text-2xl font-bold mb-3">검색 결과가 없습니다.</h1>
-          <p className="text-gray-500">입력하신 조건에 맞는 결과가 존재하지 않습니다.</p>
+        <div className="flex flex-col items-center justify-center py-20 px-8">
+          <h1 className="text-2xl font-bold mb-3 text-center">검색 결과가 없습니다</h1>
+          <p className="text-gray-500 text-center">입력하신 조건에 맞는 결과가 존재하지 않습니다</p>
         </div>
         <SetTotalElementsAndPages
           category="통합"
