@@ -78,12 +78,12 @@ export default function CreatedPage() {
 
             {/* 마감된 투표 그래프 */}
             <VoteCard.Graph status={post.status}>
-              <GraphWrapper pollId={post.pollId ?? post.id} />
+              <GraphWrapper pollId={post.pollId} />
             </VoteCard.Graph>
 
             {/* 투표 옵션 */}
             <VoteCard.Options
-              pollId={post.pollId ?? post.id}
+              pollId={post.pollId}
               options={post.options}
               totalVotes={post.participants}
               status={post.status}
