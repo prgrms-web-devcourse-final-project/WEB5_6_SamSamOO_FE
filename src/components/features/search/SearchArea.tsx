@@ -30,7 +30,7 @@ function SearchArea() {
     startPending(() => {
       router.push(url);
     });
-    input.value = '';
+    // input.value = '';
   };
 
   // document.documentElement.style.overflow = '';
