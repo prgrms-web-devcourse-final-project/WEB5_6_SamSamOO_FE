@@ -197,7 +197,7 @@ RESTful API통신, 인증/보안 처리, 에러 핸들링을 구현하고, API �
 ### 반응형 / 테마 지원
 - 모바일 ~ 데스크탑 해상도까지 지원
 - 라이트 / 다크모드 지원
----
+
 ## 📸 주요 기능 화면
 ### 회원 관리, 유저 세션 관리
 
@@ -268,7 +268,7 @@ RESTful API통신, 인증/보안 처리, 에러 핸들링을 구현하고, API �
     </tr>
   <tr>
     <td>
-      <img width="2938" height="865" alt="2" src="https://github.com/user-attachments/assets/890e11e0-2984-4066-aeae-cf3b7cf1ef07" />
+      <img width="2938" height="865" alt="2" src="https://github.com/user-attachments/assets/a181849d-dc85-43c4-83db-0d0169a20494" />
     </td>
     </tr>
     <tr>
