@@ -167,8 +167,8 @@ function Header() {
                   />
                 </Link>
               </li>
-              <li>
-                <button onClick={handleLogout} className="hover:text-brand-accent">
+              <li className="w-17">
+                <button onClick={handleLogout} className="hover:text-brand-accent tracking-tighter">
                   로그아웃
                 </button>
               </li>
