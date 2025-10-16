@@ -28,6 +28,10 @@ AI를 활용해 법률 정보의 문턱을 낮추는 <b>"내 손안의 법률 �
 
 ---
 
+## 시연 영상
+#### 👇 아래 사진 클릭시 실행 영상 화면으로 이동합니다 👇
+[![Video Label](https://github.com/user-attachments/assets/9c7b152f-df23-4585-b176-8d6e3206cee5)](https://www.youtube.com/watch?v=qoPqfKEXApI)
+
 ## 🛠️ 기술 스택
 
 | Category                 | Stack                                        |
