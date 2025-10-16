@@ -20,15 +20,15 @@ AI를 활용해 법률 정보의 문턱을 낮추는 <b>"내 손안의 법률 �
 <img src="https://img.shields.io/badge/GSAP-88CE02?style=for-the-badge&logo=greensock&logoColor=white"/>
 </p>
 
----
+<br/>
 
 ## 바로? BaLaw! <a href="https://www.trybalaw.com/" target="_blank"> 🚀 서비스 바로가기</a>
 
 **바로(BaLaw)** 는 복잡하고 어려운 법률 문제에 직면한 일반인들을 위해 **AI 기술**을 활용하여 법률 정보의 문턱을 낮추는 **'내 손안의 법률 비서'** 서비스입니다
 
----
+<br/>
 
-## 시연 영상
+## 📹시연 영상
 #### 👇 아래 사진 클릭시 실행 영상 화면으로 이동합니다 👇
 [![Video Label](https://github.com/user-attachments/assets/9c7b152f-df23-4585-b176-8d6e3206cee5)](https://www.youtube.com/watch?v=qoPqfKEXApI)
 
@@ -50,31 +50,31 @@ AI를 활용해 법률 정보의 문턱을 낮추는 <b>"내 손안의 법률 �
 | **테스트**               | LightHouse, Vercel Speed Insight / Analytics |
 | **협업**                 | Notion, Github, Figma, Slack, Discord, Zoom  |
 
----
+<br/>
 
 ## 🎯 프로젝트 목표
 
-### 💡 기획 배경
+### 기획 배경
 
 기존의 법률 서비스는 전문 용어로 인한 소통의 어려움이나, 시간과 비용이 큰 높은 진입 장벽이 존재합니다 <br/> **AI를 활용해 언제나, 즉시, 무료로 법률 정보의 접근성을 극대화하고, 사용자에게 직관적이고 친화적인 디자인과 기능을 제공하여 어렵지 않은, 다가가기 쉬운 법률 서비스**를 제공하고자 합니다
 <br/>
 <br/>
-### 🚩 기술 목표
+### 기술 목표
 
-#### Next.js 이해와 활용
+#### - Next.js 이해와 활용
 
 App Router, 서버/클라이언트 컴포넌트, SSR/SSG/ISR 등 렌더링 전략을 이해하고, 데이터 패칭, 라우팅, 성능 최적화를 통해 SEO와 사용자 경험이 우수한 웹 애플리케이션을 구축할 수 있습니다
 
-#### 백엔드와 협업
+#### - 백엔드와의 협업
 
 RESTful API통신, 인증/보안 처리, 에러 핸들링을 구현하고, API 스펙 협의 및 상태 관리를 통해 백엔드 팀과 효과적으로 협업하여 안정적인 서비스를 개발할 수 있습니다
 
----
+<br/>
 
 ## 🗂️ 폴더 구조
 
 <details>
-<summary>📂 폴더 구조 보기</summary>
+<summary>폴더 구조 보기</summary>
 
 ```bash
 📁 project-root
@@ -158,12 +158,12 @@ RESTful API통신, 인증/보안 처리, 에러 핸들링을 구현하고, API �
 </details>
 <br/>
 
----
+<br/>
 
 ## 🏗️ 시스템 아키텍처
 <img width="1920" height="1080" alt="'바로 BaLaw' 시스템 아키텍처" src="https://github.com/user-attachments/assets/0a9cb00f-44d5-4be5-b9ac-973887b9e711" />
 
----
+<br/>
 
 ## ⚙️ 주요 기능
 ### 회원 관리, 유저 세션 관리
@@ -202,8 +202,20 @@ RESTful API통신, 인증/보안 처리, 에러 핸들링을 구현하고, API �
 - 모바일 ~ 데스크탑 해상도까지 지원
 - 라이트 / 다크모드 지원
 
+<br/>
+
 ## 📸 주요 기능 화면
 ### 회원 관리, 유저 세션 관리
+<table>
+  <tr>
+    <td>
+      <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/8ce45648-bd93-4a73-afd2-698a851a1c2d" />
+    </td>
+    <td>
+      <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/31755711-63de-4fc8-ba0b-7a3900bb6afa" />
+    </td>
+  </tr>
+</table>
 
 ### AI 상담
 <table>
@@ -303,6 +315,7 @@ RESTful API통신, 인증/보안 처리, 에러 핸들링을 구현하고, API �
   </tr>
 </table>
 
+<br/>
 
 ## 🧑‍💻 협업 컨벤션
 
@@ -328,27 +341,27 @@ RESTful API통신, 인증/보안 처리, 에러 핸들링을 구현하고, API �
 
 - Husky + ESLint + Prettier로 코드 품질 관리
 
----
+<br/>
 
 ## 🧪 테스트
 
 - **Vercel Speed Insight / Analytics** 를 통한 자동 성능 분석
 - **Lighthouse** 로 접근성, SEO, 성능 지표 측정
 
----
+<br/>
 
-## ✍️ 팀 문화
+## ⏰ 하루 일정
 
 | 시간             | 내용                                           |
 | ---------------- | ---------------------------------------------- |
-| 🕘 오전 9시      | 데일리 스크럼 (컨디션 / 일정 / 작업 계획 공유) |
-| 🕔 오후 5시      | 작업 진행 내용 공유 및 회고                    |
-| 🌙 오후 6시 이후 | 디스코드 모각코 자율 개발                      |
-| 📚 상시          | 데일리 로그 작성                               |
+| **오전 9시**      | 데일리 스크럼 (컨디션 / 일정 / 작업 계획 공유) |
+| **오후 5시**      | 작업 진행 내용 공유 및 회고                    |
+| **오후 6시 이후** | 디스코드 모각코 자율 개발                      |
+| **매일**          | 데일리 로그 작성                               |
 
----
+<br/>
 
-## 🚀 향후 발전 방향
+## 🌈 향후 발전 방향
 - 우선순위 낮은 기능 구현
 - 아키텍쳐 리팩토링
 - 성능 개선(캐싱 및 서버컴포넌트 리팩토링)
@@ -356,7 +369,7 @@ RESTful API통신, 인증/보안 처리, 에러 핸들링을 구현하고, API �
 
 
 
----
+<br/>
 
 ## 👥 팀원 소개
 
