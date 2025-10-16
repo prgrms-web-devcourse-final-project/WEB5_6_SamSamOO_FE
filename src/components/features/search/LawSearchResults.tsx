@@ -48,7 +48,7 @@ function LawSearchResults({ content, showTag = false }: Props) {
                   <p className="pt-1">{lawName}</p>
                 </section>
                 <p className="mb-3 line-clamp-2 text-sm sm:text-[16px]">{firstJoContent}</p>
-                <section className="flex gap-2 text-xs sm:text-[16px] text-primary-gray1">
+                <section className="flex gap-2 text-[11px] sm:text-xs sm:text-[16px] text-primary-gray1">
                   <h2 className="sr-only">기간</h2>
                   <p>공포일자 : {String(promulgationDate)}</p>
                   <p>시행일자 : {String(enforcementDate)}</p>
