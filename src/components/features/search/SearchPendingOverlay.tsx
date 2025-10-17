@@ -30,7 +30,7 @@ function SearchPendingOverlay() {
     <div className="w-full flex flex-col items-center justify-center p-8 space-y-4 fixed inset-0 z-[20] bg-white dark:bg-black">
       <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-accent" />
       <p
-        className={`text-gray-600 dark:text-gray-300 transition-opacity duration-300 ${
+        className={`text-gray-600 text-center dark:text-gray-300 transition-opacity duration-300 ${
           fade ? 'opacity-100' : 'opacity-0'
         }`}
       >

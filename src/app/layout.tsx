@@ -23,14 +23,20 @@ export const metadata: Metadata = {
     siteName: '바로 BaLaw',
     images: [
       {
-        url: 'https://github.com/user-attachments/assets/ee793fa8-d43c-4b22-a95f-7a90f5ae30d1',
-        width: 800,
-        height: 600,
+        url: 'https://www.trybalaw.com/images/og-balaw.png',
+        width: 1200,
+        height: 630,
         alt: '바로 BaLaw',
       },
     ],
     locale: 'ko_KR',
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '바로 | BaLaw',
+    description: 'AI 기술로 법률 정보의 문턱을 낮추는 내 손안의 법률 비서',
+    images: ['https://www.trybalaw.com/images/og-balaw.png'],
   },
   icons: {
     icon: [

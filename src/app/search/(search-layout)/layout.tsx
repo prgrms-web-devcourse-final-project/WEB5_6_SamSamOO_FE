@@ -6,6 +6,11 @@ import { SearchProvider } from '@/context/SearchContext';
 import PaginationWrapper from '@/components/features/search/PaginationWrapper';
 import { SearchPendingProvider } from '@/context/SearchPendingContext';
 import SearchPendingOverlay from '@/components/features/search/SearchPendingOverlay';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+};
 
 function SearchLayout({ children }: { children: React.ReactNode }) {
   return (
