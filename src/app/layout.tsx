@@ -55,6 +55,11 @@ export const metadata: Metadata = {
 
 export const appleSD = localFont({
   src: [
+    { path: '../../public/fonts/AppleSDGothicNeo-Black.woff2', weight: '900' },
+    {
+      path: '../../public/fonts/AppleSDGothicNeo-ExtraBold.woff2',
+      weight: '800',
+    },
     { path: '../../public/fonts/AppleSDGothicNeo-Bold.woff2', weight: '700' },
     { path: '../../public/fonts/AppleSDGothicNeo-Medium.woff2', weight: '500' },
     {
