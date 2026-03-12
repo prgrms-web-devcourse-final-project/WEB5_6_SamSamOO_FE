@@ -31,13 +31,11 @@ function Hero() {
             <span>가 언제나 함께 고민해볼게요</span>
           </div>
           <Image
-            className="absolute  lg:left-[-300px] lg:top-[-40px] left-[-350px] top-[-90px] dark:drop-shadow-[0_4px_76px_0_rgb(74,74,74)] md:block hidden"
+            className="absolute lg:left-[-300px] lg:top-[-40px] left-[-350px] top-[-90px] dark:drop-shadow-[0_4px_76px_0_rgb(74,74,74)] md:block hidden"
             src={'/images/landingDike.png'}
             alt="마스코트 디케 이미지"
             width={503}
             height={503}
-            priority
-            quality={75}
             fetchPriority="high"
           />
         </header>
