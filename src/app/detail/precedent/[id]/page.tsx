@@ -3,8 +3,8 @@ import PrecedentDetailResult from '@/components/features/detail/PrecedentDetailR
 import { getPrecedentDetails } from '@/api/detail/getPrecedentDetails';
 import { notFound } from 'next/navigation';
 
-export async function generateMetadata({ params }: { params: { id: string } }) {
-  const { id } = params;
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   const data = await getPrecedentDetails(id);
   if (!data) {
     return {

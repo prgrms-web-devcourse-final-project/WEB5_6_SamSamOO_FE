@@ -5,13 +5,16 @@ import { Analytics } from '@vercel/analytics/next';
 import '../styles/styles.css';
 import localFont from 'next/font/local';
 
+import dynamic from 'next/dynamic';
+
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import ThemeProvider from '@/components/provider/ThemeProvider';
 import ServerUserProvider from '@/components/provider/ServerUserProvider';
-import { Toaster } from 'sonner';
-import ConfirmAlert from '@/components/ui/ConfirmAlert';
-import ScrollToTopButton from '@/components/ui/ScrollToTopButton';
+
+const Toaster = dynamic(() => import('sonner').then((mod) => mod.Toaster));
+const ConfirmAlert = dynamic(() => import('@/components/ui/ConfirmAlert'));
+const ScrollToTopButton = dynamic(() => import('@/components/ui/ScrollToTopButton'));
 
 export const metadata: Metadata = {
   title: '바로 BaLaw',
@@ -68,11 +71,6 @@ export const appleSD = localFont({
       weight: '400',
     },
     { path: '../../public/fonts/AppleSDGothicNeo-Light.woff2', weight: '300' },
-    {
-      path: '../../public/fonts/AppleSDGothicNeo-ExtraLight.woff2',
-      weight: '200',
-    },
-    { path: '../../public/fonts/AppleSDGothicNeo-Thin.woff2', weight: '100' },
   ],
   variable: '--font-apple-sd',
   display: 'swap',

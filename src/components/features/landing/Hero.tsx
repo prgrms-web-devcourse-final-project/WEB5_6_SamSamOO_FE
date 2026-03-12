@@ -36,6 +36,7 @@ function Hero() {
             alt="마스코트 디케 이미지"
             width={503}
             height={503}
+            priority
             fetchPriority="high"
           />
         </header>

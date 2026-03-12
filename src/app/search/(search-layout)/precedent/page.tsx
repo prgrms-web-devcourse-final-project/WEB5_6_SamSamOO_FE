@@ -17,7 +17,7 @@ type SearchParams = {
   pageSize: number;
 };
 
-async function Page({ searchParams }: { searchParams: SearchParams }) {
+async function Page({ searchParams }: { searchParams: Promise<SearchParams> }) {
   const searchList = await searchParams;
   const { search_query } = searchList;
 
